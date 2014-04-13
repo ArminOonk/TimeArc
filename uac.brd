@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.5" altunitdist="mm" altunit="mm"/>
+<grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.001" altunitdist="mm" altunit="mm"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -1151,6 +1151,7 @@ Your Eurocircuits Team</description>
 <wire x1="17.578596875" y1="46.592359375" x2="20.2184125" y2="63.25961875" width="0" layer="19" extent="1-1"/>
 <wire x1="36.740378125" y1="20.2184125" x2="53.4076375" y2="17.578596875" width="0" layer="19" extent="1-1"/>
 <wire x1="23.62605" y1="30.8381875" x2="17.578596875" y2="46.592359375" width="0" layer="19" extent="1-1"/>
+<via x="87.79183125" y="53.97208125" extent="1-16" drill="0.3"/>
 </signal>
 <signal name="DOZEN12">
 <contactref element="SPECIAL0" pad="A"/>
