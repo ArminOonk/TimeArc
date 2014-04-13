@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.001" altunitdist="mm" altunit="mm"/>
+<grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.5" altunitdist="mm" altunit="mm"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -1355,15 +1355,19 @@ Your Eurocircuits Team</description>
 <contactref element="SEC12" pad="C"/>
 <contactref element="SEC13" pad="C"/>
 <contactref element="SEC14" pad="C"/>
-<wire x1="78.22855625" y1="62.568165625" x2="76.760190625" y2="65.45" width="0" layer="19" extent="1-1"/>
+<via x="74.68171875" y="64.25" extent="1-16" drill="0.3"/>
+<wire x1="74.68171875" y1="64.25" x2="76.760190625" y2="65.45" width="0.2032" layer="1"/>
+<wire x1="74.68171875" y1="64.25" x2="72.733153125" y2="63.125" width="0.2032" layer="1"/>
+<wire x1="74.681725" y1="64.25" x2="78.343875" y2="52.9790625" width="0.2032" layer="1" curve="-23.999997"/>
 <wire x1="79.387653125" y1="59.54861875" x2="78.22855625" y2="62.568165625" width="0" layer="19" extent="1-1"/>
 <wire x1="80.224771875" y1="56.42448125" x2="79.387653125" y2="59.54861875" width="0" layer="19" extent="1-1"/>
-<wire x1="80.730715625" y1="53.229940625" x2="80.224771875" y2="56.42448125" width="0" layer="19" extent="1-1"/>
-<wire x1="72.733153125" y1="63.125" x2="76.760190625" y2="65.45" width="0" layer="19" extent="1-1"/>
+<wire x1="76.760190625" y1="65.45" x2="78.22855625" y2="62.568165625" width="0" layer="19" extent="1-1"/>
+<wire x1="74.681725" y1="64.25" x2="74.68171875" y2="64.25" width="0" layer="19" extent="1-1"/>
+<wire x1="76.1062" y1="52.743859375" x2="78.343875" y2="52.9790625" width="0" layer="19" extent="1-1"/>
+<wire x1="80.730715625" y1="53.229940625" x2="78.343875" y2="52.9790625" width="0" layer="19" extent="1-1"/>
 <wire x1="73.98055625" y1="60.67684375" x2="72.733153125" y2="63.125" width="0" layer="19" extent="1-1"/>
 <wire x1="74.96524375" y1="58.11169375" x2="73.98055625" y2="60.67684375" width="0" layer="19" extent="1-1"/>
-<wire x1="75.676384375" y1="55.4576875" x2="74.96524375" y2="58.11169375" width="0" layer="19" extent="1-1"/>
-<wire x1="76.1062" y1="52.743859375" x2="75.676384375" y2="55.4576875" width="0" layer="19" extent="1-1"/>
+<wire x1="75.676384375" y1="55.4576875" x2="76.1062" y2="52.743859375" width="0" layer="19" extent="1-1"/>
 <wire x1="67.2339" y1="59.95" x2="72.733153125" y2="63.125" width="0" layer="19" extent="1-1"/>
 <wire x1="73" y1="7.85" x2="76.1062" y2="52.743859375" width="0" layer="19" extent="1-1"/>
 <wire x1="-13" y1="3.1" x2="73" y2="7.85" width="0" layer="19" extent="1-1"/>
@@ -1640,6 +1644,33 @@ Your Eurocircuits Team</description>
 </signal>
 <signal name="ARCDOZEN_12">
 <contactref element="Q12" pad="1"/>
+</signal>
+<signal name="N$13">
+<wire x1="78.5" y1="50" x2="76.036046875" y2="38.40800625" width="0.2032" layer="1" curve="-23.999998"/>
+</signal>
+<signal name="N$14">
+<wire x1="74.681725" y1="35.75" x2="66.75188125" y2="26.943015625" width="0.2032" layer="1" curve="-23.999999"/>
+</signal>
+<signal name="N$15">
+<wire x1="64.25" y1="25.318275" x2="52.9790625" y2="21.656125" width="0.2032" layer="1" curve="-23.999997"/>
+</signal>
+<signal name="N$16">
+<wire x1="50" y1="21.5" x2="38.40800625" y2="23.963953125" width="0.2032" layer="1" curve="-23.999998"/>
+</signal>
+<signal name="N$17">
+<wire x1="35.75" y1="25.318275" x2="26.943015625" y2="33.24811875" width="0.2032" layer="1" curve="-23.999999"/>
+</signal>
+<signal name="N$18">
+<wire x1="21.656125" y1="47.0209375" x2="25.318275" y2="35.75" width="0.2032" layer="1" curve="23.999997"/>
+</signal>
+<signal name="N$19">
+<wire x1="47.0209375" y1="78.343875" x2="35.75" y2="74.681725" width="0.2032" layer="1" curve="23.999997"/>
+</signal>
+<signal name="N$20">
+<wire x1="33.24811875" y1="73.056984375" x2="25.318275" y2="64.25" width="0.2032" layer="1" curve="23.999999"/>
+</signal>
+<signal name="N$21">
+<wire x1="23.963953125" y1="61.59199375" x2="21.5" y2="50" width="0.2032" layer="1" curve="23.999998"/>
 </signal>
 </signals>
 </board>
