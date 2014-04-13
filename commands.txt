@@ -1,2 +1,2 @@
 Arc om arcdozen te tekenen: arc ccw <begin point> <180 tegenover begin point> <end point>
-arc ccw (p 29 66) (p 29 246) (p 29 90)
+arc ccw (p 28.5 36) (p 28.5 216) (p 28.5 60)
