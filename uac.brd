@@ -9,11 +9,11 @@
 <grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.001" altunitdist="mm" altunit="mm"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
-<layer number="2" name="Gnd" color="11" fill="1" visible="no" active="yes"/>
-<layer number="3" name="Signal3" color="13" fill="1" visible="no" active="yes"/>
+<layer number="2" name="Gnd" color="11" fill="1" visible="yes" active="yes"/>
+<layer number="3" name="Signal3" color="13" fill="1" visible="yes" active="yes"/>
 <layer number="14" name="Route14" color="1" fill="6" visible="no" active="no"/>
 <layer number="15" name="Route15" color="4" fill="6" visible="no" active="no"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
@@ -28,14 +28,14 @@
 <layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
 <layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
-<layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
-<layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
-<layer number="33" name="tFinish" color="6" fill="3" visible="no" active="yes"/>
-<layer number="34" name="bFinish" color="6" fill="6" visible="no" active="yes"/>
-<layer number="35" name="tGlue" color="7" fill="4" visible="no" active="yes"/>
-<layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
-<layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
-<layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="31" name="tCream" color="7" fill="4" visible="yes" active="yes"/>
+<layer number="32" name="bCream" color="7" fill="5" visible="yes" active="yes"/>
+<layer number="33" name="tFinish" color="6" fill="3" visible="yes" active="yes"/>
+<layer number="34" name="bFinish" color="6" fill="6" visible="yes" active="yes"/>
+<layer number="35" name="tGlue" color="7" fill="4" visible="yes" active="yes"/>
+<layer number="36" name="bGlue" color="7" fill="5" visible="yes" active="yes"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="38" name="bTest" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
@@ -43,8 +43,8 @@
 <layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
-<layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="yes" active="yes"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
@@ -705,6 +705,7 @@ Your Eurocircuits Team</description>
 <element name="C3" library="Custom components" package="C0603" value="100n" x="2" y="-21"/>
 <element name="C4" library="Custom components" package="C0603" value="100n" x="2" y="-24"/>
 <element name="Y1" library="Custom components" package="RESONATOR-SMD" value="RESONATORSMD" x="-2" y="-22"/>
+<element name="C5" library="Custom components" package="C0603" value="10u" x="-2" y="-27"/>
 </elements>
 <signals>
 <signal name="ARCDOZEN_1">
@@ -1737,6 +1738,7 @@ Your Eurocircuits Team</description>
 <contactref element="C3" pad="1"/>
 <contactref element="C4" pad="1"/>
 <contactref element="Y1" pad="2"/>
+<contactref element="C5" pad="2"/>
 <wire x1="44.696696875" y1="52.828425" x2="51.767765625" y2="56.363959375" width="0" layer="19" extent="1-1"/>
 <wire x1="43.6360375" y1="48.23223125" x2="44.696696875" y2="52.828425" width="0" layer="19" extent="1-1"/>
 <wire x1="48.23223125" y1="43.6360375" x2="43.6360375" y2="48.23223125" width="0" layer="19" extent="1-1"/>
@@ -1746,6 +1748,7 @@ Your Eurocircuits Team</description>
 <wire x1="1.15" y1="-21" x2="1.15" y2="-18" width="0" layer="19" extent="1-1"/>
 <wire x1="1.15" y1="-24" x2="1.15" y2="-21" width="0" layer="19" extent="1-1"/>
 <wire x1="-2" y1="-22" x2="1.15" y2="-21" width="0" layer="19" extent="1-1"/>
+<wire x1="-1.15" y1="-27" x2="1.15" y2="-24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+3V3">
 <contactref element="U$1" pad="1"/>
@@ -1758,6 +1761,7 @@ Your Eurocircuits Team</description>
 <contactref element="C3" pad="2"/>
 <contactref element="C2" pad="2"/>
 <contactref element="C1" pad="2"/>
+<contactref element="C5" pad="1"/>
 <wire x1="48.585784375" y1="56.7175125" x2="51.4142125" y2="56.7175125" width="0" layer="19" extent="1-1"/>
 <wire x1="44.34314375" y1="52.474871875" x2="48.585784375" y2="56.7175125" width="0" layer="19" extent="1-1"/>
 <wire x1="43.989590625" y1="47.878678125" x2="44.34314375" y2="52.474871875" width="0" layer="19" extent="1-1"/>
@@ -1767,16 +1771,17 @@ Your Eurocircuits Team</description>
 <wire x1="2.85" y1="-18" x2="2.85" y2="-15" width="0" layer="19" extent="1-1"/>
 <wire x1="2.85" y1="-21" x2="2.85" y2="-18" width="0" layer="19" extent="1-1"/>
 <wire x1="2.85" y1="-24" x2="2.85" y2="-21" width="0" layer="19" extent="1-1"/>
+<wire x1="-2.85" y1="-27" x2="2.85" y2="-24" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$1">
 <contactref element="U$1" pad="6"/>
 <contactref element="Y1" pad="3"/>
-<wire x1="-0.8" y1="-22" x2="46.81801875" y2="54.949746875" width="0" layer="19" extent="1-1"/>
+<wire x1="46.81801875" y1="54.949746875" x2="-0.8" y2="-22" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$2">
 <contactref element="U$1" pad="5"/>
 <contactref element="Y1" pad="1"/>
-<wire x1="-3.2" y1="-22" x2="47.171571875" y2="55.3033" width="0" layer="19" extent="1-1"/>
+<wire x1="47.171571875" y1="55.3033" x2="-3.2" y2="-22" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
