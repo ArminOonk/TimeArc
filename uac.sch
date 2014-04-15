@@ -11144,9 +11144,9 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <label x="27.94" y="165.1" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="PORT_C" pin="P6"/>
-<wire x1="683.26" y1="302.26" x2="655.32" y2="302.26" width="0.1524" layer="91"/>
-<label x="657.86" y="302.26" size="1.778" layer="95"/>
+<pinref part="U$1" gate="PORT_A" pin="P0-WKUP"/>
+<wire x1="571.5" y1="320.04" x2="546.1" y2="320.04" width="0.1524" layer="91"/>
+<label x="548.64" y="320.04" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ARCDOZEN_5" class="0">
@@ -11202,9 +11202,9 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <label x="175.26" y="165.1" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="PORT_A" pin="P3"/>
-<wire x1="571.5" y1="312.42" x2="546.1" y2="312.42" width="0.1524" layer="91"/>
-<label x="548.64" y="312.42" size="1.778" layer="95"/>
+<pinref part="U$1" gate="PORT_A" pin="P1"/>
+<wire x1="571.5" y1="317.5" x2="546.1" y2="317.5" width="0.1524" layer="91"/>
+<label x="548.64" y="317.5" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ARCDOZEN_6" class="0">
@@ -11306,9 +11306,9 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <label x="27.94" y="96.52" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="PORT_A" pin="P1"/>
-<wire x1="571.5" y1="317.5" x2="546.1" y2="317.5" width="0.1524" layer="91"/>
-<label x="548.64" y="317.5" size="1.778" layer="95"/>
+<pinref part="U$1" gate="PORT_A" pin="P3"/>
+<wire x1="571.5" y1="312.42" x2="546.1" y2="312.42" width="0.1524" layer="91"/>
+<label x="548.64" y="312.42" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ARCDOZEN_8" class="0">
@@ -11352,9 +11352,9 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <label x="170.18" y="96.52" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="PORT_A" pin="P0-WKUP"/>
-<wire x1="571.5" y1="320.04" x2="546.1" y2="320.04" width="0.1524" layer="91"/>
-<label x="548.64" y="320.04" size="1.778" layer="95"/>
+<pinref part="U$1" gate="PORT_C" pin="P6"/>
+<wire x1="683.26" y1="302.26" x2="655.32" y2="302.26" width="0.1524" layer="91"/>
+<label x="657.86" y="302.26" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ARCDOZEN_9" class="0">
@@ -11398,9 +11398,9 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <label x="337.82" y="96.52" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="PORT_C" pin="P9"/>
-<wire x1="683.26" y1="294.64" x2="655.32" y2="294.64" width="0.1524" layer="91"/>
-<label x="657.86" y="294.64" size="1.778" layer="95"/>
+<pinref part="U$1" gate="PORT_C" pin="P7"/>
+<wire x1="683.26" y1="299.72" x2="655.32" y2="299.72" width="0.1524" layer="91"/>
+<label x="657.86" y="299.72" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ARCDOZEN_10" class="0">
@@ -11490,9 +11490,9 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <label x="172.72" y="17.78" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="PORT_C" pin="P7"/>
-<wire x1="683.26" y1="299.72" x2="655.32" y2="299.72" width="0.1524" layer="91"/>
-<label x="657.86" y="299.72" size="1.778" layer="95"/>
+<pinref part="U$1" gate="PORT_C" pin="P9"/>
+<wire x1="683.26" y1="294.64" x2="655.32" y2="294.64" width="0.1524" layer="91"/>
+<label x="657.86" y="294.64" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ARCDOZEN_12" class="0">
