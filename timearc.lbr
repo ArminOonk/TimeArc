@@ -76,6 +76,19 @@
 <wire x1="-2" y1="-0.5" x2="-2.5" y2="-0.5" width="0.127" layer="21"/>
 <wire x1="-2" y1="0.6" x2="-2.5" y2="0.6" width="0.127" layer="21"/>
 </package>
+<package name="LED_5MM_SMD">
+<smd name="P$1" x="-1.27" y="0" dx="4" dy="2" layer="1" rot="R90"/>
+<smd name="P$2" x="1.27" y="0" dx="4" dy="2" layer="1" rot="R90"/>
+<wire x1="-3" y1="3" x2="3" y2="3" width="0.127" layer="51"/>
+<wire x1="3" y1="3" x2="3" y2="4" width="0.127" layer="51"/>
+<wire x1="3" y1="4" x2="2.5" y2="4" width="0.127" layer="51"/>
+<wire x1="2.5" y1="4" x2="-2.5" y2="4" width="0.127" layer="51"/>
+<wire x1="-2.5" y1="4" x2="-3" y2="4" width="0.127" layer="51"/>
+<wire x1="-3" y1="4" x2="-3" y2="3" width="0.127" layer="51"/>
+<wire x1="-2.5" y1="4" x2="-2.5" y2="9.2" width="0.127" layer="51"/>
+<wire x1="2.5" y1="4" x2="2.5" y2="9.2" width="0.127" layer="51"/>
+<wire x1="-2.5" y1="9.2" x2="2.5" y2="9.2" width="0.127" layer="51" curve="-180"/>
+</package>
 </packages>
 <symbols>
 <symbol name="CRYSTAL_32KHZ">
@@ -96,6 +109,14 @@
 <wire x1="5.08" y1="2.54" x2="5.08" y2="5.08" width="0.254" layer="94"/>
 <wire x1="5.08" y1="2.54" x2="5.08" y2="0" width="0.254" layer="94"/>
 </symbol>
+<symbol name="LED_5MM_SMD">
+<pin name="P$1" x="-5.08" y="0" visible="off" length="middle"/>
+<pin name="P$2" x="7.62" y="0" visible="off" length="middle" rot="R180"/>
+<wire x1="0" y1="2.54" x2="0" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="-2.54" x2="2.54" y2="0" width="0.254" layer="94"/>
+<wire x1="2.54" y1="0" x2="0" y2="2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="2.54" y2="-2.54" width="0.254" layer="94"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="CRYSTAL_32KHZ">
@@ -115,6 +136,22 @@
 <attribute name="MPN" value="MC-306 32.768K-E3:ROHS" constant="no"/>
 <attribute name="OC_DIGIKEY_1" value="SER2417TR-ND" constant="no"/>
 </technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="LED_5MM_SMD">
+<gates>
+<gate name="G$1" symbol="LED_5MM_SMD" x="-2.54" y="0"/>
+</gates>
+<devices>
+<device name="" package="LED_5MM_SMD">
+<connects>
+<connect gate="G$1" pin="P$1" pad="P$1"/>
+<connect gate="G$1" pin="P$2" pad="P$2"/>
+</connects>
+<technologies>
+<technology name=""/>
 </technologies>
 </device>
 </devices>
