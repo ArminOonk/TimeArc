@@ -14065,6 +14065,41 @@ Source: Motorola European Master Guide Pacge 3-59</description>
 <wire x1="2.5" y1="4" x2="2.5" y2="9.2" width="0.127" layer="51"/>
 <wire x1="-2.5" y1="9.2" x2="2.5" y2="9.2" width="0.127" layer="51" curve="-180"/>
 </package>
+<package name="1X09-SMD">
+<wire x1="-7.62" y1="-1.25" x2="15.24" y2="-1.25" width="0.127" layer="21"/>
+<wire x1="15.24" y1="-1.25" x2="15.24" y2="1.25" width="0.127" layer="21"/>
+<wire x1="15.24" y1="1.25" x2="6.35" y2="1.25" width="0.127" layer="21"/>
+<wire x1="6.35" y1="1.25" x2="3.81" y2="1.25" width="0.127" layer="21"/>
+<wire x1="3.81" y1="1.25" x2="1.27" y2="1.25" width="0.127" layer="21"/>
+<wire x1="1.27" y1="1.25" x2="-1.27" y2="1.25" width="0.127" layer="21"/>
+<wire x1="-1.27" y1="1.25" x2="-3.81" y2="1.25" width="0.127" layer="21"/>
+<wire x1="-3.81" y1="1.25" x2="-6.35" y2="1.25" width="0.127" layer="21"/>
+<wire x1="-6.35" y1="1.25" x2="-7.62" y2="1.25" width="0.127" layer="21"/>
+<wire x1="-7.62" y1="1.25" x2="-7.62" y2="-1.25" width="0.127" layer="21"/>
+<wire x1="-6.35" y1="1.25" x2="-6.35" y2="7.25" width="0.127" layer="21"/>
+<wire x1="-3.81" y1="1.25" x2="-3.81" y2="7.25" width="0.127" layer="21"/>
+<wire x1="-1.27" y1="1.25" x2="-1.27" y2="7.25" width="0.127" layer="21"/>
+<wire x1="1.27" y1="1.25" x2="1.27" y2="7.25" width="0.127" layer="21"/>
+<wire x1="3.81" y1="1.25" x2="3.81" y2="7.25" width="0.127" layer="21"/>
+<wire x1="6.35" y1="1.25" x2="6.35" y2="7.25" width="0.127" layer="21"/>
+<smd name="4" x="-1.27" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="5" x="-3.81" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="6" x="-6.35" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="3" x="1.27" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="2" x="3.81" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="1" x="6.35" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<text x="15.62" y="-2" size="0.8128" layer="21" font="vector" rot="R270">&gt;name</text>
+<text x="-9" y="-2" size="0.8128" layer="21" font="vector" rot="R270">&gt;value</text>
+<smd name="7" x="8.89" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="8" x="11.43" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="9" x="13.97" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<wire x1="13.97" y1="1.25" x2="11.43" y2="1.25" width="0.127" layer="21"/>
+<wire x1="11.43" y1="1.25" x2="8.89" y2="1.25" width="0.127" layer="21"/>
+<wire x1="8.89" y1="1.25" x2="6.35" y2="1.25" width="0.127" layer="21"/>
+<wire x1="8.89" y1="1.25" x2="8.89" y2="7.25" width="0.127" layer="21"/>
+<wire x1="11.43" y1="1.25" x2="11.43" y2="7.25" width="0.127" layer="21"/>
+<wire x1="13.97" y1="1.25" x2="13.97" y2="7.25" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="CRYSTAL_32KHZ">
@@ -14092,6 +14127,21 @@ Source: Motorola European Master Guide Pacge 3-59</description>
 <wire x1="0" y1="-2.54" x2="2.54" y2="0" width="0.254" layer="94"/>
 <wire x1="2.54" y1="0" x2="0" y2="2.54" width="0.254" layer="94"/>
 <wire x1="2.54" y1="2.54" x2="2.54" y2="-2.54" width="0.254" layer="94"/>
+</symbol>
+<symbol name="CC3000">
+<pin name="GND" x="-7.62" y="12.7" length="middle"/>
+<pin name="VCC" x="-7.62" y="7.62" length="middle"/>
+<pin name="3V3" x="-7.62" y="2.54" length="middle"/>
+<pin name="MOSI" x="-7.62" y="-2.54" length="middle"/>
+<pin name="MISO" x="-7.62" y="-7.62" length="middle"/>
+<pin name="CS" x="-7.62" y="-12.7" length="middle"/>
+<wire x1="-5.08" y1="15.24" x2="-5.08" y2="-30.48" width="0.254" layer="94"/>
+<wire x1="-5.08" y1="-30.48" x2="7.62" y2="-30.48" width="0.254" layer="94"/>
+<wire x1="7.62" y1="-30.48" x2="7.62" y2="15.24" width="0.254" layer="94"/>
+<wire x1="7.62" y1="15.24" x2="-5.08" y2="15.24" width="0.254" layer="94"/>
+<pin name="INT" x="-7.62" y="-17.78" length="middle"/>
+<pin name="SCK" x="-7.62" y="-22.86" length="middle"/>
+<pin name="EN" x="-7.62" y="-27.94" length="middle"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -14122,6 +14172,29 @@ Source: Motorola European Master Guide Pacge 3-59</description>
 <connects>
 <connect gate="G$1" pin="P$1" pad="P$1"/>
 <connect gate="G$1" pin="P$2" pad="P$2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="CC3000">
+<gates>
+<gate name="G$1" symbol="CC3000" x="-2.54" y="7.62"/>
+</gates>
+<devices>
+<device name="" package="1X09-SMD">
+<connects>
+<connect gate="G$1" pin="3V3" pad="1"/>
+<connect gate="G$1" pin="CS" pad="2"/>
+<connect gate="G$1" pin="EN" pad="3"/>
+<connect gate="G$1" pin="GND" pad="4"/>
+<connect gate="G$1" pin="INT" pad="5"/>
+<connect gate="G$1" pin="MISO" pad="6"/>
+<connect gate="G$1" pin="MOSI" pad="7"/>
+<connect gate="G$1" pin="SCK" pad="8"/>
+<connect gate="G$1" pin="VCC" pad="9"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -14963,6 +15036,9 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="GND18" library="Custom components" deviceset="GND" device=""/>
 <part name="R26" library="Custom components" deviceset="R-EU_" device="R0603" value="200"/>
 <part name="P+6" library="Custom components" deviceset="+5V" device=""/>
+<part name="U$9" library="timearc" deviceset="CC3000" device=""/>
+<part name="GND20" library="supply1" deviceset="GND" device=""/>
+<part name="+3V8" library="Custom components" deviceset="+3V3" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -15309,6 +15385,9 @@ We've spent an enormous amount of time creating and checking these footprints an
 <instance part="GND18" gate="1" x="414.02" y="167.64"/>
 <instance part="R26" gate="G$1" x="439.42" y="177.8" rot="MR180"/>
 <instance part="P+6" gate="1" x="447.04" y="182.88"/>
+<instance part="U$9" gate="G$1" x="736.6" y="215.9"/>
+<instance part="GND20" gate="1" x="718.82" y="226.06"/>
+<instance part="+3V8" gate="G$1" x="718.82" y="223.52"/>
 </instances>
 <busses>
 </busses>
@@ -16998,6 +17077,11 @@ We've spent an enormous amount of time creating and checking these footprints an
 <wire x1="411.48" y1="172.72" x2="414.02" y2="172.72" width="0.1524" layer="91"/>
 <wire x1="414.02" y1="172.72" x2="414.02" y2="170.18" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="GND20" gate="1" pin="GND"/>
+<pinref part="U$9" gate="G$1" pin="GND"/>
+<wire x1="718.82" y1="228.6" x2="728.98" y2="228.6" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="+3V3" class="0">
 <segment>
@@ -17148,6 +17232,12 @@ We've spent an enormous amount of time creating and checking these footprints an
 <junction x="406.4" y="63.5"/>
 <junction x="406.4" y="63.5"/>
 <junction x="406.4" y="66.04"/>
+</segment>
+<segment>
+<pinref part="U$9" gate="G$1" pin="3V3"/>
+<pinref part="+3V8" gate="G$1" pin="+3V3"/>
+<wire x1="728.98" y1="218.44" x2="718.82" y2="218.44" width="0.1524" layer="91"/>
+<wire x1="718.82" y1="218.44" x2="718.82" y2="220.98" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$1" class="0">
