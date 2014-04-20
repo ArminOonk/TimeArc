@@ -14068,7 +14068,7 @@ Source: Motorola European Master Guide Pacge 3-59</description>
 <package name="1X09-SMD">
 <wire x1="-7.62" y1="-1.25" x2="15.24" y2="-1.25" width="0.127" layer="21"/>
 <wire x1="15.24" y1="-1.25" x2="15.24" y2="1.25" width="0.127" layer="21"/>
-<wire x1="15.24" y1="1.25" x2="6.35" y2="1.25" width="0.127" layer="21"/>
+<wire x1="15.24" y1="1.25" x2="13.97" y2="1.25" width="0.127" layer="21"/>
 <wire x1="6.35" y1="1.25" x2="3.81" y2="1.25" width="0.127" layer="21"/>
 <wire x1="3.81" y1="1.25" x2="1.27" y2="1.25" width="0.127" layer="21"/>
 <wire x1="1.27" y1="1.25" x2="-1.27" y2="1.25" width="0.127" layer="21"/>
@@ -14082,17 +14082,17 @@ Source: Motorola European Master Guide Pacge 3-59</description>
 <wire x1="1.27" y1="1.25" x2="1.27" y2="7.25" width="0.127" layer="21"/>
 <wire x1="3.81" y1="1.25" x2="3.81" y2="7.25" width="0.127" layer="21"/>
 <wire x1="6.35" y1="1.25" x2="6.35" y2="7.25" width="0.127" layer="21"/>
-<smd name="4" x="-1.27" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
-<smd name="5" x="-3.81" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
-<smd name="6" x="-6.35" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
-<smd name="3" x="1.27" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
-<smd name="2" x="3.81" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
-<smd name="1" x="6.35" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="4" x="1.27" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="5" x="3.81" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="6" x="6.35" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="3" x="-1.27" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="2" x="-3.81" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="1" x="-6.35" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
 <text x="15.62" y="-2" size="0.8128" layer="21" font="vector" rot="R270">&gt;name</text>
 <text x="-9" y="-2" size="0.8128" layer="21" font="vector" rot="R270">&gt;value</text>
-<smd name="7" x="8.89" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="7" x="13.97" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
 <smd name="8" x="11.43" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
-<smd name="9" x="13.97" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
+<smd name="9" x="8.89" y="-3.5" dx="2.5" dy="1" layer="1" rot="R270"/>
 <wire x1="13.97" y1="1.25" x2="11.43" y2="1.25" width="0.127" layer="21"/>
 <wire x1="11.43" y1="1.25" x2="8.89" y2="1.25" width="0.127" layer="21"/>
 <wire x1="8.89" y1="1.25" x2="6.35" y2="1.25" width="0.127" layer="21"/>
@@ -14158,7 +14158,10 @@ Source: Motorola European Master Guide Pacge 3-59</description>
 <connect gate="G$1" pin="P$4" pad="P$4"/>
 </connects>
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="MPN" value="MC-306 32.768K-E3:ROHS" constant="no"/>
+<attribute name="OC_DIGIKEY_1" value="SER2417TR-ND" constant="no"/>
+</technology>
 </technologies>
 </device>
 </devices>
@@ -14186,15 +14189,15 @@ Source: Motorola European Master Guide Pacge 3-59</description>
 <devices>
 <device name="" package="1X09-SMD">
 <connects>
-<connect gate="G$1" pin="3V3" pad="1"/>
-<connect gate="G$1" pin="CS" pad="2"/>
-<connect gate="G$1" pin="EN" pad="3"/>
-<connect gate="G$1" pin="GND" pad="4"/>
-<connect gate="G$1" pin="INT" pad="5"/>
-<connect gate="G$1" pin="MISO" pad="6"/>
-<connect gate="G$1" pin="MOSI" pad="7"/>
+<connect gate="G$1" pin="3V3" pad="3"/>
+<connect gate="G$1" pin="CS" pad="6"/>
+<connect gate="G$1" pin="EN" pad="9"/>
+<connect gate="G$1" pin="GND" pad="1"/>
+<connect gate="G$1" pin="INT" pad="7"/>
+<connect gate="G$1" pin="MISO" pad="5"/>
+<connect gate="G$1" pin="MOSI" pad="4"/>
 <connect gate="G$1" pin="SCK" pad="8"/>
-<connect gate="G$1" pin="VCC" pad="9"/>
+<connect gate="G$1" pin="VCC" pad="2"/>
 </connects>
 <technologies>
 <technology name=""/>
