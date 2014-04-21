@@ -18526,9 +18526,9 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <label x="314.96" y="27.94" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="PORT_B" pin="P1"/>
-<wire x1="93.98" y1="172.72" x2="68.58" y2="172.72" width="0.1524" layer="91"/>
-<label x="71.12" y="172.72" size="1.778" layer="95"/>
+<pinref part="U$1" gate="PORT_C" pin="P1"/>
+<wire x1="157.48" y1="170.18" x2="129.54" y2="170.18" width="0.1524" layer="91"/>
+<label x="132.08" y="170.18" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$23" class="0">
@@ -18876,6 +18876,13 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <pinref part="U$1" gate="PORT_A" pin="P8"/>
 <wire x1="45.72" y1="154.94" x2="20.32" y2="154.94" width="0.1524" layer="91"/>
 <label x="22.86" y="154.94" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="AUDIO_OUT" class="0">
+<segment>
+<pinref part="U$1" gate="PORT_B" pin="P1"/>
+<wire x1="93.98" y1="172.72" x2="68.58" y2="172.72" width="0.1524" layer="91"/>
+<label x="71.12" y="172.72" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
