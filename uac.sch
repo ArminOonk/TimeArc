@@ -14513,6 +14513,17 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <wire x1="11.43" y1="1.25" x2="11.43" y2="7.25" width="0.127" layer="21"/>
 <wire x1="13.97" y1="1.25" x2="13.97" y2="7.25" width="0.127" layer="21"/>
 </package>
+<package name="SOT23">
+<smd name="1" x="-0.95" y="-1.15" dx="1.2" dy="0.6" layer="1" rot="R90"/>
+<smd name="2" x="0" y="-1.15" dx="1.2" dy="0.6" layer="1" rot="R90"/>
+<smd name="3" x="0.95" y="-1.15" dx="1.2" dy="0.6" layer="1" rot="R90"/>
+<smd name="4" x="0.95" y="1.15" dx="1.2" dy="0.6" layer="1" rot="R90"/>
+<smd name="5" x="0" y="1.15" dx="1.2" dy="0.6" layer="1" rot="R90"/>
+<smd name="6" x="-0.95" y="1.15" dx="1.2" dy="0.6" layer="1" rot="R90"/>
+<circle x="-2" y="-2" radius="0.2" width="0.127" layer="21"/>
+<wire x1="-1.5" y1="1" x2="-1.5" y2="-1" width="0.127" layer="21"/>
+<wire x1="1.5" y1="1" x2="1.5" y2="-1" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="CRYSTAL_32KHZ">
@@ -14555,6 +14566,19 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 <pin name="INT" x="-7.62" y="-17.78" length="middle"/>
 <pin name="SCK" x="-7.62" y="-22.86" length="middle"/>
 <pin name="EN" x="-7.62" y="-27.94" length="middle"/>
+</symbol>
+<symbol name="USBLC6-2SC6">
+<pin name="IO1_IN" x="-15.24" y="10.16" length="middle"/>
+<pin name="GND" x="-15.24" y="5.08" length="middle"/>
+<pin name="IO2_IN" x="-15.24" y="0" length="middle"/>
+<pin name="IO2_OUT" x="17.78" y="0" length="middle" rot="R180"/>
+<pin name="VBUS" x="17.78" y="5.08" length="middle" rot="R180"/>
+<pin name="IO1_OUT" x="17.78" y="10.16" length="middle" rot="R180"/>
+<wire x1="-10.16" y1="12.7" x2="-10.16" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-2.54" x2="12.7" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="12.7" y1="-2.54" x2="12.7" y2="12.7" width="0.254" layer="94"/>
+<wire x1="12.7" y1="12.7" x2="-10.16" y2="12.7" width="0.254" layer="94"/>
+<text x="-10.16" y="12.7" size="1.27" layer="94" ratio="10">USBLC6-2SC6</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -14614,6 +14638,29 @@ will be further integrated into the Sparkfun Library for other footprints.  It c
 </connects>
 <technologies>
 <technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="USBLC6-2SC6">
+<gates>
+<gate name="A" symbol="USBLC6-2SC6" x="0" y="-5.08"/>
+</gates>
+<devices>
+<device name="" package="SOT23">
+<connects>
+<connect gate="A" pin="GND" pad="2"/>
+<connect gate="A" pin="IO1_IN" pad="1"/>
+<connect gate="A" pin="IO1_OUT" pad="6"/>
+<connect gate="A" pin="IO2_IN" pad="3"/>
+<connect gate="A" pin="IO2_OUT" pad="4"/>
+<connect gate="A" pin="VBUS" pad="5"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="MPN" value="USBLC6-2SC6" constant="no"/>
+<attribute name="OC_FARNELL" value="1269406" constant="no"/>
+</technology>
 </technologies>
 </device>
 </devices>
@@ -15130,6 +15177,29 @@ We've spent an enormous amount of time creating and checking these footprints an
 <text x="-0.508" y="-0.254" size="0.3048" layer="51" ratio="15">Y</text>
 <text x="-0.127" y="0.127" size="0.3048" layer="51" ratio="15">Z</text>
 </package>
+<package name="USB-MINIB">
+<description>&lt;b&gt;USB Series Mini-B Surface Mounted&lt;/b&gt;</description>
+<wire x1="-1.3" y1="3.8" x2="0.8" y2="3.8" width="0.2032" layer="21"/>
+<wire x1="3.3" y1="3.1" x2="3.3" y2="2.2" width="0.2032" layer="21"/>
+<wire x1="3.3" y1="-2.2" x2="3.3" y2="-3.1" width="0.2032" layer="21"/>
+<wire x1="0.8" y1="-3.8" x2="-1.3" y2="-3.8" width="0.2032" layer="21"/>
+<wire x1="-5.9" y1="3.8" x2="-5.9" y2="-3.8" width="0.2032" layer="51"/>
+<wire x1="-5.9" y1="-3.8" x2="-4.5" y2="-3.8" width="0.2032" layer="51"/>
+<wire x1="-5.9" y1="3.8" x2="-4.5" y2="3.8" width="0.2032" layer="51"/>
+<smd name="D+" x="2.5" y="0" dx="2.5" dy="0.5" layer="1"/>
+<smd name="D-" x="2.5" y="0.8" dx="2.5" dy="0.5" layer="1"/>
+<smd name="GND" x="2.5" y="-1.6" dx="2.5" dy="0.5" layer="1"/>
+<smd name="ID" x="2.5" y="-0.8" dx="2.5" dy="0.5" layer="1"/>
+<smd name="MTN3" x="-3" y="-4.5" dx="2.5" dy="2" layer="1"/>
+<smd name="MTN1" x="-3" y="4.5" dx="2.5" dy="2" layer="1"/>
+<smd name="MTN4" x="2.5" y="-4.5" dx="2.5" dy="2" layer="1"/>
+<smd name="MTN2" x="2.5" y="4.5" dx="2.5" dy="2" layer="1"/>
+<smd name="VBUS" x="2.5" y="1.6" dx="2.5" dy="0.5" layer="1"/>
+<text x="-3.81" y="1.27" size="0.4064" layer="25">&gt;NAME</text>
+<text x="-3.81" y="0" size="0.4064" layer="27">&gt;VALUE</text>
+<hole x="0" y="2.2" drill="0.9"/>
+<hole x="0" y="-2.2" drill="0.9"/>
+</package>
 </packages>
 <symbols>
 <symbol name="ADXL345">
@@ -15154,6 +15224,21 @@ We've spent an enormous amount of time creating and checking these footprints an
 <pin name="SDA" x="12.7" y="2.54" length="short" rot="R180"/>
 <pin name="SCL" x="12.7" y="0" length="short" rot="R180"/>
 </symbol>
+<symbol name="USB-5PIN">
+<wire x1="7.62" y1="12.7" x2="0" y2="12.7" width="0.254" layer="94"/>
+<wire x1="0" y1="12.7" x2="0" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="-2.54" x2="7.62" y2="-2.54" width="0.254" layer="94"/>
+<text x="5.334" y="1.778" size="2.54" layer="94" rot="R90">USB</text>
+<pin name="D+" x="-2.54" y="5.08" visible="pad" length="short"/>
+<pin name="D-" x="-2.54" y="7.62" visible="pad" length="short"/>
+<pin name="VBUS" x="-2.54" y="10.16" visible="pad" length="short"/>
+<pin name="GND" x="-2.54" y="0" visible="pad" length="short"/>
+<pin name="ID" x="-2.54" y="2.54" visible="pad" length="short"/>
+<pin name="MTN1" x="2.54" y="15.24" visible="pad" length="short" rot="R270"/>
+<pin name="MTN2" x="5.08" y="15.24" visible="pad" length="short" rot="R270"/>
+<pin name="MTN3" x="2.54" y="-5.08" visible="pad" length="short" rot="R90"/>
+<pin name="MTN4" x="5.08" y="-5.08" visible="pad" length="short" rot="R90"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="ADXL345" prefix="U">
@@ -15177,6 +15262,34 @@ We've spent an enormous amount of time creating and checking these footprints an
 <connect gate="G$1" pin="SDO" pad="12"/>
 <connect gate="G$1" pin="VDD" pad="1"/>
 <connect gate="G$1" pin="VSS" pad="6"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="USB-MINIB">
+<description>&lt;b&gt;Mini-USB "B" connector with 5th pin broken out.&lt;/b&gt;&lt;p&gt;
+Created new symbol breaking out 5th "ID" pin in mini/micro USB connector spec.  See: http://en.wikipedia.org/wiki/Mini_usb#Cables.  Uses same footprint as 4-pin symbol.&lt;p&gt;
+ 
+
+Also added pins to connect to mounting / shield pads if required (probably not generally needed as signals aren't shielded once they leave the connector).</description>
+<gates>
+<gate name="G$1" symbol="USB-5PIN" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-5PIN" package="USB-MINIB">
+<connects>
+<connect gate="G$1" pin="D+" pad="D+"/>
+<connect gate="G$1" pin="D-" pad="D-"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="ID" pad="ID"/>
+<connect gate="G$1" pin="MTN1" pad="MTN3"/>
+<connect gate="G$1" pin="MTN2" pad="MTN1"/>
+<connect gate="G$1" pin="MTN3" pad="MTN2"/>
+<connect gate="G$1" pin="MTN4" pad="MTN4"/>
+<connect gate="G$1" pin="VBUS" pad="VBUS"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -15554,6 +15667,25 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <part name="+3V9" library="Custom components" deviceset="+3V3" device=""/>
 <part name="GND22" library="SparkFun" deviceset="GND" device=""/>
 <part name="FTDI" library="Custom components" deviceset="M06" device="SMD"/>
+<part name="U$12" library="SparkFun2012" deviceset="USB-MINIB" device="-5PIN"/>
+<part name="GND23" library="supply1" deviceset="GND" device=""/>
+<part name="GND24" library="supply1" deviceset="GND" device=""/>
+<part name="U$13" library="timearc" deviceset="USBLC6-2SC6" device=""/>
+<part name="GND25" library="supply1" deviceset="GND" device=""/>
+<part name="C11" library="Custom components" deviceset="C-EU" device="C0603" value="100n"/>
+<part name="GND26" library="supply1" deviceset="GND" device=""/>
+<part name="R28" library="Custom components" deviceset="R-EU_" device="R0603" value="0"/>
+<part name="R29" library="Custom components" deviceset="R-EU_" device="R0603" value="0"/>
+<part name="Q6" library="Custom components" deviceset="2N7002CK" device="SST" technology="4"/>
+<part name="Q7" library="Custom components" deviceset="2N7002CK" device="SST" technology="4"/>
+<part name="+3V10" library="Custom components" deviceset="+3V3" device=""/>
+<part name="R30" library="Custom components" deviceset="R-EU_" device="R0603" value="1k5"/>
+<part name="R32" library="Custom components" deviceset="R-EU_" device="R0603" value="10k"/>
+<part name="R33" library="Custom components" deviceset="R-EU_" device="R0603" value="36k"/>
+<part name="P+7" library="Custom components" deviceset="+5V" device=""/>
+<part name="GND27" library="supply1" deviceset="GND" device=""/>
+<part name="R34" library="Custom components" deviceset="R-EU_" device="R0603" value="47k"/>
+<part name="+3V11" library="Custom components" deviceset="+3V3" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -15651,6 +15783,8 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <text x="60.96" y="160.02" size="1.778" layer="91">SPI2</text>
 <wire x1="655.32" y1="88.9" x2="655.32" y2="0" width="0.1524" layer="97"/>
 <text x="167.64" y="172.72" size="1.778" layer="91">USART3 remap</text>
+<text x="459.74" y="76.2" size="1.778" layer="91">USB: 1125348</text>
+<text x="434.34" y="38.1" size="1.778" layer="91">Transistor Q6,Q7 BC817</text>
 </plain>
 <instances>
 <instance part="MIN0" gate="G$1" x="782.32" y="226.06"/>
@@ -15926,6 +16060,29 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <instance part="+3V9" gate="G$1" x="505.46" y="55.88"/>
 <instance part="GND22" gate="1" x="635" y="33.02"/>
 <instance part="FTDI" gate="G$1" x="627.38" y="45.72" rot="MR180"/>
+<instance part="U$12" gate="G$1" x="467.36" y="55.88"/>
+<instance part="GND23" gate="1" x="464.82" y="45.72"/>
+<instance part="GND24" gate="1" x="462.28" y="71.12"/>
+<instance part="U$13" gate="A" x="426.72" y="53.34" rot="MR0"/>
+<instance part="GND25" gate="1" x="447.04" y="55.88"/>
+<instance part="C11" gate="G$1" x="378.46" y="55.88"/>
+<instance part="GND26" gate="1" x="378.46" y="45.72"/>
+<instance part="R28" gate="G$1" x="401.32" y="63.5" rot="MR180"/>
+<instance part="R29" gate="G$1" x="401.32" y="53.34" rot="MR180"/>
+<instance part="Q6" gate="G$1" x="388.62" y="30.48" smashed="yes" rot="R90">
+<attribute name="NAME" x="393.7" y="32.893" size="1.778" layer="95"/>
+</instance>
+<instance part="Q7" gate="G$1" x="396.24" y="17.78" smashed="yes" rot="R90">
+<attribute name="NAME" x="401.32" y="17.653" size="1.778" layer="95"/>
+</instance>
+<instance part="+3V10" gate="G$1" x="378.46" y="38.1"/>
+<instance part="R30" gate="G$1" x="391.16" y="43.18" rot="MR90"/>
+<instance part="R32" gate="G$1" x="383.54" y="22.86" rot="MR0"/>
+<instance part="R33" gate="G$1" x="406.4" y="22.86" rot="MR0"/>
+<instance part="P+7" gate="1" x="375.92" y="27.94"/>
+<instance part="GND27" gate="1" x="414.02" y="20.32"/>
+<instance part="R34" gate="G$1" x="406.4" y="10.16" rot="MR0"/>
+<instance part="+3V11" gate="G$1" x="414.02" y="15.24"/>
 </instances>
 <busses>
 </busses>
@@ -17632,6 +17789,44 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <pinref part="FTDI" gate="G$1" pin="5"/>
 <pinref part="FTDI" gate="G$1" pin="6"/>
 </segment>
+<segment>
+<pinref part="U$12" gate="G$1" pin="MTN4"/>
+<pinref part="U$12" gate="G$1" pin="MTN3"/>
+<wire x1="472.44" y1="50.8" x2="469.9" y2="50.8" width="0.1524" layer="91"/>
+<pinref part="U$12" gate="G$1" pin="GND"/>
+<wire x1="469.9" y1="50.8" x2="464.82" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="464.82" y1="50.8" x2="464.82" y2="55.88" width="0.1524" layer="91"/>
+<pinref part="GND23" gate="1" pin="GND"/>
+<wire x1="464.82" y1="48.26" x2="464.82" y2="50.8" width="0.1524" layer="91"/>
+<junction x="464.82" y="50.8"/>
+<junction x="469.9" y="50.8"/>
+<junction x="472.44" y="50.8"/>
+</segment>
+<segment>
+<pinref part="U$12" gate="G$1" pin="MTN1"/>
+<pinref part="U$12" gate="G$1" pin="MTN2"/>
+<wire x1="469.9" y1="71.12" x2="472.44" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="472.44" y1="71.12" x2="472.44" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="472.44" y1="73.66" x2="462.28" y2="73.66" width="0.1524" layer="91"/>
+<pinref part="GND24" gate="1" pin="GND"/>
+<junction x="472.44" y="71.12"/>
+<junction x="469.9" y="71.12"/>
+</segment>
+<segment>
+<pinref part="U$13" gate="A" pin="GND"/>
+<pinref part="GND25" gate="1" pin="GND"/>
+<wire x1="441.96" y1="58.42" x2="447.04" y2="58.42" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="GND26" gate="1" pin="GND"/>
+<pinref part="C11" gate="G$1" pin="2"/>
+<wire x1="378.46" y1="48.26" x2="378.46" y2="50.8" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="R33" gate="G$1" pin="1"/>
+<pinref part="GND27" gate="1" pin="GND"/>
+<wire x1="411.48" y1="22.86" x2="414.02" y2="22.86" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="+3V3" class="0">
 <segment>
@@ -17790,6 +17985,17 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <pinref part="R27" gate="G$1" pin="1"/>
 <wire x1="505.46" y1="45.72" x2="505.46" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="+3V9" gate="G$1" pin="+3V3"/>
+</segment>
+<segment>
+<pinref part="+3V10" gate="G$1" pin="+3V3"/>
+<pinref part="Q6" gate="G$1" pin="D"/>
+<wire x1="378.46" y1="35.56" x2="386.08" y2="35.56" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="R34" gate="G$1" pin="1"/>
+<pinref part="+3V11" gate="G$1" pin="+3V3"/>
+<wire x1="411.48" y1="10.16" x2="414.02" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="414.02" y1="10.16" x2="414.02" y2="12.7" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -18138,6 +18344,17 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <label x="15.24" y="50.8" size="1.778" layer="95"/>
 <junction x="38.1" y="50.8"/>
 </segment>
+<segment>
+<pinref part="U$12" gate="G$1" pin="VBUS"/>
+<wire x1="464.82" y1="66.04" x2="441.96" y2="66.04" width="0.1524" layer="91"/>
+<label x="444.5" y="66.04" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$13" gate="A" pin="VBUS"/>
+<wire x1="408.94" y1="58.42" x2="378.46" y2="58.42" width="0.1524" layer="91"/>
+<label x="391.16" y="58.42" size="1.778" layer="95"/>
+<pinref part="C11" gate="G$1" pin="1"/>
+</segment>
 </net>
 <net name="N$19" class="0">
 <segment>
@@ -18234,6 +18451,12 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <pinref part="P+6" gate="1" pin="+5V"/>
 <wire x1="444.5" y1="177.8" x2="447.04" y2="177.8" width="0.1524" layer="91"/>
 <wire x1="447.04" y1="177.8" x2="447.04" y2="180.34" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="R32" gate="G$1" pin="2"/>
+<pinref part="P+7" gate="1" pin="+5V"/>
+<wire x1="378.46" y1="22.86" x2="375.92" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="375.92" y1="22.86" x2="375.92" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="SPI1_NSS" class="0">
@@ -18554,6 +18777,105 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <pinref part="U$1" gate="PORT_D" pin="P10"/>
 <pinref part="R12" gate="G$1" pin="2"/>
 <wire x1="205.74" y1="165.1" x2="203.2" y2="165.1" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$18" class="0">
+<segment>
+<pinref part="U$12" gate="G$1" pin="D-"/>
+<pinref part="U$13" gate="A" pin="IO1_IN"/>
+<wire x1="464.82" y1="63.5" x2="441.96" y2="63.5" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$34" class="0">
+<segment>
+<pinref part="U$13" gate="A" pin="IO2_IN"/>
+<wire x1="441.96" y1="53.34" x2="454.66" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="454.66" y1="53.34" x2="454.66" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="U$12" gate="G$1" pin="D+"/>
+<wire x1="454.66" y1="60.96" x2="464.82" y2="60.96" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$36" class="0">
+<segment>
+<pinref part="U$13" gate="A" pin="IO1_OUT"/>
+<pinref part="R28" gate="G$1" pin="2"/>
+<wire x1="408.94" y1="63.5" x2="406.4" y2="63.5" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$37" class="0">
+<segment>
+<pinref part="R29" gate="G$1" pin="2"/>
+<pinref part="U$13" gate="A" pin="IO2_OUT"/>
+<wire x1="406.4" y1="53.34" x2="408.94" y2="53.34" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="USB_DP" class="0">
+<segment>
+<pinref part="R29" gate="G$1" pin="1"/>
+<wire x1="396.24" y1="53.34" x2="391.16" y2="53.34" width="0.1524" layer="91"/>
+<label x="383.54" y="53.34" size="1.778" layer="95"/>
+<pinref part="R30" gate="G$1" pin="2"/>
+<wire x1="391.16" y1="53.34" x2="383.54" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="391.16" y1="48.26" x2="391.16" y2="53.34" width="0.1524" layer="91"/>
+<junction x="391.16" y="53.34"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="PORT_A" pin="P12"/>
+<wire x1="45.72" y1="162.56" x2="20.32" y2="162.56" width="0.1524" layer="91"/>
+<label x="22.86" y="162.56" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="USB_DM" class="0">
+<segment>
+<pinref part="R28" gate="G$1" pin="1"/>
+<wire x1="396.24" y1="63.5" x2="383.54" y2="63.5" width="0.1524" layer="91"/>
+<label x="383.54" y="63.5" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="PORT_A" pin="P11"/>
+<wire x1="45.72" y1="165.1" x2="20.32" y2="165.1" width="0.1524" layer="91"/>
+<label x="22.86" y="165.1" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$38" class="0">
+<segment>
+<pinref part="Q6" gate="G$1" pin="S"/>
+<pinref part="R30" gate="G$1" pin="1"/>
+<wire x1="391.16" y1="35.56" x2="391.16" y2="38.1" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$39" class="0">
+<segment>
+<pinref part="R32" gate="G$1" pin="1"/>
+<pinref part="Q7" gate="G$1" pin="D"/>
+<wire x1="388.62" y1="22.86" x2="391.16" y2="22.86" width="0.1524" layer="91"/>
+<pinref part="Q6" gate="G$1" pin="G"/>
+<wire x1="391.16" y1="22.86" x2="393.7" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="391.16" y1="25.4" x2="391.16" y2="22.86" width="0.1524" layer="91"/>
+<junction x="391.16" y="22.86"/>
+</segment>
+</net>
+<net name="N$40" class="0">
+<segment>
+<pinref part="Q7" gate="G$1" pin="S"/>
+<pinref part="R33" gate="G$1" pin="2"/>
+<wire x1="398.78" y1="22.86" x2="401.32" y2="22.86" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="USB_DISCONNECT" class="0">
+<segment>
+<pinref part="R34" gate="G$1" pin="2"/>
+<pinref part="Q7" gate="G$1" pin="G"/>
+<wire x1="401.32" y1="10.16" x2="398.78" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="398.78" y1="10.16" x2="398.78" y2="12.7" width="0.1524" layer="91"/>
+<wire x1="398.78" y1="10.16" x2="373.38" y2="10.16" width="0.1524" layer="91"/>
+<junction x="398.78" y="10.16"/>
+<label x="373.38" y="10.16" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="PORT_A" pin="P8"/>
+<wire x1="45.72" y1="172.72" x2="20.32" y2="172.72" width="0.1524" layer="91"/>
+<label x="22.86" y="172.72" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
