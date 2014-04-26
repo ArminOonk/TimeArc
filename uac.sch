@@ -14618,7 +14618,6 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <part name="C25" library="Custom components" deviceset="CPOL-EU" device="SMCC" value="100u"/>
 <part name="U2" library="SparkFun2012" deviceset="ADXL345" device=""/>
 <part name="C5" library="Custom components" deviceset="C-EU" device="C0603" value="100n"/>
-<part name="C26" library="Custom components" deviceset="C-EU" device="C0603" value="100n"/>
 <part name="C27" library="Custom components" deviceset="C-EU" device="C0603" value="10u"/>
 <part name="+3V6" library="Custom components" deviceset="+3V3" device=""/>
 <part name="GND12" library="supply1" deviceset="GND" device=""/>
@@ -14928,8 +14927,7 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <instance part="C25" gate="G$1" x="78.74" y="38.1"/>
 <instance part="U2" gate="G$1" x="299.72" y="35.56"/>
 <instance part="C5" gate="G$1" x="284.48" y="38.1"/>
-<instance part="C26" gate="G$1" x="276.86" y="38.1"/>
-<instance part="C27" gate="G$1" x="269.24" y="38.1"/>
+<instance part="C27" gate="G$1" x="276.86" y="38.1"/>
 <instance part="+3V6" gate="G$1" x="284.48" y="50.8"/>
 <instance part="GND12" gate="1" x="284.48" y="17.78"/>
 <instance part="U$11" gate="G$1" x="393.7" y="33.02"/>
@@ -16518,14 +16516,10 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <wire x1="289.56" y1="22.86" x2="284.48" y2="22.86" width="0.1524" layer="91"/>
 <pinref part="C27" gate="G$1" pin="2"/>
 <wire x1="284.48" y1="27.94" x2="276.86" y2="27.94" width="0.1524" layer="91"/>
-<wire x1="276.86" y1="27.94" x2="269.24" y2="27.94" width="0.1524" layer="91"/>
-<wire x1="269.24" y1="27.94" x2="269.24" y2="33.02" width="0.1524" layer="91"/>
-<pinref part="C26" gate="G$1" pin="2"/>
-<wire x1="276.86" y1="33.02" x2="276.86" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="276.86" y1="27.94" x2="276.86" y2="33.02" width="0.1524" layer="91"/>
 <pinref part="C5" gate="G$1" pin="2"/>
 <wire x1="284.48" y1="33.02" x2="284.48" y2="27.94" width="0.1524" layer="91"/>
 <junction x="284.48" y="27.94"/>
-<junction x="276.86" y="27.94"/>
 <junction x="284.48" y="27.94"/>
 <junction x="284.48" y="25.4"/>
 <junction x="284.48" y="22.86"/>
@@ -16691,14 +16685,10 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <wire x1="284.48" y1="45.72" x2="284.48" y2="48.26" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="45.72" x2="284.48" y2="45.72" width="0.1524" layer="91"/>
 <pinref part="C27" gate="G$1" pin="1"/>
-<wire x1="269.24" y1="40.64" x2="269.24" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="269.24" y1="43.18" x2="276.86" y2="43.18" width="0.1524" layer="91"/>
-<pinref part="C26" gate="G$1" pin="1"/>
-<wire x1="276.86" y1="43.18" x2="284.48" y2="43.18" width="0.1524" layer="91"/>
 <wire x1="276.86" y1="40.64" x2="276.86" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="276.86" y1="43.18" x2="284.48" y2="43.18" width="0.1524" layer="91"/>
 <pinref part="C5" gate="G$1" pin="1"/>
 <wire x1="284.48" y1="40.64" x2="284.48" y2="43.18" width="0.1524" layer="91"/>
-<junction x="276.86" y="43.18"/>
 <junction x="284.48" y="43.18"/>
 <junction x="284.48" y="43.18"/>
 <junction x="284.48" y="45.72"/>
