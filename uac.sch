@@ -17285,9 +17285,9 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <pinref part="FTDI" gate="G$1" pin="2"/>
 </segment>
 <segment>
-<pinref part="EXT_INTERFACE" gate="A" pin="3"/>
-<wire x1="424.18" y1="142.24" x2="391.16" y2="142.24" width="0.1524" layer="91"/>
-<label x="393.7" y="142.24" size="1.778" layer="95"/>
+<pinref part="EXT_INTERFACE" gate="A" pin="2"/>
+<wire x1="431.8" y1="144.78" x2="457.2" y2="144.78" width="0.1524" layer="91"/>
+<label x="439.42" y="144.78" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="USART1_RX" class="0">
@@ -17302,9 +17302,9 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <pinref part="FTDI" gate="G$1" pin="3"/>
 </segment>
 <segment>
-<pinref part="EXT_INTERFACE" gate="A" pin="2"/>
-<wire x1="431.8" y1="144.78" x2="457.2" y2="144.78" width="0.1524" layer="91"/>
-<label x="439.42" y="144.78" size="1.778" layer="95"/>
+<pinref part="EXT_INTERFACE" gate="A" pin="3"/>
+<wire x1="424.18" y1="142.24" x2="391.16" y2="142.24" width="0.1524" layer="91"/>
+<label x="393.7" y="142.24" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$3" class="0">
