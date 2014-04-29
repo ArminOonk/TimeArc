@@ -2717,10 +2717,10 @@ Your Eurocircuits Team</description>
 <wire x1="73.5" y1="11.35" x2="73.5" y2="12" width="0.2032" layer="16"/>
 <wire x1="73.5" y1="12" x2="73" y2="12.5" width="0.2032" layer="16"/>
 <wire x1="73" y1="12.5" x2="71" y2="12.5" width="0.2032" layer="16"/>
-<polygon width="0.2032" layer="1" isolate="0.3048">
+<polygon width="0.2032" layer="1" isolate="0.3048" rank="2">
 <vertex x="0" y="0"/>
-<vertex x="0" y="11"/>
-<vertex x="100" y="11"/>
+<vertex x="0" y="100"/>
+<vertex x="100" y="100"/>
 <vertex x="100" y="0"/>
 </polygon>
 <wire x1="26.35" y1="7.5" x2="26" y2="7" width="0.2032" layer="16"/>
@@ -3586,17 +3586,17 @@ Your Eurocircuits Team</description>
 <signal name="TOUCH2">
 <contactref element="U$1" pad="11"/>
 <polygon width="0.2032" layer="1">
-<vertex x="74" y="94"/>
-<vertex x="83" y="94" curve="-90"/>
-<vertex x="84" y="93"/>
-<vertex x="84" y="84" curve="-90"/>
-<vertex x="83" y="83"/>
-<vertex x="74" y="83" curve="-90"/>
-<vertex x="73" y="84"/>
-<vertex x="73" y="93" curve="-90"/>
+<vertex x="3" y="60"/>
+<vertex x="12" y="60" curve="-90"/>
+<vertex x="13" y="59"/>
+<vertex x="13" y="50" curve="-90"/>
+<vertex x="12" y="49"/>
+<vertex x="3" y="49" curve="-90"/>
+<vertex x="2" y="50"/>
+<vertex x="2" y="59" curve="-90"/>
 </polygon>
-<via x="78.5" y="88.5" extent="1-16" drill="0.31"/>
-<wire x1="78.5" y1="88.5" x2="45.05025" y2="53.181978125" width="0" layer="19" extent="1-1"/>
+<via x="7.5" y="54.5" extent="1-16" drill="0.31"/>
+<wire x1="7.5" y1="54.5" x2="45.05025" y2="53.181978125" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="TOUCH3">
 <contactref element="U$1" pad="24"/>
@@ -3631,17 +3631,17 @@ Your Eurocircuits Team</description>
 <signal name="TOUCH5">
 <contactref element="U$1" pad="57"/>
 <polygon width="0.2032" layer="1">
-<vertex x="35" y="99"/>
-<vertex x="44" y="99" curve="-90"/>
-<vertex x="45" y="98"/>
-<vertex x="45" y="89" curve="-90"/>
-<vertex x="44" y="88"/>
-<vertex x="35" y="88" curve="-90"/>
-<vertex x="34" y="89"/>
-<vertex x="34" y="98" curve="-90"/>
+<vertex x="46" y="99"/>
+<vertex x="55" y="99" curve="-90"/>
+<vertex x="56" y="98"/>
+<vertex x="56" y="89" curve="-90"/>
+<vertex x="55" y="88"/>
+<vertex x="46" y="88" curve="-90"/>
+<vertex x="45" y="89"/>
+<vertex x="45" y="98" curve="-90"/>
 </polygon>
-<via x="39.5" y="93.5" extent="1-16" drill="0.31"/>
-<wire x1="39.5" y1="93.5" x2="53.889084375" y2="54.242640625" width="0" layer="19" extent="1-1"/>
+<via x="50.5" y="93.5" extent="1-16" drill="0.31"/>
+<wire x1="50.5" y1="93.5" x2="53.889084375" y2="54.242640625" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
