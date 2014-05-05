@@ -14647,11 +14647,9 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <part name="GND3" library="Custom components" deviceset="GND" device=""/>
 <part name="GND5" library="Custom components" deviceset="GND" device=""/>
 <part name="JP2" library="SparkFun2012" deviceset="JUMPER-2" device="SMD-NO"/>
-<part name="EXT_INTERFACE" library="Custom components" deviceset="PINHD-2X3" device="SMT"/>
-<part name="GND10" library="supply1" deviceset="GND" device=""/>
-<part name="P+4" library="Custom components" deviceset="+5V" device=""/>
 <part name="Q1" library="Custom components" deviceset="2N7002CK" device="SST" technology="4"/>
 <part name="GND11" library="supply1" deviceset="GND" device=""/>
+<part name="P+5" library="Custom components" deviceset="+5V" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -14954,13 +14952,11 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <instance part="GND3" gate="1" x="200.66" y="129.54"/>
 <instance part="GND5" gate="1" x="231.14" y="195.58"/>
 <instance part="JP2" gate="A" x="218.44" y="66.04"/>
-<instance part="EXT_INTERFACE" gate="A" x="426.72" y="142.24"/>
-<instance part="GND10" gate="1" x="406.4" y="137.16"/>
-<instance part="P+4" gate="1" x="406.4" y="149.86"/>
-<instance part="Q1" gate="G$1" x="449.58" y="139.7" smashed="yes" rot="MR0">
-<attribute name="NAME" x="447.167" y="134.62" size="1.778" layer="95" rot="MR270"/>
+<instance part="Q1" gate="G$1" x="439.42" y="223.52" smashed="yes" rot="MR0">
+<attribute name="NAME" x="437.007" y="218.44" size="1.778" layer="95" rot="MR270"/>
 </instance>
-<instance part="GND11" gate="1" x="444.5" y="132.08"/>
+<instance part="GND11" gate="1" x="434.34" y="215.9"/>
+<instance part="P+5" gate="1" x="139.7" y="58.42"/>
 </instances>
 <busses>
 </busses>
@@ -16580,14 +16576,9 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <wire x1="198.12" y1="198.12" x2="231.14" y2="198.12" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="EXT_INTERFACE" gate="A" pin="5"/>
-<pinref part="GND10" gate="1" pin="GND"/>
-<wire x1="424.18" y1="139.7" x2="406.4" y2="139.7" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="GND11" gate="1" pin="GND"/>
 <pinref part="Q1" gate="G$1" pin="S"/>
-<wire x1="444.5" y1="134.62" x2="444.5" y2="137.16" width="0.1524" layer="91"/>
+<wire x1="434.34" y1="218.44" x2="434.34" y2="220.98" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -16602,9 +16593,14 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <wire x1="45.72" y1="220.98" x2="35.56" y2="220.98" width="0.1524" layer="91"/>
 <junction x="45.72" y="220.98"/>
 <pinref part="+3V3" gate="G$1" pin="+3V3"/>
-<wire x1="35.56" y1="220.98" x2="25.4" y2="220.98" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="220.98" x2="27.94" y2="220.98" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="220.98" x2="25.4" y2="220.98" width="0.1524" layer="91"/>
 <wire x1="35.56" y1="223.52" x2="35.56" y2="220.98" width="0.1524" layer="91"/>
 <junction x="35.56" y="220.98"/>
+<pinref part="PROG" gate="A" pin="1"/>
+<wire x1="33.02" y1="205.74" x2="27.94" y2="205.74" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="205.74" x2="27.94" y2="220.98" width="0.1524" layer="91"/>
+<junction x="27.94" y="220.98"/>
 </segment>
 <segment>
 <wire x1="195.58" y1="228.6" x2="195.58" y2="231.14" width="0.1524" layer="91"/>
@@ -16975,14 +16971,6 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <junction x="198.12" y="147.32"/>
 </segment>
 </net>
-<net name="V_CHARGE" class="0">
-<segment>
-<pinref part="U$13" gate="A" pin="VBUS"/>
-<wire x1="172.72" y1="55.88" x2="142.24" y2="55.88" width="0.1524" layer="91"/>
-<label x="154.94" y="55.88" size="1.778" layer="95"/>
-<pinref part="C11" gate="G$1" pin="1"/>
-</segment>
-</net>
 <net name="+5V" class="0">
 <segment>
 <pinref part="C23" gate="G$1" pin="1"/>
@@ -17019,10 +17007,12 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <wire x1="213.36" y1="63.5" x2="213.36" y2="68.58" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="EXT_INTERFACE" gate="A" pin="1"/>
-<pinref part="P+4" gate="1" pin="+5V"/>
-<wire x1="424.18" y1="144.78" x2="406.4" y2="144.78" width="0.1524" layer="91"/>
-<wire x1="406.4" y1="144.78" x2="406.4" y2="147.32" width="0.1524" layer="91"/>
+<pinref part="P+5" gate="1" pin="+5V"/>
+<pinref part="C11" gate="G$1" pin="1"/>
+<wire x1="139.7" y1="55.88" x2="142.24" y2="55.88" width="0.1524" layer="91"/>
+<pinref part="U$13" gate="A" pin="VBUS"/>
+<wire x1="142.24" y1="55.88" x2="172.72" y2="55.88" width="0.1524" layer="91"/>
+<junction x="142.24" y="55.88"/>
 </segment>
 </net>
 <net name="SPI1_NSS" class="0">
@@ -17246,11 +17236,6 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <label x="393.7" y="223.52" size="1.778" layer="95"/>
 <pinref part="FTDI" gate="G$1" pin="2"/>
 </segment>
-<segment>
-<pinref part="EXT_INTERFACE" gate="A" pin="2"/>
-<wire x1="431.8" y1="144.78" x2="457.2" y2="144.78" width="0.1524" layer="91"/>
-<label x="439.42" y="144.78" size="1.778" layer="95"/>
-</segment>
 </net>
 <net name="USART1_RX" class="0">
 <segment>
@@ -17263,11 +17248,6 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <label x="393.7" y="220.98" size="1.778" layer="95"/>
 <pinref part="FTDI" gate="G$1" pin="3"/>
 </segment>
-<segment>
-<pinref part="EXT_INTERFACE" gate="A" pin="3"/>
-<wire x1="424.18" y1="142.24" x2="391.16" y2="142.24" width="0.1524" layer="91"/>
-<label x="393.7" y="142.24" size="1.778" layer="95"/>
-</segment>
 </net>
 <net name="N$3" class="0">
 <segment>
@@ -17276,18 +17256,11 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <wire x1="228.6" y1="63.5" x2="220.98" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$20" class="0">
-<segment>
-<pinref part="EXT_INTERFACE" gate="A" pin="4"/>
-<pinref part="Q1" gate="G$1" pin="D"/>
-<wire x1="431.8" y1="142.24" x2="444.5" y2="142.24" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="WAKE" class="0">
 <segment>
 <pinref part="Q1" gate="G$1" pin="G"/>
-<wire x1="454.66" y1="137.16" x2="469.9" y2="137.16" width="0.1524" layer="91"/>
-<label x="457.2" y="137.16" size="1.778" layer="95"/>
+<wire x1="444.5" y1="220.98" x2="459.74" y2="220.98" width="0.1524" layer="91"/>
+<label x="447.04" y="220.98" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="PC13-TAMPER-RTC"/>
@@ -17329,6 +17302,13 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <wire x1="198.12" y1="190.5" x2="226.06" y2="190.5" width="0.1524" layer="91"/>
 <label x="200.66" y="190.5" size="1.778" layer="95"/>
 <junction x="198.12" y="190.5"/>
+</segment>
+</net>
+<net name="N$20" class="0">
+<segment>
+<pinref part="FTDI" gate="G$1" pin="1"/>
+<pinref part="Q1" gate="G$1" pin="D"/>
+<wire x1="391.16" y1="226.06" x2="434.34" y2="226.06" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
