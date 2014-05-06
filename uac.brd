@@ -1447,7 +1447,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <attribute name="VALUE" x="44.298028125" y="57.396053125" size="0.8128" layer="28" font="vector" rot="MR225"/>
 </element>
 <element name="C20" library="Custom components" package="C0603" value="10n" x="65.7" y="12" rot="MR90"/>
-<element name="C8" library="Custom components" package="C0603" value="1uF" x="68.2" y="12" rot="MR90"/>
+<element name="C8" library="Custom components" package="C0603" value="10u" x="68.2" y="12" rot="MR90"/>
 <element name="R16" library="Custom components" package="R0603" value="10k" x="40" y="60.9" rot="MR315"/>
 <element name="C18" library="Custom components" package="C0603" value="100n" x="42" y="8" rot="MR270"/>
 <element name="C23" library="Custom components" package="C0603" value="10u" x="44.5" y="8" rot="MR270"/>

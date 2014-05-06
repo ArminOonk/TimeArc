@@ -14595,7 +14595,7 @@ applications like mobile appliances backlighting.&lt;/p&gt;</description>
 <part name="R13" library="Custom components" deviceset="R-EU_" device="R0603" value="0"/>
 <part name="+3V4" library="supply1" deviceset="+3V3" device=""/>
 <part name="C20" library="Custom components" deviceset="C-EU" device="C0603" value="10n"/>
-<part name="C8" library="Custom components" deviceset="C-EU" device="C0603" value="1uF"/>
+<part name="C8" library="Custom components" deviceset="C-EU" device="C0603" value="10u"/>
 <part name="GND8" library="Custom components" deviceset="GND" device=""/>
 <part name="+3V5" library="supply1" deviceset="+3V3" device=""/>
 <part name="GND9" library="Custom components" deviceset="GND" device=""/>
