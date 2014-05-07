@@ -48,7 +48,7 @@
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
-<layer number="51" name="tDocu" color="7" fill="1" visible="no" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
@@ -2761,7 +2761,6 @@ We've spent an enormous amount of time creating and checking these footprints an
 <wire x1="44.5" y1="7.15" x2="44.5" y2="5" width="0.4064" layer="16"/>
 <wire x1="47" y1="7.15" x2="47" y2="5" width="0.4064" layer="16"/>
 <wire x1="23.81" y1="7.5" x2="26.35" y2="7.5" width="0.4064" layer="16"/>
-<wire x1="28.35" y1="5.5" x2="26.35" y2="7.5" width="0.4064" layer="16"/>
 <wire x1="49.9012" y1="5.6886" x2="49.6886" y2="5.6886" width="0.4064" layer="16"/>
 <wire x1="49.6886" y1="5.6886" x2="49" y2="5" width="0.4064" layer="16"/>
 <wire x1="60" y1="5" x2="60" y2="5.5" width="0.4064" layer="16"/>
@@ -2786,7 +2785,6 @@ We've spent an enormous amount of time creating and checking these footprints an
 <vertex x="100" y="0"/>
 </polygon>
 <wire x1="26.35" y1="7.5" x2="26" y2="7" width="0.2032" layer="16"/>
-<wire x1="26" y1="7" x2="26" y2="5" width="0.2032" layer="16"/>
 <via x="34.5" y="12" extent="1-16" drill="0.31"/>
 <via x="96" y="10" extent="1-16" drill="0.31"/>
 <via x="96" y="4" extent="1-16" drill="0.31"/>
