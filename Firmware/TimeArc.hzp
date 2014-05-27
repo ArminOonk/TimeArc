@@ -1,0 +1,74 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="TimeArc" target="8" version="2">
+  <project Name="TimeArc">
+    <configuration Name="Common" Target="STM32F103RB" arm_architecture="v7M" arm_core_type="Cortex-M3" arm_fpu_type="None" arm_gcc_target="arm-unknown-elf" arm_linker_heap_size="8192" arm_linker_jtag_pad_pre_dr="1" arm_linker_jtag_pad_pre_ir="5" arm_linker_process_stack_size="8192" arm_linker_stack_size="8192" arm_simulator_memory_simulation_filename="$(TargetsDir)/STM32/STM32SimulatorMemory.dll" arm_simulator_memory_simulation_parameter="STM32F103RB;0x20000;0x5000" arm_target_debug_interface_type="ADIv5" arm_target_loader_parameter="8000000" build_always_rebuild="Yes" c_preprocessor_definitions="" c_user_include_directories=".;$(STM32F10X_STDPERIPH_LIB)/Libraries/CMSIS/CM3/CoreSupport;$(STM32F10X_STDPERIPH_LIB)/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x;$(STM32F10X_STDPERIPH_LIB)/Libraries/STM32F10x_StdPeriph_Driver/inc;$(BEDRIJF_SVN_LIB);$(StudioDir)/ctl/include" link_include_startup_code="No" linker_additional_files="$(StudioDir)/ctl/lib/libctl$(LibExt).a" linker_memory_map_file="$(TargetsDir)/STM32/STM32F103RB_MemoryMap.xml" linker_output_format="bin" oscillator_frequency="8MHz" project_dependencies="code_lib(code_lib);stm32f10x_lib(code_lib,stm32f10_lib.hzp)" project_type="Executable" property_groups_file_path="$(TargetsDir)/STM32/propertyGroups.xml"/>
+    <folder Name="Source Files" file_name="">
+      <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc"/>
+      <file file_name="main.cpp">
+        <configuration Name="Common" gcc_optimization_level="None"/>
+      </file>
+      <file file_name="defines.h"/>
+      <file file_name="main.h"/>
+      <file file_name="stm32f10x_it.cpp"/>
+      <file file_name="stm32f10x_it.h"/>
+      <file file_name="stm32f10x_conf.h"/>
+      <file file_name="misc.c"/>
+      <file file_name="misc.h"/>
+      <file file_name="stm32f10x_adc.c"/>
+      <file file_name="stm32f10x_adc.h"/>
+      <file file_name="stm32f10x_crc.c"/>
+      <file file_name="stm32f10x_crc.h"/>
+      <file file_name="stm32f10x_dma.c"/>
+      <file file_name="stm32f10x_dma.h"/>
+      <file file_name="stm32f10x_exti.c"/>
+      <file file_name="stm32f10x_exti.h"/>
+      <file file_name="stm32f10x_flash.c"/>
+      <file file_name="stm32f10x_flash.h"/>
+      <file file_name="stm32f10x_gpio.c"/>
+      <file file_name="stm32f10x_gpio.h"/>
+      <file file_name="stm32f10x_pwr.c"/>
+      <file file_name="stm32f10x_pwr.h"/>
+      <file file_name="stm32f10x_rcc.c"/>
+      <file file_name="stm32f10x_rcc.h"/>
+      <file file_name="stm32f10x_rtc.c"/>
+      <file file_name="stm32f10x_rtc.h"/>
+      <file file_name="stm32f10x_spi.c"/>
+      <file file_name="stm32f10x_spi.h"/>
+      <file file_name="stm32f10x_tim.c"/>
+      <file file_name="stm32f10x_tim.h"/>
+      <file file_name="stm32f10x_usart.c"/>
+      <file file_name="stm32f10x_usart.h"/>
+      <file file_name="system_stm32f10x.c"/>
+      <file file_name="system_stm32f10x.h"/>
+    </folder>
+    <folder Name="System Files">
+      <file file_name="$(TargetsDir)/STM32/STM32_Startup.s">
+        <configuration Name="Common" c_preprocessor_definitions="__NO_SYSTEM_INIT;STARTUP_FROM_RESET;USE_STDPERIPH_DRIVER;STM32F10X_MD;STM32;NESTED_INTERRUPTS;CTL_TASKING"/>
+      </file>
+      <configuration Name="Common" filter=""/>
+      <file file_name="$(StudioDir)/source/thumb_crt0.s"/>
+      <file file_name="$(TargetsDir)/STM32/STM32_Target.js">
+        <configuration Name="Common" file_type="Reset Script"/>
+      </file>
+      <file file_name="$(TargetsDir)/STM32/STM32_ctl.c"/>
+      <file file_name="$(StudioDir)/ctl/source/threads.js"/>
+    </folder>
+    <configuration Name="RAM" Placement="RAM" linker_section_placement_file="$(StudioDir)/targets/Cortex_M/ram_placement.xml" target_reset_script="SRAMReset()"/>
+    <configuration Name="Flash" Placement="Flash" arm_target_flash_loader_file_path="$(TargetsDir)/STM32/Release/Loader_rpc.elf" arm_target_flash_loader_type="LIBMEM RPC Loader" arm_target_loader_can_erase_all="Yes" linker_section_placement_file="$(StudioDir)/targets/Cortex_M/flash_placement.xml" target_reset_script="FLASHReset()"/>
+    <configuration Name="THUMB Flash Debug" arm_linker_heap_size="10240" arm_linker_process_stack_size="2048" arm_linker_stack_size="2048" linker_output_format="bin" linker_printf_fp_enabled="Yes" linker_scanf_character_group_matching_enabled="Yes" linker_scanf_fp_enabled="Yes" project_dependencies="stm32f10x_lib"/>
+    <configuration Name="THUMB RAM Debug" project_dependencies="stm32f10x_lib"/>
+    <configuration Name="THUMB Flash Release" project_dependencies="stm32f10x_lib"/>
+    <configuration Name="THUMB RAM Release" project_dependencies="stm32f10x_lib"/>
+    <configuration Name="THUMB" build_always_rebuild="No"/>
+  </project>
+  <configuration Name="THUMB RAM Debug" inherited_configurations="THUMB;RAM;Debug"/>
+  <configuration Name="THUMB" Platform="ARM" arm_instruction_set="THUMB" arm_library_instruction_set="THUMB" c_preprocessor_definitions="__THUMB" hidden="Yes"/>
+  <configuration Name="RAM" c_preprocessor_definitions="__RAM_BUILD" hidden="Yes"/>
+  <configuration Name="Debug" build_debug_information="Yes" c_preprocessor_definitions="DEBUG" gcc_optimization_level="None" hidden="Yes" link_include_startup_code="No"/>
+  <configuration Name="THUMB RAM Release" inherited_configurations="THUMB;RAM;Release"/>
+  <configuration Name="Release" build_debug_information="No" c_additional_options="-g1" c_preprocessor_definitions="NDEBUG" gcc_optimization_level="Level 1" hidden="Yes" link_include_startup_code="No"/>
+  <configuration Name="THUMB Flash Debug" inherited_configurations="THUMB;Flash;Debug"/>
+  <configuration Name="Flash" c_preprocessor_definitions="__FLASH_BUILD" hidden="Yes"/>
+  <configuration Name="THUMB Flash Release" inherited_configurations="THUMB;Flash;Release"/>
+  <configuration Name="Common" arm_architecture="v4T" arm_core_type="Cortex-M3" arm_gcc_target="arm-unknown-elf" arm_instruction_set="Thumb" c_preprocessor_definitions="USE_STDPERIPH_DRIVER;STM32F10X_MD;STM32;NESTED_INTERRUPTS;CTL_TASKING;FAT_FS_SUNURU" gcc_optimization_level="None" linker_printf_fp_enabled="Yes"/>
+</solution>
