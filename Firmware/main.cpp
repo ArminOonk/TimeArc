@@ -8,16 +8,124 @@
 
 //FUNCTIONS
 void ledHandler(void *p);
+void ledsLow();
+void ctl_delay(CTL_TIME_t t);
+
 
 CTL_TASK_t mainTask, ledTask;
 static unsigned ledTaskStack[256];
+
+unsigned int ledCnt = 0;
 
 void ledHandler(void *p)
 {
   while(1)
   {
+    ledsLow();
+    
+    switch((ledCnt/12)%12)
+    {
+      case 0:
+      ARCDOZEN1_LOW;
+      break;
+    
+      case 1:
+      ARCDOZEN2_LOW;
+      break;
 
-    ctl_timeout_wait(ctl_get_current_time()+100); 
+      case 2:
+      ARCDOZEN3_LOW;
+      break;
+
+      case 3:
+      ARCDOZEN4_LOW;
+      break;
+    
+      case 4:
+      ARCDOZEN5_LOW;
+      break;
+
+      case 5:
+      ARCDOZEN6_LOW;
+      break;
+
+      case 6:
+      ARCDOZEN7_LOW;
+      break;
+
+      case 7:
+      ARCDOZEN8_LOW;
+      break;
+
+      case 8:
+      ARCDOZEN9_LOW;
+      break;
+
+      case 9:
+      ARCDOZEN10_LOW;
+      break;
+
+      case 10:
+      ARCDOZEN11_LOW;
+      break;
+
+      case 11:
+      ARCDOZEN12_LOW;
+      break;
+    }
+
+    switch(ledCnt%12)
+    {
+      case 0:
+      DOZEN1_HIGH;
+      break;
+
+      case 1:
+      DOZEN2_HIGH;
+      break;
+
+      case 2:
+      DOZEN3_HIGH;
+      break;
+
+      case 3:
+      DOZEN4_HIGH;
+      break;
+
+      case 4:
+      DOZEN5_HIGH;
+      break;
+
+      case 5:
+      DOZEN6_HIGH;
+      break;
+
+      case 6:
+      DOZEN7_HIGH;
+      break;
+
+      case 7:
+      DOZEN8_HIGH;
+      break;
+
+      case 8:
+      DOZEN9_HIGH;
+      break;
+
+      case 9:
+      DOZEN10_HIGH;
+      break;
+
+      case 10:
+      DOZEN11_HIGH;
+      break;
+
+      case 11:
+      DOZEN12_HIGH;
+      break;
+    }
+    ctl_delay(300); 
+    ledCnt++;
   }
 }
 
@@ -64,6 +172,36 @@ void error(const char *err)
   }
 }
 
+void ledsLow()
+{
+  DOZEN1_LOW;
+  DOZEN2_LOW;
+  DOZEN3_LOW;
+  DOZEN4_LOW;
+  DOZEN5_LOW;
+  DOZEN6_LOW;
+  DOZEN7_LOW;
+  DOZEN8_LOW;
+  DOZEN9_LOW;
+  DOZEN10_LOW;
+  DOZEN11_LOW;
+  DOZEN12_LOW;
+
+
+  // ARCDOZEN high leds off
+  ARCDOZEN1_HIGH;
+  ARCDOZEN2_HIGH;
+  ARCDOZEN3_HIGH;
+  ARCDOZEN4_HIGH;
+  ARCDOZEN5_HIGH;
+  ARCDOZEN6_HIGH;
+  ARCDOZEN7_HIGH;
+  ARCDOZEN8_HIGH;
+  ARCDOZEN9_HIGH;
+  ARCDOZEN10_HIGH;
+  ARCDOZEN11_HIGH;
+  ARCDOZEN12_HIGH;
+}
 
 void initGPIO(void)
 {
@@ -91,24 +229,31 @@ void initGPIO(void)
 
   // ARC DOZEN (PWM timer)
   GPIO_InitStructure.GPIO_Pin   = ARCDOZEN1_PIN | ARCDOZEN2_PIN | ARCDOZEN7_PIN | ARCDOZEN8_PIN | ARCDOZEN9_PIN | ARCDOZEN10_PIN;
-  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_PP;
+  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(ARCDOZEN1_PORT, &GPIO_InitStructure);
 
   // ARC DOZEN (PWM timer)
   GPIO_InitStructure.GPIO_Pin   = ARCDOZEN3_PIN | ARCDOZEN4_PIN | ARCDOZEN5_PIN | ARCDOZEN6_PIN;
-  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_PP;
+  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(ARCDOZEN3_PORT, &GPIO_InitStructure);
   
   // ARC DOZEN (PWM timer)
   GPIO_InitStructure.GPIO_Pin   = ARCDOZEN11_PIN | ARCDOZEN12_PIN;
-  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_PP;
+  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(ARCDOZEN11_PORT, &GPIO_InitStructure);
+
+  ledsLow();
 }
 
 void initTimer(void)
+{
+
+}
+
+/*void initTimer(void)
 {
   NVIC_InitTypeDef NVIC_InitStructure;
   TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure; 
@@ -195,10 +340,14 @@ void initTimer(void)
   ARCDOZEN10_PWM(0);
   ARCDOZEN11_PWM(0);
   ARCDOZEN12_PWM(0);
-}
+}*/
 
 void ctl_handle_error(CTL_ERROR_CODE_t error)
 {
   //Do something
 }
 
+void ctl_delay(CTL_TIME_t t)
+{
+  ctl_timeout_wait(ctl_get_current_time()+t);
+}

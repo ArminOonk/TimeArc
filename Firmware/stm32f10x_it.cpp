@@ -4,11 +4,6 @@
 #include "defines.h"
 
 
-
-
-
-
-
 extern "C" void NMI_Handler(void){}
 
 extern "C" void HardFault_Handler(void)
