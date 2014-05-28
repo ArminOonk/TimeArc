@@ -3,6 +3,7 @@
 #include <misc.h>
 #include <ctl_api.h>
 #include <stdio.h>
+#include <time.h>
 
 #include "defines.h"
 

@@ -16,17 +16,29 @@ static unsigned ledTaskStack[256];
 
 displayBuffer display;
 unsigned int ledCnt = 0;
+
 void ledHandler(void *p)
 {
+  time_t currentTime = 1401312421;
+  CTL_TIME_t startupTime = ctl_get_current_time();
 
   while(true)
   {
-    display.hourOn(ledCnt%12);
-    display.minuteOn(ledCnt%60);
-    display.secondOn(ledCnt%60);
+    time_t now = ((ctl_get_current_time()-startupTime)/1000) + currentTime;
+    struct tm * ptm;
+    ptm = gmtime ( &now );
+
+    display.hourOn(ptm->tm_hour%12);
+    display.minuteOn(ptm->tm_min);
+    display.secondOn(ptm->tm_sec);
     display.switchBuffer();
 
-    ctl_delay(1000);
+    /*display.hourOn(ledCnt%12);
+    display.minuteOn(ledCnt%60);
+    display.secondOn(ledCnt%60);
+    display.switchBuffer();*/
+
+    ctl_delay(10);
     ledCnt++;
   }
 }
