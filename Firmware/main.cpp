@@ -8,124 +8,18 @@
 
 //FUNCTIONS
 void ledHandler(void *p);
-void ledsLow();
+void ledsOff();
 void ctl_delay(CTL_TIME_t t);
 
 
 CTL_TASK_t mainTask, ledTask;
 static unsigned ledTaskStack[256];
 
-unsigned int ledCnt = 0;
-
 void ledHandler(void *p)
 {
-  while(1)
+  while(true)
   {
-    ledsLow();
-    
-    switch((ledCnt/12)%12)
-    {
-      case 0:
-      ARCDOZEN1_LOW;
-      break;
-    
-      case 1:
-      ARCDOZEN2_LOW;
-      break;
-
-      case 2:
-      ARCDOZEN3_LOW;
-      break;
-
-      case 3:
-      ARCDOZEN4_LOW;
-      break;
-    
-      case 4:
-      ARCDOZEN5_LOW;
-      break;
-
-      case 5:
-      ARCDOZEN6_LOW;
-      break;
-
-      case 6:
-      ARCDOZEN7_LOW;
-      break;
-
-      case 7:
-      ARCDOZEN8_LOW;
-      break;
-
-      case 8:
-      ARCDOZEN9_LOW;
-      break;
-
-      case 9:
-      ARCDOZEN10_LOW;
-      break;
-
-      case 10:
-      ARCDOZEN11_LOW;
-      break;
-
-      case 11:
-      ARCDOZEN12_LOW;
-      break;
-    }
-
-    switch(ledCnt%12)
-    {
-      case 0:
-      DOZEN1_HIGH;
-      break;
-
-      case 1:
-      DOZEN2_HIGH;
-      break;
-
-      case 2:
-      DOZEN3_HIGH;
-      break;
-
-      case 3:
-      DOZEN4_HIGH;
-      break;
-
-      case 4:
-      DOZEN5_HIGH;
-      break;
-
-      case 5:
-      DOZEN6_HIGH;
-      break;
-
-      case 6:
-      DOZEN7_HIGH;
-      break;
-
-      case 7:
-      DOZEN8_HIGH;
-      break;
-
-      case 8:
-      DOZEN9_HIGH;
-      break;
-
-      case 9:
-      DOZEN10_HIGH;
-      break;
-
-      case 10:
-      DOZEN11_HIGH;
-      break;
-
-      case 11:
-      DOZEN12_HIGH;
-      break;
-    }
-    ctl_delay(300); 
-    ledCnt++;
+    ctl_delay(1000);
   }
 }
 
@@ -172,7 +66,7 @@ void error(const char *err)
   }
 }
 
-void ledsLow()
+void ledsOff()
 {
   DOZEN1_LOW;
   DOZEN2_LOW;
@@ -245,12 +139,34 @@ void initGPIO(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(ARCDOZEN11_PORT, &GPIO_InitStructure);
 
-  ledsLow();
+  ledsOff();
 }
 
 void initTimer(void)
 {
+  NVIC_InitTypeDef NVIC_InitStructure;
+  TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure; 
+  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
 
+  //TIMER2 is control loop timer
+  //Timer2 loopt op 72Mhz
+  //prescaler = 180; -> timer freq is 400kHz
+  //period = 397 -> interrupt freq is 999.5 Hz 
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+  TIM_TimeBaseStructure.TIM_Prescaler         = 20;
+  TIM_TimeBaseStructure.TIM_Period            = 397;
+  TIM_TimeBaseStructure.TIM_ClockDivision     = TIM_CKD_DIV1;
+  TIM_TimeBaseStructure.TIM_CounterMode       = TIM_CounterMode_Up;
+  TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+
+  NVIC_InitStructure.NVIC_IRQChannel                    = TIM2_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 2;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority         = 0;
+  NVIC_InitStructure.NVIC_IRQChannelCmd                 = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
+
+  TIM_Cmd(TIM2, ENABLE);
+  TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
 }
 
 /*void initTimer(void)
