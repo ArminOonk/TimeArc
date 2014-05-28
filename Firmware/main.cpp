@@ -15,18 +15,19 @@ CTL_TASK_t mainTask, ledTask;
 static unsigned ledTaskStack[256];
 
 displayBuffer display;
-
+unsigned int ledCnt = 0;
 void ledHandler(void *p)
 {
-  for(int i=0; i< totalNrLeds; i++)
-  {
-    display.ledOn(i);
-  }
-  display.switchBuffer();
 
   while(true)
   {
+    display.hourOn(ledCnt%12);
+    display.minuteOn(ledCnt%60);
+    display.secondOn(ledCnt%60);
+    display.switchBuffer();
+
     ctl_delay(1000);
+    ledCnt++;
   }
 }
 
@@ -45,9 +46,7 @@ int main(void)
   // CTL
   ctl_start_timer(ctl_increment_tick_from_isr);
   ctl_time_increment = 1;
-  if(SysTick_Config(SystemCoreClock / 1000))
-   error("SysTick Error"); 
-
+  
   ctl_task_init(&mainTask, 255, "main");
   memset(ledTaskStack, 0xba, sizeof(ledTaskStack));
 

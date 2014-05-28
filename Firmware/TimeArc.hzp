@@ -72,5 +72,5 @@
   <configuration Name="THUMB Flash Debug" inherited_configurations="THUMB;Flash;Debug"/>
   <configuration Name="Flash" c_preprocessor_definitions="__FLASH_BUILD" hidden="Yes"/>
   <configuration Name="THUMB Flash Release" inherited_configurations="THUMB;Flash;Release"/>
-  <configuration Name="Common" arm_architecture="v4T" arm_core_type="Cortex-M3" arm_gcc_target="arm-unknown-elf" arm_instruction_set="Thumb" c_preprocessor_definitions="USE_STDPERIPH_DRIVER;STM32F10X_MD;STM32;NESTED_INTERRUPTS;CTL_TASKING;FAT_FS_SUNURU" gcc_optimization_level="None" linker_printf_fp_enabled="Yes"/>
+  <configuration Name="Common" arm_architecture="v4T" arm_core_type="Cortex-M3" arm_gcc_target="arm-unknown-elf" arm_instruction_set="Thumb" c_preprocessor_definitions="__NO_SYSTEM_INIT\;;STARTUP_FROM_RESET\;;USE_STDPERIPH_DRIVER;STM32F10X_MD;STM32;NESTED_INTERRUPTS;CTL_TASKING" gcc_optimization_level="None" linker_printf_fp_enabled="Yes"/>
 </solution>
