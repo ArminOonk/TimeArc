@@ -16,18 +16,90 @@ static unsigned ledTaskStack[256];
 
 displayBuffer display;
 unsigned int ledCnt = 0;
-
+unsigned int touch1Time = 0;
+unsigned int touch2Time = 0;
 void ledHandler(void *p)
 {
   time_t currentTime = 1401312421;
   CTL_TIME_t startupTime = ctl_get_current_time();
 
+  TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure; 
+  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
+
+  //TIMER3 is control loop timer
+  //Timer3 loopt op 72Mhz
+  //prescaler = 72; -> timer freq is 1Mhz
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+  TIM_TimeBaseStructure.TIM_Prescaler         = 72;
+  TIM_TimeBaseStructure.TIM_Period            = 65535;
+  TIM_TimeBaseStructure.TIM_ClockDivision     = TIM_CKD_DIV1;
+  TIM_TimeBaseStructure.TIM_CounterMode       = TIM_CounterMode_Up;
+  TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+  TIM_Cmd(TIM3, ENABLE);
+
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+  GPIO_InitTypeDef touch2OutputStruct; 
+  GPIO_StructInit(&touch2OutputStruct);
+  touch2OutputStruct.GPIO_Pin   = TOUCH2_PIN;
+  touch2OutputStruct.GPIO_Mode  = GPIO_Mode_Out_PP;
+  touch2OutputStruct.GPIO_Speed = GPIO_Speed_50MHz;
+  
+  // Configure the touch sensor as input
+  GPIO_InitTypeDef touch2InputStruct; 
+  GPIO_StructInit(&touch2InputStruct);
+  touch2InputStruct.GPIO_Pin   = TOUCH2_PIN;
+  touch2InputStruct.GPIO_Mode  = GPIO_Mode_IN_FLOATING;
+  touch2InputStruct.GPIO_Speed = GPIO_Speed_50MHz;
+
+  // Set touchpin Low
+  GPIO_Init(TOUCH2_PORT, &touch2OutputStruct);
+  TOUCH2_LOW;
+
+  NVIC_InitTypeDef NVIC_InitStructure;
+  EXTI_InitTypeDef EXTI_InitStructure; 
+  EXTI_StructInit(&EXTI_InitStructure);
+
+  GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource3);
+  EXTI_InitStructure.EXTI_Line     = EXTI_Line3;
+  EXTI_InitStructure.EXTI_Mode     = EXTI_Mode_Interrupt;
+  EXTI_InitStructure.EXTI_Trigger  = EXTI_Trigger_Rising;
+  EXTI_InitStructure.EXTI_LineCmd  = ENABLE;
+  EXTI_Init(&EXTI_InitStructure);
+
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 0;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority         = 0;
+  NVIC_InitStructure.NVIC_IRQChannel                    = EXTI3_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelCmd                 = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
+
   while(true)
   {
     time_t now = ((ctl_get_current_time()-startupTime)/1000) + currentTime;
     display.setTime(now);
+   
+    TIM3->CNT = 0;                                // Set timer to zero
+    touch2Time = 0;
 
-    ctl_delay(10);
+    GPIO_Init(TOUCH2_PORT, &touch2InputStruct);   // Configure touch1 as input pull up
+    /*while(!IS_TOUCH2_HIGH && touch2Time < 100000)
+    {
+      touch2Time++;
+    }*/
+    ctl_delay(50);
+    if(touch2Time != 0)
+    {
+      //Touch!
+      startupTime = ctl_get_current_time();
+    }
+    
+     
+
+    // Set touchpin Low
+    GPIO_Init(TOUCH2_PORT, &touch2OutputStruct);
+    TOUCH2_LOW;
+
+    ctl_delay(10); 
     ledCnt++;
   }
 }
@@ -42,7 +114,6 @@ int main(void)
  
   // Configure GPIO
   initGPIO();
-  initTimer();
 
   // CTL
   ctl_start_timer(ctl_increment_tick_from_isr);
@@ -85,62 +156,7 @@ void initGPIO(void)
 
   GPIO_InitTypeDef GPIO_InitStructure; 
   GPIO_StructInit(&GPIO_InitStructure);
-/*
-  // DOZEN Pins
-  GPIO_InitStructure.GPIO_Pin   = DOZEN1_PIN | DOZEN2_PIN | DOZEN3_PIN | DOZEN4_PIN | DOZEN5_PIN | DOZEN6_PIN;
-  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_Init(DOZEN1_PORT, &GPIO_InitStructure);
 
-  GPIO_InitStructure.GPIO_Pin   = DOZEN7_PIN | DOZEN8_PIN | DOZEN9_PIN | DOZEN10_PIN | DOZEN11_PIN | DOZEN12_PIN;
-  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_Init(DOZEN7_PORT, &GPIO_InitStructure);
-
-  // ARC DOZEN (PWM timer)
-  GPIO_InitStructure.GPIO_Pin   = ARCDOZEN1_PIN | ARCDOZEN2_PIN | ARCDOZEN7_PIN | ARCDOZEN8_PIN | ARCDOZEN9_PIN | ARCDOZEN10_PIN;
-  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_Init(ARCDOZEN1_PORT, &GPIO_InitStructure);
-
-  // ARC DOZEN (PWM timer)
-  GPIO_InitStructure.GPIO_Pin   = ARCDOZEN3_PIN | ARCDOZEN4_PIN | ARCDOZEN5_PIN | ARCDOZEN6_PIN;
-  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_Init(ARCDOZEN3_PORT, &GPIO_InitStructure);
-  
-  // ARC DOZEN (PWM timer)
-  GPIO_InitStructure.GPIO_Pin   = ARCDOZEN11_PIN | ARCDOZEN12_PIN;
-  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_Init(ARCDOZEN11_PORT, &GPIO_InitStructure);*/
-}
-
-void initTimer(void)
-{
-  NVIC_InitTypeDef NVIC_InitStructure;
-  TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure; 
-  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
-
-  //TIMER2 is control loop timer
-  //Timer2 loopt op 72Mhz
-  //prescaler = 180; -> timer freq is 400kHz
-  //period = 397 -> interrupt freq is 999.5 Hz 
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-  TIM_TimeBaseStructure.TIM_Prescaler         = 20;
-  TIM_TimeBaseStructure.TIM_Period            = 397;
-  TIM_TimeBaseStructure.TIM_ClockDivision     = TIM_CKD_DIV1;
-  TIM_TimeBaseStructure.TIM_CounterMode       = TIM_CounterMode_Up;
-  TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-
-  NVIC_InitStructure.NVIC_IRQChannel                    = TIM2_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 2;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority         = 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd                 = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);
-
-  TIM_Cmd(TIM2, ENABLE);
-  TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
 }
 
 void ctl_handle_error(CTL_ERROR_CODE_t error)

@@ -42,6 +42,30 @@ displayBuffer::displayBuffer()
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(ARCDOZEN11_PORT, &GPIO_InitStructure);
 
+  NVIC_InitTypeDef NVIC_InitStructure;
+  TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure; 
+  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
+
+  //TIMER2 is control loop timer
+  //Timer2 loopt op 72Mhz
+  //prescaler = 180; -> timer freq is 400kHz
+  //period = 397 -> interrupt freq is 999.5 Hz 
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+  TIM_TimeBaseStructure.TIM_Prescaler         = 20;
+  TIM_TimeBaseStructure.TIM_Period            = 397;
+  TIM_TimeBaseStructure.TIM_ClockDivision     = TIM_CKD_DIV1;
+  TIM_TimeBaseStructure.TIM_CounterMode       = TIM_CounterMode_Up;
+  TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+
+  NVIC_InitStructure.NVIC_IRQChannel                    = TIM2_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 2;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority         = 0;
+  NVIC_InitStructure.NVIC_IRQChannelCmd                 = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
+
+  TIM_Cmd(TIM2, ENABLE);
+  TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+
   displayOff();
 
   currentBuffer = 0;
