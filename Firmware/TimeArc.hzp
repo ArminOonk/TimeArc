@@ -42,6 +42,8 @@
       <file file_name="system_stm32f10x.h"/>
       <file file_name="displayBuffer.cpp"/>
       <file file_name="displayBuffer.h"/>
+      <file file_name="capTouch.cpp"/>
+      <file file_name="capTouch.h"/>
     </folder>
     <folder Name="System Files">
       <file file_name="$(TargetsDir)/STM32/STM32_Startup.s">

@@ -3,6 +3,7 @@
 #include <ctl_api.h>
 #include "defines.h"
 #include "displayBuffer.h"
+#include "capTouch.h"
 
 extern displayBuffer display;
 
@@ -35,16 +36,14 @@ extern "C" void EXTI15_10_IRQHandler(void)
 }
 */
 
-extern unsigned int touch2Time;
+extern capTouch touch2;
 extern "C" void EXTI3_IRQHandler(void)
 {
   ctl_enter_isr();
 
-  if(EXTI_GetITStatus(EXTI_Line3) != RESET)
-  {
-    EXTI_ClearITPendingBit(EXTI_Line3);
-    touch2Time = TIM3->CNT;
-  }
+  
+    touch2.interrupt();
+  
 
   ctl_exit_isr();
 }

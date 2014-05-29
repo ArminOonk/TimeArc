@@ -5,7 +5,6 @@
 #include <string.h>
 #include <ctl_api.h>
 #include "main.h"
-#include "displayBuffer.h"
 
 //FUNCTIONS
 void ledHandler(void *p);
@@ -15,27 +14,16 @@ CTL_TASK_t mainTask, ledTask;
 static unsigned ledTaskStack[256];
 
 displayBuffer display;
+
+capTouch touch2(GPIOC, GPIO_Pin_3);
+
 unsigned int ledCnt = 0;
-unsigned int touch1Time = 0;
+
 unsigned int touch2Time = 0;
 void ledHandler(void *p)
 {
   time_t currentTime = 1401312421;
   CTL_TIME_t startupTime = ctl_get_current_time();
-
-  TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure; 
-  TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
-
-  //TIMER3 is control loop timer
-  //Timer3 loopt op 72Mhz
-  //prescaler = 72; -> timer freq is 1Mhz
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-  TIM_TimeBaseStructure.TIM_Prescaler         = 72;
-  TIM_TimeBaseStructure.TIM_Period            = 65535;
-  TIM_TimeBaseStructure.TIM_ClockDivision     = TIM_CKD_DIV1;
-  TIM_TimeBaseStructure.TIM_CounterMode       = TIM_CounterMode_Up;
-  TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-  TIM_Cmd(TIM3, ENABLE);
 
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
@@ -82,18 +70,13 @@ void ledHandler(void *p)
     touch2Time = 0;
 
     GPIO_Init(TOUCH2_PORT, &touch2InputStruct);   // Configure touch1 as input pull up
-    /*while(!IS_TOUCH2_HIGH && touch2Time < 100000)
-    {
-      touch2Time++;
-    }*/
+
     ctl_delay(50);
-    if(touch2Time != 0)
+    if(touch2Time != 0 && touch2Time < 25000)
     {
       //Touch!
       startupTime = ctl_get_current_time();
-    }
-    
-     
+    }   
 
     // Set touchpin Low
     GPIO_Init(TOUCH2_PORT, &touch2OutputStruct);

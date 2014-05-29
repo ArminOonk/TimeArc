@@ -6,6 +6,8 @@
 #include <time.h>
 
 #include "defines.h"
+#include "displayBuffer.h"
+#include "capTouch.h"
 
 void initGPIO(void);
 void initTimer(void);
