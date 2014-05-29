@@ -21,6 +21,16 @@ extern "C" void TIM2_IRQHandler(void)
   ctl_exit_isr();
 }
 
+extern capTouch touch4;
+extern "C" void EXTI2_IRQHandler(void)
+{
+  ctl_enter_isr();
+
+  touch4.interrupt(); 
+
+  ctl_exit_isr();
+}
+
 extern capTouch touch2;
 extern "C" void EXTI3_IRQHandler(void)
 {
@@ -37,6 +47,16 @@ extern "C" void EXTI4_IRQHandler(void)
   ctl_enter_isr();
 
   touch3.interrupt(); 
+
+  ctl_exit_isr();
+}
+
+extern capTouch touch5;
+extern "C" void EXTI9_5_IRQHandler(void)
+{
+  ctl_enter_isr();
+
+  touch5.interrupt(); 
 
   ctl_exit_isr();
 }

@@ -17,7 +17,8 @@ displayBuffer display;
 
 capTouch touch2(GPIOC, GPIO_Pin_3);
 capTouch touch3(GPIOC, GPIO_Pin_4);
-
+capTouch touch4(GPIOD, GPIO_Pin_2);
+capTouch touch5(GPIOB, GPIO_Pin_5);
 unsigned int ledCnt = 0;
 
 void ledHandler(void *p)
@@ -27,9 +28,11 @@ void ledHandler(void *p)
 
   touch2.init();
   touch3.init();
+  touch4.init();
+  touch5.init();
 
-  unsigned int touch2Cnt = 0;
-  unsigned int touch3Cnt = 0;
+  int touch2Cnt = 0;
+  int touch3Cnt = 0;
 
   while(true)
   {
@@ -38,22 +41,48 @@ void ledHandler(void *p)
 
     touch2.start();
     touch3.start();
+    touch4.start();
+    touch5.start();
 
     ctl_delay(50);
     if(touch2.isTouched())
     {
-      //Touch!
-      //startupTime = ctl_get_current_time();
       touch2Cnt++;
+      if(touch2Cnt > 59)
+      {
+        touch2Cnt = touch2Cnt - 60;
+      }
     }   
 
     if(touch3.isTouched())
     {
-      touch3Cnt++;
+      touch2Cnt--;
+      if(touch2Cnt < 0)
+      {
+        touch2Cnt = 60 + touch2Cnt;
+      }
     }
 
-    display.minuteOn(touch2Cnt%60);
-    display.secondOn(touch3Cnt%60);
+    if(touch4.isTouched())
+    {
+      touch3Cnt++;
+      if(touch3Cnt > 59)
+      {
+        touch3Cnt -= 60;
+      }
+    }
+
+    if(touch5.isTouched())
+    {
+      touch3Cnt--;
+      if(touch3Cnt < 0)
+      {
+        touch3Cnt += 60;
+      }
+    }
+
+    display.minuteOn(touch2Cnt);
+    display.secondOn(touch3Cnt);
     display.switchBuffer();
     
     touch2.stop();
