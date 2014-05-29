@@ -10,6 +10,8 @@ class capTouch
 {
   public:
   capTouch(GPIO_TypeDef* _port, uint32_t _pin);
+
+  void init();
   void interrupt();
   void start();
   void stop();

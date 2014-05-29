@@ -20,30 +20,23 @@ extern "C" void TIM2_IRQHandler(void)
 
   ctl_exit_isr();
 }
-/*
-extern unsigned int touch1Time;
-extern "C" void EXTI15_10_IRQHandler(void)
-{
-  ctl_enter_isr();
-
-  if(EXTI_GetITStatus(EXTI_Line15) != RESET)
-  {
-    EXTI_ClearITPendingBit(EXTI_Line15);
-    touch1Time = TIM3->CNT;
-  }
-
-  ctl_exit_isr();
-}
-*/
 
 extern capTouch touch2;
 extern "C" void EXTI3_IRQHandler(void)
 {
   ctl_enter_isr();
 
-  
-    touch2.interrupt();
-  
+  touch2.interrupt(); 
+
+  ctl_exit_isr();
+}
+
+extern capTouch touch3;
+extern "C" void EXTI4_IRQHandler(void)
+{
+  ctl_enter_isr();
+
+  touch3.interrupt(); 
 
   ctl_exit_isr();
 }

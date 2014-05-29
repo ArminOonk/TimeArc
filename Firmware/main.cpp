@@ -16,71 +16,48 @@ static unsigned ledTaskStack[256];
 displayBuffer display;
 
 capTouch touch2(GPIOC, GPIO_Pin_3);
+capTouch touch3(GPIOC, GPIO_Pin_4);
 
 unsigned int ledCnt = 0;
 
-unsigned int touch2Time = 0;
 void ledHandler(void *p)
 {
   time_t currentTime = 1401312421;
   CTL_TIME_t startupTime = ctl_get_current_time();
 
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
-  GPIO_InitTypeDef touch2OutputStruct; 
-  GPIO_StructInit(&touch2OutputStruct);
-  touch2OutputStruct.GPIO_Pin   = TOUCH2_PIN;
-  touch2OutputStruct.GPIO_Mode  = GPIO_Mode_Out_PP;
-  touch2OutputStruct.GPIO_Speed = GPIO_Speed_50MHz;
-  
-  // Configure the touch sensor as input
-  GPIO_InitTypeDef touch2InputStruct; 
-  GPIO_StructInit(&touch2InputStruct);
-  touch2InputStruct.GPIO_Pin   = TOUCH2_PIN;
-  touch2InputStruct.GPIO_Mode  = GPIO_Mode_IN_FLOATING;
-  touch2InputStruct.GPIO_Speed = GPIO_Speed_50MHz;
+  touch2.init();
+  touch3.init();
 
-  // Set touchpin Low
-  GPIO_Init(TOUCH2_PORT, &touch2OutputStruct);
-  TOUCH2_LOW;
-
-  NVIC_InitTypeDef NVIC_InitStructure;
-  EXTI_InitTypeDef EXTI_InitStructure; 
-  EXTI_StructInit(&EXTI_InitStructure);
-
-  GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource3);
-  EXTI_InitStructure.EXTI_Line     = EXTI_Line3;
-  EXTI_InitStructure.EXTI_Mode     = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger  = EXTI_Trigger_Rising;
-  EXTI_InitStructure.EXTI_LineCmd  = ENABLE;
-  EXTI_Init(&EXTI_InitStructure);
-
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority         = 0;
-  NVIC_InitStructure.NVIC_IRQChannel                    = EXTI3_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelCmd                 = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);
+  unsigned int touch2Cnt = 0;
+  unsigned int touch3Cnt = 0;
 
   while(true)
   {
-    time_t now = ((ctl_get_current_time()-startupTime)/1000) + currentTime;
-    display.setTime(now);
-   
-    TIM3->CNT = 0;                                // Set timer to zero
-    touch2Time = 0;
+    //time_t now = ((ctl_get_current_time()-startupTime)/1000) + currentTime;
+    //display.setTime(now);
 
-    GPIO_Init(TOUCH2_PORT, &touch2InputStruct);   // Configure touch1 as input pull up
+    touch2.start();
+    touch3.start();
 
     ctl_delay(50);
-    if(touch2Time != 0 && touch2Time < 25000)
+    if(touch2.isTouched())
     {
       //Touch!
-      startupTime = ctl_get_current_time();
+      //startupTime = ctl_get_current_time();
+      touch2Cnt++;
     }   
 
-    // Set touchpin Low
-    GPIO_Init(TOUCH2_PORT, &touch2OutputStruct);
-    TOUCH2_LOW;
+    if(touch3.isTouched())
+    {
+      touch3Cnt++;
+    }
+
+    display.minuteOn(touch2Cnt%60);
+    display.secondOn(touch3Cnt%60);
+    display.switchBuffer();
+    
+    touch2.stop();
+    touch3.stop();
 
     ctl_delay(10); 
     ledCnt++;
