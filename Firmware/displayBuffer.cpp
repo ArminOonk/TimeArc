@@ -53,9 +53,19 @@ displayBuffer::displayBuffer()
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
   TIM_TimeBaseStructure.TIM_Prescaler         = 20;
   TIM_TimeBaseStructure.TIM_Period            = 397;
+  timerPeriod = TIM_TimeBaseStructure.TIM_Period;
   TIM_TimeBaseStructure.TIM_ClockDivision     = TIM_CKD_DIV1;
   TIM_TimeBaseStructure.TIM_CounterMode       = TIM_CounterMode_Up;
   TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+
+  TIM_OCInitTypeDef  TIM_OCInitStructure;
+  TIM_OCStructInit(&TIM_OCInitStructure);
+  TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Inactive;
+  TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Disable;
+  TIM_OCInitStructure.TIM_Pulse =  (uint32_t)(TIM_TimeBaseStructure.TIM_Period); // Duty cycle 
+  TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+  TIM_OC1Init(TIM2, &TIM_OCInitStructure);
+  TIM_OC1PreloadConfig(TIM2, TIM_OCPreload_Disable);
 
   NVIC_InitStructure.NVIC_IRQChannel                    = TIM2_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 2;
@@ -64,7 +74,7 @@ displayBuffer::displayBuffer()
   NVIC_Init(&NVIC_InitStructure);
 
   TIM_Cmd(TIM2, ENABLE);
-  TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+  TIM_ITConfig(TIM2, TIM_IT_Update | TIM_IT_CC1, ENABLE);
 
   displayOff();
 
@@ -123,6 +133,12 @@ void displayBuffer::secondOn(unsigned int second)
     clockLedNr[SECOND] = ((div*12+remainder+6) + (totalNrLeds/2))%totalNrLeds;
     ledOn(clockLedNr[SECOND]);
   }
+}
+
+void displayBuffer::setIntensity(float intensity)
+{
+  uint16_t intval = intensity*timerPeriod;
+  TIM_SetCompare1(TIM2, intval);
 }
 
 void displayBuffer::switchBuffer()

@@ -156,10 +156,12 @@ class displayBuffer
   void minuteOn(unsigned int minute);
   void secondOn(unsigned int second);
 
-  private:
-  void switchLedOn(int ledNr);
+  void setIntensity(float intensity);
   void displayOff();
 
+  private:
+  void switchLedOn(int ledNr);
+  
   void clearBuffer(int bufferNr);
   int nextBufferNr();
   
@@ -176,6 +178,8 @@ class displayBuffer
   int runCnt;
 
   int clockLedNr[3];
+  int timerPeriod;
+
 };
 
 #endif

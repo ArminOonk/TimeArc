@@ -18,6 +18,12 @@ extern "C" void TIM2_IRQHandler(void)
     display.run();
   }
 
+  if(TIM_GetITStatus(TIM2,TIM_IT_CC1) != RESET)
+  {
+    TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);
+    display.displayOff();
+
+  }
   ctl_exit_isr();
 }
 
@@ -57,6 +63,16 @@ extern "C" void EXTI9_5_IRQHandler(void)
   ctl_enter_isr();
 
   touch5.interrupt(); 
+
+  ctl_exit_isr();
+}
+
+extern capTouch touch1;
+extern "C" void EXTI15_10_IRQHandler(void)
+{
+  ctl_enter_isr();
+
+  touch1.interrupt(); 
 
   ctl_exit_isr();
 }

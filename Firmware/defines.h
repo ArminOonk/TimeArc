@@ -1,25 +1,4 @@
 #ifndef DEFINE
 #define DEFINE
 
-#define TOUCH1_PORT     GPIOA
-#define TOUCH1_PIN      GPIO_Pin_15
-#define TOUCH1_HIGH     TOUCH1_PORT->BSRR |= TOUCH1_PIN
-#define TOUCH1_LOW      TOUCH1_PORT->BRR |= TOUCH1_PIN
-#define IS_TOUCH1_HIGH  (GPIO_ReadInputDataBit(TOUCH1_PORT, TOUCH1_PIN) == SET)
-
-#define TOUCH2_PORT   GPIOC
-#define TOUCH2_PIN    GPIO_Pin_3
-#define TOUCH2_HIGH     TOUCH2_PORT->BSRR |= TOUCH2_PIN
-#define TOUCH2_LOW      TOUCH2_PORT->BRR |= TOUCH2_PIN
-#define IS_TOUCH2_HIGH  (GPIO_ReadInputDataBit(TOUCH2_PORT, TOUCH2_PIN) == SET)
-
-#define TOUCH3_PORT   GPIOC
-#define TOUCH3_PIN    GPIO_Pin_4
-
-#define TOUCH4_PORT   GPIOD
-#define TOUCH4_PIN    GPIO_Pin_2
-
-#define TOUCH5_PORT   GPIOB
-#define TOUCH5_PIN    GPIO_Pin_5
-
 #endif

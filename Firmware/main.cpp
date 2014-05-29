@@ -10,11 +10,13 @@
 void ledHandler(void *p);
 void ctl_delay(CTL_TIME_t t);
 
-CTL_TASK_t mainTask, ledTask;
+CTL_TASK_t mainTask, ledTask, touchTask;
 static unsigned ledTaskStack[256];
+static unsigned touchTaskStack[256];
 
 displayBuffer display;
 
+capTouch touch1(GPIOA, GPIO_Pin_15);
 capTouch touch2(GPIOC, GPIO_Pin_3);
 capTouch touch3(GPIOC, GPIO_Pin_4);
 capTouch touch4(GPIOD, GPIO_Pin_2);
@@ -26,31 +28,22 @@ void ledHandler(void *p)
   time_t currentTime = 1401312421;
   CTL_TIME_t startupTime = ctl_get_current_time();
 
-  touch2.init();
-  touch3.init();
-  touch4.init();
-  touch5.init();
-
   int touch2Cnt = 0;
   int touch3Cnt = 0;
-
+  int hourCnt = 0;
+  
   while(true)
   {
     //time_t now = ((ctl_get_current_time()-startupTime)/1000) + currentTime;
     //display.setTime(now);
 
-    touch2.start();
-    touch3.start();
-    touch4.start();
-    touch5.start();
 
-    ctl_delay(50);
     if(touch2.isTouched())
     {
       touch2Cnt++;
       if(touch2Cnt > 59)
       {
-        touch2Cnt = touch2Cnt - 60;
+        touch2Cnt -= 60;
       }
     }   
 
@@ -59,7 +52,7 @@ void ledHandler(void *p)
       touch2Cnt--;
       if(touch2Cnt < 0)
       {
-        touch2Cnt = 60 + touch2Cnt;
+        touch2Cnt += 60;
       }
     }
 
@@ -81,15 +74,60 @@ void ledHandler(void *p)
       }
     }
 
+    if(touch1.isTouched())
+    {
+      hourCnt++;
+    }
+
     display.minuteOn(touch2Cnt);
     display.secondOn(touch3Cnt);
-    display.switchBuffer();
+    display.hourOn(hourCnt%12);
+    display.setIntensity((ledCnt%100)/100.0);
+    //display.switchBuffer();
     
+    ctl_delay(100); 
+    ledCnt++;
+  }
+}
+
+void touchHandler(void *p)
+{
+  touch2.init();
+  touch3.init();
+  touch4.init();
+  touch5.init();
+
+  bool disabledJTAG = false;
+  while(true)
+  {
+  
+    if((ctl_get_current_time() > 10000) && !disabledJTAG)
+    {
+      display.hourOn(6);
+      //RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
+ 
+      // Disable the Serial Wire Jtag Debug Port SWJ-DP 
+      //GPIO_PinRemapConfig(GPIO_Remap_SWJ_Disable, ENABLE);
+
+      touch1.init();
+      disabledJTAG = true;
+    }
+
+    touch2.start();
+    ctl_delay(50);
     touch2.stop();
+
+    touch3.start();
+    ctl_delay(50);
     touch3.stop();
 
-    ctl_delay(10); 
-    ledCnt++;
+    touch4.start();
+    ctl_delay(50);
+    touch4.stop();
+
+    touch5.start();
+    ctl_delay(50);
+    touch5.stop();
   }
 }
 
@@ -110,9 +148,11 @@ int main(void)
   
   ctl_task_init(&mainTask, 255, "main");
   memset(ledTaskStack, 0xba, sizeof(ledTaskStack));
+  memset(touchTaskStack, 0xba, sizeof(touchTaskStack));
 
   // Make another task ready to run.
   ctl_task_run(&ledTask, 1, ledHandler, 0, "ledTask", sizeof(ledTaskStack) / sizeof(unsigned), ledTaskStack, 0);
+  ctl_task_run(&touchTask, 2, touchHandler, 0, "touchTask", sizeof(touchTaskStack) / sizeof(unsigned), touchTaskStack, 0);
 
   // Now all the tasks have been created go to lowest priority.
   ctl_task_set_priority(&mainTask, 0);
@@ -121,6 +161,8 @@ int main(void)
   {
     if(ledTaskStack[0]  !=  0xbabababa)
       error("ledTaskStack Overflow!");
+    if(touchTaskStack[0]  !=  0xbabababa)
+      error("touchTaskStack Overflow!");
   }
 }
 
