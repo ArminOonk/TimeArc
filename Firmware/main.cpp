@@ -11,6 +11,11 @@ void ledHandler(void *p);
 void ctl_delay(CTL_TIME_t t);
 void initADC();
 unsigned int readLight();
+void initSPI();
+char spiSendByte(char byte);
+char readADXL345Register(char registerAddress);
+void writeADXL345Register(char registerAddress, char value);
+void readADXL345Register(char registerAddress, char *buffer, int length);
 
 CTL_TASK_t mainTask, ledTask, touchTask;
 static unsigned ledTaskStack[256];
@@ -26,10 +31,31 @@ capTouch touchTop(GPIOB, GPIO_Pin_5);
 unsigned int ledCnt = 0;
 
 float light = 0;
+char accelBuffer[6];
+
+struct accelData_t
+{
+  short x;
+  short y;
+  short z;
+} __attribute__((packed));
+
+accelData_t accelData;
 void ledHandler(void *p)
 {
   time_t currentTime = 1401312421;
   CTL_TIME_t startupTime = ctl_get_current_time();
+
+  ctl_delay(1000);
+  if(readADXL345Register(0x00) == 0xe5)
+  {
+    writeADXL345Register(DATA_FORMAT, 0x00);    // Range +/- 2g
+    //Put the ADXL345 into Measurement Mode by writing 0x08 to the POWER_CTL register.
+    writeADXL345Register(POWER_CTL, 0x08);  //Measurement mode  
+
+    //take first measurement
+    readADXL345Register(DATAX0, (char*)&accelData, 6);
+  }
 
   int touch2Cnt = 0;
   int touch3Cnt = 0;
@@ -85,11 +111,9 @@ void ledHandler(void *p)
     display.secondOn(touch3Cnt);
     display.hourOn(hourCnt%12);
 
-
     light += 0.2*(readLight() - light);
 
     display.setIntensity(1.0-light/4096.0);
-    //display.switchBuffer();
     
     ctl_delay(100); 
     ledCnt++;
@@ -107,19 +131,6 @@ void touchHandler(void *p)
   bool disabledJTAG = false;
   while(true)
   {
-  
-    /*if((ctl_get_current_time() > 10000) && !disabledJTAG)
-    {
-      display.hourOn(6);
-      //RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
- 
-      // Disable the Serial Wire Jtag Debug Port SWJ-DP 
-      //GPIO_PinRemapConfig(GPIO_Remap_SWJ_Disable, ENABLE);
-
-      touch1.init();
-      disabledJTAG = true;
-    }*/
-
     touchDown.start();
     ctl_delay(50);
     touchDown.stop();
@@ -151,8 +162,8 @@ int main(void)
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
  
   initGPIO();   // Configure GPIO
-
   initADC();
+  initSPI();
 
   // CTL
   ctl_start_timer(ctl_increment_tick_from_isr);
@@ -181,7 +192,7 @@ int main(void)
 
 void error(const char *err)
 {
-  while(1) //loop forever
+  while(true) //loop forever
   {
     
   }
@@ -240,6 +251,94 @@ void initADC()
 
   /* Start ADC1 Software Conversion */ 
   ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+}
+
+void initSPI()
+{
+  GPIO_InitTypeDef GPIO_InitStructure; 
+  GPIO_StructInit(&GPIO_InitStructure);
+  GPIO_InitStructure.GPIO_Pin   = SPI_CS_PIN;
+  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(SPI_CS_PORT, &GPIO_InitStructure);
+
+  GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
+  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(SPI_CS_PORT, &GPIO_InitStructure);
+
+  SPI_CS_HIGH;
+
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+  SPI_InitTypeDef   SPI_InitStructure;
+  SPI_StructInit(&SPI_InitStructure);
+  
+  SPI_InitStructure.SPI_Direction           = SPI_Direction_2Lines_FullDuplex;
+  SPI_InitStructure.SPI_Mode                = SPI_Mode_Master;
+  SPI_InitStructure.SPI_DataSize            = SPI_DataSize_8b;
+  SPI_InitStructure.SPI_CPOL                = SPI_CPOL_High;         //Idle state low
+  SPI_InitStructure.SPI_CPHA                = SPI_CPHA_2Edge;       // latch on first edge
+  SPI_InitStructure.SPI_NSS                 = SPI_NSS_Soft;
+  SPI_InitStructure.SPI_BaudRatePrescaler   = SPI_BaudRatePrescaler_64;
+  SPI_InitStructure.SPI_FirstBit            = SPI_FirstBit_MSB;
+  
+  SPI_Init(SPI1, &SPI_InitStructure);
+  SPI_Cmd(SPI1, ENABLE);
+}
+
+char spiSendByte(char byte)
+{
+  // Loop while DR register in not empty 
+  while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
+
+  // Send byte through the SPI1 peripheral 
+  SPI_I2S_SendData(SPI1, byte);
+
+  // Wait to receive a byte 
+  while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
+
+  uint16_t retVal = SPI_I2S_ReceiveData(SPI1);
+  return (char)(retVal&0xff);
+}
+
+void writeADXL345Register(char registerAddress, char value)
+{
+  //Set Chip Select pin low to signal the beginning of an SPI packet.
+  SPI_CS_LOW;
+  //Transfer the register address over SPI.
+  spiSendByte(registerAddress);
+  //Transfer the desired register value over SPI.
+  spiSendByte(value);
+  //Set the Chip Select pin high to signal the end of an SPI packet.
+  SPI_CS_HIGH;
+}
+
+char readADXL345Register(char registerAddress)
+{
+  //Set Chip Select pin low to signal the beginning of an SPI packet.
+  SPI_CS_LOW;
+  //Transfer the register address over SPI.
+  spiSendByte(registerAddress|(1<<7));
+  //Transfer the desired register value over SPI.
+  char retVal = spiSendByte(0x00);
+  //Set the Chip Select pin high to signal the end of an SPI packet.
+  SPI_CS_HIGH;
+  return retVal;
+}
+
+void readADXL345Register(char registerAddress, char *buffer, int length)
+{
+  //Set Chip Select pin low to signal the beginning of an SPI packet.
+  SPI_CS_LOW;
+  //Transfer the register address over SPI.
+  spiSendByte(registerAddress|(1<<7)|(1<<6));
+  //Transfer the desired register value over SPI.
+  for(int i=0; i<length; i++)
+  {
+    buffer[i] = spiSendByte(0x00);
+  }
+  //Set the Chip Select pin high to signal the end of an SPI packet.
+  SPI_CS_HIGH;
 }
 
 unsigned int readLight()
