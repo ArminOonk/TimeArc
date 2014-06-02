@@ -27,6 +27,25 @@ extern "C" void TIM2_IRQHandler(void)
   ctl_exit_isr();
 }
 
+extern char readADXL345Register(char registerAddress);
+extern void writeADXL345Register(char registerAddress, char value);
+extern void readADXL345Register(char registerAddress, char *buffer, int length);
+
+extern "C" void EXTI1_IRQHandler(void)
+{
+  ctl_enter_isr();
+  EXTI_ClearITPendingBit(EXTI_Line1);
+  if(readADXL345Register(INT_SOURCE) & (1<<5))
+  {
+    // double tap
+  }
+  else
+  {
+    // single tap
+  }
+  ctl_exit_isr();
+}
+
 extern capTouch touchUp;
 extern "C" void EXTI2_IRQHandler(void)
 {

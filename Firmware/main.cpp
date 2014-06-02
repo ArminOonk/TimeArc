@@ -50,8 +50,20 @@ void ledHandler(void *p)
   if(readADXL345Register(0x00) == 0xe5)
   {
     writeADXL345Register(DATA_FORMAT, 0x00);    // Range +/- 2g
-    //Put the ADXL345 into Measurement Mode by writing 0x08 to the POWER_CTL register.
-    writeADXL345Register(POWER_CTL, 0x08);  //Measurement mode  
+    
+    writeADXL345Register(INT_MAP, (1<<5)|(1<<6));    //Send the Tap and Double Tap Interrupts to INT2 pin
+    writeADXL345Register(TAP_AXES, 0x01);   //Look for taps on the Z axis only.
+    writeADXL345Register(THRESH_TAP, 84); //Set the Tap Threshold to 56=3g, 84=4.5g
+    writeADXL345Register(DURATION, 0x10);   //Set the Tap Duration that must be reached
+    writeADXL345Register(LATENT, 0x50);     //100ms Latency before the second tap can occur.
+    writeADXL345Register(WINDOW, 0xFF);
+
+    //Enable the Single and Double Taps.
+    writeADXL345Register(INT_ENABLE, 0xE0);
+
+    writeADXL345Register(POWER_CTL, 0x08);   //Put the ADXL345 into Measurement Mode by writing 0x08 to the POWER_CTL register.
+
+    readADXL345Register(INT_SOURCE); //Clear the interrupts from the INT_SOURCE register.
 
     //take first measurement
     readADXL345Register(DATAX0, (char*)&accelData, 6);
@@ -115,6 +127,9 @@ void ledHandler(void *p)
 
     display.setIntensity(1.0-light/4096.0);
     
+    // Read accelerometer data
+    readADXL345Register(DATAX0, (char*)&accelData, 6);
+
     ctl_delay(100); 
     ledCnt++;
   }
@@ -268,6 +283,28 @@ void initSPI()
   GPIO_Init(SPI_CS_PORT, &GPIO_InitStructure);
 
   SPI_CS_HIGH;
+
+  GPIO_InitStructure.GPIO_Pin   = ACCEL_INT2_PIN;
+  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IN_FLOATING;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(ACCEL_INT2_PORT, &GPIO_InitStructure);
+
+  GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource1);
+  NVIC_InitTypeDef NVIC_InitStructure;
+  EXTI_InitTypeDef EXTI_InitStructure;
+
+  EXTI_InitStructure.EXTI_Line     = EXTI_Line1;
+  EXTI_InitStructure.EXTI_Mode     = EXTI_Mode_Interrupt;
+  EXTI_InitStructure.EXTI_Trigger  = EXTI_Trigger_Rising;
+  EXTI_InitStructure.EXTI_LineCmd  = ENABLE;
+  EXTI_Init(&EXTI_InitStructure);
+
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 0;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority         = 0;
+  NVIC_InitStructure.NVIC_IRQChannel                    = EXTI1_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelCmd                 = ENABLE;
+
+  NVIC_Init(&NVIC_InitStructure);
 
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
   SPI_InitTypeDef   SPI_InitStructure;
