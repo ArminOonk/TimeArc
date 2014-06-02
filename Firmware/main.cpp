@@ -9,6 +9,8 @@
 //FUNCTIONS
 void ledHandler(void *p);
 void ctl_delay(CTL_TIME_t t);
+void initADC();
+unsigned int readLight();
 
 CTL_TASK_t mainTask, ledTask, touchTask;
 static unsigned ledTaskStack[256];
@@ -16,13 +18,14 @@ static unsigned touchTaskStack[256];
 
 displayBuffer display;
 
-capTouch touch1(GPIOA, GPIO_Pin_15);
-capTouch touch2(GPIOC, GPIO_Pin_3);
-capTouch touch3(GPIOC, GPIO_Pin_4);
-capTouch touch4(GPIOD, GPIO_Pin_2);
-capTouch touch5(GPIOB, GPIO_Pin_5);
+capTouch touchDown(GPIOC, GPIO_Pin_13);
+capTouch touchRight(GPIOC, GPIO_Pin_3);
+capTouch touchLeft(GPIOC, GPIO_Pin_4);
+capTouch touchUp(GPIOD, GPIO_Pin_2);
+capTouch touchTop(GPIOB, GPIO_Pin_5);
 unsigned int ledCnt = 0;
 
+float light = 0;
 void ledHandler(void *p)
 {
   time_t currentTime = 1401312421;
@@ -37,8 +40,12 @@ void ledHandler(void *p)
     //time_t now = ((ctl_get_current_time()-startupTime)/1000) + currentTime;
     //display.setTime(now);
 
+    if(touchTop.isTouched())
+    {
+      hourCnt++;
+    }
 
-    if(touch2.isTouched())
+    if(touchRight.isTouched())
     {
       touch2Cnt++;
       if(touch2Cnt > 59)
@@ -47,7 +54,7 @@ void ledHandler(void *p)
       }
     }   
 
-    if(touch3.isTouched())
+    if(touchLeft.isTouched())
     {
       touch2Cnt--;
       if(touch2Cnt < 0)
@@ -56,7 +63,7 @@ void ledHandler(void *p)
       }
     }
 
-    if(touch4.isTouched())
+    if(touchUp.isTouched())
     {
       touch3Cnt++;
       if(touch3Cnt > 59)
@@ -65,7 +72,7 @@ void ledHandler(void *p)
       }
     }
 
-    if(touch5.isTouched())
+    if(touchDown.isTouched())
     {
       touch3Cnt--;
       if(touch3Cnt < 0)
@@ -74,15 +81,14 @@ void ledHandler(void *p)
       }
     }
 
-    if(touch1.isTouched())
-    {
-      hourCnt++;
-    }
-
     display.minuteOn(touch2Cnt);
     display.secondOn(touch3Cnt);
     display.hourOn(hourCnt%12);
-    display.setIntensity((ledCnt%100)/100.0);
+
+
+    light += 0.2*(readLight() - light);
+
+    display.setIntensity(1.0-light/4096.0);
     //display.switchBuffer();
     
     ctl_delay(100); 
@@ -92,16 +98,17 @@ void ledHandler(void *p)
 
 void touchHandler(void *p)
 {
-  touch2.init();
-  touch3.init();
-  touch4.init();
-  touch5.init();
+  touchDown.init();
+  touchRight.init();
+  touchLeft.init();
+  touchUp.init();
+  touchTop.init();
 
   bool disabledJTAG = false;
   while(true)
   {
   
-    if((ctl_get_current_time() > 10000) && !disabledJTAG)
+    /*if((ctl_get_current_time() > 10000) && !disabledJTAG)
     {
       display.hourOn(6);
       //RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
@@ -111,23 +118,27 @@ void touchHandler(void *p)
 
       touch1.init();
       disabledJTAG = true;
-    }
+    }*/
 
-    touch2.start();
+    touchDown.start();
     ctl_delay(50);
-    touch2.stop();
+    touchDown.stop();
 
-    touch3.start();
+    touchRight.start();
     ctl_delay(50);
-    touch3.stop();
+    touchRight.stop();
 
-    touch4.start();
+    touchLeft.start();
     ctl_delay(50);
-    touch4.stop();
+    touchLeft.stop();
 
-    touch5.start();
+    touchUp.start();
     ctl_delay(50);
-    touch5.stop();
+    touchUp.stop();
+
+    touchTop.start();
+    ctl_delay(50);
+    touchTop.stop();
   }
 }
 
@@ -139,8 +150,9 @@ int main(void)
   
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
  
-  // Configure GPIO
-  initGPIO();
+  initGPIO();   // Configure GPIO
+
+  initADC();
 
   // CTL
   ctl_start_timer(ctl_increment_tick_from_isr);
@@ -188,6 +200,56 @@ void initGPIO(void)
   GPIO_InitTypeDef GPIO_InitStructure; 
   GPIO_StructInit(&GPIO_InitStructure);
 
+}
+
+void initADC()
+{
+  RCC_ADCCLKConfig(RCC_PCLK2_Div6);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+  ADC_DeInit(ADC1);
+
+  GPIO_InitTypeDef GPIO_InitStructure;
+  GPIO_StructInit(&GPIO_InitStructure);
+  GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_0;
+  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AIN;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+  ADC_InitTypeDef  ADC_InitStructure;
+  ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
+  ADC_InitStructure.ADC_ScanConvMode = DISABLE;
+  ADC_InitStructure.ADC_ContinuousConvMode = DISABLE;
+  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
+  ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+  ADC_InitStructure.ADC_NbrOfChannel = 1;
+
+  ADC_Init(ADC1, &ADC_InitStructure);
+
+  ADC_RegularChannelConfig(ADC1, ADC_Channel_10, 1, ADC_SampleTime_239Cycles5);
+  ADC_Cmd(ADC1, ENABLE);
+
+  ADC_ResetCalibration(ADC1);
+  /* Check the end of ADC1 reset calibration register */
+  while(ADC_GetResetCalibrationStatus(ADC1));
+
+  /* Start ADC1 calibaration */
+  ADC_StartCalibration(ADC1);
+  /* Check the end of ADC1 calibration */
+  while(ADC_GetCalibrationStatus(ADC1));
+
+  /* Start ADC1 Software Conversion */ 
+  ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+}
+
+unsigned int readLight()
+{
+  // Start the conversion
+  ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+  // Wait until conversion completion
+  while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
+  // Get the conversion value
+  return ADC_GetConversionValue(ADC1);
 }
 
 void ctl_handle_error(CTL_ERROR_CODE_t error)

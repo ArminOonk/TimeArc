@@ -27,52 +27,52 @@ extern "C" void TIM2_IRQHandler(void)
   ctl_exit_isr();
 }
 
-extern capTouch touch4;
+extern capTouch touchUp;
 extern "C" void EXTI2_IRQHandler(void)
 {
   ctl_enter_isr();
 
-  touch4.interrupt(); 
+  touchUp.interrupt(); 
 
   ctl_exit_isr();
 }
 
-extern capTouch touch2;
+extern capTouch touchRight;
 extern "C" void EXTI3_IRQHandler(void)
 {
   ctl_enter_isr();
 
-  touch2.interrupt(); 
+  touchRight.interrupt(); 
 
   ctl_exit_isr();
 }
 
-extern capTouch touch3;
+extern capTouch touchLeft;
 extern "C" void EXTI4_IRQHandler(void)
 {
   ctl_enter_isr();
 
-  touch3.interrupt(); 
+  touchLeft.interrupt(); 
 
   ctl_exit_isr();
 }
 
-extern capTouch touch5;
+extern capTouch touchTop;
 extern "C" void EXTI9_5_IRQHandler(void)
 {
   ctl_enter_isr();
 
-  touch5.interrupt(); 
+  touchTop.interrupt(); 
 
   ctl_exit_isr();
 }
 
-extern capTouch touch1;
+extern capTouch touchDown;
 extern "C" void EXTI15_10_IRQHandler(void)
 {
   ctl_enter_isr();
 
-  touch1.interrupt(); 
+  touchDown.interrupt(); 
 
   ctl_exit_isr();
 }

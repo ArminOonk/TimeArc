@@ -38,6 +38,16 @@ void capTouch::init()
   outputStruct.GPIO_Mode  = GPIO_Mode_Out_PP;
   outputStruct.GPIO_Speed = GPIO_Speed_50MHz;
 
+  if(port == GPIOC && pin == GPIO_Pin_13)
+  {
+    inputStruct.GPIO_Pin   = pin;
+    inputStruct.GPIO_Mode  = GPIO_Mode_IN_FLOATING;
+    inputStruct.GPIO_Speed = GPIO_Speed_2MHz;
+
+    outputStruct.GPIO_Pin   = pin;
+    outputStruct.GPIO_Mode  = GPIO_Mode_Out_PP;
+    outputStruct.GPIO_Speed = GPIO_Speed_2MHz;
+  }
   stop(); // Set pin low 
 
   initExti();
