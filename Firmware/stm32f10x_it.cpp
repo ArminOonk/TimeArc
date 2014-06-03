@@ -27,10 +27,7 @@ extern "C" void TIM2_IRQHandler(void)
   }
   ctl_exit_isr();
 }
-/*
-extern char readADXL345Register(char registerAddress);
-extern void writeADXL345Register(char registerAddress, char value);
-extern void readADXL345Register(char registerAddress, char *buffer, int length);*/
+
 extern adxl345 accel;
 extern "C" void EXTI1_IRQHandler(void)
 {

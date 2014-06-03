@@ -25,6 +25,8 @@
 #define INT_ENABLE 0x2e
 #define INT_SOURCE 0x30
 
+#define SINGLE_TAP (1<<6)
+#define DOUBLE_TAP (1<<5)
 class adxl345
 {
   public:
@@ -38,10 +40,18 @@ class adxl345
   short y;
   short z;
 
+  unsigned int intCnt;
+
   private:
   char spiSendByte(char byte);
   void writeRegister(char registerAddress, char value);
   char readRegister(char registerAddress);
+
+  void enableInterrupt();
+  void disableInterrupt();
+
+  EXTI_InitTypeDef EXTI_InitStructure;
+  bool interruptEnabled;
   
 
 };

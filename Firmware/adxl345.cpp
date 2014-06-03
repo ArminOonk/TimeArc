@@ -6,6 +6,9 @@ adxl345::adxl345()
   y = 0;
   z = 0;
 
+  intCnt = 0;
+  interruptEnabled = false;
+
   GPIO_InitTypeDef GPIO_InitStructure; 
   GPIO_StructInit(&GPIO_InitStructure);
   GPIO_InitStructure.GPIO_Pin   = SPI_CS_PIN;
@@ -27,7 +30,6 @@ adxl345::adxl345()
 
   GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource1);
   NVIC_InitTypeDef NVIC_InitStructure;
-  EXTI_InitTypeDef EXTI_InitStructure;
 
   EXTI_InitStructure.EXTI_Line     = EXTI_Line1;
   EXTI_InitStructure.EXTI_Mode     = EXTI_Mode_Interrupt;
@@ -61,44 +63,90 @@ adxl345::adxl345()
 
 void adxl345::init()
 {
-  writeRegister(DATA_FORMAT, 0x00);    // Range +/- 2g
-  
-  writeRegister(INT_MAP, (1<<5)|(1<<6));    //Send the Tap and Double Tap Interrupts to INT2 pin
-  writeRegister(TAP_AXES, 0x01);   //Look for taps on the Z axis only.
-  writeRegister(THRESH_TAP, 84); //Set the Tap Threshold to 56=3g, 84=4.5g
-  writeRegister(DURATION, 0x10);   //Set the Tap Duration that must be reached
-  writeRegister(LATENT, 0x50);     //100ms Latency before the second tap can occur.
-  writeRegister(WINDOW, 0xFF);
+  writeRegister(DATA_FORMAT, 0b00001010);     // Range +/- 2g
+        
+  writeRegister(THRESH_TAP, 0x30);        
+  writeRegister(DURATION, 0x7f);           
+  writeRegister(LATENT, 0x10 );          
+  writeRegister(WINDOW, 0x10);
+  writeRegister(TAP_AXES, 0x0f);
 
-  //Enable the Single and Double Taps.
-  writeRegister(INT_ENABLE, 0xE0);
   writeRegister(POWER_CTL, 0x08);   //Put the ADXL345 into Measurement Mode by writing 0x08 to the POWER_CTL register.
-  readRegister(INT_SOURCE); //Clear the interrupts from the INT_SOURCE register.
 
   readAccel();
 }
 
+int source = 0;
 void adxl345::interrupt()
 {
   EXTI_ClearITPendingBit(EXTI_Line1);
+
   if(readRegister(INT_SOURCE) & (1<<5))
   {
     // double tap
+    source = 2;
   }
   else
   {
     // single tap
+    source = 1;
   }
+
+  disableInterrupt();
+
+  intCnt++;
 }
 
 void adxl345::readAccel()
 {
-    x = (readRegister(DATAX0+1)<<8)|readRegister(DATAX0);
-    y = (readRegister(DATAX0+3)<<8)|readRegister(DATAX0+2);
-    z = (readRegister(DATAX0+5)<<8)|readRegister(DATAX0+4);
+  char xLow = readRegister(DATAX0);
+  char xHigh = readRegister(DATAX0+1);
+  char yLow = readRegister(DATAX0+2);
+  char yHigh = readRegister(DATAX0+3);
+  char zLow = readRegister(DATAX0+4);
+  char zHigh = readRegister(DATAX0+5);
+
+  x = (xHigh<<8)| xLow;
+  y = (yHigh<<8)|yLow;
+  z = (zHigh<<8)|zLow;
+
+  if(!interruptEnabled)
+  {
+    enableInterrupt();
+  }
 }
 
 // Private
+
+void adxl345::enableInterrupt()
+{
+  interruptEnabled = true;
+
+  EXTI_InitStructure.EXTI_Line     = EXTI_Line1;
+  EXTI_InitStructure.EXTI_Mode     = EXTI_Mode_Interrupt;
+  EXTI_InitStructure.EXTI_Trigger  = EXTI_Trigger_Rising;
+  EXTI_InitStructure.EXTI_LineCmd  = ENABLE;
+  EXTI_Init(&EXTI_InitStructure);
+
+  writeRegister(INT_MAP, SINGLE_TAP|DOUBLE_TAP);   //Send the Tap and Double Tap Interrupts to INT2 pin
+  writeRegister(INT_ENABLE, 0x60 );
+  //readRegister(INT_SOURCE); //Clear the interrupts from the INT_SOURCE register.
+}
+
+void adxl345::disableInterrupt()
+{
+  interruptEnabled = false;
+
+  EXTI_InitStructure.EXTI_Line     = EXTI_Line1;
+  EXTI_InitStructure.EXTI_Mode     = EXTI_Mode_Interrupt;
+  EXTI_InitStructure.EXTI_Trigger  = EXTI_Trigger_Rising;
+  EXTI_InitStructure.EXTI_LineCmd  = DISABLE;
+  EXTI_Init(&EXTI_InitStructure);
+
+  writeRegister(INT_MAP, 0x00);   //Send the Tap and Double Tap Interrupts to INT2 pin
+  writeRegister(INT_ENABLE, 0x00);
+  
+}
 
 char adxl345::spiSendByte(char byte)
 {
