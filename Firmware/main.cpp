@@ -15,7 +15,7 @@ void initSPI();
 char spiSendByte(char byte);
 char readADXL345Register(char registerAddress);
 void writeADXL345Register(char registerAddress, char value);
-void readADXL345Register(char registerAddress, char *buffer, int length);
+void readAccel();
 
 CTL_TASK_t mainTask, ledTask, touchTask;
 static unsigned ledTaskStack[256];
@@ -41,33 +41,30 @@ struct accelData_t
 } __attribute__((packed));
 
 accelData_t accelData;
+char hoi=0;
+
 void ledHandler(void *p)
 {
   time_t currentTime = 1401312421;
   CTL_TIME_t startupTime = ctl_get_current_time();
 
   ctl_delay(1000);
-  if(readADXL345Register(0x00) == 0xe5)
-  {
-    writeADXL345Register(DATA_FORMAT, 0x00);    // Range +/- 2g
-    
-    writeADXL345Register(INT_MAP, (1<<5)|(1<<6));    //Send the Tap and Double Tap Interrupts to INT2 pin
-    writeADXL345Register(TAP_AXES, 0x01);   //Look for taps on the Z axis only.
-    writeADXL345Register(THRESH_TAP, 84); //Set the Tap Threshold to 56=3g, 84=4.5g
-    writeADXL345Register(DURATION, 0x10);   //Set the Tap Duration that must be reached
-    writeADXL345Register(LATENT, 0x50);     //100ms Latency before the second tap can occur.
-    writeADXL345Register(WINDOW, 0xFF);
 
-    //Enable the Single and Double Taps.
-    writeADXL345Register(INT_ENABLE, 0xE0);
+  writeADXL345Register(DATA_FORMAT, 0x01);    // Range +/- 2g
+  
+  writeADXL345Register(INT_MAP, (1<<5)|(1<<6));    //Send the Tap and Double Tap Interrupts to INT2 pin
+  writeADXL345Register(TAP_AXES, 0x01);   //Look for taps on the Z axis only.
+  writeADXL345Register(THRESH_TAP, 84); //Set the Tap Threshold to 56=3g, 84=4.5g
+  writeADXL345Register(DURATION, 0x10);   //Set the Tap Duration that must be reached
+  writeADXL345Register(LATENT, 0x50);     //100ms Latency before the second tap can occur.
+  writeADXL345Register(WINDOW, 0xFF);
 
-    writeADXL345Register(POWER_CTL, 0x08);   //Put the ADXL345 into Measurement Mode by writing 0x08 to the POWER_CTL register.
+  //Enable the Single and Double Taps.
+  writeADXL345Register(INT_ENABLE, 0xE0);
+  writeADXL345Register(POWER_CTL, 0x08);   //Put the ADXL345 into Measurement Mode by writing 0x08 to the POWER_CTL register.
+  readADXL345Register(INT_SOURCE); //Clear the interrupts from the INT_SOURCE register.
 
-    readADXL345Register(INT_SOURCE); //Clear the interrupts from the INT_SOURCE register.
-
-    //take first measurement
-    readADXL345Register(DATAX0, (char*)&accelData, 6);
-  }
+  readAccel();
 
   int touch2Cnt = 0;
   int touch3Cnt = 0;
@@ -126,9 +123,9 @@ void ledHandler(void *p)
     light += 0.2*(readLight() - light);
 
     display.setIntensity(1.0-light/4096.0);
-    
-    // Read accelerometer data
-    readADXL345Register(DATAX0, (char*)&accelData, 6);
+   
+    readAccel();
+    hoi = readADXL345Register(0x00);
 
     ctl_delay(100); 
     ledCnt++;
@@ -334,8 +331,7 @@ char spiSendByte(char byte)
   // Wait to receive a byte 
   while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
 
-  uint16_t retVal = SPI_I2S_ReceiveData(SPI1);
-  return (char)(retVal&0xff);
+  return SPI_I2S_ReceiveData(SPI1);
 }
 
 void writeADXL345Register(char registerAddress, char value)
@@ -363,19 +359,11 @@ char readADXL345Register(char registerAddress)
   return retVal;
 }
 
-void readADXL345Register(char registerAddress, char *buffer, int length)
+void readAccel()
 {
-  //Set Chip Select pin low to signal the beginning of an SPI packet.
-  SPI_CS_LOW;
-  //Transfer the register address over SPI.
-  spiSendByte(registerAddress|(1<<7)|(1<<6));
-  //Transfer the desired register value over SPI.
-  for(int i=0; i<length; i++)
-  {
-    buffer[i] = spiSendByte(0x00);
-  }
-  //Set the Chip Select pin high to signal the end of an SPI packet.
-  SPI_CS_HIGH;
+    accelData.x = (readADXL345Register(DATAX0+1)<<8)|readADXL345Register(DATAX0);
+    accelData.y = (readADXL345Register(DATAX0+3)<<8)|readADXL345Register(DATAX0+2);
+    accelData.z = (readADXL345Register(DATAX0+5)<<8)|readADXL345Register(DATAX0+4);
 }
 
 unsigned int readLight()
