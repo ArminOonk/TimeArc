@@ -4,6 +4,7 @@
 #include "defines.h"
 #include "displayBuffer.h"
 #include "capTouch.h"
+#include "adxl345.h"
 
 extern displayBuffer display;
 
@@ -26,23 +27,15 @@ extern "C" void TIM2_IRQHandler(void)
   }
   ctl_exit_isr();
 }
-
+/*
 extern char readADXL345Register(char registerAddress);
 extern void writeADXL345Register(char registerAddress, char value);
-extern void readADXL345Register(char registerAddress, char *buffer, int length);
-
+extern void readADXL345Register(char registerAddress, char *buffer, int length);*/
+extern adxl345 accel;
 extern "C" void EXTI1_IRQHandler(void)
 {
   ctl_enter_isr();
-  EXTI_ClearITPendingBit(EXTI_Line1);
-  if(readADXL345Register(INT_SOURCE) & (1<<5))
-  {
-    // double tap
-  }
-  else
-  {
-    // single tap
-  }
+  accel.interrupt();
   ctl_exit_isr();
 }
 

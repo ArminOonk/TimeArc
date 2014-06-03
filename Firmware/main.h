@@ -8,6 +8,7 @@
 #include "defines.h"
 #include "displayBuffer.h"
 #include "capTouch.h"
+#include "adxl345.h"
 
 void initGPIO(void);
 void initTimer(void);

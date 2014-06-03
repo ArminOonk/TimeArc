@@ -11,11 +11,11 @@ void ledHandler(void *p);
 void ctl_delay(CTL_TIME_t t);
 void initADC();
 unsigned int readLight();
-void initSPI();
-char spiSendByte(char byte);
-char readADXL345Register(char registerAddress);
-void writeADXL345Register(char registerAddress, char value);
-void readAccel();
+//void initSPI();
+//char spiSendByte(char byte);
+//char readADXL345Register(char registerAddress);
+//void writeADXL345Register(char registerAddress, char value);
+//void readAccel();
 
 CTL_TASK_t mainTask, ledTask, touchTask;
 static unsigned ledTaskStack[256];
@@ -31,17 +31,7 @@ capTouch touchTop(GPIOB, GPIO_Pin_5);
 unsigned int ledCnt = 0;
 
 float light = 0;
-char accelBuffer[6];
-
-struct accelData_t
-{
-  short x;
-  short y;
-  short z;
-} __attribute__((packed));
-
-accelData_t accelData;
-char hoi=0;
+adxl345 accel;
 
 void ledHandler(void *p)
 {
@@ -49,22 +39,7 @@ void ledHandler(void *p)
   CTL_TIME_t startupTime = ctl_get_current_time();
 
   ctl_delay(1000);
-
-  writeADXL345Register(DATA_FORMAT, 0x01);    // Range +/- 2g
-  
-  writeADXL345Register(INT_MAP, (1<<5)|(1<<6));    //Send the Tap and Double Tap Interrupts to INT2 pin
-  writeADXL345Register(TAP_AXES, 0x01);   //Look for taps on the Z axis only.
-  writeADXL345Register(THRESH_TAP, 84); //Set the Tap Threshold to 56=3g, 84=4.5g
-  writeADXL345Register(DURATION, 0x10);   //Set the Tap Duration that must be reached
-  writeADXL345Register(LATENT, 0x50);     //100ms Latency before the second tap can occur.
-  writeADXL345Register(WINDOW, 0xFF);
-
-  //Enable the Single and Double Taps.
-  writeADXL345Register(INT_ENABLE, 0xE0);
-  writeADXL345Register(POWER_CTL, 0x08);   //Put the ADXL345 into Measurement Mode by writing 0x08 to the POWER_CTL register.
-  readADXL345Register(INT_SOURCE); //Clear the interrupts from the INT_SOURCE register.
-
-  readAccel();
+  accel.init();
 
   int touch2Cnt = 0;
   int touch3Cnt = 0;
@@ -124,8 +99,7 @@ void ledHandler(void *p)
 
     display.setIntensity(1.0-light/4096.0);
    
-    readAccel();
-    hoi = readADXL345Register(0x00);
+    accel.readAccel();
 
     ctl_delay(100); 
     ledCnt++;
@@ -175,7 +149,7 @@ int main(void)
  
   initGPIO();   // Configure GPIO
   initADC();
-  initSPI();
+  //initSPI();
 
   // CTL
   ctl_start_timer(ctl_increment_tick_from_isr);
@@ -264,7 +238,7 @@ void initADC()
   /* Start ADC1 Software Conversion */ 
   ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
-
+/*
 void initSPI()
 {
   GPIO_InitTypeDef GPIO_InitStructure; 
@@ -364,7 +338,7 @@ void readAccel()
     accelData.x = (readADXL345Register(DATAX0+1)<<8)|readADXL345Register(DATAX0);
     accelData.y = (readADXL345Register(DATAX0+3)<<8)|readADXL345Register(DATAX0+2);
     accelData.z = (readADXL345Register(DATAX0+5)<<8)|readADXL345Register(DATAX0+4);
-}
+}*/
 
 unsigned int readLight()
 {
