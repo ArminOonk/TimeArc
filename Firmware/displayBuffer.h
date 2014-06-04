@@ -159,6 +159,8 @@ class displayBuffer
   void setIntensity(float intensity);
   void displayOff();
 
+  void setPose(pose_t p);
+
   private:
   void switchLedOn(int ledNr);
   
@@ -172,12 +174,17 @@ class displayBuffer
   void animationMode();
   void clockMode();
 
+  int getSecondLedNr(int second);
+  int getMinuteLedNr(int minute);
+  int getHourLedNr(int hour);
+
+  pose_t pose;
   static const int nrBuffers = 2;
   int currentBuffer;
   char buffer[nrBuffers][displayBufferSize];
   int runCnt;
 
-  int clockLedNr[3];
+  int clockTime[3];
   int timerPeriod;
 
 };

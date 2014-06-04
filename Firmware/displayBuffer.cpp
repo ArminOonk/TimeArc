@@ -86,9 +86,11 @@ displayBuffer::displayBuffer()
 
   runCnt = 0;
 
-  clockLedNr[SECOND] = 0;
-  clockLedNr[MINUTE] = 0;
-  clockLedNr[HOUR] = 0;
+  clockTime[SECOND] = 0;
+  clockTime[MINUTE] = 0;
+  clockTime[HOUR] = 0;
+
+  pose = UNKNOWN;
 }
 
 void displayBuffer::setTime(time_t now)
@@ -106,8 +108,8 @@ void displayBuffer::hourOn(unsigned int hour)
 {
   if(hour < 12)
   {
-    clockLedNr[HOUR] = ((hour+6)*12)%totalNrLeds;
-    ledOn(clockLedNr[HOUR]);
+    clockTime[HOUR] = hour;
+    ledOn(getHourLedNr(clockTime[HOUR]));
   }
 }
 
@@ -115,11 +117,8 @@ void displayBuffer::minuteOn(unsigned int minute)
 {
   if(minute < 60)
   {
-    int div = minute/5;
-    int remainder = minute%5;
-
-    clockLedNr[MINUTE] = ((div*12+remainder+1) + (totalNrLeds/2))%totalNrLeds;
-    ledOn(clockLedNr[MINUTE]);
+    clockTime[MINUTE] = minute;
+    ledOn(getMinuteLedNr(clockTime[MINUTE]));
   }
 }
 
@@ -127,11 +126,8 @@ void displayBuffer::secondOn(unsigned int second)
 {
   if(second < 60)
   {
-    int div = second/5;
-    int remainder = second%5;
-
-    clockLedNr[SECOND] = ((div*12+remainder+6) + (totalNrLeds/2))%totalNrLeds;
-    ledOn(clockLedNr[SECOND]);
+    clockTime[SECOND] = second;
+    ledOn(getSecondLedNr(clockTime[SECOND]));
   }
 }
 
@@ -174,6 +170,11 @@ void displayBuffer::ledOff(int ledNr)
 {
   char *buf = getPaintBuffer();
   buf[ledNr/8] &= ~(1<<(ledNr%8));
+}
+
+void displayBuffer::setPose(pose_t p)
+{
+  pose = p;
 }
 
 /// Private
@@ -359,18 +360,21 @@ void displayBuffer::animationMode()
 // CLockMode only 1 second, 1 minute and 1 hour led are active
 void displayBuffer::clockMode()
 {
+  int minuteOffset = 0;
+  int hourOffset = 0;
+
   switch(runCnt)
   {
     case 0:
-    switchLedOn(clockLedNr[SECOND]);
+    switchLedOn(getSecondLedNr(clockTime[SECOND]));
     break;
 
     case 1:
-    switchLedOn(clockLedNr[MINUTE]);
+    switchLedOn(getMinuteLedNr(clockTime[MINUTE]));
     break;
 
     case 2:
-    switchLedOn(clockLedNr[HOUR]);
+    switchLedOn(getHourLedNr(clockTime[HOUR]));
     break;
   }
 
@@ -379,4 +383,24 @@ void displayBuffer::clockMode()
   {
     runCnt = 0;
   }
+}
+
+int displayBuffer::getSecondLedNr(int second)
+{
+  int div = second/5;
+  int remainder = second%5;
+  return  ((div*12+remainder+6) + (totalNrLeds/2))%totalNrLeds;
+}
+
+int displayBuffer::getMinuteLedNr(int minute)
+{
+  int div = minute/5;
+  int remainder = minute%5;
+
+  return ((div*12+remainder+1) + (totalNrLeds/2))%totalNrLeds;
+}
+
+int displayBuffer::getHourLedNr(int hour)
+{
+  return ((hour+6)*12)%totalNrLeds;
 }

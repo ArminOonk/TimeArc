@@ -2,9 +2,18 @@
 
 adxl345::adxl345()
 {
-  x = 0;
-  y = 0;
-  z = 0;
+  xRaw = 0;
+  yRaw = 0;
+  zRaw = 0;
+
+  x = 0.0;
+  y = 0.0;
+  z = 0.0;
+
+  cosAngle = cos(angleOffset);
+  sinAngle = sin(angleOffset);
+
+  pose = UNKNOWN;
 
   intCnt = 0;
   interruptEnabled = false;
@@ -92,7 +101,7 @@ void adxl345::interrupt()
     source = 1;
   }
 
-  disableInterrupt();
+  //disableInterrupt();
 
   intCnt++;
 }
@@ -106,14 +115,19 @@ void adxl345::readAccel()
   char zLow = readRegister(DATAX0+4);
   char zHigh = readRegister(DATAX0+5);
 
-  x = (xHigh<<8)| xLow;
-  y = (yHigh<<8)|yLow;
-  z = (zHigh<<8)|zLow;
+  xRaw = (xHigh<<8)| xLow;
+  yRaw = (yHigh<<8)|yLow;
+  zRaw = (zHigh<<8)|zLow;
 
-  if(!interruptEnabled)
+  x = scaleFactor*(cosAngle*xRaw - sinAngle*yRaw);
+  y = -1.0*scaleFactor*(sinAngle*xRaw + sinAngle*yRaw);
+  z = -zRaw*scaleFactor;
+
+  updatePose();
+  /*if(!interruptEnabled)
   {
     enableInterrupt();
-  }
+  }*/
 }
 
 // Private
@@ -185,4 +199,56 @@ char adxl345::readRegister(char registerAddress)
   //Set the Chip Select pin high to signal the end of an SPI packet.
   SPI_CS_HIGH;
   return retVal;
+}
+
+bool adxl345::inRange(float testVal, float mid, float span)
+{
+
+  if(testVal > (mid - span) && testVal < (mid + span))
+  {
+    return true;
+  }
+  return false;
+}
+
+bool adxl345::updatePose()
+{
+pose_t tempPose = UNKNOWN;
+
+  if(inRange(x, 1.0, 0.2) && inRange(y, 0.0, 0.2)  && inRange(z, 0.0, 0.2) )
+  { 
+    tempPose = UP;
+  }
+
+  if(inRange(x, -1.0, 0.2) && inRange(y, 0.0, 0.2)  && inRange(z, 0.0, 0.2) )
+  { 
+    tempPose = DOWN;
+  }
+
+  if(inRange(x, 0.0, 0.2) && inRange(y, 1.0, 0.2)  && inRange(z, 0.0, 0.2) )
+  { 
+    tempPose = RIGHT;
+  }
+
+  if(inRange(x, 0.0, 0.2) && inRange(y, -1.0, 0.2)  && inRange(z, 0.0, 0.2) )
+  { 
+    tempPose = LEFT;
+  }
+
+  if(inRange(x, 0.0, 0.2) && inRange(y, 0.0, 0.2)  && inRange(z, 1.0, 0.2) )
+  { 
+    tempPose = BACK;
+  }
+
+  if(inRange(x, 0.0, 0.2) && inRange(y, 0.0, 0.2)  && inRange(z, -1.0, 0.2) )
+  { 
+    tempPose = FRONT;
+  }
+
+  if(tempPose != UNKNOWN)
+  {
+    pose = tempPose;
+    return true;
+  }
+  return false;
 }

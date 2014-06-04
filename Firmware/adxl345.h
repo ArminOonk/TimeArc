@@ -4,6 +4,10 @@
 #include "stm32f10x.h"
 #include "stm32f10x_conf.h"
 #include <misc.h>
+#include <math.h>
+#include "defines.h"
+
+#define M_PI           3.14159265358979323846
 
 #define SPI_CS_PORT GPIOA
 #define SPI_CS_PIN  GPIO_Pin_4
@@ -27,6 +31,7 @@
 
 #define SINGLE_TAP (1<<6)
 #define DOUBLE_TAP (1<<5)
+
 class adxl345
 {
   public:
@@ -36,11 +41,11 @@ class adxl345
   
   void readAccel();
 
-  short x;
-  short y;
-  short z;
+  short xRaw, yRaw, zRaw;
+  float x, y, z;
 
   unsigned int intCnt;
+  pose_t pose;
 
   private:
   char spiSendByte(char byte);
@@ -49,6 +54,15 @@ class adxl345
 
   void enableInterrupt();
   void disableInterrupt();
+
+  bool updatePose();
+  bool inRange(float testVal, float mid, float span);
+
+  static const float scaleFactor = 1.0/256.0;
+  static const float angleOffset = 45.0*(M_PI/180.0);
+
+  float cosAngle;
+  float sinAngle;
 
   EXTI_InitTypeDef EXTI_InitStructure;
   bool interruptEnabled;
