@@ -65,6 +65,7 @@ class adxl345
   float sinAngle;
 
   EXTI_InitTypeDef EXTI_InitStructure;
+  NVIC_InitTypeDef NVIC_InitStructure;
   bool interruptEnabled;
   
 

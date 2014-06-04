@@ -38,21 +38,7 @@ adxl345::adxl345()
   GPIO_Init(ACCEL_INT2_PORT, &GPIO_InitStructure);
 
   GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource1);
-  NVIC_InitTypeDef NVIC_InitStructure;
-
-  EXTI_InitStructure.EXTI_Line     = EXTI_Line1;
-  EXTI_InitStructure.EXTI_Mode     = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger  = EXTI_Trigger_Rising;
-  EXTI_InitStructure.EXTI_LineCmd  = ENABLE;
-  EXTI_Init(&EXTI_InitStructure);
-
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority         = 0;
-  NVIC_InitStructure.NVIC_IRQChannel                    = EXTI1_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelCmd                 = ENABLE;
-
-  NVIC_Init(&NVIC_InitStructure);
-
+  
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
   SPI_InitTypeDef   SPI_InitStructure;
   SPI_StructInit(&SPI_InitStructure);
@@ -142,6 +128,13 @@ void adxl345::enableInterrupt()
   EXTI_InitStructure.EXTI_LineCmd  = ENABLE;
   EXTI_Init(&EXTI_InitStructure);
 
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 0;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority         = 0;
+  NVIC_InitStructure.NVIC_IRQChannel                    = EXTI1_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelCmd                 = ENABLE;
+
+  NVIC_Init(&NVIC_InitStructure);
+
   writeRegister(INT_MAP, SINGLE_TAP|DOUBLE_TAP);   //Send the Tap and Double Tap Interrupts to INT2 pin
   writeRegister(INT_ENABLE, 0x60 );
   //readRegister(INT_SOURCE); //Clear the interrupts from the INT_SOURCE register.
@@ -156,6 +149,13 @@ void adxl345::disableInterrupt()
   EXTI_InitStructure.EXTI_Trigger  = EXTI_Trigger_Rising;
   EXTI_InitStructure.EXTI_LineCmd  = DISABLE;
   EXTI_Init(&EXTI_InitStructure);
+
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 0;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority         = 0;
+  NVIC_InitStructure.NVIC_IRQChannel                    = EXTI1_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelCmd                 = DISABLE;
+
+  NVIC_Init(&NVIC_InitStructure);
 
   writeRegister(INT_MAP, 0x00);   //Send the Tap and Double Tap Interrupts to INT2 pin
   writeRegister(INT_ENABLE, 0x00);
@@ -215,32 +215,32 @@ bool adxl345::updatePose()
 {
 pose_t tempPose = UNKNOWN;
 
-  if(inRange(x, 1.0, 0.2) && inRange(y, 0.0, 0.2)  && inRange(z, 0.0, 0.2) )
-  { 
-    tempPose = UP;
-  }
-
-  if(inRange(x, -1.0, 0.2) && inRange(y, 0.0, 0.2)  && inRange(z, 0.0, 0.2) )
-  { 
-    tempPose = DOWN;
-  }
-
-  if(inRange(x, 0.0, 0.2) && inRange(y, 1.0, 0.2)  && inRange(z, 0.0, 0.2) )
+  if(inRange(x, 1.0, 0.2) && inRange(y, 0.0, 0.4)  && inRange(z, 0.0, 0.4) )
   { 
     tempPose = RIGHT;
   }
 
-  if(inRange(x, 0.0, 0.2) && inRange(y, -1.0, 0.2)  && inRange(z, 0.0, 0.2) )
+  if(inRange(x, -1.0, 0.2) && inRange(y, 0.0, 0.4)  && inRange(z, 0.0, 0.4) )
   { 
     tempPose = LEFT;
   }
 
-  if(inRange(x, 0.0, 0.2) && inRange(y, 0.0, 0.2)  && inRange(z, 1.0, 0.2) )
+  if(inRange(x, 0.0, 0.4) && inRange(y, 1.0, 0.2)  && inRange(z, 0.0, 0.4) )
+  { 
+    tempPose = UP;
+  }
+
+  if(inRange(x, 0.0, 0.4) && inRange(y, -1.0, 0.2)  && inRange(z, 0.0, 0.4) )
+  { 
+    tempPose = DOWN;
+  }
+
+  if(inRange(x, 0.0, 0.4) && inRange(y, 0.0, 0.4)  && inRange(z, 1.0, 0.2) )
   { 
     tempPose = BACK;
   }
 
-  if(inRange(x, 0.0, 0.2) && inRange(y, 0.0, 0.2)  && inRange(z, -1.0, 0.2) )
+  if(inRange(x, 0.0, 0.4) && inRange(y, 0.0, 0.4)  && inRange(z, -1.0, 0.2) )
   { 
     tempPose = FRONT;
   }
