@@ -46,6 +46,8 @@
       <file file_name="capTouch.h"/>
       <file file_name="adxl345.cpp"/>
       <file file_name="adxl345.h"/>
+      <file file_name="stm32f10x_bkp.c"/>
+      <file file_name="stm32f10x_bkp.h"/>
     </folder>
     <folder Name="System Files">
       <file file_name="$(TargetsDir)/STM32/STM32_Startup.s">

@@ -6,6 +6,21 @@
 #include "capTouch.h"
 #include "adxl345.h"
 
+extern "C" void RTC_IRQHandler(void)
+{
+  if (RTC_GetITStatus(RTC_IT_SEC) != RESET)
+  {
+    //Clear the RTC Second interrupt
+    RTC_ClearITPendingBit(RTC_IT_SEC);
+    
+    // Do stuff
+
+    // Wait for last task
+    RTC_WaitForLastTask();
+    
+  }
+}
+
 extern displayBuffer display;
 
 extern "C" void TIM2_IRQHandler(void)
