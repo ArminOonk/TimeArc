@@ -91,6 +91,7 @@ displayBuffer::displayBuffer()
   clockTime[HOUR] = 0;
 
   pose = UNKNOWN;
+  mode = OFF;
 }
 
 void displayBuffer::setTime(time_t now)
@@ -134,6 +135,15 @@ void displayBuffer::secondOn(unsigned int second)
 void displayBuffer::setIntensity(float intensity)
 {
   uint16_t intval = intensity*timerPeriod;
+  if(intval >= timerPeriod)
+  {
+    intval = timerPeriod -1;
+  }
+
+  if(intval < 0)
+  {
+    intval = 0;
+  }
   TIM_SetCompare1(TIM2, intval);
 }
 
@@ -156,8 +166,20 @@ bool displayBuffer::isLedOn(int ledNr)
 void displayBuffer::run()
 {
   displayOff();
-  //animationMode();
-  clockMode();
+
+  switch(mode)
+  {
+    case OFF:
+    break;
+
+    case CLOCK:
+    clockMode();
+    break;
+
+    case ANIMATION:
+    animationMode();
+    break;    
+  }
 }
 
 void displayBuffer::ledOn(int ledNr)
@@ -177,7 +199,133 @@ void displayBuffer::setPose(pose_t p)
   pose = p;
 }
 
+void displayBuffer::setMode(displayMode_t m)
+{
+  mode = m;
+}
+
 /// Private
+
+char* displayBuffer::getShowBuffer()
+{
+  return buffer[currentBuffer];
+}
+
+char* displayBuffer::getPaintBuffer()
+{
+  return buffer[nextBufferNr()];
+}
+
+int displayBuffer::nextBufferNr()
+{
+  int ret = currentBuffer + 1;
+  if(ret >= nrBuffers)
+  {
+    ret = 0;
+  }
+  return ret;
+}
+
+void displayBuffer::clearBuffer(int bufferNr)
+{
+  if(bufferNr < nrBuffers)
+  {
+    memset(buffer[bufferNr], 0x00, displayBufferSize);
+  }
+}
+
+// animationMode: all led can be on 'simultaneous' but leds will be low intensity
+void displayBuffer::animationMode()
+{
+  if(isLedOn(runCnt))
+  {
+    switchLedOn(runCnt);
+  }
+
+  runCnt++;
+  if(runCnt >= totalNrLeds)
+  {
+    runCnt = 0;
+  }
+}
+
+// CLockMode only 1 second, 1 minute and 1 hour led are active
+void displayBuffer::clockMode()
+{
+  int minuteOffset = 0;
+  int hourOffset = 0;
+
+  switch(runCnt)
+  {
+    case 0:
+    switchLedOn(getSecondLedNr(clockTime[SECOND]));
+    break;
+
+    case 1:
+    switchLedOn(getMinuteLedNr(clockTime[MINUTE]));
+    break;
+
+    case 2:
+    switchLedOn(getHourLedNr(clockTime[HOUR]));
+    break;
+  }
+
+  runCnt++;
+  if(runCnt > 2)
+  {
+    runCnt = 0;
+  }
+}
+
+int displayBuffer::getSecondLedNr(int second)
+{
+  second = poseOffset(second, 60);
+
+  int div = second/5;
+  int remainder = second%5;
+
+  return  ((div*12+remainder+6) + (totalNrLeds/2))%totalNrLeds;
+}
+
+int displayBuffer::getMinuteLedNr(int minute)
+{
+  minute = poseOffset(minute, 60);
+
+  int div = minute/5;
+  int remainder = minute%5;
+
+  return ((div*12+remainder+1) + (totalNrLeds/2))%totalNrLeds;
+}
+
+int displayBuffer::getHourLedNr(int hour)
+{
+  hour = poseOffset(hour, 12);
+  return ((hour+6)*12)%totalNrLeds;
+}
+
+int displayBuffer::poseOffset(int org, int span)
+{
+  switch(pose)
+  {
+    case UP:
+    org = (org + 0)%span;
+    break;
+
+    case DOWN:
+    org = (org + span/2)%span;
+    break;
+
+    case LEFT:
+    org = (org + (3*span)/4)%span;
+    break;
+
+    case RIGHT:
+    org = (org + span/4)%span;
+    break;
+  }
+  return org;
+}
+
 void displayBuffer::switchLedOn(int ledNr)
 {
   switch(ledNr/12)
@@ -312,95 +460,4 @@ void displayBuffer::displayOff()
   ARCDOZEN10_HIGH;
   ARCDOZEN11_HIGH;
   ARCDOZEN12_HIGH;
-}
-
-char* displayBuffer::getShowBuffer()
-{
-  return buffer[currentBuffer];
-}
-
-char* displayBuffer::getPaintBuffer()
-{
-  return buffer[nextBufferNr()];
-}
-
-int displayBuffer::nextBufferNr()
-{
-  int ret = currentBuffer + 1;
-  if(ret >= nrBuffers)
-  {
-    ret = 0;
-  }
-  return ret;
-}
-
-void displayBuffer::clearBuffer(int bufferNr)
-{
-  if(bufferNr < nrBuffers)
-  {
-    memset(buffer[bufferNr], 0x00, displayBufferSize);
-  }
-}
-
-// animationMode: all led can be on 'simultaneous' but leds will be low intensity
-void displayBuffer::animationMode()
-{
-  if(isLedOn(runCnt))
-  {
-    switchLedOn(runCnt);
-  }
-
-  runCnt++;
-  if(runCnt >= totalNrLeds)
-  {
-    runCnt = 0;
-  }
-}
-
-// CLockMode only 1 second, 1 minute and 1 hour led are active
-void displayBuffer::clockMode()
-{
-  int minuteOffset = 0;
-  int hourOffset = 0;
-
-  switch(runCnt)
-  {
-    case 0:
-    switchLedOn(getSecondLedNr(clockTime[SECOND]));
-    break;
-
-    case 1:
-    switchLedOn(getMinuteLedNr(clockTime[MINUTE]));
-    break;
-
-    case 2:
-    switchLedOn(getHourLedNr(clockTime[HOUR]));
-    break;
-  }
-
-  runCnt++;
-  if(runCnt > 2)
-  {
-    runCnt = 0;
-  }
-}
-
-int displayBuffer::getSecondLedNr(int second)
-{
-  int div = second/5;
-  int remainder = second%5;
-  return  ((div*12+remainder+6) + (totalNrLeds/2))%totalNrLeds;
-}
-
-int displayBuffer::getMinuteLedNr(int minute)
-{
-  int div = minute/5;
-  int remainder = minute%5;
-
-  return ((div*12+remainder+1) + (totalNrLeds/2))%totalNrLeds;
-}
-
-int displayBuffer::getHourLedNr(int hour)
-{
-  return ((hour+6)*12)%totalNrLeds;
 }

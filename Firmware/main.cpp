@@ -86,15 +86,36 @@ void ledHandler(void *p)
       }
     }
 
-    display.minuteOn(touch2Cnt);
-    display.secondOn(touch3Cnt);
-    display.hourOn(hourCnt%12);
-
-    light += 0.2*(readLight() - light);
-
-    display.setIntensity(1.0-light/4096.0);
-   
     accel.readAccel();
+    display.setPose(accel.pose);
+
+    switch(accel.pose)
+    {
+      case FRONT:
+      display.setMode(OFF);
+      break;
+
+      case BACK:
+      display.setMode(ANIMATION);
+      for(int i=0; i<totalNrLeds; i+=4)
+      {
+        display.ledOn(i+ledCnt%4);
+      }
+      display.setIntensity(1.0);
+      display.switchBuffer();
+      break;
+
+      default:
+      display.minuteOn(touch2Cnt);
+      display.secondOn(touch3Cnt);
+      display.hourOn(hourCnt%12);
+
+      light += 0.2*(readLight() - light);
+      display.setIntensity(1.0-light/4096.0);
+
+      display.setMode(CLOCK);
+      break;
+    }
 
     ctl_delay(100); 
     ledCnt++;

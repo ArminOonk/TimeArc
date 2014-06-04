@@ -11,4 +11,11 @@ enum pose_t
   LEFT,
   RIGHT
 };
+
+enum displayMode_t
+{
+  OFF,
+  CLOCK,
+  ANIMATION,
+};
 #endif

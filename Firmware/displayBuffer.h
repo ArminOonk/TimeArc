@@ -160,6 +160,7 @@ class displayBuffer
   void displayOff();
 
   void setPose(pose_t p);
+  void setMode(displayMode_t m);
 
   private:
   void switchLedOn(int ledNr);
@@ -178,7 +179,10 @@ class displayBuffer
   int getMinuteLedNr(int minute);
   int getHourLedNr(int hour);
 
+  int poseOffset(int org, int span);
+  displayMode_t mode;
   pose_t pose;
+
   static const int nrBuffers = 2;
   int currentBuffer;
   char buffer[nrBuffers][displayBufferSize];
