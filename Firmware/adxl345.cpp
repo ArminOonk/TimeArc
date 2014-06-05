@@ -245,9 +245,36 @@ pose_t tempPose = UNKNOWN;
     tempPose = FRONT;
   }
 
-  if(tempPose != UNKNOWN)
+  if(tempPose != pose && tempPose != UNKNOWN)
   {
     pose = tempPose;
+    switch(pose)
+    {
+      case UP:
+      printf("pose=UP\r\n");
+      break;
+
+      case DOWN:
+      printf("pose=DOWN\r\n");
+      break;
+
+      case LEFT:
+      printf("pose=LEFT\r\n");
+      break;
+
+      case RIGHT:
+      printf("pose=RIGHT\r\n");
+      break;
+
+      case FRONT:
+      printf("pose=FRONT\r\n");
+      break;
+
+      case BACK:
+      printf("pose=BACK\r\n");
+      break;
+
+    }
     return true;
   }
   return false;

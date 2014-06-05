@@ -14,6 +14,7 @@ void initRTC();
 void initUsart();
 unsigned int readLight();
 extern "C" int __putchar(char ch);
+void handleTouch();
 
 CTL_TASK_t mainTask, ledTask, touchTask;
 static unsigned ledTaskStack[256];
@@ -30,6 +31,9 @@ unsigned int ledCnt = 0;
 
 float light = 0;
 adxl345 accel;
+int touch2Cnt = 0;
+int touch3Cnt = 0;
+int hourCnt = 0;
 
 void ledHandler(void *p)
 {
@@ -38,56 +42,14 @@ void ledHandler(void *p)
 
   ctl_delay(1000);
   accel.init();
-
-  int touch2Cnt = 0;
-  int touch3Cnt = 0;
-  int hourCnt = 0;
-  
+ 
   while(true)
   {
     //time_t now = ((ctl_get_current_time()-startupTime)/1000) + currentTime;
     //display.setTime(now);
 
-    if(touchTop.isTouched())
-    {
-      hourCnt++;
-    }
-
-    if(touchRight.isTouched())
-    {
-      touch2Cnt++;
-      if(touch2Cnt > 59)
-      {
-        touch2Cnt -= 60;
-      }
-    }   
-
-    if(touchLeft.isTouched())
-    {
-      touch2Cnt--;
-      if(touch2Cnt < 0)
-      {
-        touch2Cnt += 60;
-      }
-    }
-
-    if(touchUp.isTouched())
-    {
-      touch3Cnt++;
-      if(touch3Cnt > 59)
-      {
-        touch3Cnt -= 60;
-      }
-    }
-
-    if(touchDown.isTouched())
-    {
-      touch3Cnt--;
-      if(touch3Cnt < 0)
-      {
-        touch3Cnt += 60;
-      }
-    }
+    handleTouch();
+    
 
     accel.readAccel();
     display.setPose(accel.pose);
@@ -120,7 +82,7 @@ void ledHandler(void *p)
       break;
     }
 
-    printf("hoi\r\n");
+    //printf("hoi\r\n");
     ctl_delay(100); 
     ledCnt++;
   }
@@ -394,4 +356,53 @@ int __putchar(char ch)
   ;
 
   return ch;
+}
+
+void handleTouch()
+{
+  if(touchTop.isTouched())
+  {
+    printf("button=TOP\r\n");
+    hourCnt++;
+  }
+
+  if(touchRight.isTouched())
+  {
+    printf("button=RIGHT\r\n");
+    touch2Cnt++;
+    if(touch2Cnt > 59)
+    {
+      touch2Cnt -= 60;
+    }
+  }   
+
+  if(touchLeft.isTouched())
+  {
+    printf("button=LEFT\r\n");
+    touch2Cnt--;
+    if(touch2Cnt < 0)
+    {
+      touch2Cnt += 60;
+    }
+  }
+
+  if(touchUp.isTouched())
+  {
+    printf("button=UP\r\n");
+    touch3Cnt++;
+    if(touch3Cnt > 59)
+    {
+      touch3Cnt -= 60;
+    }
+  }
+
+  if(touchDown.isTouched())
+  {
+    printf("button=DOWN\r\n");
+    touch3Cnt--;
+    if(touch3Cnt < 0)
+    {
+      touch3Cnt += 60;
+    }
+  }
 }

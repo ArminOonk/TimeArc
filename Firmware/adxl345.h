@@ -5,6 +5,7 @@
 #include "stm32f10x_conf.h"
 #include <misc.h>
 #include <math.h>
+#include <stdio.h>
 #include "defines.h"
 
 #define M_PI           3.14159265358979323846

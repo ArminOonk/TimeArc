@@ -81,7 +81,6 @@ bool capTouch::isTouched()
 }
 
 // Private
-
 void capTouch::configurePort()
 {
   if(port == GPIOA)
