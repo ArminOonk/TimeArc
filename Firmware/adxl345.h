@@ -68,8 +68,6 @@ class adxl345
   EXTI_InitTypeDef EXTI_InitStructure;
   NVIC_InitTypeDef NVIC_InitStructure;
   bool interruptEnabled;
-  
-
 };
 
 #endif

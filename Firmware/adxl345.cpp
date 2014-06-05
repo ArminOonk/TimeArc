@@ -68,6 +68,7 @@ void adxl345::init()
 
   writeRegister(POWER_CTL, 0x08);   //Put the ADXL345 into Measurement Mode by writing 0x08 to the POWER_CTL register.
 
+  //enableInterrupt();
   readAccel();
 }
 
@@ -76,7 +77,11 @@ void adxl345::interrupt()
 {
   EXTI_ClearITPendingBit(EXTI_Line1);
 
-  if(readRegister(INT_SOURCE) & (1<<5))
+  char intSource = readRegister(INT_SOURCE);
+  char intEnable = readRegister(INT_ENABLE);
+  char intMap =  readRegister(INT_MAP);
+  char intSource2 = readRegister(INT_SOURCE);
+  if(intSource & (1<<5))
   {
     // double tap
     source = 2;
@@ -90,6 +95,7 @@ void adxl345::interrupt()
   //disableInterrupt();
 
   intCnt++;
+  
 }
 
 void adxl345::readAccel()
@@ -120,8 +126,12 @@ void adxl345::readAccel()
 
 void adxl345::enableInterrupt()
 {
-  interruptEnabled = true;
+  writeRegister(INT_MAP, 0b10000000/*SINGLE_TAP|DOUBLE_TAP*/);   //Send the Tap and Double Tap Interrupts to INT2 pin
+  writeRegister(INT_ENABLE, 0b10000000);
+  readRegister(INT_SOURCE); //Clear the interrupts from the INT_SOURCE register.
 
+  interruptEnabled = true;
+  
   EXTI_InitStructure.EXTI_Line     = EXTI_Line1;
   EXTI_InitStructure.EXTI_Mode     = EXTI_Mode_Interrupt;
   EXTI_InitStructure.EXTI_Trigger  = EXTI_Trigger_Rising;
@@ -134,10 +144,6 @@ void adxl345::enableInterrupt()
   NVIC_InitStructure.NVIC_IRQChannelCmd                 = ENABLE;
 
   NVIC_Init(&NVIC_InitStructure);
-
-  writeRegister(INT_MAP, SINGLE_TAP|DOUBLE_TAP);   //Send the Tap and Double Tap Interrupts to INT2 pin
-  writeRegister(INT_ENABLE, 0x60 );
-  //readRegister(INT_SOURCE); //Clear the interrupts from the INT_SOURCE register.
 }
 
 void adxl345::disableInterrupt()
@@ -157,8 +163,8 @@ void adxl345::disableInterrupt()
 
   NVIC_Init(&NVIC_InitStructure);
 
-  writeRegister(INT_MAP, 0x00);   //Send the Tap and Double Tap Interrupts to INT2 pin
-  writeRegister(INT_ENABLE, 0x00);
+  //writeRegister(INT_MAP, 0x00);   //Send the Tap and Double Tap Interrupts to INT2 pin
+  //writeRegister(INT_ENABLE, 0x00);
   
 }
 

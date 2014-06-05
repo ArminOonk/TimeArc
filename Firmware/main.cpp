@@ -50,7 +50,6 @@ void ledHandler(void *p)
 
     handleTouch();
     
-
     accel.readAccel();
     display.setPose(accel.pose);
 
@@ -82,7 +81,6 @@ void ledHandler(void *p)
       break;
     }
 
-    //printf("hoi\r\n");
     ctl_delay(100); 
     ledCnt++;
   }
@@ -134,6 +132,8 @@ int main(void)
   //initRTC();
   initUsart();
 
+  printf("\r\n");
+  printf("start=%s %s\r\n", __DATE__, __TIME__);
   // CTL
   ctl_start_timer(ctl_increment_tick_from_isr);
   ctl_time_increment = 1;
