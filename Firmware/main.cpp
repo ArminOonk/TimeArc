@@ -11,7 +11,9 @@ void ledHandler(void *p);
 void ctl_delay(CTL_TIME_t t);
 void initADC();
 void initRTC();
+void initUsart();
 unsigned int readLight();
+extern "C" int __putchar(char ch);
 
 CTL_TASK_t mainTask, ledTask, touchTask;
 static unsigned ledTaskStack[256];
@@ -118,6 +120,7 @@ void ledHandler(void *p)
       break;
     }
 
+    printf("hoi\r\n");
     ctl_delay(100); 
     ledCnt++;
   }
@@ -167,6 +170,7 @@ int main(void)
   initGPIO();   // Configure GPIO
   initADC();
   //initRTC();
+  initUsart();
 
   // CTL
   ctl_start_timer(ctl_increment_tick_from_isr);
@@ -347,4 +351,47 @@ void initRTC()
 
   // Clear reset flags
   RCC_ClearFlag();
+}
+
+void initUsart()
+{
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+
+  GPIO_InitTypeDef GPIO_InitStructure;
+  GPIO_StructInit(&GPIO_InitStructure);
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); 
+
+  USART_InitTypeDef USART_InitStructure;
+  USART_InitStructure.USART_BaudRate = 230400;
+  USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+  USART_InitStructure.USART_StopBits = USART_StopBits_1;
+  USART_InitStructure.USART_Parity = USART_Parity_No;
+  USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+  USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+  
+  // Configure USARTy
+  USART_Init(USART1, &USART_InitStructure);
+  USART_Cmd(USART1, ENABLE);
+
+}
+
+int __putchar(char ch)
+{
+  // Place your implementation of fputc here
+  USART_SendData(USART1, (uint8_t) ch);
+
+  /* Loop until the end of transmission */
+  while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET)
+  ;
+
+  return ch;
 }
