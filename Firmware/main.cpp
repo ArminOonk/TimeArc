@@ -45,10 +45,7 @@ void ledHandler(void *p)
  
   while(true)
   {
-    //time_t now = ((ctl_get_current_time()-startupTime)/1000) + currentTime;
-    //display.setTime(now);
-
-    handleTouch();
+    //handleTouch();
     
     accel.readAccel();
     display.setPose(accel.pose);
@@ -70,9 +67,12 @@ void ledHandler(void *p)
       break;
 
       default:
-      display.minuteOn(touch2Cnt);
+      /*display.minuteOn(touch2Cnt);
       display.secondOn(touch3Cnt);
-      display.hourOn(hourCnt%12);
+      display.hourOn(hourCnt%12);*/
+
+      time_t now = RTC_GetCounter();
+      display.setTime(now);
 
       light += 0.2*(readLight() - light);
       display.setIntensity(1.0-light/4096.0);
@@ -129,7 +129,7 @@ int main(void)
  
   initGPIO();   // Configure GPIO
   initADC();
-  //initRTC();
+  initRTC();
   initUsart();
 
   printf("\r\n");
@@ -284,9 +284,33 @@ void RTC_Configuration(void)
   RTC_WaitForLastTask();
 }
 
+void timeAdjust(unsigned int t)
+{
+  /* Wait until last write operation on RTC registers has finished */
+  RTC_WaitForLastTask();
+  /* Change the current time */
+  RTC_SetCounter(t);
+  /* Wait until last write operation on RTC registers has finished */
+  RTC_WaitForLastTask();
+}
+
 void initRTC()
 {
-  if (BKP_ReadBackupRegister(BKP_DR1) != 0xA5A5)
+  NVIC_InitTypeDef NVIC_InitStructure;
+
+  /* Configure one bit for preemption priority */
+  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+
+  /* Enable the RTC Interrupt */
+  NVIC_InitStructure.NVIC_IRQChannel = RTC_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
+
+  uint16_t magicNumber = BKP_ReadBackupRegister(BKP_DR1);
+  magicNumber = 0;
+  if (magicNumber != 0xA5A5)
   {
     RTC_Configuration();
     // Get the time one way or another
@@ -313,7 +337,10 @@ void initRTC()
 
   // Clear reset flags
   RCC_ClearFlag();
+
+  timeAdjust(1402036753);
 }
+
 
 void initUsart()
 {
