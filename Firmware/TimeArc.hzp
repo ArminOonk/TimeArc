@@ -50,8 +50,8 @@
       <file file_name="stm32f10x_bkp.h"/>
       <file file_name="WString.cpp"/>
       <file file_name="WString.h"/>
-      <file file_name="RtcClock.cpp"/>
-      <file file_name="RtcClock.h"/>
+      <file file_name="rtcClock.cpp"/>
+      <file file_name="rtcClock.h"/>
     </folder>
     <folder Name="System Files">
       <file file_name="$(TargetsDir)/STM32/STM32_Startup.s">

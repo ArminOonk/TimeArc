@@ -31,7 +31,7 @@ unsigned int ledCnt = 0;
 
 float light = 0;
 adxl345 accel;
-rtClock rtc;
+rtcClock rtc;
 
 void ledHandler(void *p)
 {
@@ -68,7 +68,7 @@ void ledHandler(void *p)
       break;
 
       default:
-      time_t now = RTC_GetCounter();
+      time_t now = rtc.getTime();
       display.setTime(now);
 
       light += 0.2*(readLight() - light);
@@ -126,8 +126,10 @@ int main(void)
  
   initGPIO();   // Configure GPIO
   initADC();
-  initRTC();
   initUsart();
+
+  rtc.init();
+
 
   printf("\r\n");
   printf("start=%s %s\r\n", __DATE__, __TIME__);
@@ -160,7 +162,8 @@ void error(const char *err)
 {
   while(true) //loop forever
   {
-    
+    printf("ERROR: %s\r\n", err);
+    NVIC_SystemReset();
   }
 }
 
@@ -239,107 +242,6 @@ void ctl_delay(CTL_TIME_t t)
   ctl_timeout_wait(ctl_get_current_time()+t);
 }
 
-void RTC_Configuration(void)
-{
-  // Enable PWR and BKP clocks
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);
-
-  // Allow access to BKP Domain
-  PWR_BackupAccessCmd(ENABLE);
-
-  // Reset Backup Domain
-  BKP_DeInit();
-
-  // Enable LSE
-  RCC_LSEConfig(RCC_LSE_ON);
-
-  // Wait till LSE is ready
-  while (RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
-  {}
-
-  // Select LSE as RTC Clock Source
-  RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
-
-  // Enable RTC Clock
-  RCC_RTCCLKCmd(ENABLE);
-
-  // Wait for RTC registers synchronization
-  RTC_WaitForSynchro();
-
-  // Wait until last write operation on RTC registers has finished
-  RTC_WaitForLastTask();
-
-  // Enable the RTC Second
-  //RTC_ITConfig(RTC_IT_SEC, ENABLE);
-
-  // Wait until last write operation on RTC registers has finished 
-  //RTC_WaitForLastTask();
-
-  // Set RTC prescaler: set RTC period to 1sec 
-  RTC_SetPrescaler(32767);
-
-  // Wait until last write operation on RTC registers has finished
-  RTC_WaitForLastTask();
-}
-
-void timeAdjust(unsigned int t)
-{
-  // Wait until last write operation on RTC registers has finished
-  RTC_WaitForLastTask();
-  // Change the current time
-  RTC_SetCounter(t);
-  // Wait until last write operation on RTC registers has finished
-  RTC_WaitForLastTask();
-}
-
-void initRTC()
-{
-  NVIC_InitTypeDef NVIC_InitStructure;
-
-  // Configure one bit for preemption priority
-  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-
-  // Enable the RTC Interrupt
-  NVIC_InitStructure.NVIC_IRQChannel = RTC_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);
-
-  uint16_t magicNumber2 = BKP_ReadBackupRegister(BKP_DR1);
-
-  RTC_Configuration();
-  if (magicNumber2 != 0xA5A5)
-  {
-    // Get the time one way or another
-    BKP_WriteBackupRegister(BKP_DR1, 0xA5A5);
-
-    timeAdjust(1402036753);
-  }
-
-  // Check if the Power On Reset flag is set */
-  if (RCC_GetFlagStatus(RCC_FLAG_PORRST) != RESET)
-  {
-  }
-  // Check if the Pin Reset flag is set
-  else if (RCC_GetFlagStatus(RCC_FLAG_PINRST) != RESET)
-  {
-  }
-
-  // Wait for RTC registers synchronization
-  RTC_WaitForSynchro();
-
-  //Enable the RTC Second
-  //RTC_ITConfig(RTC_IT_SEC, ENABLE);
-
-  //Wait until last write operation on RTC registers has finished
-  RTC_WaitForLastTask();
-
-  // Clear reset flags
-  RCC_ClearFlag();
-}
-
-
 void initUsart()
 {
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
@@ -368,7 +270,6 @@ void initUsart()
   // Configure USARTy
   USART_Init(USART1, &USART_InitStructure);
   USART_Cmd(USART1, ENABLE);
-
 }
 
 int __putchar(char ch)
@@ -424,28 +325,28 @@ void handleTouch()
     if(touchRight.isTouched())
     {
       unsigned int newNow = now+3600;
-      timeAdjust(newNow);
+      rtc.setTime(newNow);
       lastMenuTime = newNow;
     }   
 
     if(touchLeft.isTouched())
     {
       unsigned int newNow = now-3600;
-      timeAdjust(newNow);
+      rtc.setTime(newNow);
       lastMenuTime = newNow;
     }
 
     if(touchUp.isTouched())
     {
       unsigned int newNow = now+60;
-      timeAdjust(newNow);
+      rtc.setTime(newNow);
       lastMenuTime = newNow;
     }
 
     if(touchDown.isTouched())
     {
       unsigned int newNow = now-60;
-      timeAdjust(newNow);
+      rtc.setTime(newNow);
       lastMenuTime = newNow;
     }
   }
