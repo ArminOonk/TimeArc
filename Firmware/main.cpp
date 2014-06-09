@@ -31,9 +31,6 @@ unsigned int ledCnt = 0;
 
 float light = 0;
 adxl345 accel;
-int touch2Cnt = 0;
-int touch3Cnt = 0;
-int hourCnt = 0;
 
 void ledHandler(void *p)
 {
@@ -45,8 +42,11 @@ void ledHandler(void *p)
  
   while(true)
   {
-    //handleTouch();
-    
+    if(ledCnt%2 == 0)
+    {
+      handleTouch();
+    }
+
     accel.readAccel();
     display.setPose(accel.pose);
 
@@ -67,10 +67,6 @@ void ledHandler(void *p)
       break;
 
       default:
-      /*display.minuteOn(touch2Cnt);
-      display.secondOn(touch3Cnt);
-      display.hourOn(hourCnt%12);*/
-
       time_t now = RTC_GetCounter();
       display.setTime(now);
 
@@ -308,13 +304,15 @@ void initRTC()
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
 
-  uint16_t magicNumber = BKP_ReadBackupRegister(BKP_DR1);
-  magicNumber = 0;
-  if (magicNumber != 0xA5A5)
+  uint16_t magicNumber2 = BKP_ReadBackupRegister(BKP_DR1);
+
+  RTC_Configuration();
+  if (magicNumber2 != 0xA5A5)
   {
-    RTC_Configuration();
     // Get the time one way or another
     BKP_WriteBackupRegister(BKP_DR1, 0xA5A5);
+
+    timeAdjust(1402036753);
   }
 
   // Check if the Power On Reset flag is set */
@@ -337,8 +335,6 @@ void initRTC()
 
   // Clear reset flags
   RCC_ClearFlag();
-
-  timeAdjust(1402036753);
 }
 
 
@@ -385,51 +381,70 @@ int __putchar(char ch)
   return ch;
 }
 
+unsigned int lastMenuTime = 0;
 void handleTouch()
 {
+  // Reporting
   if(touchTop.isTouched())
   {
     printf("button=TOP\r\n");
-    hourCnt++;
   }
-
+  
   if(touchRight.isTouched())
   {
     printf("button=RIGHT\r\n");
-    touch2Cnt++;
-    if(touch2Cnt > 59)
-    {
-      touch2Cnt -= 60;
-    }
-  }   
+  }
 
   if(touchLeft.isTouched())
   {
     printf("button=LEFT\r\n");
-    touch2Cnt--;
-    if(touch2Cnt < 0)
-    {
-      touch2Cnt += 60;
-    }
   }
 
   if(touchUp.isTouched())
   {
     printf("button=UP\r\n");
-    touch3Cnt++;
-    if(touch3Cnt > 59)
-    {
-      touch3Cnt -= 60;
-    }
   }
 
   if(touchDown.isTouched())
   {
     printf("button=DOWN\r\n");
-    touch3Cnt--;
-    if(touch3Cnt < 0)
+  }
+
+  // change time
+  unsigned int now = RTC_GetCounter();
+  if(touchTop.isTouched())
+  {
+    lastMenuTime = now;
+  }
+
+  if( (now - lastMenuTime) < 3)
+  {
+    if(touchRight.isTouched())
     {
-      touch3Cnt += 60;
+      unsigned int newNow = now+3600;
+      timeAdjust(newNow);
+      lastMenuTime = newNow;
+    }   
+
+    if(touchLeft.isTouched())
+    {
+      unsigned int newNow = now-3600;
+      timeAdjust(newNow);
+      lastMenuTime = newNow;
+    }
+
+    if(touchUp.isTouched())
+    {
+      unsigned int newNow = now+60;
+      timeAdjust(newNow);
+      lastMenuTime = newNow;
+    }
+
+    if(touchDown.isTouched())
+    {
+      unsigned int newNow = now-60;
+      timeAdjust(newNow);
+      lastMenuTime = newNow;
     }
   }
 }
