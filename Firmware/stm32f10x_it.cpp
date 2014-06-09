@@ -5,7 +5,8 @@
 #include "displayBuffer.h"
 #include "capTouch.h"
 #include "adxl345.h"
-
+#include "WString.h"
+/*
 extern "C" void RTC_IRQHandler(void)
 {
   if (RTC_GetITStatus(RTC_IT_SEC) != RESET)
@@ -19,7 +20,7 @@ extern "C" void RTC_IRQHandler(void)
     RTC_WaitForLastTask();
     
   }
-}
+}*/
 
 extern displayBuffer display;
 

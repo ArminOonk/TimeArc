@@ -9,6 +9,8 @@
 #include "displayBuffer.h"
 #include "capTouch.h"
 #include "adxl345.h"
+#include "RtcClock.h"
+#include "WString.h"
 
 void initGPIO(void);
 void initTimer(void);

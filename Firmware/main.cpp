@@ -31,6 +31,7 @@ unsigned int ledCnt = 0;
 
 float light = 0;
 adxl345 accel;
+rtClock rtc;
 
 void ledHandler(void *p)
 {
@@ -206,15 +207,15 @@ void initADC()
   ADC_Cmd(ADC1, ENABLE);
 
   ADC_ResetCalibration(ADC1);
-  /* Check the end of ADC1 reset calibration register */
+  // Check the end of ADC1 reset calibration register
   while(ADC_GetResetCalibrationStatus(ADC1));
 
-  /* Start ADC1 calibaration */
+  // Start ADC1 calibaration
   ADC_StartCalibration(ADC1);
-  /* Check the end of ADC1 calibration */
+  // Check the end of ADC1 calibration
   while(ADC_GetCalibrationStatus(ADC1));
 
-  /* Start ADC1 Software Conversion */ 
+  // Start ADC1 Software Conversion 
   ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
 
@@ -240,53 +241,54 @@ void ctl_delay(CTL_TIME_t t)
 
 void RTC_Configuration(void)
 {
-  /* Enable PWR and BKP clocks */
+  // Enable PWR and BKP clocks
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);
 
-  /* Allow access to BKP Domain */
+  // Allow access to BKP Domain
   PWR_BackupAccessCmd(ENABLE);
 
-  /* Reset Backup Domain */
+  // Reset Backup Domain
   BKP_DeInit();
 
-  /* Enable LSE */
+  // Enable LSE
   RCC_LSEConfig(RCC_LSE_ON);
-  /* Wait till LSE is ready */
+
+  // Wait till LSE is ready
   while (RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
   {}
 
-  /* Select LSE as RTC Clock Source */
+  // Select LSE as RTC Clock Source
   RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
 
-  /* Enable RTC Clock */
+  // Enable RTC Clock
   RCC_RTCCLKCmd(ENABLE);
 
-  /* Wait for RTC registers synchronization */
+  // Wait for RTC registers synchronization
   RTC_WaitForSynchro();
 
-  /* Wait until last write operation on RTC registers has finished */
+  // Wait until last write operation on RTC registers has finished
   RTC_WaitForLastTask();
 
-  /* Enable the RTC Second */
-  RTC_ITConfig(RTC_IT_SEC, ENABLE);
+  // Enable the RTC Second
+  //RTC_ITConfig(RTC_IT_SEC, ENABLE);
 
-  /* Wait until last write operation on RTC registers has finished */
-  RTC_WaitForLastTask();
+  // Wait until last write operation on RTC registers has finished 
+  //RTC_WaitForLastTask();
 
-  /* Set RTC prescaler: set RTC period to 1sec */
-  RTC_SetPrescaler(32767); /* RTC period = RTCCLK/RTC_PR = (32.768 KHz)/(32767+1) */
+  // Set RTC prescaler: set RTC period to 1sec 
+  RTC_SetPrescaler(32767);
 
-  /* Wait until last write operation on RTC registers has finished */
+  // Wait until last write operation on RTC registers has finished
   RTC_WaitForLastTask();
 }
 
 void timeAdjust(unsigned int t)
 {
-  /* Wait until last write operation on RTC registers has finished */
+  // Wait until last write operation on RTC registers has finished
   RTC_WaitForLastTask();
-  /* Change the current time */
+  // Change the current time
   RTC_SetCounter(t);
-  /* Wait until last write operation on RTC registers has finished */
+  // Wait until last write operation on RTC registers has finished
   RTC_WaitForLastTask();
 }
 
@@ -294,10 +296,10 @@ void initRTC()
 {
   NVIC_InitTypeDef NVIC_InitStructure;
 
-  /* Configure one bit for preemption priority */
+  // Configure one bit for preemption priority
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
 
-  /* Enable the RTC Interrupt */
+  // Enable the RTC Interrupt
   NVIC_InitStructure.NVIC_IRQChannel = RTC_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
@@ -328,7 +330,7 @@ void initRTC()
   RTC_WaitForSynchro();
 
   //Enable the RTC Second
-  RTC_ITConfig(RTC_IT_SEC, ENABLE);
+  //RTC_ITConfig(RTC_IT_SEC, ENABLE);
 
   //Wait until last write operation on RTC registers has finished
   RTC_WaitForLastTask();
