@@ -9,6 +9,7 @@ bool rtcClock::init()
 {
   unsigned int magicNumber2 = BKP_ReadBackupRegister(BKP_DR1);
 
+ 
   if (magicNumber2 != magicNumber)
   {
     printf("RTC not configure\r\n");
@@ -44,6 +45,9 @@ bool rtcClock::init()
 
 void rtcClock::setTime(time_t t)
 {
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR | RCC_APB1Periph_BKP, ENABLE);
+  PWR_BackupAccessCmd(ENABLE);
+
   // Wait until last write operation on RTC registers has finished
   RTC_WaitForLastTask();
   // Change the current time

@@ -7,6 +7,40 @@
 #include "adxl345.h"
 #include "WString.h"
 
+const int maxData = 128;
+String data;
+extern String completeData;
+extern "C" void USART1_IRQHandler(void)
+{
+  ctl_enter_isr();
+  if(USART_GetITStatus(USART1, USART_IT_RXNE) != 0)
+  {
+    char c = USART_ReceiveData(USART1);
+    if(c == '\r' || c == '\n')
+    {
+      if(data.length() > 0)
+      {
+        data.toUpperCase();
+        completeData = data;
+        data = "";
+      }
+    }
+    else
+    {
+      if(data.length() < maxData)
+      {
+        data += c;
+      }
+      else
+      {
+        // Clear to much data
+        data = "";
+      }
+    }
+  }
+  ctl_exit_isr();
+}
+
 extern displayBuffer display;
 
 extern "C" void TIM2_IRQHandler(void)

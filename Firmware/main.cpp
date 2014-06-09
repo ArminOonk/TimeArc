@@ -16,9 +16,10 @@ unsigned int readLight();
 extern "C" int __putchar(char ch);
 void handleTouch();
 
-CTL_TASK_t mainTask, ledTask, touchTask;
+CTL_TASK_t mainTask, ledTask, touchTask, comTask;
 static unsigned ledTaskStack[256];
 static unsigned touchTaskStack[256];
+static unsigned comTaskStack[256];
 
 displayBuffer display;
 
@@ -32,6 +33,34 @@ unsigned int ledCnt = 0;
 float light = 0;
 adxl345 accel;
 rtcClock rtc;
+
+String completeData;
+void comHandler(void *p)
+{
+
+  while(true)
+  {
+    if(completeData.length() > 0)
+    {
+        //Process data
+        if(completeData.startsWith("TIME?"))
+        {
+          printf("TIME=%d\r\n", rtc.getTime());
+        }
+        else if(completeData.startsWith("TIME="))
+        {
+          String time = completeData.substring(completeData.indexOf("=")+1);
+          time_t t = time.toInt();
+          rtc.setTime(t);
+          printf("SET TIME=%d\r\n", t);
+        }
+
+        completeData = "";
+    }
+    ctl_delay(1);
+  }
+}
+
 
 void ledHandler(void *p)
 {
@@ -140,11 +169,12 @@ int main(void)
   ctl_task_init(&mainTask, 255, "main");
   memset(ledTaskStack, 0xba, sizeof(ledTaskStack));
   memset(touchTaskStack, 0xba, sizeof(touchTaskStack));
+  memset(comTaskStack, 0xba, sizeof(comTaskStack));
 
   // Make another task ready to run.
-  ctl_task_run(&ledTask, 1, ledHandler, 0, "ledTask", sizeof(ledTaskStack) / sizeof(unsigned), ledTaskStack, 0);
-  ctl_task_run(&touchTask, 2, touchHandler, 0, "touchTask", sizeof(touchTaskStack) / sizeof(unsigned), touchTaskStack, 0);
-
+  ctl_task_run(&ledTask, 2, ledHandler, 0, "ledTask", sizeof(ledTaskStack) / sizeof(unsigned), ledTaskStack, 0);
+  ctl_task_run(&touchTask, 3, touchHandler, 0, "touchTask", sizeof(touchTaskStack) / sizeof(unsigned), touchTaskStack, 0);
+  ctl_task_run(&comTask, 1, comHandler, 0, "comTask", sizeof(comTaskStack) / sizeof(unsigned), comTaskStack, 0);
   // Now all the tasks have been created go to lowest priority.
   ctl_task_set_priority(&mainTask, 0);
 
@@ -154,6 +184,8 @@ int main(void)
       error("ledTaskStack Overflow!");
     if(touchTaskStack[0]  !=  0xbabababa)
       error("touchTaskStack Overflow!");
+    if(comTaskStack[0]  !=  0xbabababa)
+      error("comTaskStack Overflow!");
   }
 }
 
@@ -246,6 +278,13 @@ void initUsart()
 {
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 
+  NVIC_InitTypeDef NVIC_InitStructure;
+  NVIC_InitStructure.NVIC_IRQChannel                    = USART1_IRQn;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 0x0f;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority         = 0x0f;
+  NVIC_InitStructure.NVIC_IRQChannelCmd                 = ENABLE;
+  NVIC_Init(&NVIC_InitStructure);
+
   GPIO_InitTypeDef GPIO_InitStructure;
   GPIO_StructInit(&GPIO_InitStructure);
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -270,6 +309,8 @@ void initUsart()
   // Configure USARTy
   USART_Init(USART1, &USART_InitStructure);
   USART_Cmd(USART1, ENABLE);
+
+  USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
 }
 
 int __putchar(char ch)
