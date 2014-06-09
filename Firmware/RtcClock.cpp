@@ -2,7 +2,7 @@
 
 rtcClock::rtcClock()
 {
-
+  timeZone = 0;
 }
 
 bool rtcClock::init()
@@ -58,9 +58,30 @@ void rtcClock::setTime(time_t t)
 
 time_t rtcClock::getTime()
 {
-  RTC_GetCounter();
+  return getUTC() + (timeZone*3600);
 }
 
+time_t  rtcClock::getUTC()
+{
+  return RTC_GetCounter();
+}
+
+void  rtcClock::setTimeZone(int tz)
+{
+  if(tz >= -12 && tz <= 14)
+  {
+    timeZone = tz;
+  }
+}
+
+int  rtcClock::getTimeZone()
+{
+  return timeZone;
+}
+
+/////////////////////
+// Private
+/////////////////////
 void rtcClock::RTC_Configuration(void)
 {
   // Enable PWR and BKP clocks

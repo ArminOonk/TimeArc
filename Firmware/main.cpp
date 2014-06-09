@@ -45,7 +45,7 @@ void comHandler(void *p)
         //Process data
         if(completeData.startsWith("TIME?"))
         {
-          printf("TIME=%d\r\n", rtc.getTime());
+          printf("TIME=%d\r\n", rtc.getUTC());
         }
         else if(completeData.startsWith("TIME="))
         {
@@ -54,7 +54,18 @@ void comHandler(void *p)
           rtc.setTime(t);
           printf("SET TIME=%d\r\n", t);
         }
-
+        else if(completeData.startsWith("TIMEZONE?"))
+        {
+          printf("TIMEZONE=%d\r\n", rtc.getTimeZone());
+        }
+        else if(completeData.startsWith("TIMEZONE="))
+        {
+          String tzString = completeData.substring(completeData.indexOf("=")+1);
+          int tz = tzString.toInt();
+          rtc.setTimeZone(tz);
+          printf("SET TIMEZONE=%d\r\n", rtc.getTimeZone());
+        }
+        
         completeData = "";
     }
     ctl_delay(1);

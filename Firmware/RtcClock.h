@@ -12,13 +12,19 @@ class rtcClock
   rtcClock();
   bool init();
 
+  
   void setTime(time_t t);
   time_t getTime();
+  time_t getUTC();
+
+  void setTimeZone(int tz);
+  int getTimeZone();
 
   private:
   void RTC_Configuration(void);
 
   const static unsigned int magicNumber = 0xA5A5;
+  int timeZone;
 };
 
 #endif
