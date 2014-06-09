@@ -3,6 +3,7 @@
 rtcClock::rtcClock()
 {
   timeZone = 0;
+  dayLightSaving = false;
 }
 
 bool rtcClock::init()
@@ -58,7 +59,12 @@ void rtcClock::setTime(time_t t)
 
 time_t rtcClock::getTime()
 {
-  return getUTC() + (timeZone*3600);
+  int dlsOffset = 0;
+  if(dayLightSaving)
+  {
+    dlsOffset = 3600;
+  }
+  return getUTC() + (timeZone*3600) + dlsOffset;
 }
 
 time_t  rtcClock::getUTC()
@@ -79,6 +85,15 @@ int  rtcClock::getTimeZone()
   return timeZone;
 }
 
+void rtcClock::setDayLightSaving(bool dls)
+{
+  dayLightSaving = dls;
+}
+
+bool rtcClock::getDayLightSaving()
+{
+  return dayLightSaving;
+}
 /////////////////////
 // Private
 /////////////////////

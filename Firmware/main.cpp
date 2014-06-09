@@ -52,7 +52,7 @@ void comHandler(void *p)
           String time = completeData.substring(completeData.indexOf("=")+1);
           time_t t = time.toInt();
           rtc.setTime(t);
-          printf("SET TIME=%d\r\n", t);
+          printf("SET TIME=%d\r\n", rtc.getUTC());
         }
         else if(completeData.startsWith("TIMEZONE?"))
         {
@@ -64,6 +64,31 @@ void comHandler(void *p)
           int tz = tzString.toInt();
           rtc.setTimeZone(tz);
           printf("SET TIMEZONE=%d\r\n", rtc.getTimeZone());
+        }
+        else if(completeData.startsWith("DAYLIGHT?"))
+        {
+          if(rtc.getDayLightSaving())
+          {
+            printf("DAYLIGHT=TRUE\r\n");
+          }
+          else
+          {
+            printf("DAYLIGHT=FALSE\r\n");
+          }
+        }
+        else if(completeData.startsWith("DAYLIGHT="))
+        {
+          String dlsString = completeData.substring(completeData.indexOf("=")+1);
+
+          rtc.setDayLightSaving(dlsString == "TRUE");
+          if(rtc.getDayLightSaving())
+          {
+            printf("SET DAYLIGHT=TRUE\r\n");
+          }
+          else
+          {
+            printf("SET DAYLIGHT=FALSE\r\n");
+          }
         }
         
         completeData = "";

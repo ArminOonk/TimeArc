@@ -20,11 +20,15 @@ class rtcClock
   void setTimeZone(int tz);
   int getTimeZone();
 
+  void setDayLightSaving(bool dls);
+  bool getDayLightSaving();
+
   private:
   void RTC_Configuration(void);
 
   const static unsigned int magicNumber = 0xA5A5;
   int timeZone;
+  bool dayLightSaving;
 };
 
 #endif
