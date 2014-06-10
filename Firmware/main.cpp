@@ -30,9 +30,10 @@ capTouch touchUp(GPIOD, GPIO_Pin_2);
 capTouch touchTop(GPIOB, GPIO_Pin_5);
 unsigned int ledCnt = 0;
 
-float light = 0;
+//float light = 0;
 adxl345 accel;
 rtcClock rtc;
+lightSensor light;
 
 String completeData;
 void comHandler(void *p)
@@ -136,8 +137,9 @@ void ledHandler(void *p)
       time_t now = rtc.getTime();
       display.setTime(now);
 
-      light += 0.2*(readLight() - light);
-      display.setIntensity(1.0-light/4096.0);
+      //light += 0.2*(readLight() - light);
+      //display.setIntensity(1.0-light/4096.0);
+      display.setIntensity(1.0-light.getValue()/4096.0);
 
       display.setMode(CLOCK);
       break;
