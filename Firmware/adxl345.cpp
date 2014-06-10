@@ -217,6 +217,37 @@ bool adxl345::inRange(float testVal, float mid, float span)
   return false;
 }
 
+void adxl345::print()
+{
+  switch(pose)
+  {
+    case UP:
+    printf("POSE=UP\r\n");
+    break;
+
+    case DOWN:
+    printf("POSE=DOWN\r\n");
+    break;
+
+    case LEFT:
+    printf("POSE=LEFT\r\n");
+    break;
+
+    case RIGHT:
+    printf("POSE=RIGHT\r\n");
+    break;
+
+    case FRONT:
+    printf("POSE=FRONT\r\n");
+    break;
+
+    case BACK:
+    printf("POSE=BACK\r\n");
+    break;
+
+  }
+}
+
 bool adxl345::updatePose()
 {
 pose_t tempPose = UNKNOWN;
@@ -254,33 +285,7 @@ pose_t tempPose = UNKNOWN;
   if(tempPose != pose && tempPose != UNKNOWN)
   {
     pose = tempPose;
-    switch(pose)
-    {
-      case UP:
-      printf("pose=UP\r\n");
-      break;
-
-      case DOWN:
-      printf("pose=DOWN\r\n");
-      break;
-
-      case LEFT:
-      printf("pose=LEFT\r\n");
-      break;
-
-      case RIGHT:
-      printf("pose=RIGHT\r\n");
-      break;
-
-      case FRONT:
-      printf("pose=FRONT\r\n");
-      break;
-
-      case BACK:
-      printf("pose=BACK\r\n");
-      break;
-
-    }
+    print();
     return true;
   }
   return false;

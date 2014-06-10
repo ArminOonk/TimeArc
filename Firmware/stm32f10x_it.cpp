@@ -75,9 +75,7 @@ extern capTouch touchUp;
 extern "C" void EXTI2_IRQHandler(void)
 {
   ctl_enter_isr();
-
   touchUp.interrupt(); 
-
   ctl_exit_isr();
 }
 

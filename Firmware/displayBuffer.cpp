@@ -201,9 +201,31 @@ void displayBuffer::setPose(pose_t p)
 
 void displayBuffer::setMode(displayMode_t m)
 {
+  bool print = (m != mode);
   mode = m;
+  if(print)
+  {
+    printMode();
+  }
 }
 
+void displayBuffer::printMode()
+{
+  switch(mode)
+  {
+    case OFF:
+    printf("MODE=OFF\r\n");
+    break;
+
+    case CLOCK:
+    printf("MODE=CLOCK\r\n");
+    break;
+
+    case ANIMATION:
+    printf("MODE=ANIMATION\r\n");
+    break;
+  }
+}
 /// Private
 
 char* displayBuffer::getShowBuffer()

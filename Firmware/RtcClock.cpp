@@ -2,15 +2,13 @@
 
 rtcClock::rtcClock()
 {
-  timeZone = 0;
-  dayLightSaving = false;
+  offset = 0;
 }
 
 bool rtcClock::init()
 {
   unsigned int magicNumber2 = BKP_ReadBackupRegister(BKP_DR1);
 
- 
   if (magicNumber2 != magicNumber)
   {
     printf("RTC not configure\r\n");
@@ -55,16 +53,14 @@ void rtcClock::setTime(time_t t)
   RTC_SetCounter(t);
   // Wait until last write operation on RTC registers has finished
   RTC_WaitForLastTask();
+
+  printTime();
 }
 
 time_t rtcClock::getTime()
 {
-  int dlsOffset = 0;
-  if(dayLightSaving)
-  {
-    dlsOffset = 3600;
-  }
-  return getUTC() + (timeZone*3600) + dlsOffset;
+
+  return getUTC() + offset;
 }
 
 time_t  rtcClock::getUTC()
@@ -72,27 +68,25 @@ time_t  rtcClock::getUTC()
   return RTC_GetCounter();
 }
 
-void  rtcClock::setTimeZone(int tz)
+void  rtcClock::setOffset(int _offset)
 {
-  if(tz >= -12 && tz <= 14)
-  {
-    timeZone = tz;
-  }
+  offset = _offset;
+  printOffset();
 }
 
-int  rtcClock::getTimeZone()
+int  rtcClock::getOffset()
 {
-  return timeZone;
+  return offset;
 }
 
-void rtcClock::setDayLightSaving(bool dls)
+void rtcClock::printOffset()
 {
-  dayLightSaving = dls;
+  printf("OFFSET=%d\r\n", getOffset());
 }
 
-bool rtcClock::getDayLightSaving()
+void rtcClock::printTime()
 {
-  return dayLightSaving;
+  printf("TIME=%d\r\n", getUTC());
 }
 /////////////////////
 // Private

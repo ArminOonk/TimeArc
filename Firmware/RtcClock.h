@@ -17,17 +17,17 @@ class rtcClock
   time_t getTime();
   time_t getUTC();
 
-  void setTimeZone(int tz);
-  int getTimeZone();
+  void setOffset(int offset);
+  int getOffset();
 
-  void setDayLightSaving(bool dls);
-  bool getDayLightSaving();
+  void printOffset();
+  void printTime();
 
   private:
   void RTC_Configuration(void);
 
   const static unsigned int magicNumber = 0xA5A5;
-  int timeZone;
+  int offset;
   bool dayLightSaving;
 };
 

@@ -5,7 +5,7 @@
 #include "defines.h"
 #include <string.h>
 #include <time.h>
-
+#include <stdio.h>
 
 const int totalNrLeds = 144;
 const int displayBufferSize = 144/8;
@@ -161,6 +161,8 @@ class displayBuffer
 
   void setPose(pose_t p);
   void setMode(displayMode_t m);
+
+  void printMode();
 
   private:
   void switchLedOn(int ledNr);

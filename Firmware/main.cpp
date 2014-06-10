@@ -46,52 +46,57 @@ void comHandler(void *p)
         //Process data
         if(completeData.startsWith("TIME?"))
         {
-          printf("TIME=%d\r\n", rtc.getUTC());
+          rtc.printTime();
         }
         else if(completeData.startsWith("TIME="))
         {
           String time = completeData.substring(completeData.indexOf("=")+1);
           time_t t = time.toInt();
           rtc.setTime(t);
-          printf("SET TIME=%d\r\n", rtc.getUTC());
         }
-        else if(completeData.startsWith("TIMEZONE?"))
+        else if(completeData.startsWith("OFFSET?"))
         {
-          printf("TIMEZONE=%d\r\n", rtc.getTimeZone());
+          rtc.printOffset();
         }
-        else if(completeData.startsWith("TIMEZONE="))
+        else if(completeData.startsWith("OFFSET="))
         {
           String tzString = completeData.substring(completeData.indexOf("=")+1);
-          int tz = tzString.toInt();
-          rtc.setTimeZone(tz);
-          printf("SET TIMEZONE=%d\r\n", rtc.getTimeZone());
+          int offset = tzString.toInt();
+          rtc.setOffset(offset);
         }
-        else if(completeData.startsWith("DAYLIGHT?"))
+        else if(completeData.startsWith("POSE?"))
         {
-          if(rtc.getDayLightSaving())
-          {
-            printf("DAYLIGHT=TRUE\r\n");
-          }
-          else
-          {
-            printf("DAYLIGHT=FALSE\r\n");
-          }
+          accel.print();
         }
-        else if(completeData.startsWith("DAYLIGHT="))
+        else if(completeData.startsWith("ID?"))
         {
-          String dlsString = completeData.substring(completeData.indexOf("=")+1);
-
-          rtc.setDayLightSaving(dlsString == "TRUE");
-          if(rtc.getDayLightSaving())
+          printf("ID=");
+          for(int i=0; i<12; i++)
           {
-            printf("SET DAYLIGHT=TRUE\r\n");
+            printf("%02x", *(const char *)(0x1FFFF7E8+i));
           }
-          else
+          printf("\r\n");
+        }
+        else if(completeData.startsWith("MODE?"))
+        {
+          display.printMode();
+        }
+        else if(completeData.startsWith("MODE="))
+        {
+          String modeString = completeData.substring(completeData.indexOf("=")+1);
+          if(modeString == "OFF")
           {
-            printf("SET DAYLIGHT=FALSE\r\n");
+            display.setMode(OFF);
+          }
+          else if(modeString == "CLOCK")
+          {
+            display.setMode(CLOCK);
+          }
+          else if(modeString == "ANIMATION")
+          {
+            display.setMode(ANIMATION);
           }
         }
-        
         completeData = "";
     }
     ctl_delay(1);
@@ -109,10 +114,7 @@ void ledHandler(void *p)
  
   while(true)
   {
-    if(ledCnt%2 == 0)
-    {
-      handleTouch();
-    }
+    handleTouch();
 
     accel.readAccel();
     display.setPose(accel.pose);
@@ -123,7 +125,7 @@ void ledHandler(void *p)
       display.setMode(OFF);
       break;
 
-      case BACK:
+     /* case BACK:
       display.setMode(ANIMATION);
       for(int i=0; i<totalNrLeds; i+=4)
       {
@@ -131,14 +133,12 @@ void ledHandler(void *p)
       }
       display.setIntensity(1.0);
       display.switchBuffer();
-      break;
+      break;*/
 
       default:
       time_t now = rtc.getTime();
       display.setTime(now);
 
-      //light += 0.2*(readLight() - light);
-      //display.setIntensity(1.0-light/4096.0);
       display.setIntensity(1.0-light.getValue()/4096.0);
 
       display.setMode(CLOCK);
@@ -146,10 +146,10 @@ void ledHandler(void *p)
     }
 
     ctl_delay(100); 
-    ledCnt++;
   }
 }
 
+const int touchDelay = 50;
 void touchHandler(void *p)
 {
   touchDown.init();
@@ -158,27 +158,26 @@ void touchHandler(void *p)
   touchUp.init();
   touchTop.init();
 
-  bool disabledJTAG = false;
   while(true)
   {
     touchDown.start();
-    ctl_delay(50);
+    ctl_delay(touchDelay);
     touchDown.stop();
 
     touchRight.start();
-    ctl_delay(50);
+    ctl_delay(touchDelay);
     touchRight.stop();
 
     touchLeft.start();
-    ctl_delay(50);
+    ctl_delay(touchDelay);
     touchLeft.stop();
 
     touchUp.start();
-    ctl_delay(50);
+    ctl_delay(touchDelay);
     touchUp.stop();
 
     touchTop.start();
-    ctl_delay(50);
+    ctl_delay(touchDelay);
     touchTop.stop();
   }
 }
@@ -192,11 +191,9 @@ int main(void)
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
  
   initGPIO();   // Configure GPIO
-  initADC();
   initUsart();
 
   rtc.init();
-
 
   printf("\r\n");
   printf("start=%s %s\r\n", __DATE__, __TIME__);
@@ -250,56 +247,6 @@ void initGPIO(void)
   GPIO_InitTypeDef GPIO_InitStructure; 
   GPIO_StructInit(&GPIO_InitStructure);
 
-}
-
-void initADC()
-{
-  RCC_ADCCLKConfig(RCC_PCLK2_Div6);
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
-  ADC_DeInit(ADC1);
-
-  GPIO_InitTypeDef GPIO_InitStructure;
-  GPIO_StructInit(&GPIO_InitStructure);
-  GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_0;
-  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AIN;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_Init(GPIOC, &GPIO_InitStructure);
-
-  ADC_InitTypeDef  ADC_InitStructure;
-  ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
-  ADC_InitStructure.ADC_ScanConvMode = DISABLE;
-  ADC_InitStructure.ADC_ContinuousConvMode = DISABLE;
-  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
-  ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-  ADC_InitStructure.ADC_NbrOfChannel = 1;
-
-  ADC_Init(ADC1, &ADC_InitStructure);
-
-  ADC_RegularChannelConfig(ADC1, ADC_Channel_10, 1, ADC_SampleTime_239Cycles5);
-  ADC_Cmd(ADC1, ENABLE);
-
-  ADC_ResetCalibration(ADC1);
-  // Check the end of ADC1 reset calibration register
-  while(ADC_GetResetCalibrationStatus(ADC1));
-
-  // Start ADC1 calibaration
-  ADC_StartCalibration(ADC1);
-  // Check the end of ADC1 calibration
-  while(ADC_GetCalibrationStatus(ADC1));
-
-  // Start ADC1 Software Conversion 
-  ADC_SoftwareStartConvCmd(ADC1, ENABLE);
-}
-
-unsigned int readLight()
-{
-  // Start the conversion
-  ADC_SoftwareStartConvCmd(ADC1, ENABLE);
-  // Wait until conversion completion
-  while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
-  // Get the conversion value
-  return ADC_GetConversionValue(ADC1);
 }
 
 void ctl_handle_error(CTL_ERROR_CODE_t error)
@@ -369,31 +316,31 @@ void handleTouch()
   // Reporting
   if(touchTop.isTouched())
   {
-    printf("button=TOP\r\n");
+    printf("BUTTON=TOP\r\n");
   }
   
   if(touchRight.isTouched())
   {
-    printf("button=RIGHT\r\n");
+    printf("BUTTON=RIGHT\r\n");
   }
 
   if(touchLeft.isTouched())
   {
-    printf("button=LEFT\r\n");
+    printf("BUTTON=LEFT\r\n");
   }
 
   if(touchUp.isTouched())
   {
-    printf("button=UP\r\n");
+    printf("BUTTON=UP\r\n");
   }
 
   if(touchDown.isTouched())
   {
-    printf("button=DOWN\r\n");
+    printf("BUTTON=DOWN\r\n");
   }
 
   // change time
-  unsigned int now = RTC_GetCounter();
+  unsigned int now = rtc.getUTC();
   if(touchTop.isTouched())
   {
     lastMenuTime = now;

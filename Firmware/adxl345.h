@@ -41,6 +41,7 @@ class adxl345
   void interrupt();
   
   void readAccel();
+  void print();
 
   short xRaw, yRaw, zRaw;
   float x, y, z;
