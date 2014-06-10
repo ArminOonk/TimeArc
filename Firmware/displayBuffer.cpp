@@ -134,10 +134,10 @@ void displayBuffer::secondOn(unsigned int second)
 
 void displayBuffer::setIntensity(float intensity)
 {
-  uint16_t intval = intensity*timerPeriod;
+  int intval = intensity*timerPeriod-6; // -6 to make sure intensity of 1.0 is actually max power (compensate for time during cc1 intterrupt)
   if(intval >= timerPeriod)
   {
-    intval = timerPeriod -1;
+    intval = timerPeriod - 1;
   }
 
   if(intval < 0)

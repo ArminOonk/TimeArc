@@ -125,7 +125,7 @@ void ledHandler(void *p)
       display.setMode(OFF);
       break;
 
-     /* case BACK:
+      case BACK:
       display.setMode(ANIMATION);
       for(int i=0; i<totalNrLeds; i+=4)
       {
@@ -133,7 +133,7 @@ void ledHandler(void *p)
       }
       display.setIntensity(1.0);
       display.switchBuffer();
-      break;*/
+      break;
 
       default:
       time_t now = rtc.getTime();
@@ -145,6 +145,7 @@ void ledHandler(void *p)
       break;
     }
 
+    ledCnt++;
     ctl_delay(100); 
   }
 }
