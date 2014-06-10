@@ -161,6 +161,7 @@ class displayBuffer
 
   void setPose(pose_t p);
   void setMode(displayMode_t m);
+  displayMode_t getMode();
 
   void printMode();
 

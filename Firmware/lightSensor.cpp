@@ -56,5 +56,5 @@ unsigned int lightSensor::read()
 float lightSensor::getValue()
 {
   light += 0.2*(read() - light);
-  return light;
+  return (1.0-(light/4096.0));
 }

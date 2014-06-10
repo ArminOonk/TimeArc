@@ -15,6 +15,7 @@ void initUsart();
 unsigned int readLight();
 extern "C" int __putchar(char ch);
 void handleTouch();
+void printAutoMode();
 
 CTL_TASK_t mainTask, ledTask, touchTask, comTask;
 static unsigned ledTaskStack[256];
@@ -36,6 +37,7 @@ rtcClock rtc;
 lightSensor light;
 
 String completeData;
+bool autoMode = true;
 void comHandler(void *p)
 {
 
@@ -97,12 +99,21 @@ void comHandler(void *p)
             display.setMode(ANIMATION);
           }
         }
+        else if(completeData.startsWith("AUTO?"))
+        {
+          printAutoMode();
+        }
+        else if(completeData.startsWith("AUTO="))
+        {
+          String autoString = completeData.substring(completeData.indexOf("=")+1);
+          autoMode = (autoString == "TRUE");
+          printAutoMode();
+        }
         completeData = "";
     }
     ctl_delay(1);
   }
 }
-
 
 void ledHandler(void *p)
 {
@@ -119,30 +130,39 @@ void ledHandler(void *p)
     accel.readAccel();
     display.setPose(accel.pose);
 
-    switch(accel.pose)
-    {
-      case FRONT:
-      display.setMode(OFF);
-      break;
+    float lightVal = light.getValue();
 
-      case BACK:
-      display.setMode(ANIMATION);
+    if(autoMode)
+    {
+      switch(accel.pose)
+      {
+        case FRONT:
+        display.setMode(OFF);
+        break;
+
+        case BACK:
+        display.setMode(ANIMATION);
+        break;
+
+        default:
+        display.setMode(CLOCK);
+        break;
+      }
+    }
+
+    if(display.getMode() == CLOCK)
+    {
+      display.setTime(rtc.getTime());
+      display.setIntensity(lightVal);
+    }
+    else if(display.getMode() == ANIMATION)
+    {
       for(int i=0; i<totalNrLeds; i+=4)
       {
         display.ledOn(i+ledCnt%4);
       }
       display.setIntensity(1.0);
       display.switchBuffer();
-      break;
-
-      default:
-      time_t now = rtc.getTime();
-      display.setTime(now);
-
-      display.setIntensity(1.0-light.getValue()/4096.0);
-
-      display.setMode(CLOCK);
-      break;
     }
 
     ledCnt++;
@@ -376,5 +396,17 @@ void handleTouch()
       rtc.setTime(newNow);
       lastMenuTime = newNow;
     }
+  }
+}
+
+void printAutoMode()
+{
+  if(autoMode)
+  {
+    printf("AUTO=TRUE\r\n");
+  }
+  else
+  {
+    printf("AUTO=FALSE\r\n");
   }
 }

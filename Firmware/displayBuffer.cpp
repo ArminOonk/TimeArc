@@ -209,6 +209,11 @@ void displayBuffer::setMode(displayMode_t m)
   }
 }
 
+displayMode_t displayBuffer::getMode()
+{
+  return mode;
+}
+
 void displayBuffer::printMode()
 {
   switch(mode)
