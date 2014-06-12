@@ -1,4 +1,5 @@
 #include "adxl345.h"
+extern rtcClock rtc;
 
 adxl345::adxl345()
 {
@@ -106,10 +107,12 @@ void adxl345::readAccel()
     { 
       printf("ACCEL=DOUBLETAP\r\n");
       print = true;
+      lastUserActionTime = rtc.getUTC();
     }else if(intSource & (1<<6))
     { 
       printf("ACCEL=TAP\r\n");
       print = true;
+      lastUserActionTime = rtc.getUTC();
     }
 
     if(!print)
@@ -209,8 +212,12 @@ void adxl345::print()
     case BACK:
     printf("POSE=BACK\r\n");
     break;
-
   }
+}
+
+time_t adxl345::lastUserAction()
+{
+  return lastUserActionTime;
 }
 
 bool adxl345::updatePose()

@@ -40,7 +40,7 @@ String completeData;
 bool autoMode = true;
 bool autoLight = true;
 float manualLightVal = 0.0f;
-
+int timeout = 0;
 void comHandler(void *p)
 {
 
@@ -130,15 +130,24 @@ void comHandler(void *p)
           }
 
         }
+        else if(completeData.startsWith("TIMEOUT?"))
+        {
+          printf("TIMEOUT=%d\r\n",timeout);
+        }
+        else if(completeData.startsWith("TIMEOUT="))
+        {
+          String timeoutString = completeData.substring(completeData.indexOf("=")+1);
+          timeout = timeoutString.toInt();
+        }
         completeData = "";
     }
     ctl_delay(1);
   }
 }
 
+time_t lastUserActionTime = 0;
 void ledHandler(void *p)
 {
-  time_t currentTime = 1401312421;
   CTL_TIME_t startupTime = ctl_get_current_time();
 
   ctl_delay(1000);
@@ -149,6 +158,14 @@ void ledHandler(void *p)
     handleTouch();
 
     accel.readAccel();
+
+    // Get the last time the user was active
+    if(accel.lastUserAction() > lastUserActionTime)
+    {
+      lastUserActionTime = accel.lastUserAction();
+    }
+
+
     display.setPose(accel.pose);
 
     float lightVal = light.getValue();
@@ -170,8 +187,22 @@ void ledHandler(void *p)
         break;
       }
     }
+    else
+    {
+      if(timeout != 0)
+      {
+        if((display.getMode() == CLOCK) && (rtc.getUTC() > (lastUserActionTime + timeout)))
+        {
+            display.setMode(OFF);
+        }
+        else if((display.getMode() == OFF) && (rtc.getUTC() < (lastUserActionTime + timeout)))
+        {
+          display.setMode(CLOCK);
+        }
+      }
+    }
 
-    if(display.getMode() == CLOCK)
+    if((display.getMode() == CLOCK))
     {
       display.setTime(rtc.getTime());
       if(autoLight)
@@ -366,30 +397,35 @@ void handleTouch()
   if(touchTop.isTouched())
   {
     printf("BUTTON=TOP\r\n");
+    lastUserActionTime = rtc.getUTC();
   }
   
   if(touchRight.isTouched())
   {
     printf("BUTTON=RIGHT\r\n");
+    lastUserActionTime = rtc.getUTC();
   }
 
   if(touchLeft.isTouched())
   {
     printf("BUTTON=LEFT\r\n");
+    lastUserActionTime = rtc.getUTC();
   }
 
   if(touchUp.isTouched())
   {
     printf("BUTTON=UP\r\n");
+    lastUserActionTime = rtc.getUTC();
   }
 
   if(touchDown.isTouched())
   {
     printf("BUTTON=DOWN\r\n");
+    lastUserActionTime = rtc.getUTC();
   }
 
   // change time
-  unsigned int now = rtc.getUTC();
+  /*unsigned int now = rtc.getUTC();
   if(touchTop.isTouched())
   {
     lastMenuTime = now;
@@ -424,7 +460,7 @@ void handleTouch()
       rtc.setTime(newNow);
       lastMenuTime = newNow;
     }
-  }
+  }*/
 }
 
 void printAutoMode()

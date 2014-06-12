@@ -6,6 +6,8 @@
 #include <misc.h>
 #include <math.h>
 #include <stdio.h>
+#include <time.h>
+#include "rtcClock.h"
 #include "defines.h"
 
 #define M_PI           3.14159265358979323846
@@ -46,6 +48,7 @@ class adxl345
   
   void readAccel();
   void print();
+  time_t lastUserAction();
 
   short xRaw, yRaw, zRaw;
   float x, y, z;
@@ -70,6 +73,7 @@ class adxl345
   EXTI_InitTypeDef EXTI_InitStructure;
   NVIC_InitTypeDef NVIC_InitStructure;
   bool interruptEnabled;
+  time_t lastUserActionTime;
 };
 
 #endif

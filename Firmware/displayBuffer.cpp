@@ -163,6 +163,7 @@ bool displayBuffer::isLedOn(int ledNr)
   return ( (index & bitpos) != 0);
 }
 
+// run() is the interrupt function
 void displayBuffer::run()
 {
   displayOff();
