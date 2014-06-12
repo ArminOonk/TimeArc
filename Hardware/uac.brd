@@ -53,6 +53,7 @@
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
 <layer number="56" name="wert" color="7" fill="1" visible="no" active="no"/>
+<layer number="57" name="tCAD" color="7" fill="1" visible="no" active="no"/>
 <layer number="91" name="Nets" color="2" fill="1" visible="no" active="no"/>
 <layer number="92" name="Busses" color="1" fill="1" visible="no" active="no"/>
 <layer number="93" name="Pins" color="2" fill="1" visible="no" active="no"/>
@@ -61,6 +62,7 @@
 <layer number="96" name="Values" color="7" fill="1" visible="no" active="no"/>
 <layer number="97" name="Info" color="7" fill="1" visible="no" active="no"/>
 <layer number="98" name="Guide" color="6" fill="1" visible="no" active="no"/>
+<layer number="99" name="SpiceOrder" color="7" fill="1" visible="no" active="no"/>
 <layer number="100" name="Muster" color="7" fill="1" visible="no" active="no"/>
 <layer number="101" name="Patch_Top" color="12" fill="4" visible="yes" active="yes"/>
 <layer number="102" name="Vscore" color="7" fill="1" visible="yes" active="yes"/>
@@ -89,8 +91,12 @@
 <layer number="131" name="tAdjust" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="132" name="bAdjust" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="144" name="Drill_legend" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="150" name="Notes" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="151" name="HeatSink" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="152" name="_bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="153" name="FabDoc1" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="154" name="FabDoc2" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="155" name="FabDoc3" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="199" name="L$199" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="200" name="200bmp" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="201" name="201bmp" color="2" fill="1" visible="no" active="no"/>
@@ -248,30 +254,6 @@ in de behuizing te verwerken</text>
 <libraries>
 <library name="Custom components">
 <packages>
-<package name="CHIPLED_0603">
-<description>&lt;b&gt;CHIPLED&lt;/b&gt;&lt;p&gt;
-Source: http://www.osram.convergy.de/ ... LG_LY Q971.pdf</description>
-<wire x1="-0.3" y1="0.8" x2="0.3" y2="0.8" width="0.1016" layer="51" curve="170.055574"/>
-<wire x1="-0.275" y1="-0.825" x2="0.275" y2="-0.825" width="0.0508" layer="51" curve="-180"/>
-<wire x1="-0.4" y1="0.375" x2="-0.4" y2="-0.35" width="0.1016" layer="51"/>
-<wire x1="0.4" y1="0.35" x2="0.4" y2="-0.35" width="0.1016" layer="51"/>
-<circle x="-0.35" y="0.625" radius="0.075" width="0.0508" layer="51"/>
-<smd name="C" x="0" y="0.85" dx="1.1" dy="1" layer="1"/>
-<smd name="A" x="0" y="-0.85" dx="1.1" dy="1" layer="1"/>
-<text x="-1" y="-1" size="0.8128" layer="25" font="vector" rot="R90">&gt;NAME</text>
-<text x="2" y="-1" size="0.8128" layer="27" font="vector" rot="R90">&gt;VALUE</text>
-<rectangle x1="-0.45" y1="0.7" x2="-0.25" y2="0.85" layer="51"/>
-<rectangle x1="-0.275" y1="0.55" x2="-0.225" y2="0.6" layer="51"/>
-<rectangle x1="-0.45" y1="0.35" x2="-0.4" y2="0.725" layer="51"/>
-<rectangle x1="0.25" y1="0.55" x2="0.45" y2="0.85" layer="51"/>
-<rectangle x1="-0.45" y1="0.35" x2="0.45" y2="0.575" layer="51"/>
-<rectangle x1="-0.45" y1="-0.85" x2="-0.25" y2="-0.35" layer="51"/>
-<rectangle x1="0.25" y1="-0.85" x2="0.45" y2="-0.35" layer="51"/>
-<rectangle x1="-0.275" y1="-0.575" x2="0.275" y2="-0.35" layer="51"/>
-<rectangle x1="-0.275" y1="-0.65" x2="-0.175" y2="-0.55" layer="51"/>
-<rectangle x1="0.175" y1="-0.65" x2="0.275" y2="-0.55" layer="51"/>
-<rectangle x1="-0.125" y1="0" x2="0.125" y2="0.25" layer="21"/>
-</package>
 <package name="R0603">
 <description>&lt;b&gt;RESISTOR&lt;/b&gt;</description>
 <wire x1="-0.432" y1="-0.356" x2="0.432" y2="-0.356" width="0.1524" layer="51"/>
@@ -444,107 +426,34 @@ Source: www.farnell.com/datasheets/247.pdf</description>
 <wire x1="-1.5" y1="1" x2="-1.5" y2="-1" width="0.127" layer="21"/>
 <wire x1="1.5" y1="1" x2="1.5" y2="-1" width="0.127" layer="21"/>
 </package>
-</packages>
-</library>
-<library name="SparkFun2012">
-<description>&lt;h3&gt;SparkFun Electronics' preferred foot prints&lt;/h3&gt;
-We've spent an enormous amount of time creating and checking these footprints and parts. If you enjoy using this library, please buy one of our products at www.sparkfun.com.
-&lt;br&gt;&lt;br&gt;
-&lt;b&gt;Licensing:&lt;/b&gt; CC v3.0 Share-Alike You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
-<packages>
-<package name="LGA14">
-<wire x1="2.5" y1="1.5" x2="-2.5" y2="1.5" width="0.127" layer="51"/>
-<wire x1="-2.5" y1="1.5" x2="-2.5" y2="-1.5" width="0.127" layer="51"/>
-<wire x1="-2.5" y1="-1.5" x2="2.5" y2="-1.5" width="0.127" layer="51"/>
-<wire x1="2.5" y1="-1.5" x2="2.5" y2="1.5" width="0.127" layer="51"/>
-<wire x1="2.5" y1="1.5" x2="2.5" y2="0.7" width="0.2032" layer="21"/>
-<wire x1="2.5" y1="-0.7" x2="2.5" y2="-1.5" width="0.2032" layer="21"/>
-<wire x1="-2.5" y1="-1.5" x2="-2.5" y2="-0.7" width="0.2032" layer="21"/>
-<wire x1="-2.5" y1="0.7" x2="-2.5" y2="1.5" width="0.2032" layer="21"/>
-<wire x1="0.254" y1="-0.127" x2="0.508" y2="-0.127" width="0.0508" layer="51"/>
-<wire x1="0.508" y1="-0.127" x2="0.381" y2="0" width="0.0508" layer="51"/>
-<wire x1="0.508" y1="-0.127" x2="0.381" y2="-0.254" width="0.0508" layer="51"/>
-<wire x1="-0.381" y1="0.127" x2="-0.381" y2="0.381" width="0.0508" layer="51"/>
-<wire x1="-0.381" y1="0.381" x2="-0.508" y2="0.254" width="0.0508" layer="51"/>
-<wire x1="-0.381" y1="0.381" x2="-0.254" y2="0.254" width="0.0508" layer="51"/>
-<circle x="1" y="0" radius="0.1" width="0.2032" layer="21"/>
-<circle x="0.254" y="0.254" radius="0.127" width="0.0508" layer="51"/>
-<circle x="0.254" y="0.254" radius="0.0254" width="0.0508" layer="51"/>
-<smd name="6" x="-2" y="1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
-<smd name="5" x="-1.2" y="1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
-<smd name="4" x="-0.4" y="1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
-<smd name="3" x="0.4" y="1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
-<smd name="2" x="1.2" y="1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
-<smd name="1" x="2" y="1.1" dx="0.5" dy="1.2" layer="1"/>
-<smd name="14" x="2.1" y="0" dx="0.5" dy="1.2" layer="1" rot="R90"/>
-<smd name="13" x="2" y="-1.1" dx="0.5" dy="1.2" layer="1"/>
-<smd name="12" x="1.2" y="-1.1" dx="0.5" dy="1.2" layer="1"/>
-<smd name="11" x="0.4" y="-1.1" dx="0.5" dy="1.2" layer="1"/>
-<smd name="10" x="-0.4" y="-1.1" dx="0.5" dy="1.2" layer="1"/>
-<smd name="9" x="-1.2" y="-1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
-<smd name="8" x="-2" y="-1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
-<smd name="7" x="-2.1" y="0" dx="0.5" dy="1.2" layer="1" rot="R270"/>
-<text x="-2.032" y="2.159" size="0.4064" layer="25">&gt;Name</text>
-<text x="-2.032" y="-2.413" size="0.4064" layer="27">&gt;Value</text>
-<text x="-0.127" y="-0.254" size="0.3048" layer="51" ratio="15">X</text>
-<text x="-0.508" y="-0.254" size="0.3048" layer="51" ratio="15">Y</text>
-<text x="-0.127" y="0.127" size="0.3048" layer="51" ratio="15">Z</text>
+<package name="CHIPLED_0603">
+<description>&lt;b&gt;CHIPLED&lt;/b&gt;&lt;p&gt;
+Source: http://www.osram.convergy.de/ ... LG_LY Q971.pdf</description>
+<wire x1="-0.3" y1="0.8" x2="0.3" y2="0.8" width="0.1016" layer="51" curve="170.055574"/>
+<wire x1="-0.275" y1="-0.825" x2="0.275" y2="-0.825" width="0.0508" layer="51" curve="-180"/>
+<wire x1="-0.4" y1="0.375" x2="-0.4" y2="-0.35" width="0.1016" layer="51"/>
+<wire x1="0.4" y1="0.35" x2="0.4" y2="-0.35" width="0.1016" layer="51"/>
+<circle x="-0.35" y="0.625" radius="0.075" width="0.0508" layer="51"/>
+<smd name="C" x="0" y="0.85" dx="1.1" dy="1" layer="1"/>
+<smd name="A" x="0" y="-0.85" dx="1.1" dy="1" layer="1"/>
+<text x="-1" y="-1" size="0.8128" layer="25" font="vector" rot="R90">&gt;NAME</text>
+<text x="2" y="-1" size="0.8128" layer="27" font="vector" rot="R90">&gt;VALUE</text>
+<rectangle x1="-0.45" y1="0.7" x2="-0.25" y2="0.85" layer="51"/>
+<rectangle x1="-0.275" y1="0.55" x2="-0.225" y2="0.6" layer="51"/>
+<rectangle x1="-0.45" y1="0.35" x2="-0.4" y2="0.725" layer="51"/>
+<rectangle x1="0.25" y1="0.55" x2="0.45" y2="0.85" layer="51"/>
+<rectangle x1="-0.45" y1="0.35" x2="0.45" y2="0.575" layer="51"/>
+<rectangle x1="-0.45" y1="-0.85" x2="-0.25" y2="-0.35" layer="51"/>
+<rectangle x1="0.25" y1="-0.85" x2="0.45" y2="-0.35" layer="51"/>
+<rectangle x1="-0.275" y1="-0.575" x2="0.275" y2="-0.35" layer="51"/>
+<rectangle x1="-0.275" y1="-0.65" x2="-0.175" y2="-0.55" layer="51"/>
+<rectangle x1="0.175" y1="-0.65" x2="0.275" y2="-0.55" layer="51"/>
+<rectangle x1="-0.125" y1="0" x2="0.125" y2="0.25" layer="21"/>
+<wire x1="-0.9" y1="-1" x2="0.9" y2="-1" width="0.1" layer="39" curve="180"/>
+<wire x1="0.9" y1="1" x2="-0.9" y2="1" width="0.1" layer="39" curve="180"/>
+<wire x1="-0.9" y1="-1" x2="-0.9" y2="1" width="0.1" layer="39"/>
+<wire x1="0.9" y1="1" x2="0.9" y2="-1" width="0.1" layer="39"/>
 </package>
-<package name="USB-MINIB">
-<description>&lt;b&gt;USB Series Mini-B Surface Mounted&lt;/b&gt;</description>
-<wire x1="-1.3" y1="3.8" x2="0.8" y2="3.8" width="0.2032" layer="21"/>
-<wire x1="3.3" y1="3.1" x2="3.3" y2="2.2" width="0.2032" layer="21"/>
-<wire x1="3.3" y1="-2.2" x2="3.3" y2="-3.1" width="0.2032" layer="21"/>
-<wire x1="0.8" y1="-3.8" x2="-1.3" y2="-3.8" width="0.2032" layer="21"/>
-<wire x1="-5.9" y1="3.8" x2="-5.9" y2="-3.8" width="0.2032" layer="51"/>
-<wire x1="-5.9" y1="-3.8" x2="-4.5" y2="-3.8" width="0.2032" layer="51"/>
-<wire x1="-5.9" y1="3.8" x2="-4.5" y2="3.8" width="0.2032" layer="51"/>
-<smd name="D+" x="2.5" y="0" dx="2.5" dy="0.5" layer="1"/>
-<smd name="D-" x="2.5" y="0.8" dx="2.5" dy="0.5" layer="1"/>
-<smd name="GND" x="2.5" y="-1.6" dx="2.5" dy="0.5" layer="1"/>
-<smd name="ID" x="2.5" y="-0.8" dx="2.5" dy="0.5" layer="1"/>
-<smd name="MTN3" x="-3" y="-4.5" dx="2.5" dy="2" layer="1"/>
-<smd name="MTN1" x="-3" y="4.5" dx="2.5" dy="2" layer="1"/>
-<smd name="MTN4" x="2.5" y="-4.5" dx="2.5" dy="2" layer="1"/>
-<smd name="MTN2" x="2.5" y="4.5" dx="2.5" dy="2" layer="1"/>
-<smd name="VBUS" x="2.5" y="1.6" dx="2.5" dy="0.5" layer="1"/>
-<text x="-3.81" y="1.27" size="0.4064" layer="25">&gt;NAME</text>
-<text x="-3.81" y="0" size="0.4064" layer="27">&gt;VALUE</text>
-<hole x="0" y="2.2" drill="0.9"/>
-<hole x="0" y="-2.2" drill="0.9"/>
-</package>
-<package name="SJ_2S-NO">
-<description>Small solder jumper with no paste layer so it will open after reflow.</description>
-<wire x1="0.8" y1="-1" x2="-0.8" y2="-1" width="0.2032" layer="21"/>
-<wire x1="0.8" y1="1" x2="1" y2="0.7" width="0.2032" layer="21" curve="-90"/>
-<wire x1="-1" y1="0.7" x2="-0.8" y2="1" width="0.2032" layer="21" curve="-90"/>
-<wire x1="-1" y1="-0.7" x2="-0.8" y2="-1" width="0.2032" layer="21" curve="90"/>
-<wire x1="0.8" y1="-1" x2="1" y2="-0.7" width="0.2032" layer="21" curve="90"/>
-<wire x1="-0.8" y1="1" x2="0.8" y2="1" width="0.2032" layer="21"/>
-<smd name="1" x="-0.45" y="0" dx="0.635" dy="1.27" layer="1" cream="no"/>
-<smd name="2" x="0.45" y="0" dx="0.635" dy="1.27" layer="1" cream="no"/>
-<text x="-0.908" y="1.27" size="0.4064" layer="25">&gt;NAME</text>
-<text x="-0.908" y="-1.651" size="0.4064" layer="27">&gt;VALUE</text>
-</package>
-</packages>
-</library>
-<library name="devergy_berkelaarmrt">
-<packages>
-<package name="FLD00030">
-<wire x1="-0.432" y1="-0.356" x2="0.432" y2="-0.356" width="0.1524" layer="51"/>
-<wire x1="0.432" y1="0.356" x2="-0.432" y2="0.356" width="0.1524" layer="51"/>
-<smd name="1" x="-0.75" y="0" dx="0.8" dy="0.8" layer="1"/>
-<smd name="2" x="0.75" y="0" dx="0.8" dy="0.8" layer="1"/>
-<text x="-1" y="0.5" size="0.8128" layer="25" font="vector">&gt;NAME</text>
-<text x="-1" y="-1.5" size="0.8128" layer="27" font="vector">&gt;VALUE</text>
-<rectangle x1="0.4318" y1="-0.4318" x2="0.8382" y2="0.4318" layer="51"/>
-<rectangle x1="-0.8382" y1="-0.4318" x2="-0.4318" y2="0.4318" layer="51"/>
-<wire x1="-1.3" y1="0.5" x2="-1.3" y2="-0.5" width="0.127" layer="21"/>
-</package>
-</packages>
-</library>
-<library name="stm32">
-<packages>
 <package name="LQFP64">
 <description>&lt;b&gt;L-Quad Flat Package, 64 leads &lt;p&gt;</description>
 <wire x1="-5" y1="-5" x2="-5" y2="5" width="0.1" layer="21"/>
@@ -682,6 +591,111 @@ We've spent an enormous amount of time creating and checking these footprints an
 <rectangle x1="-5.875" y1="-2.81" x2="-5.125" y2="-2.69" layer="51"/>
 <rectangle x1="-5.875" y1="-3.31" x2="-5.125" y2="-3.19" layer="51"/>
 <rectangle x1="-5.875" y1="-3.81" x2="-5.125" y2="-3.69" layer="51"/>
+<wire x1="-6.5" y1="5.5" x2="-6.5" y2="-5.5" width="0.1" layer="39"/>
+<wire x1="-5.5" y1="-6.5" x2="5.5" y2="-6.5" width="0.1" layer="39"/>
+<wire x1="6.5" y1="-5.5" x2="6.5" y2="5.5" width="0.1" layer="39"/>
+<wire x1="5.5" y1="6.5" x2="-5.5" y2="6.5" width="0.1" layer="39"/>
+<wire x1="-6.5" y1="-5.5" x2="-5.5" y2="-6.5" width="0.1" layer="39" curve="90"/>
+<wire x1="-5.5" y1="6.5" x2="-6.5" y2="5.5" width="0.1" layer="39" curve="90"/>
+<wire x1="6.5" y1="5.5" x2="5.5" y2="6.5" width="0.1" layer="39" curve="90"/>
+<wire x1="5.5" y1="-6.5" x2="6.5" y2="-5.5" width="0.1" layer="39" curve="90"/>
+</package>
+<package name="FLD00030">
+<wire x1="-0.432" y1="-0.356" x2="0.432" y2="-0.356" width="0.1524" layer="51"/>
+<wire x1="0.432" y1="0.356" x2="-0.432" y2="0.356" width="0.1524" layer="51"/>
+<smd name="1" x="-0.75" y="0" dx="0.8" dy="0.8" layer="1"/>
+<smd name="2" x="0.75" y="0" dx="0.8" dy="0.8" layer="1"/>
+<text x="-1" y="0.5" size="0.8128" layer="25" font="vector">&gt;NAME</text>
+<text x="-1" y="-1.5" size="0.8128" layer="27" font="vector">&gt;VALUE</text>
+<rectangle x1="0.4318" y1="-0.4318" x2="0.8382" y2="0.4318" layer="51"/>
+<rectangle x1="-0.8382" y1="-0.4318" x2="-0.4318" y2="0.4318" layer="51"/>
+<wire x1="-1.3" y1="0.5" x2="-1.3" y2="-0.5" width="0.127" layer="21"/>
+<wire x1="-1" y1="-0.9" x2="1" y2="-0.9" width="0.1" layer="39"/>
+<wire x1="1" y1="0.9" x2="-1" y2="0.9" width="0.1" layer="39"/>
+<wire x1="-1" y1="0.9" x2="-1" y2="-0.9" width="0.1" layer="39" curve="180"/>
+<wire x1="1" y1="-0.9" x2="1" y2="0.9" width="0.1" layer="39" curve="180"/>
+</package>
+</packages>
+</library>
+<library name="SparkFun2012">
+<description>&lt;h3&gt;SparkFun Electronics' preferred foot prints&lt;/h3&gt;
+We've spent an enormous amount of time creating and checking these footprints and parts. If you enjoy using this library, please buy one of our products at www.sparkfun.com.
+&lt;br&gt;&lt;br&gt;
+&lt;b&gt;Licensing:&lt;/b&gt; CC v3.0 Share-Alike You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
+<packages>
+<package name="LGA14">
+<wire x1="2.5" y1="1.5" x2="-2.5" y2="1.5" width="0.127" layer="51"/>
+<wire x1="-2.5" y1="1.5" x2="-2.5" y2="-1.5" width="0.127" layer="51"/>
+<wire x1="-2.5" y1="-1.5" x2="2.5" y2="-1.5" width="0.127" layer="51"/>
+<wire x1="2.5" y1="-1.5" x2="2.5" y2="1.5" width="0.127" layer="51"/>
+<wire x1="2.5" y1="1.5" x2="2.5" y2="0.7" width="0.2032" layer="21"/>
+<wire x1="2.5" y1="-0.7" x2="2.5" y2="-1.5" width="0.2032" layer="21"/>
+<wire x1="-2.5" y1="-1.5" x2="-2.5" y2="-0.7" width="0.2032" layer="21"/>
+<wire x1="-2.5" y1="0.7" x2="-2.5" y2="1.5" width="0.2032" layer="21"/>
+<wire x1="0.254" y1="-0.127" x2="0.508" y2="-0.127" width="0.0508" layer="51"/>
+<wire x1="0.508" y1="-0.127" x2="0.381" y2="0" width="0.0508" layer="51"/>
+<wire x1="0.508" y1="-0.127" x2="0.381" y2="-0.254" width="0.0508" layer="51"/>
+<wire x1="-0.381" y1="0.127" x2="-0.381" y2="0.381" width="0.0508" layer="51"/>
+<wire x1="-0.381" y1="0.381" x2="-0.508" y2="0.254" width="0.0508" layer="51"/>
+<wire x1="-0.381" y1="0.381" x2="-0.254" y2="0.254" width="0.0508" layer="51"/>
+<circle x="1" y="0" radius="0.1" width="0.2032" layer="21"/>
+<circle x="0.254" y="0.254" radius="0.127" width="0.0508" layer="51"/>
+<circle x="0.254" y="0.254" radius="0.0254" width="0.0508" layer="51"/>
+<smd name="6" x="-2" y="1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
+<smd name="5" x="-1.2" y="1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
+<smd name="4" x="-0.4" y="1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
+<smd name="3" x="0.4" y="1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
+<smd name="2" x="1.2" y="1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
+<smd name="1" x="2" y="1.1" dx="0.5" dy="1.2" layer="1"/>
+<smd name="14" x="2.1" y="0" dx="0.5" dy="1.2" layer="1" rot="R90"/>
+<smd name="13" x="2" y="-1.1" dx="0.5" dy="1.2" layer="1"/>
+<smd name="12" x="1.2" y="-1.1" dx="0.5" dy="1.2" layer="1"/>
+<smd name="11" x="0.4" y="-1.1" dx="0.5" dy="1.2" layer="1"/>
+<smd name="10" x="-0.4" y="-1.1" dx="0.5" dy="1.2" layer="1"/>
+<smd name="9" x="-1.2" y="-1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
+<smd name="8" x="-2" y="-1.1" dx="0.5" dy="1.2" layer="1" rot="R180"/>
+<smd name="7" x="-2.1" y="0" dx="0.5" dy="1.2" layer="1" rot="R270"/>
+<text x="-2.032" y="2.159" size="0.4064" layer="25">&gt;Name</text>
+<text x="-2.032" y="-2.413" size="0.4064" layer="27">&gt;Value</text>
+<text x="-0.127" y="-0.254" size="0.3048" layer="51" ratio="15">X</text>
+<text x="-0.508" y="-0.254" size="0.3048" layer="51" ratio="15">Y</text>
+<text x="-0.127" y="0.127" size="0.3048" layer="51" ratio="15">Z</text>
+</package>
+<package name="USB-MINIB">
+<description>&lt;b&gt;USB Series Mini-B Surface Mounted&lt;/b&gt;</description>
+<wire x1="-1.3" y1="3.8" x2="0.8" y2="3.8" width="0.2032" layer="21"/>
+<wire x1="3.3" y1="3.1" x2="3.3" y2="2.2" width="0.2032" layer="21"/>
+<wire x1="3.3" y1="-2.2" x2="3.3" y2="-3.1" width="0.2032" layer="21"/>
+<wire x1="0.8" y1="-3.8" x2="-1.3" y2="-3.8" width="0.2032" layer="21"/>
+<wire x1="-5.9" y1="3.8" x2="-5.9" y2="-3.8" width="0.2032" layer="51"/>
+<wire x1="-5.9" y1="-3.8" x2="-4.5" y2="-3.8" width="0.2032" layer="51"/>
+<wire x1="-5.9" y1="3.8" x2="-4.5" y2="3.8" width="0.2032" layer="51"/>
+<smd name="D+" x="2.5" y="0" dx="2.5" dy="0.5" layer="1"/>
+<smd name="D-" x="2.5" y="0.8" dx="2.5" dy="0.5" layer="1"/>
+<smd name="GND" x="2.5" y="-1.6" dx="2.5" dy="0.5" layer="1"/>
+<smd name="ID" x="2.5" y="-0.8" dx="2.5" dy="0.5" layer="1"/>
+<smd name="MTN3" x="-3" y="-4.5" dx="2.5" dy="2" layer="1"/>
+<smd name="MTN1" x="-3" y="4.5" dx="2.5" dy="2" layer="1"/>
+<smd name="MTN4" x="2.5" y="-4.5" dx="2.5" dy="2" layer="1"/>
+<smd name="MTN2" x="2.5" y="4.5" dx="2.5" dy="2" layer="1"/>
+<smd name="VBUS" x="2.5" y="1.6" dx="2.5" dy="0.5" layer="1"/>
+<text x="-3.81" y="1.27" size="0.4064" layer="25">&gt;NAME</text>
+<text x="-3.81" y="0" size="0.4064" layer="27">&gt;VALUE</text>
+<hole x="0" y="2.2" drill="0.9"/>
+<hole x="0" y="-2.2" drill="0.9"/>
+</package>
+<package name="SJ_2S-NO">
+<description>Small solder jumper with no paste layer so it will open after reflow.</description>
+<wire x1="0.8" y1="-1" x2="-0.8" y2="-1" width="0.2032" layer="21"/>
+<wire x1="0.8" y1="1" x2="1" y2="0.7" width="0.2032" layer="21" curve="-90"/>
+<wire x1="-1" y1="0.7" x2="-0.8" y2="1" width="0.2032" layer="21" curve="-90"/>
+<wire x1="-1" y1="-0.7" x2="-0.8" y2="-1" width="0.2032" layer="21" curve="90"/>
+<wire x1="0.8" y1="-1" x2="1" y2="-0.7" width="0.2032" layer="21" curve="90"/>
+<wire x1="-0.8" y1="1" x2="0.8" y2="1" width="0.2032" layer="21"/>
+<smd name="1" x="-0.45" y="0" dx="0.635" dy="1.27" layer="1" cream="no"/>
+<smd name="2" x="0.45" y="0" dx="0.635" dy="1.27" layer="1" cream="no"/>
+<text x="-0.908" y="1.27" size="0.4064" layer="25">&gt;NAME</text>
+<text x="-0.908" y="-1.651" size="0.4064" layer="27">&gt;VALUE</text>
 </package>
 </packages>
 </library>
@@ -863,554 +877,554 @@ We've spent an enormous amount of time creating and checking these footprints an
 </pass>
 </autorouter>
 <elements>
-<element name="MIN0" library="Custom components" package="CHIPLED_0603" value="" x="50" y="24.6" smashed="yes" rot="R180">
+<element name="MIN0" library="timearc" package="CHIPLED_0603" value="" x="50" y="24.6" smashed="yes" rot="R180">
 <attribute name="NAME" x="51" y="25.6" size="0.8128" layer="51" font="vector" rot="R270"/>
 <attribute name="VALUE" x="48" y="25.6" size="0.8128" layer="27" font="vector" rot="R270"/>
 </element>
-<element name="SEC0" library="Custom components" package="CHIPLED_0603" value="" x="50" y="18.25" smashed="yes">
+<element name="SEC0" library="timearc" package="CHIPLED_0603" value="" x="50" y="18.25" smashed="yes">
 <attribute name="NAME" x="49" y="17.25" size="0.8128" layer="51" font="vector" rot="R90"/>
 <attribute name="VALUE" x="52" y="17.25" size="0.8128" layer="27" font="vector" rot="R90"/>
 </element>
-<element name="MIN1" library="Custom components" package="CHIPLED_0603" value="" x="47.3449875" y="24.739140625" smashed="yes" rot="R174">
+<element name="MIN1" library="timearc" package="CHIPLED_0603" value="" x="47.3449875" y="24.739140625" smashed="yes" rot="R174">
 <attribute name="NAME" x="48.444040625" y="25.629134375" size="0.8128" layer="51" font="vector" rot="R264"/>
 <attribute name="VALUE" x="45.460475" y="25.942721875" size="0.8128" layer="27" font="vector" rot="R264"/>
 </element>
-<element name="SEC1" library="Custom components" package="CHIPLED_0603" value="" x="46.681209375" y="18.423940625" smashed="yes" rot="R354">
+<element name="SEC1" library="timearc" package="CHIPLED_0603" value="" x="46.681209375" y="18.423940625" smashed="yes" rot="R354">
 <attribute name="NAME" x="45.582159375" y="17.53395" size="0.8128" layer="51" font="vector" rot="R84"/>
 <attribute name="VALUE" x="48.565725" y="17.2203625" size="0.8128" layer="27" font="vector" rot="R84"/>
 </element>
-<element name="MIN2" library="Custom components" package="CHIPLED_0603" value="" x="44.719034375" y="25.155040625" smashed="yes" rot="R168">
+<element name="MIN2" library="timearc" package="CHIPLED_0603" value="" x="44.719034375" y="25.155040625" smashed="yes" rot="R168">
 <attribute name="NAME" x="45.90509375" y="25.925278125" size="0.8128" layer="51" font="vector" rot="R258"/>
 <attribute name="VALUE" x="42.970653125" y="26.5490125" size="0.8128" layer="27" font="vector" rot="R258"/>
 </element>
-<element name="SEC2" library="Custom components" package="CHIPLED_0603" value="" x="43.39879375" y="18.9438" smashed="yes" rot="R348">
+<element name="SEC2" library="timearc" package="CHIPLED_0603" value="" x="43.39879375" y="18.9438" smashed="yes" rot="R348">
 <attribute name="NAME" x="42.2127375" y="18.173565625" size="0.8128" layer="51" font="vector" rot="R78"/>
 <attribute name="VALUE" x="45.147178125" y="17.54983125" size="0.8128" layer="27" font="vector" rot="R78"/>
 </element>
-<element name="MIN3" library="Custom components" package="CHIPLED_0603" value="" x="42.15096875" y="25.843153125" smashed="yes" rot="R162">
+<element name="MIN3" library="timearc" package="CHIPLED_0603" value="" x="42.15096875" y="25.843153125" smashed="yes" rot="R162">
 <attribute name="NAME" x="43.41104375" y="26.48519375" size="0.8128" layer="51" font="vector" rot="R252"/>
 <attribute name="VALUE" x="40.557875" y="27.41224375" size="0.8128" layer="27" font="vector" rot="R252"/>
 </element>
-<element name="SEC3" library="Custom components" package="CHIPLED_0603" value="" x="40.188715625" y="19.803946875" smashed="yes" rot="R342">
+<element name="SEC3" library="timearc" package="CHIPLED_0603" value="" x="40.188715625" y="19.803946875" smashed="yes" rot="R342">
 <attribute name="NAME" x="38.92864375" y="19.161909375" size="0.8128" layer="51" font="vector" rot="R72"/>
 <attribute name="VALUE" x="41.7818125" y="18.234859375" size="0.8128" layer="27" font="vector" rot="R72"/>
 </element>
-<element name="MIN4" library="Custom components" package="CHIPLED_0603" value="" x="39.66888125" y="26.79595625" smashed="yes" rot="R156">
+<element name="MIN4" library="timearc" package="CHIPLED_0603" value="" x="39.66888125" y="26.79595625" smashed="yes" rot="R156">
 <attribute name="NAME" x="40.989165625" y="27.302765625" size="0.8128" layer="51" font="vector" rot="R246"/>
 <attribute name="VALUE" x="38.248528125" y="28.522975" size="0.8128" layer="27" font="vector" rot="R246"/>
 </element>
-<element name="SEC4" library="Custom components" package="CHIPLED_0603" value="" x="37.08610625" y="20.994928125" smashed="yes" rot="R336">
+<element name="SEC4" library="timearc" package="CHIPLED_0603" value="" x="37.08610625" y="20.994928125" smashed="yes" rot="R336">
 <attribute name="NAME" x="35.765825" y="20.488121875" size="0.8128" layer="51" font="vector" rot="R66"/>
 <attribute name="VALUE" x="38.5064625" y="19.2679125" size="0.8128" layer="27" font="vector" rot="R66"/>
 </element>
-<element name="MIN5" library="Custom components" package="CHIPLED_0603" value="" x="37.3" y="28.002965625" smashed="yes" rot="R150">
+<element name="MIN5" library="timearc" package="CHIPLED_0603" value="" x="37.3" y="28.002965625" smashed="yes" rot="R150">
 <attribute name="NAME" x="38.666028125" y="28.36899375" size="0.8128" layer="51" font="vector" rot="R240"/>
 <attribute name="VALUE" x="36.06795" y="29.86899375" size="0.8128" layer="27" font="vector" rot="R240"/>
 </element>
-<element name="SEC5" library="Custom components" package="CHIPLED_0603" value="" x="34.125" y="22.5036875" smashed="yes" rot="R330">
+<element name="SEC5" library="timearc" package="CHIPLED_0603" value="" x="34.125" y="22.5036875" smashed="yes" rot="R330">
 <attribute name="NAME" x="32.758975" y="22.1376625" size="0.8128" layer="51" font="vector" rot="R60"/>
 <attribute name="VALUE" x="35.357053125" y="20.6376625" size="0.8128" layer="27" font="vector" rot="R60"/>
 </element>
-<element name="MIN6" library="Custom components" package="CHIPLED_0603" value="" x="35.0702625" y="29.45096875" smashed="yes" rot="R144">
+<element name="MIN6" library="timearc" package="CHIPLED_0603" value="" x="35.0702625" y="29.45096875" smashed="yes" rot="R144">
 <attribute name="NAME" x="36.467065625" y="29.672203125" size="0.8128" layer="51" font="vector" rot="R234"/>
 <attribute name="VALUE" x="34.040015625" y="31.43555625" size="0.8128" layer="27" font="vector" rot="R234"/>
 </element>
-<element name="SEC6" library="Custom components" package="CHIPLED_0603" value="" x="31.33780625" y="24.313715625" smashed="yes" rot="R324">
+<element name="SEC6" library="timearc" package="CHIPLED_0603" value="" x="31.33780625" y="24.313715625" smashed="yes" rot="R324">
 <attribute name="NAME" x="29.94100625" y="24.092484375" size="0.8128" layer="51" font="vector" rot="R54"/>
 <attribute name="VALUE" x="32.36805625" y="22.32913125" size="0.8128" layer="27" font="vector" rot="R54"/>
 </element>
-<element name="MIN7" library="Custom components" package="CHIPLED_0603" value="" x="33.004071875" y="31.124115625" smashed="yes" rot="R138">
+<element name="MIN7" library="timearc" package="CHIPLED_0603" value="" x="33.004071875" y="31.124115625" smashed="yes" rot="R138">
 <attribute name="NAME" x="34.41635" y="31.19813125" size="0.8128" layer="51" font="vector" rot="R228"/>
 <attribute name="VALUE" x="32.186915625" y="33.205521875" size="0.8128" layer="27" font="vector" rot="R228"/>
 </element>
-<element name="SEC7" library="Custom components" package="CHIPLED_0603" value="" x="28.755109375" y="26.405153125" smashed="yes" rot="R318">
+<element name="SEC7" library="timearc" package="CHIPLED_0603" value="" x="28.755109375" y="26.405153125" smashed="yes" rot="R318">
 <attribute name="NAME" x="27.342834375" y="26.331140625" size="0.8128" layer="51" font="vector" rot="R48"/>
 <attribute name="VALUE" x="29.57226875" y="24.32375" size="0.8128" layer="27" font="vector" rot="R48"/>
 </element>
-<element name="MIN8" library="Custom components" package="CHIPLED_0603" value="" x="31.124115625" y="33.004071875" smashed="yes" rot="R132">
+<element name="MIN8" library="timearc" package="CHIPLED_0603" value="" x="31.124115625" y="33.004071875" smashed="yes" rot="R132">
 <attribute name="NAME" x="32.53639375" y="32.930059375" size="0.8128" layer="51" font="vector" rot="R222"/>
 <attribute name="VALUE" x="30.529" y="35.15949375" size="0.8128" layer="27" font="vector" rot="R222"/>
 </element>
-<element name="SEC8" library="Custom components" package="CHIPLED_0603" value="" x="26.405153125" y="28.755109375" smashed="yes" rot="R312">
+<element name="SEC8" library="timearc" package="CHIPLED_0603" value="" x="26.405153125" y="28.755109375" smashed="yes" rot="R312">
 <attribute name="NAME" x="24.992878125" y="28.829125" size="0.8128" layer="51" font="vector" rot="R42"/>
 <attribute name="VALUE" x="27.000271875" y="26.599690625" size="0.8128" layer="27" font="vector" rot="R42"/>
 </element>
-<element name="MIN9" library="Custom components" package="CHIPLED_0603" value="" x="29.45096875" y="35.0702625" smashed="yes" rot="R126">
+<element name="MIN9" library="timearc" package="CHIPLED_0603" value="" x="29.45096875" y="35.0702625" smashed="yes" rot="R126">
 <attribute name="NAME" x="30.847771875" y="34.84903125" size="0.8128" layer="51" font="vector" rot="R216"/>
 <attribute name="VALUE" x="29.084415625" y="37.276084375" size="0.8128" layer="27" font="vector" rot="R216"/>
 </element>
-<element name="SEC9" library="Custom components" package="CHIPLED_0603" value="" x="24.313715625" y="31.33780625" smashed="yes" rot="R306">
+<element name="SEC9" library="timearc" package="CHIPLED_0603" value="" x="24.313715625" y="31.33780625" smashed="yes" rot="R306">
 <attribute name="NAME" x="22.916915625" y="31.559040625" size="0.8128" layer="51" font="vector" rot="R36"/>
 <attribute name="VALUE" x="24.680271875" y="29.1319875" size="0.8128" layer="27" font="vector" rot="R36"/>
 </element>
-<element name="MIN10" library="Custom components" package="CHIPLED_0603" value="" x="28.002965625" y="37.3" smashed="yes" rot="R120">
+<element name="MIN10" library="timearc" package="CHIPLED_0603" value="" x="28.002965625" y="37.3" smashed="yes" rot="R120">
 <attribute name="NAME" x="29.36899375" y="36.933975" size="0.8128" layer="51" font="vector" rot="R210"/>
 <attribute name="VALUE" x="27.86899375" y="39.532053125" size="0.8128" layer="27" font="vector" rot="R210"/>
 </element>
-<element name="SEC10" library="Custom components" package="CHIPLED_0603" value="" x="22.5036875" y="34.125" smashed="yes" rot="R300">
+<element name="SEC10" library="timearc" package="CHIPLED_0603" value="" x="22.5036875" y="34.125" smashed="yes" rot="R300">
 <attribute name="NAME" x="21.1376625" y="34.491028125" size="0.8128" layer="51" font="vector" rot="R30"/>
 <attribute name="VALUE" x="22.6376625" y="31.89295" size="0.8128" layer="27" font="vector" rot="R30"/>
 </element>
-<element name="MIN11" library="Custom components" package="CHIPLED_0603" value="" x="26.79595625" y="39.66888125" smashed="yes" rot="R114">
+<element name="MIN11" library="timearc" package="CHIPLED_0603" value="" x="26.79595625" y="39.66888125" smashed="yes" rot="R114">
 <attribute name="NAME" x="28.116240625" y="39.162075" size="0.8128" layer="51" font="vector" rot="R204"/>
 <attribute name="VALUE" x="26.89603125" y="41.902709375" size="0.8128" layer="27" font="vector" rot="R204"/>
 </element>
-<element name="SEC11" library="Custom components" package="CHIPLED_0603" value="" x="20.994928125" y="37.08610625" smashed="yes" rot="R294">
+<element name="SEC11" library="timearc" package="CHIPLED_0603" value="" x="20.994928125" y="37.08610625" smashed="yes" rot="R294">
 <attribute name="NAME" x="19.674646875" y="37.592915625" size="0.8128" layer="51" font="vector" rot="R24"/>
 <attribute name="VALUE" x="20.89485625" y="34.85228125" size="0.8128" layer="27" font="vector" rot="R24"/>
 </element>
-<element name="MIN12" library="Custom components" package="CHIPLED_0603" value="" x="25.843153125" y="42.15096875" smashed="yes" rot="R108">
+<element name="MIN12" library="timearc" package="CHIPLED_0603" value="" x="25.843153125" y="42.15096875" smashed="yes" rot="R108">
 <attribute name="NAME" x="27.103228125" y="41.50893125" size="0.8128" layer="51" font="vector" rot="R198"/>
 <attribute name="VALUE" x="26.176178125" y="44.3621" size="0.8128" layer="27" font="vector" rot="R198"/>
 </element>
-<element name="SEC12" library="Custom components" package="CHIPLED_0603" value="" x="19.803946875" y="40.188715625" smashed="yes" rot="R288">
+<element name="SEC12" library="timearc" package="CHIPLED_0603" value="" x="19.803946875" y="40.188715625" smashed="yes" rot="R288">
 <attribute name="NAME" x="18.543875" y="40.83075625" size="0.8128" layer="51" font="vector" rot="R18"/>
 <attribute name="VALUE" x="19.470925" y="37.9775875" size="0.8128" layer="27" font="vector" rot="R18"/>
 </element>
-<element name="MIN13" library="Custom components" package="CHIPLED_0603" value="" x="25.155040625" y="44.719034375" smashed="yes" rot="R102">
+<element name="MIN13" library="timearc" package="CHIPLED_0603" value="" x="25.155040625" y="44.719034375" smashed="yes" rot="R102">
 <attribute name="NAME" x="26.3411" y="43.9488" size="0.8128" layer="51" font="vector" rot="R192"/>
 <attribute name="VALUE" x="25.717365625" y="46.88324375" size="0.8128" layer="27" font="vector" rot="R192"/>
 </element>
-<element name="SEC13" library="Custom components" package="CHIPLED_0603" value="" x="18.9438" y="43.39879375" smashed="yes" rot="R282">
+<element name="SEC13" library="timearc" package="CHIPLED_0603" value="" x="18.9438" y="43.39879375" smashed="yes" rot="R282">
 <attribute name="NAME" x="17.75774375" y="44.16903125" size="0.8128" layer="51" font="vector" rot="R12"/>
 <attribute name="VALUE" x="18.381478125" y="41.2345875" size="0.8128" layer="27" font="vector" rot="R12"/>
 </element>
-<element name="MIN14" library="Custom components" package="CHIPLED_0603" value="" x="24.739140625" y="47.3449875" smashed="yes" rot="R96">
+<element name="MIN14" library="timearc" package="CHIPLED_0603" value="" x="24.739140625" y="47.3449875" smashed="yes" rot="R96">
 <attribute name="NAME" x="25.83819375" y="46.454996875" size="0.8128" layer="51" font="vector" rot="R186"/>
 <attribute name="VALUE" x="25.52460625" y="49.4385625" size="0.8128" layer="27" font="vector" rot="R186"/>
 </element>
-<element name="SEC14" library="Custom components" package="CHIPLED_0603" value="" x="18.423940625" y="46.681209375" smashed="yes" rot="R276">
+<element name="SEC14" library="timearc" package="CHIPLED_0603" value="" x="18.423940625" y="46.681209375" smashed="yes" rot="R276">
 <attribute name="NAME" x="17.324890625" y="47.571203125" size="0.8128" layer="51" font="vector" rot="R6"/>
 <attribute name="VALUE" x="17.638478125" y="44.5876375" size="0.8128" layer="27" font="vector" rot="R6"/>
 </element>
-<element name="MIN15" library="Custom components" package="CHIPLED_0603" value="" x="24.6" y="50" smashed="yes" rot="R90">
+<element name="MIN15" library="timearc" package="CHIPLED_0603" value="" x="24.6" y="50" smashed="yes" rot="R90">
 <attribute name="NAME" x="25.6" y="49" size="0.8128" layer="51" font="vector" rot="R180"/>
 <attribute name="VALUE" x="25.6" y="52" size="0.8128" layer="27" font="vector" rot="R180"/>
 </element>
-<element name="SEC15" library="Custom components" package="CHIPLED_0603" value="" x="18.25" y="50" smashed="yes" rot="R270">
+<element name="SEC15" library="timearc" package="CHIPLED_0603" value="" x="18.25" y="50" smashed="yes" rot="R270">
 <attribute name="NAME" x="17.25" y="51" size="0.8128" layer="51" font="vector"/>
 <attribute name="VALUE" x="17.25" y="48" size="0.8128" layer="27" font="vector"/>
 </element>
-<element name="MIN16" library="Custom components" package="CHIPLED_0603" value="" x="24.739140625" y="52.6550125" smashed="yes" rot="R84">
+<element name="MIN16" library="timearc" package="CHIPLED_0603" value="" x="24.739140625" y="52.6550125" smashed="yes" rot="R84">
 <attribute name="NAME" x="25.629134375" y="51.5559625" size="0.8128" layer="51" font="vector" rot="R174"/>
 <attribute name="VALUE" x="25.942721875" y="54.539528125" size="0.8128" layer="27" font="vector" rot="R174"/>
 </element>
-<element name="SEC16" library="Custom components" package="CHIPLED_0603" value="" x="18.423940625" y="53.318790625" smashed="yes" rot="R264">
+<element name="SEC16" library="timearc" package="CHIPLED_0603" value="" x="18.423940625" y="53.318790625" smashed="yes" rot="R264">
 <attribute name="NAME" x="17.53395" y="54.41784375" size="0.8128" layer="51" font="vector" rot="R354"/>
 <attribute name="VALUE" x="17.2203625" y="51.434278125" size="0.8128" layer="27" font="vector" rot="R354"/>
 </element>
-<element name="MIN17" library="Custom components" package="CHIPLED_0603" value="" x="25.155040625" y="55.280965625" smashed="yes" rot="R78">
+<element name="MIN17" library="timearc" package="CHIPLED_0603" value="" x="25.155040625" y="55.280965625" smashed="yes" rot="R78">
 <attribute name="NAME" x="25.925278125" y="54.094909375" size="0.8128" layer="51" font="vector" rot="R168"/>
 <attribute name="VALUE" x="26.5490125" y="57.02935" size="0.8128" layer="27" font="vector" rot="R168"/>
 </element>
-<element name="SEC17" library="Custom components" package="CHIPLED_0603" value="" x="18.9438" y="56.60120625" smashed="yes" rot="R258">
+<element name="SEC17" library="timearc" package="CHIPLED_0603" value="" x="18.9438" y="56.60120625" smashed="yes" rot="R258">
 <attribute name="NAME" x="18.173565625" y="57.787265625" size="0.8128" layer="51" font="vector" rot="R348"/>
 <attribute name="VALUE" x="17.54983125" y="54.852825" size="0.8128" layer="27" font="vector" rot="R348"/>
 </element>
-<element name="MIN18" library="Custom components" package="CHIPLED_0603" value="" x="25.843153125" y="57.84903125" smashed="yes" rot="R72">
+<element name="MIN18" library="timearc" package="CHIPLED_0603" value="" x="25.843153125" y="57.84903125" smashed="yes" rot="R72">
 <attribute name="NAME" x="26.48519375" y="56.588959375" size="0.8128" layer="51" font="vector" rot="R162"/>
 <attribute name="VALUE" x="27.41224375" y="59.442128125" size="0.8128" layer="27" font="vector" rot="R162"/>
 </element>
-<element name="SEC18" library="Custom components" package="CHIPLED_0603" value="" x="19.803946875" y="59.811284375" smashed="yes" rot="R252">
+<element name="SEC18" library="timearc" package="CHIPLED_0603" value="" x="19.803946875" y="59.811284375" smashed="yes" rot="R252">
 <attribute name="NAME" x="19.161909375" y="61.071359375" size="0.8128" layer="51" font="vector" rot="R342"/>
 <attribute name="VALUE" x="18.234859375" y="58.218190625" size="0.8128" layer="27" font="vector" rot="R342"/>
 </element>
-<element name="MIN19" library="Custom components" package="CHIPLED_0603" value="" x="26.79595625" y="60.33111875" smashed="yes" rot="R66">
+<element name="MIN19" library="timearc" package="CHIPLED_0603" value="" x="26.79595625" y="60.33111875" smashed="yes" rot="R66">
 <attribute name="NAME" x="27.302765625" y="59.0108375" size="0.8128" layer="51" font="vector" rot="R156"/>
 <attribute name="VALUE" x="28.522975" y="61.751475" size="0.8128" layer="27" font="vector" rot="R156"/>
 </element>
-<element name="SEC19" library="Custom components" package="CHIPLED_0603" value="" x="20.994928125" y="62.91389375" smashed="yes" rot="R246">
+<element name="SEC19" library="timearc" package="CHIPLED_0603" value="" x="20.994928125" y="62.91389375" smashed="yes" rot="R246">
 <attribute name="NAME" x="27.765821875" y="71.488121875" size="0.8128" layer="51" font="vector" rot="R66"/>
 <attribute name="VALUE" x="19.2679125" y="61.493540625" size="0.8128" layer="27" font="vector" rot="R336"/>
 </element>
-<element name="MIN20" library="Custom components" package="CHIPLED_0603" value="" x="28.002965625" y="62.7" smashed="yes" rot="R60">
+<element name="MIN20" library="timearc" package="CHIPLED_0603" value="" x="28.002965625" y="62.7" smashed="yes" rot="R60">
 <attribute name="NAME" x="28.36899375" y="61.333975" size="0.8128" layer="51" font="vector" rot="R150"/>
 <attribute name="VALUE" x="29.86899375" y="63.932053125" size="0.8128" layer="27" font="vector" rot="R150"/>
 </element>
-<element name="SEC20" library="Custom components" package="CHIPLED_0603" value="" x="22.5036875" y="65.875" smashed="yes" rot="R240">
+<element name="SEC20" library="timearc" package="CHIPLED_0603" value="" x="22.5036875" y="65.875" smashed="yes" rot="R240">
 <attribute name="NAME" x="22.1376625" y="67.241028125" size="0.8128" layer="51" font="vector" rot="R330"/>
 <attribute name="VALUE" x="20.6376625" y="64.64295" size="0.8128" layer="27" font="vector" rot="R330"/>
 </element>
-<element name="MIN21" library="Custom components" package="CHIPLED_0603" value="" x="29.45096875" y="64.9297375" smashed="yes" rot="R54">
+<element name="MIN21" library="timearc" package="CHIPLED_0603" value="" x="29.45096875" y="64.9297375" smashed="yes" rot="R54">
 <attribute name="NAME" x="29.672203125" y="63.5329375" size="0.8128" layer="51" font="vector" rot="R144"/>
 <attribute name="VALUE" x="31.43555625" y="65.9599875" size="0.8128" layer="27" font="vector" rot="R144"/>
 </element>
-<element name="SEC21" library="Custom components" package="CHIPLED_0603" value="" x="24.313715625" y="68.66219375" smashed="yes" rot="R234">
+<element name="SEC21" library="timearc" package="CHIPLED_0603" value="" x="24.313715625" y="68.66219375" smashed="yes" rot="R234">
 <attribute name="VALUE" x="22.32913125" y="67.631946875" size="0.8128" layer="27" font="vector" rot="R324"/>
 </element>
-<element name="MIN22" library="Custom components" package="CHIPLED_0603" value="" x="31.124115625" y="66.995928125" smashed="yes" rot="R48">
+<element name="MIN22" library="timearc" package="CHIPLED_0603" value="" x="31.124115625" y="66.995928125" smashed="yes" rot="R48">
 <attribute name="NAME" x="31.19813125" y="65.583653125" size="0.8128" layer="51" font="vector" rot="R138"/>
 <attribute name="VALUE" x="33.205521875" y="67.8130875" size="0.8128" layer="27" font="vector" rot="R138"/>
 </element>
-<element name="SEC22" library="Custom components" package="CHIPLED_0603" value="" x="26.405153125" y="71.244890625" smashed="yes" rot="R228">
+<element name="SEC22" library="timearc" package="CHIPLED_0603" value="" x="26.405153125" y="71.244890625" smashed="yes" rot="R228">
 <attribute name="NAME" x="26.331140625" y="72.65716875" size="0.8128" layer="51" font="vector" rot="R318"/>
 <attribute name="VALUE" x="24.32375" y="70.427734375" size="0.8128" layer="27" font="vector" rot="R318"/>
 </element>
-<element name="MIN23" library="Custom components" package="CHIPLED_0603" value="" x="33.004071875" y="68.875884375" smashed="yes" rot="R42">
+<element name="MIN23" library="timearc" package="CHIPLED_0603" value="" x="33.004071875" y="68.875884375" smashed="yes" rot="R42">
 <attribute name="NAME" x="32.930059375" y="67.463609375" size="0.8128" layer="51" font="vector" rot="R132"/>
 <attribute name="VALUE" x="35.15949375" y="69.471003125" size="0.8128" layer="27" font="vector" rot="R132"/>
 </element>
-<element name="SEC23" library="Custom components" package="CHIPLED_0603" value="" x="28.755109375" y="73.594846875" smashed="yes" rot="R222">
+<element name="SEC23" library="timearc" package="CHIPLED_0603" value="" x="28.755109375" y="73.594846875" smashed="yes" rot="R222">
 <attribute name="NAME" x="28.829125" y="71.007125" size="0.8128" layer="51" font="vector" rot="R312"/>
 <attribute name="VALUE" x="26.599690625" y="72.99973125" size="0.8128" layer="27" font="vector" rot="R312"/>
 </element>
-<element name="MIN24" library="Custom components" package="CHIPLED_0603" value="" x="35.0702625" y="70.54903125" smashed="yes" rot="R36">
+<element name="MIN24" library="timearc" package="CHIPLED_0603" value="" x="35.0702625" y="70.54903125" smashed="yes" rot="R36">
 <attribute name="NAME" x="34.84903125" y="69.15223125" size="0.8128" layer="51" font="vector" rot="R126"/>
 <attribute name="VALUE" x="37.276084375" y="70.9155875" size="0.8128" layer="27" font="vector" rot="R126"/>
 </element>
-<element name="SEC24" library="Custom components" package="CHIPLED_0603" value="" x="31.33780625" y="75.686284375" smashed="yes" rot="R216">
+<element name="SEC24" library="timearc" package="CHIPLED_0603" value="" x="31.33780625" y="75.686284375" smashed="yes" rot="R216">
 <attribute name="NAME" x="31.559040625" y="77.0830875" size="0.8128" layer="51" font="vector" rot="R306"/>
 <attribute name="VALUE" x="29.1319875" y="75.31973125" size="0.8128" layer="27" font="vector" rot="R306"/>
 </element>
-<element name="MIN25" library="Custom components" package="CHIPLED_0603" value="" x="37.3" y="71.997034375" smashed="yes" rot="R30">
+<element name="MIN25" library="timearc" package="CHIPLED_0603" value="" x="37.3" y="71.997034375" smashed="yes" rot="R30">
 <attribute name="NAME" x="36.933975" y="70.631009375" size="0.8128" layer="51" font="vector" rot="R120"/>
 <attribute name="VALUE" x="39.532053125" y="72.131009375" size="0.8128" layer="27" font="vector" rot="R120"/>
 </element>
-<element name="SEC25" library="Custom components" package="CHIPLED_0603" value="" x="34.125" y="77.4963125" smashed="yes" rot="R210">
+<element name="SEC25" library="timearc" package="CHIPLED_0603" value="" x="34.125" y="77.4963125" smashed="yes" rot="R210">
 <attribute name="NAME" x="34.491028125" y="78.862340625" size="0.8128" layer="51" font="vector" rot="R300"/>
 <attribute name="VALUE" x="31.89295" y="77.362340625" size="0.8128" layer="27" font="vector" rot="R300"/>
 </element>
-<element name="MIN26" library="Custom components" package="CHIPLED_0603" value="" x="39.66888125" y="73.20404375" smashed="yes" rot="R24">
+<element name="MIN26" library="timearc" package="CHIPLED_0603" value="" x="39.66888125" y="73.20404375" smashed="yes" rot="R24">
 <attribute name="NAME" x="39.162075" y="71.8837625" size="0.8128" layer="51" font="vector" rot="R114"/>
 <attribute name="VALUE" x="41.902709375" y="73.103971875" size="0.8128" layer="27" font="vector" rot="R114"/>
 </element>
-<element name="SEC26" library="Custom components" package="CHIPLED_0603" value="" x="37.08610625" y="79.005071875" smashed="yes" rot="R204">
+<element name="SEC26" library="timearc" package="CHIPLED_0603" value="" x="37.08610625" y="79.005071875" smashed="yes" rot="R204">
 <attribute name="NAME" x="37.592915625" y="80.32535625" size="0.8128" layer="51" font="vector" rot="R294"/>
 <attribute name="VALUE" x="34.85228125" y="79.105146875" size="0.8128" layer="27" font="vector" rot="R294"/>
 </element>
-<element name="MIN27" library="Custom components" package="CHIPLED_0603" value="" x="42.15096875" y="74.156846875" smashed="yes" rot="R18">
+<element name="MIN27" library="timearc" package="CHIPLED_0603" value="" x="42.15096875" y="74.156846875" smashed="yes" rot="R18">
 <attribute name="NAME" x="41.50893125" y="72.896775" size="0.8128" layer="51" font="vector" rot="R108"/>
 <attribute name="VALUE" x="44.3621" y="73.823825" size="0.8128" layer="27" font="vector" rot="R108"/>
 </element>
-<element name="SEC27" library="Custom components" package="CHIPLED_0603" value="" x="40.188715625" y="80.196053125" smashed="yes" rot="R198">
+<element name="SEC27" library="timearc" package="CHIPLED_0603" value="" x="40.188715625" y="80.196053125" smashed="yes" rot="R198">
 <attribute name="NAME" x="40.83075625" y="81.456128125" size="0.8128" layer="51" font="vector" rot="R288"/>
 <attribute name="VALUE" x="37.9775875" y="80.529078125" size="0.8128" layer="27" font="vector" rot="R288"/>
 </element>
-<element name="MIN28" library="Custom components" package="CHIPLED_0603" value="" x="44.719034375" y="74.844959375" smashed="yes" rot="R12">
+<element name="MIN28" library="timearc" package="CHIPLED_0603" value="" x="44.719034375" y="74.844959375" smashed="yes" rot="R12">
 <attribute name="NAME" x="43.9488" y="73.658903125" size="0.8128" layer="51" font="vector" rot="R102"/>
 <attribute name="VALUE" x="46.88324375" y="74.2826375" size="0.8128" layer="27" font="vector" rot="R102"/>
 </element>
-<element name="SEC28" library="Custom components" package="CHIPLED_0603" value="" x="43.39879375" y="81.0562" smashed="yes" rot="R192">
+<element name="SEC28" library="timearc" package="CHIPLED_0603" value="" x="43.39879375" y="81.0562" smashed="yes" rot="R192">
 <attribute name="NAME" x="44.16903125" y="82.242259375" size="0.8128" layer="51" font="vector" rot="R282"/>
 <attribute name="VALUE" x="41.2345875" y="81.618525" size="0.8128" layer="27" font="vector" rot="R282"/>
 </element>
-<element name="MIN29" library="Custom components" package="CHIPLED_0603" value="" x="47.3449875" y="75.260859375" smashed="yes" rot="R6">
+<element name="MIN29" library="timearc" package="CHIPLED_0603" value="" x="47.3449875" y="75.260859375" smashed="yes" rot="R6">
 <attribute name="NAME" x="46.454996875" y="74.161809375" size="0.8128" layer="51" font="vector" rot="R96"/>
 <attribute name="VALUE" x="49.4385625" y="74.475396875" size="0.8128" layer="27" font="vector" rot="R96"/>
 </element>
-<element name="SEC29" library="Custom components" package="CHIPLED_0603" value="" x="46.681209375" y="81.576059375" smashed="yes" rot="R186">
+<element name="SEC29" library="timearc" package="CHIPLED_0603" value="" x="46.681209375" y="81.576059375" smashed="yes" rot="R186">
 <attribute name="NAME" x="47.571203125" y="82.6751125" size="0.8128" layer="51" font="vector" rot="R276"/>
 <attribute name="VALUE" x="44.5876375" y="82.361525" size="0.8128" layer="27" font="vector" rot="R276"/>
 </element>
-<element name="MIN30" library="Custom components" package="CHIPLED_0603" value="" x="50" y="75.4" smashed="yes">
+<element name="MIN30" library="timearc" package="CHIPLED_0603" value="" x="50" y="75.4" smashed="yes">
 <attribute name="NAME" x="49" y="74.4" size="0.8128" layer="51" font="vector" rot="R90"/>
 <attribute name="VALUE" x="52" y="74.4" size="0.8128" layer="27" font="vector" rot="R90"/>
 </element>
-<element name="SEC30" library="Custom components" package="CHIPLED_0603" value="" x="50" y="81.75" smashed="yes" rot="R180">
+<element name="SEC30" library="timearc" package="CHIPLED_0603" value="" x="50" y="81.75" smashed="yes" rot="R180">
 <attribute name="NAME" x="51" y="82.75" size="0.8128" layer="51" font="vector" rot="R270"/>
 <attribute name="VALUE" x="48" y="82.75" size="0.8128" layer="27" font="vector" rot="R270"/>
 </element>
-<element name="MIN31" library="Custom components" package="CHIPLED_0603" value="" x="52.6550125" y="75.260859375" smashed="yes" rot="R354">
+<element name="MIN31" library="timearc" package="CHIPLED_0603" value="" x="52.6550125" y="75.260859375" smashed="yes" rot="R354">
 <attribute name="NAME" x="51.5559625" y="74.37086875" size="0.8128" layer="51" font="vector" rot="R84"/>
 <attribute name="VALUE" x="54.539528125" y="74.05728125" size="0.8128" layer="27" font="vector" rot="R84"/>
 </element>
-<element name="SEC31" library="Custom components" package="CHIPLED_0603" value="" x="53.318790625" y="81.576059375" smashed="yes" rot="R174">
+<element name="SEC31" library="timearc" package="CHIPLED_0603" value="" x="53.318790625" y="81.576059375" smashed="yes" rot="R174">
 <attribute name="NAME" x="54.41784375" y="82.466053125" size="0.8128" layer="51" font="vector" rot="R264"/>
 <attribute name="VALUE" x="51.434278125" y="82.779640625" size="0.8128" layer="27" font="vector" rot="R264"/>
 </element>
-<element name="MIN32" library="Custom components" package="CHIPLED_0603" value="" x="55.280965625" y="74.844959375" smashed="yes" rot="R348">
+<element name="MIN32" library="timearc" package="CHIPLED_0603" value="" x="55.280965625" y="74.844959375" smashed="yes" rot="R348">
 <attribute name="NAME" x="54.094909375" y="74.074725" size="0.8128" layer="51" font="vector" rot="R78"/>
 <attribute name="VALUE" x="57.02935" y="73.450990625" size="0.8128" layer="27" font="vector" rot="R78"/>
 </element>
-<element name="SEC32" library="Custom components" package="CHIPLED_0603" value="" x="56.60120625" y="81.0562" smashed="yes" rot="R168">
+<element name="SEC32" library="timearc" package="CHIPLED_0603" value="" x="56.60120625" y="81.0562" smashed="yes" rot="R168">
 <attribute name="NAME" x="57.787265625" y="81.8264375" size="0.8128" layer="51" font="vector" rot="R258"/>
 <attribute name="VALUE" x="54.852825" y="82.450171875" size="0.8128" layer="27" font="vector" rot="R258"/>
 </element>
-<element name="MIN33" library="Custom components" package="CHIPLED_0603" value="" x="57.84903125" y="74.156846875" smashed="yes" rot="R342">
+<element name="MIN33" library="timearc" package="CHIPLED_0603" value="" x="57.84903125" y="74.156846875" smashed="yes" rot="R342">
 <attribute name="NAME" x="56.588959375" y="73.514809375" size="0.8128" layer="51" font="vector" rot="R72"/>
 <attribute name="VALUE" x="59.442128125" y="72.587759375" size="0.8128" layer="27" font="vector" rot="R72"/>
 </element>
-<element name="SEC33" library="Custom components" package="CHIPLED_0603" value="" x="59.811284375" y="80.196053125" smashed="yes" rot="R162">
+<element name="SEC33" library="timearc" package="CHIPLED_0603" value="" x="59.811284375" y="80.196053125" smashed="yes" rot="R162">
 <attribute name="NAME" x="61.071359375" y="80.83809375" size="0.8128" layer="51" font="vector" rot="R252"/>
 <attribute name="VALUE" x="58.218190625" y="81.76514375" size="0.8128" layer="27" font="vector" rot="R252"/>
 </element>
-<element name="MIN34" library="Custom components" package="CHIPLED_0603" value="" x="60.33111875" y="73.20404375" smashed="yes" rot="R336">
+<element name="MIN34" library="timearc" package="CHIPLED_0603" value="" x="60.33111875" y="73.20404375" smashed="yes" rot="R336">
 <attribute name="NAME" x="59.0108375" y="72.6972375" size="0.8128" layer="51" font="vector" rot="R66"/>
 <attribute name="VALUE" x="61.751475" y="71.477028125" size="0.8128" layer="27" font="vector" rot="R66"/>
 </element>
-<element name="SEC34" library="Custom components" package="CHIPLED_0603" value="" x="62.91389375" y="79.005071875" smashed="yes" rot="R156">
+<element name="SEC34" library="timearc" package="CHIPLED_0603" value="" x="62.91389375" y="79.005071875" smashed="yes" rot="R156">
 <attribute name="NAME" x="64.234178125" y="79.51188125" size="0.8128" layer="51" font="vector" rot="R246"/>
 <attribute name="VALUE" x="61.493540625" y="80.732090625" size="0.8128" layer="27" font="vector" rot="R246"/>
 </element>
-<element name="MIN35" library="Custom components" package="CHIPLED_0603" value="" x="62.7" y="71.997034375" smashed="yes" rot="R330">
+<element name="MIN35" library="timearc" package="CHIPLED_0603" value="" x="62.7" y="71.997034375" smashed="yes" rot="R330">
 <attribute name="NAME" x="61.333975" y="71.631009375" size="0.8128" layer="51" font="vector" rot="R60"/>
 <attribute name="VALUE" x="63.932053125" y="70.131009375" size="0.8128" layer="27" font="vector" rot="R60"/>
 </element>
-<element name="SEC35" library="Custom components" package="CHIPLED_0603" value="" x="65.875" y="77.4963125" smashed="yes" rot="R150">
+<element name="SEC35" library="timearc" package="CHIPLED_0603" value="" x="65.875" y="77.4963125" smashed="yes" rot="R150">
 <attribute name="NAME" x="67.241028125" y="77.862340625" size="0.8128" layer="51" font="vector" rot="R240"/>
 <attribute name="VALUE" x="64.64295" y="79.362340625" size="0.8128" layer="27" font="vector" rot="R240"/>
 </element>
-<element name="MIN36" library="Custom components" package="CHIPLED_0603" value="" x="64.9297375" y="70.54903125" smashed="yes" rot="R324">
+<element name="MIN36" library="timearc" package="CHIPLED_0603" value="" x="64.9297375" y="70.54903125" smashed="yes" rot="R324">
 <attribute name="NAME" x="63.5329375" y="70.3278" size="0.8128" layer="51" font="vector" rot="R54"/>
 <attribute name="VALUE" x="65.9599875" y="68.564446875" size="0.8128" layer="27" font="vector" rot="R54"/>
 </element>
-<element name="SEC36" library="Custom components" package="CHIPLED_0603" value="" x="68.66219375" y="75.686284375" smashed="yes" rot="R144">
+<element name="SEC36" library="timearc" package="CHIPLED_0603" value="" x="68.66219375" y="75.686284375" smashed="yes" rot="R144">
 <attribute name="NAME" x="70.058996875" y="75.90751875" size="0.8128" layer="51" font="vector" rot="R234"/>
 <attribute name="VALUE" x="67.631946875" y="77.670871875" size="0.8128" layer="27" font="vector" rot="R234"/>
 </element>
-<element name="MIN37" library="Custom components" package="CHIPLED_0603" value="" x="66.995928125" y="68.875884375" smashed="yes" rot="R318">
+<element name="MIN37" library="timearc" package="CHIPLED_0603" value="" x="66.995928125" y="68.875884375" smashed="yes" rot="R318">
 <attribute name="NAME" x="65.583653125" y="68.801871875" size="0.8128" layer="51" font="vector" rot="R48"/>
 <attribute name="VALUE" x="67.8130875" y="66.79448125" size="0.8128" layer="27" font="vector" rot="R48"/>
 </element>
-<element name="SEC37" library="Custom components" package="CHIPLED_0603" value="" x="71.244890625" y="73.594846875" smashed="yes" rot="R138">
+<element name="SEC37" library="timearc" package="CHIPLED_0603" value="" x="71.244890625" y="73.594846875" smashed="yes" rot="R138">
 <attribute name="NAME" x="72.65716875" y="73.6688625" size="0.8128" layer="51" font="vector" rot="R228"/>
 <attribute name="VALUE" x="70.427734375" y="75.676253125" size="0.8128" layer="27" font="vector" rot="R228"/>
 </element>
-<element name="MIN38" library="Custom components" package="CHIPLED_0603" value="" x="68.875884375" y="66.995928125" smashed="yes" rot="R312">
+<element name="MIN38" library="timearc" package="CHIPLED_0603" value="" x="68.875884375" y="66.995928125" smashed="yes" rot="R312">
 <attribute name="NAME" x="67.463609375" y="67.06994375" size="0.8128" layer="51" font="vector" rot="R42"/>
 <attribute name="VALUE" x="69.471003125" y="64.840509375" size="0.8128" layer="27" font="vector" rot="R42"/>
 </element>
-<element name="SEC38" library="Custom components" package="CHIPLED_0603" value="" x="73.594846875" y="71.244890625" smashed="yes" rot="R132">
+<element name="SEC38" library="timearc" package="CHIPLED_0603" value="" x="73.594846875" y="71.244890625" smashed="yes" rot="R132">
 <attribute name="NAME" x="75.007125" y="71.170878125" size="0.8128" layer="51" font="vector" rot="R222"/>
 <attribute name="VALUE" x="72.99973125" y="73.4003125" size="0.8128" layer="27" font="vector" rot="R222"/>
 </element>
-<element name="MIN39" library="Custom components" package="CHIPLED_0603" value="" x="70.54903125" y="64.9297375" smashed="yes" rot="R306">
+<element name="MIN39" library="timearc" package="CHIPLED_0603" value="" x="70.54903125" y="64.9297375" smashed="yes" rot="R306">
 <attribute name="NAME" x="69.15223125" y="65.150971875" size="0.8128" layer="51" font="vector" rot="R36"/>
 <attribute name="VALUE" x="70.9155875" y="62.72391875" size="0.8128" layer="27" font="vector" rot="R36"/>
 </element>
-<element name="SEC39" library="Custom components" package="CHIPLED_0603" value="" x="75.686284375" y="68.66219375" smashed="yes" rot="R126">
+<element name="SEC39" library="timearc" package="CHIPLED_0603" value="" x="75.686284375" y="68.66219375" smashed="yes" rot="R126">
 <attribute name="NAME" x="77.0830875" y="68.4409625" size="0.8128" layer="51" font="vector" rot="R216"/>
 <attribute name="VALUE" x="75.31973125" y="70.868015625" size="0.8128" layer="27" font="vector" rot="R216"/>
 </element>
-<element name="MIN40" library="Custom components" package="CHIPLED_0603" value="" x="71.997034375" y="62.7" smashed="yes" rot="R300">
+<element name="MIN40" library="timearc" package="CHIPLED_0603" value="" x="71.997034375" y="62.7" smashed="yes" rot="R300">
 <attribute name="NAME" x="70.631009375" y="63.066028125" size="0.8128" layer="51" font="vector" rot="R30"/>
 <attribute name="VALUE" x="72.131009375" y="60.46795" size="0.8128" layer="27" font="vector" rot="R30"/>
 </element>
-<element name="SEC40" library="Custom components" package="CHIPLED_0603" value="" x="77.4963125" y="65.875" smashed="yes" rot="R120">
+<element name="SEC40" library="timearc" package="CHIPLED_0603" value="" x="77.4963125" y="65.875" smashed="yes" rot="R120">
 <attribute name="NAME" x="78.862340625" y="65.508975" size="0.8128" layer="51" font="vector" rot="R210"/>
 <attribute name="VALUE" x="77.362340625" y="68.107053125" size="0.8128" layer="27" font="vector" rot="R210"/>
 </element>
-<element name="MIN41" library="Custom components" package="CHIPLED_0603" value="" x="73.20404375" y="60.33111875" smashed="yes" rot="R294">
+<element name="MIN41" library="timearc" package="CHIPLED_0603" value="" x="73.20404375" y="60.33111875" smashed="yes" rot="R294">
 <attribute name="NAME" x="71.8837625" y="60.837928125" size="0.8128" layer="51" font="vector" rot="R24"/>
 <attribute name="VALUE" x="73.103971875" y="58.09729375" size="0.8128" layer="27" font="vector" rot="R24"/>
 </element>
-<element name="SEC41" library="Custom components" package="CHIPLED_0603" value="" x="79.005071875" y="62.91389375" smashed="yes" rot="R114">
+<element name="SEC41" library="timearc" package="CHIPLED_0603" value="" x="79.005071875" y="62.91389375" smashed="yes" rot="R114">
 <attribute name="NAME" x="80.32535625" y="62.4070875" size="0.8128" layer="51" font="vector" rot="R204"/>
 <attribute name="VALUE" x="79.105146875" y="65.147721875" size="0.8128" layer="27" font="vector" rot="R204"/>
 </element>
-<element name="MIN42" library="Custom components" package="CHIPLED_0603" value="" x="74.156846875" y="57.84903125" smashed="yes" rot="R288">
+<element name="MIN42" library="timearc" package="CHIPLED_0603" value="" x="74.156846875" y="57.84903125" smashed="yes" rot="R288">
 <attribute name="NAME" x="72.896775" y="58.491071875" size="0.8128" layer="51" font="vector" rot="R18"/>
 <attribute name="VALUE" x="73.823825" y="55.637903125" size="0.8128" layer="27" font="vector" rot="R18"/>
 </element>
-<element name="SEC42" library="Custom components" package="CHIPLED_0603" value="" x="80.196053125" y="59.811284375" smashed="yes" rot="R108">
+<element name="SEC42" library="timearc" package="CHIPLED_0603" value="" x="80.196053125" y="59.811284375" smashed="yes" rot="R108">
 <attribute name="NAME" x="81.456128125" y="59.169246875" size="0.8128" layer="51" font="vector" rot="R198"/>
 <attribute name="VALUE" x="80.529078125" y="62.022415625" size="0.8128" layer="27" font="vector" rot="R198"/>
 </element>
-<element name="MIN43" library="Custom components" package="CHIPLED_0603" value="" x="74.844959375" y="55.280965625" smashed="yes" rot="R282">
+<element name="MIN43" library="timearc" package="CHIPLED_0603" value="" x="74.844959375" y="55.280965625" smashed="yes" rot="R282">
 <attribute name="NAME" x="73.658903125" y="56.051203125" size="0.8128" layer="51" font="vector" rot="R12"/>
 <attribute name="VALUE" x="74.2826375" y="53.116759375" size="0.8128" layer="27" font="vector" rot="R12"/>
 </element>
-<element name="SEC43" library="Custom components" package="CHIPLED_0603" value="" x="81.0562" y="56.60120625" smashed="yes" rot="R102">
+<element name="SEC43" library="timearc" package="CHIPLED_0603" value="" x="81.0562" y="56.60120625" smashed="yes" rot="R102">
 <attribute name="NAME" x="82.242259375" y="55.830971875" size="0.8128" layer="51" font="vector" rot="R192"/>
 <attribute name="VALUE" x="81.618525" y="58.765415625" size="0.8128" layer="27" font="vector" rot="R192"/>
 </element>
-<element name="MIN44" library="Custom components" package="CHIPLED_0603" value="" x="75.260859375" y="52.6550125" smashed="yes" rot="R276">
+<element name="MIN44" library="timearc" package="CHIPLED_0603" value="" x="75.260859375" y="52.6550125" smashed="yes" rot="R276">
 <attribute name="NAME" x="74.161809375" y="53.54500625" size="0.8128" layer="51" font="vector" rot="R6"/>
 <attribute name="VALUE" x="74.475396875" y="50.561440625" size="0.8128" layer="27" font="vector" rot="R6"/>
 </element>
-<element name="SEC44" library="Custom components" package="CHIPLED_0603" value="" x="81.576059375" y="53.318790625" smashed="yes" rot="R96">
+<element name="SEC44" library="timearc" package="CHIPLED_0603" value="" x="81.576059375" y="53.318790625" smashed="yes" rot="R96">
 <attribute name="NAME" x="82.6751125" y="52.4288" size="0.8128" layer="51" font="vector" rot="R186"/>
 <attribute name="VALUE" x="82.361525" y="55.412365625" size="0.8128" layer="27" font="vector" rot="R186"/>
 </element>
-<element name="MIN45" library="Custom components" package="CHIPLED_0603" value="" x="75.4" y="50" smashed="yes" rot="R270">
+<element name="MIN45" library="timearc" package="CHIPLED_0603" value="" x="75.4" y="50" smashed="yes" rot="R270">
 <attribute name="NAME" x="74.4" y="51" size="0.8128" layer="51" font="vector"/>
 <attribute name="VALUE" x="74.4" y="48" size="0.8128" layer="27" font="vector"/>
 </element>
-<element name="SEC45" library="Custom components" package="CHIPLED_0603" value="" x="81.75" y="50" smashed="yes" rot="R90">
+<element name="SEC45" library="timearc" package="CHIPLED_0603" value="" x="81.75" y="50" smashed="yes" rot="R90">
 <attribute name="NAME" x="82.75" y="49" size="0.8128" layer="51" font="vector" rot="R180"/>
 <attribute name="VALUE" x="82.75" y="52" size="0.8128" layer="27" font="vector" rot="R180"/>
 </element>
-<element name="MIN46" library="Custom components" package="CHIPLED_0603" value="" x="75.260859375" y="47.3449875" smashed="yes" rot="R264">
+<element name="MIN46" library="timearc" package="CHIPLED_0603" value="" x="75.260859375" y="47.3449875" smashed="yes" rot="R264">
 <attribute name="NAME" x="74.37086875" y="48.444040625" size="0.8128" layer="51" font="vector" rot="R354"/>
 <attribute name="VALUE" x="74.05728125" y="45.460475" size="0.8128" layer="27" font="vector" rot="R354"/>
 </element>
-<element name="SEC46" library="Custom components" package="CHIPLED_0603" value="" x="81.576059375" y="46.681209375" smashed="yes" rot="R84">
+<element name="SEC46" library="timearc" package="CHIPLED_0603" value="" x="81.576059375" y="46.681209375" smashed="yes" rot="R84">
 <attribute name="NAME" x="82.466053125" y="45.582159375" size="0.8128" layer="51" font="vector" rot="R174"/>
 <attribute name="VALUE" x="82.779640625" y="48.565725" size="0.8128" layer="27" font="vector" rot="R174"/>
 </element>
-<element name="MIN47" library="Custom components" package="CHIPLED_0603" value="" x="74.844959375" y="44.719034375" smashed="yes" rot="R258">
+<element name="MIN47" library="timearc" package="CHIPLED_0603" value="" x="74.844959375" y="44.719034375" smashed="yes" rot="R258">
 <attribute name="NAME" x="74.074725" y="45.90509375" size="0.8128" layer="51" font="vector" rot="R348"/>
 <attribute name="VALUE" x="73.450990625" y="42.970653125" size="0.8128" layer="27" font="vector" rot="R348"/>
 </element>
-<element name="SEC47" library="Custom components" package="CHIPLED_0603" value="" x="81.0562" y="43.39879375" smashed="yes" rot="R78">
+<element name="SEC47" library="timearc" package="CHIPLED_0603" value="" x="81.0562" y="43.39879375" smashed="yes" rot="R78">
 <attribute name="NAME" x="81.8264375" y="42.2127375" size="0.8128" layer="51" font="vector" rot="R168"/>
 <attribute name="VALUE" x="82.450171875" y="45.147178125" size="0.8128" layer="27" font="vector" rot="R168"/>
 </element>
-<element name="MIN48" library="Custom components" package="CHIPLED_0603" value="" x="74.156846875" y="42.15096875" smashed="yes" rot="R252">
+<element name="MIN48" library="timearc" package="CHIPLED_0603" value="" x="74.156846875" y="42.15096875" smashed="yes" rot="R252">
 <attribute name="NAME" x="73.514809375" y="43.41104375" size="0.8128" layer="51" font="vector" rot="R342"/>
 <attribute name="VALUE" x="72.587759375" y="40.557875" size="0.8128" layer="27" font="vector" rot="R342"/>
 </element>
-<element name="SEC48" library="Custom components" package="CHIPLED_0603" value="" x="80.196053125" y="40.188715625" smashed="yes" rot="R72">
+<element name="SEC48" library="timearc" package="CHIPLED_0603" value="" x="80.196053125" y="40.188715625" smashed="yes" rot="R72">
 <attribute name="NAME" x="80.83809375" y="38.92864375" size="0.8128" layer="51" font="vector" rot="R162"/>
 <attribute name="VALUE" x="81.76514375" y="41.7818125" size="0.8128" layer="27" font="vector" rot="R162"/>
 </element>
-<element name="MIN49" library="Custom components" package="CHIPLED_0603" value="" x="73.20404375" y="39.66888125" smashed="yes" rot="R246">
+<element name="MIN49" library="timearc" package="CHIPLED_0603" value="" x="73.20404375" y="39.66888125" smashed="yes" rot="R246">
 <attribute name="NAME" x="72.6972375" y="40.989165625" size="0.8128" layer="51" font="vector" rot="R336"/>
 <attribute name="VALUE" x="71.477028125" y="38.248528125" size="0.8128" layer="27" font="vector" rot="R336"/>
 </element>
-<element name="SEC49" library="Custom components" package="CHIPLED_0603" value="" x="79.005071875" y="37.08610625" smashed="yes" rot="R66">
+<element name="SEC49" library="timearc" package="CHIPLED_0603" value="" x="79.005071875" y="37.08610625" smashed="yes" rot="R66">
 <attribute name="NAME" x="79.51188125" y="35.765825" size="0.8128" layer="51" font="vector" rot="R156"/>
 <attribute name="VALUE" x="80.732090625" y="38.5064625" size="0.8128" layer="27" font="vector" rot="R156"/>
 </element>
-<element name="MIN50" library="Custom components" package="CHIPLED_0603" value="" x="71.997034375" y="37.3" smashed="yes" rot="R240">
+<element name="MIN50" library="timearc" package="CHIPLED_0603" value="" x="71.997034375" y="37.3" smashed="yes" rot="R240">
 <attribute name="NAME" x="71.631009375" y="38.666028125" size="0.8128" layer="51" font="vector" rot="R330"/>
 <attribute name="VALUE" x="70.131009375" y="36.06795" size="0.8128" layer="27" font="vector" rot="R330"/>
 </element>
-<element name="SEC50" library="Custom components" package="CHIPLED_0603" value="" x="77.4963125" y="34.125" smashed="yes" rot="R60">
+<element name="SEC50" library="timearc" package="CHIPLED_0603" value="" x="77.4963125" y="34.125" smashed="yes" rot="R60">
 <attribute name="NAME" x="77.862340625" y="32.758975" size="0.8128" layer="51" font="vector" rot="R150"/>
 <attribute name="VALUE" x="79.362340625" y="35.357053125" size="0.8128" layer="27" font="vector" rot="R150"/>
 </element>
-<element name="MIN51" library="Custom components" package="CHIPLED_0603" value="" x="70.54903125" y="35.0702625" smashed="yes" rot="R234">
+<element name="MIN51" library="timearc" package="CHIPLED_0603" value="" x="70.54903125" y="35.0702625" smashed="yes" rot="R234">
 <attribute name="NAME" x="70.3278" y="36.467065625" size="0.8128" layer="51" font="vector" rot="R324"/>
 <attribute name="VALUE" x="68.564446875" y="34.040015625" size="0.8128" layer="27" font="vector" rot="R324"/>
 </element>
-<element name="SEC51" library="Custom components" package="CHIPLED_0603" value="" x="75.686284375" y="31.33780625" smashed="yes" rot="R54">
+<element name="SEC51" library="timearc" package="CHIPLED_0603" value="" x="75.686284375" y="31.33780625" smashed="yes" rot="R54">
 <attribute name="NAME" x="75.90751875" y="29.94100625" size="0.8128" layer="51" font="vector" rot="R144"/>
 <attribute name="VALUE" x="77.670871875" y="32.36805625" size="0.8128" layer="27" font="vector" rot="R144"/>
 </element>
-<element name="MIN52" library="Custom components" package="CHIPLED_0603" value="" x="68.875884375" y="33.004071875" smashed="yes" rot="R228">
+<element name="MIN52" library="timearc" package="CHIPLED_0603" value="" x="68.875884375" y="33.004071875" smashed="yes" rot="R228">
 <attribute name="NAME" x="68.801871875" y="34.41635" size="0.8128" layer="51" font="vector" rot="R318"/>
 <attribute name="VALUE" x="66.79448125" y="32.186915625" size="0.8128" layer="27" font="vector" rot="R318"/>
 </element>
-<element name="SEC52" library="Custom components" package="CHIPLED_0603" value="" x="73.594846875" y="28.755109375" smashed="yes" rot="R48">
+<element name="SEC52" library="timearc" package="CHIPLED_0603" value="" x="73.594846875" y="28.755109375" smashed="yes" rot="R48">
 <attribute name="NAME" x="73.6688625" y="27.342834375" size="0.8128" layer="51" font="vector" rot="R138"/>
 <attribute name="VALUE" x="75.676253125" y="29.57226875" size="0.8128" layer="27" font="vector" rot="R138"/>
 </element>
-<element name="MIN53" library="Custom components" package="CHIPLED_0603" value="" x="66.995928125" y="31.124115625" smashed="yes" rot="R222">
+<element name="MIN53" library="timearc" package="CHIPLED_0603" value="" x="66.995928125" y="31.124115625" smashed="yes" rot="R222">
 <attribute name="NAME" x="67.06994375" y="32.53639375" size="0.8128" layer="51" font="vector" rot="R312"/>
 <attribute name="VALUE" x="64.840509375" y="30.529" size="0.8128" layer="27" font="vector" rot="R312"/>
 </element>
-<element name="SEC53" library="Custom components" package="CHIPLED_0603" value="" x="71.244890625" y="26.405153125" smashed="yes" rot="R42">
+<element name="SEC53" library="timearc" package="CHIPLED_0603" value="" x="71.244890625" y="26.405153125" smashed="yes" rot="R42">
 <attribute name="NAME" x="71.170878125" y="24.992878125" size="0.8128" layer="51" font="vector" rot="R132"/>
 <attribute name="VALUE" x="73.4003125" y="27.000271875" size="0.8128" layer="27" font="vector" rot="R132"/>
 </element>
-<element name="MIN54" library="Custom components" package="CHIPLED_0603" value="" x="64.9297375" y="29.45096875" smashed="yes" rot="R216">
+<element name="MIN54" library="timearc" package="CHIPLED_0603" value="" x="64.9297375" y="29.45096875" smashed="yes" rot="R216">
 <attribute name="NAME" x="65.150971875" y="30.847771875" size="0.8128" layer="51" font="vector" rot="R306"/>
 <attribute name="VALUE" x="62.72391875" y="29.084415625" size="0.8128" layer="27" font="vector" rot="R306"/>
 </element>
-<element name="SEC54" library="Custom components" package="CHIPLED_0603" value="" x="68.66219375" y="24.313715625" smashed="yes" rot="R36">
+<element name="SEC54" library="timearc" package="CHIPLED_0603" value="" x="68.66219375" y="24.313715625" smashed="yes" rot="R36">
 <attribute name="NAME" x="68.4409625" y="22.916915625" size="0.8128" layer="51" font="vector" rot="R126"/>
 <attribute name="VALUE" x="70.868015625" y="24.680271875" size="0.8128" layer="27" font="vector" rot="R126"/>
 </element>
-<element name="MIN55" library="Custom components" package="CHIPLED_0603" value="" x="62.7" y="28.002965625" smashed="yes" rot="R210">
+<element name="MIN55" library="timearc" package="CHIPLED_0603" value="" x="62.7" y="28.002965625" smashed="yes" rot="R210">
 <attribute name="NAME" x="63.066028125" y="29.36899375" size="0.8128" layer="51" font="vector" rot="R300"/>
 <attribute name="VALUE" x="60.46795" y="27.86899375" size="0.8128" layer="27" font="vector" rot="R300"/>
 </element>
-<element name="SEC55" library="Custom components" package="CHIPLED_0603" value="" x="65.875" y="22.5036875" smashed="yes" rot="R30">
+<element name="SEC55" library="timearc" package="CHIPLED_0603" value="" x="65.875" y="22.5036875" smashed="yes" rot="R30">
 <attribute name="NAME" x="65.508975" y="21.1376625" size="0.8128" layer="51" font="vector" rot="R120"/>
 <attribute name="VALUE" x="68.107053125" y="22.6376625" size="0.8128" layer="27" font="vector" rot="R120"/>
 </element>
-<element name="MIN56" library="Custom components" package="CHIPLED_0603" value="" x="60.33111875" y="26.79595625" smashed="yes" rot="R204">
+<element name="MIN56" library="timearc" package="CHIPLED_0603" value="" x="60.33111875" y="26.79595625" smashed="yes" rot="R204">
 <attribute name="NAME" x="60.837928125" y="28.116240625" size="0.8128" layer="51" font="vector" rot="R294"/>
 <attribute name="VALUE" x="58.09729375" y="26.89603125" size="0.8128" layer="27" font="vector" rot="R294"/>
 </element>
-<element name="SEC56" library="Custom components" package="CHIPLED_0603" value="" x="62.91389375" y="20.994928125" smashed="yes" rot="R24">
+<element name="SEC56" library="timearc" package="CHIPLED_0603" value="" x="62.91389375" y="20.994928125" smashed="yes" rot="R24">
 <attribute name="NAME" x="62.4070875" y="19.674646875" size="0.8128" layer="51" font="vector" rot="R114"/>
 <attribute name="VALUE" x="65.147721875" y="20.89485625" size="0.8128" layer="27" font="vector" rot="R114"/>
 </element>
-<element name="MIN57" library="Custom components" package="CHIPLED_0603" value="" x="57.84903125" y="25.843153125" smashed="yes" rot="R198">
+<element name="MIN57" library="timearc" package="CHIPLED_0603" value="" x="57.84903125" y="25.843153125" smashed="yes" rot="R198">
 <attribute name="NAME" x="58.491071875" y="27.103228125" size="0.8128" layer="51" font="vector" rot="R288"/>
 <attribute name="VALUE" x="55.637903125" y="26.176178125" size="0.8128" layer="27" font="vector" rot="R288"/>
 </element>
-<element name="SEC57" library="Custom components" package="CHIPLED_0603" value="" x="59.811284375" y="19.803946875" smashed="yes" rot="R18">
+<element name="SEC57" library="timearc" package="CHIPLED_0603" value="" x="59.811284375" y="19.803946875" smashed="yes" rot="R18">
 <attribute name="NAME" x="59.169246875" y="18.543875" size="0.8128" layer="51" font="vector" rot="R108"/>
 <attribute name="VALUE" x="62.022415625" y="19.470925" size="0.8128" layer="27" font="vector" rot="R108"/>
 </element>
-<element name="MIN58" library="Custom components" package="CHIPLED_0603" value="" x="55.280965625" y="25.155040625" smashed="yes" rot="R192">
+<element name="MIN58" library="timearc" package="CHIPLED_0603" value="" x="55.280965625" y="25.155040625" smashed="yes" rot="R192">
 <attribute name="NAME" x="56.051203125" y="26.3411" size="0.8128" layer="51" font="vector" rot="R282"/>
 <attribute name="VALUE" x="53.116759375" y="25.717365625" size="0.8128" layer="27" font="vector" rot="R282"/>
 </element>
-<element name="SEC58" library="Custom components" package="CHIPLED_0603" value="" x="56.60120625" y="18.9438" smashed="yes" rot="R12">
+<element name="SEC58" library="timearc" package="CHIPLED_0603" value="" x="56.60120625" y="18.9438" smashed="yes" rot="R12">
 <attribute name="NAME" x="55.830971875" y="17.75774375" size="0.8128" layer="51" font="vector" rot="R102"/>
 <attribute name="VALUE" x="58.765415625" y="18.381478125" size="0.8128" layer="27" font="vector" rot="R102"/>
 </element>
-<element name="MIN59" library="Custom components" package="CHIPLED_0603" value="" x="52.6550125" y="24.739140625" smashed="yes" rot="R186">
+<element name="MIN59" library="timearc" package="CHIPLED_0603" value="" x="52.6550125" y="24.739140625" smashed="yes" rot="R186">
 <attribute name="NAME" x="53.54500625" y="25.83819375" size="0.8128" layer="51" font="vector" rot="R276"/>
 <attribute name="VALUE" x="50.561440625" y="25.52460625" size="0.8128" layer="27" font="vector" rot="R276"/>
 </element>
-<element name="SEC59" library="Custom components" package="CHIPLED_0603" value="" x="53.318790625" y="18.423940625" smashed="yes" rot="R6">
+<element name="SEC59" library="timearc" package="CHIPLED_0603" value="" x="53.318790625" y="18.423940625" smashed="yes" rot="R6">
 <attribute name="NAME" x="52.4288" y="17.324890625" size="0.8128" layer="51" font="vector" rot="R96"/>
 <attribute name="VALUE" x="55.412365625" y="17.638478125" size="0.8128" layer="27" font="vector" rot="R96"/>
 </element>
-<element name="HOUR0" library="Custom components" package="CHIPLED_0603" value="" x="50" y="30.95" smashed="yes" rot="R180">
+<element name="HOUR0" library="timearc" package="CHIPLED_0603" value="" x="50" y="30.95" smashed="yes" rot="R180">
 <attribute name="NAME" x="51" y="31.95" size="0.8128" layer="51" font="vector" rot="R270"/>
 <attribute name="VALUE" x="48" y="31.95" size="0.8128" layer="27" font="vector" rot="R270"/>
 </element>
-<element name="HOUR1" library="Custom components" package="CHIPLED_0603" value="" x="40.475" y="33.50221875" smashed="yes" rot="R150">
+<element name="HOUR1" library="timearc" package="CHIPLED_0603" value="" x="40.475" y="33.50221875" smashed="yes" rot="R150">
 <attribute name="NAME" x="41.841028125" y="33.868246875" size="0.8128" layer="51" font="vector" rot="R240"/>
 <attribute name="VALUE" x="39.24295" y="35.368246875" size="0.8128" layer="27" font="vector" rot="R240"/>
 </element>
-<element name="HOUR2" library="Custom components" package="CHIPLED_0603" value="" x="33.50221875" y="40.475" smashed="yes" rot="R120">
+<element name="HOUR2" library="timearc" package="CHIPLED_0603" value="" x="33.50221875" y="40.475" smashed="yes" rot="R120">
 <attribute name="NAME" x="34.868246875" y="40.108975" size="0.8128" layer="51" font="vector" rot="R210"/>
 <attribute name="VALUE" x="33.368246875" y="42.707053125" size="0.8128" layer="27" font="vector" rot="R210"/>
 </element>
-<element name="HOUR3" library="Custom components" package="CHIPLED_0603" value="" x="30.95" y="50" smashed="yes" rot="R90">
+<element name="HOUR3" library="timearc" package="CHIPLED_0603" value="" x="30.95" y="50" smashed="yes" rot="R90">
 <attribute name="NAME" x="31.95" y="49" size="0.8128" layer="51" font="vector" rot="R180"/>
 <attribute name="VALUE" x="31.95" y="52" size="0.8128" layer="27" font="vector" rot="R180"/>
 </element>
-<element name="HOUR4" library="Custom components" package="CHIPLED_0603" value="" x="33.50221875" y="59.525" smashed="yes" rot="R60">
+<element name="HOUR4" library="timearc" package="CHIPLED_0603" value="" x="33.50221875" y="59.525" smashed="yes" rot="R60">
 <attribute name="NAME" x="33.868246875" y="58.158975" size="0.8128" layer="51" font="vector" rot="R150"/>
 <attribute name="VALUE" x="35.368246875" y="60.757053125" size="0.8128" layer="27" font="vector" rot="R150"/>
 </element>
-<element name="HOUR5" library="Custom components" package="CHIPLED_0603" value="" x="40.475" y="66.49778125" smashed="yes" rot="R30">
+<element name="HOUR5" library="timearc" package="CHIPLED_0603" value="" x="40.475" y="66.49778125" smashed="yes" rot="R30">
 <attribute name="NAME" x="40.108975" y="65.13175625" size="0.8128" layer="51" font="vector" rot="R120"/>
 <attribute name="VALUE" x="42.707053125" y="66.63175625" size="0.8128" layer="27" font="vector" rot="R120"/>
 </element>
-<element name="HOUR6" library="Custom components" package="CHIPLED_0603" value="" x="50" y="69.05" smashed="yes">
+<element name="HOUR6" library="timearc" package="CHIPLED_0603" value="" x="50" y="69.05" smashed="yes">
 <attribute name="NAME" x="49" y="68.05" size="0.8128" layer="51" font="vector" rot="R90"/>
 <attribute name="VALUE" x="52" y="68.05" size="0.8128" layer="27" font="vector" rot="R90"/>
 </element>
-<element name="HOUR7" library="Custom components" package="CHIPLED_0603" value="" x="59.525" y="66.49778125" smashed="yes" rot="R330">
+<element name="HOUR7" library="timearc" package="CHIPLED_0603" value="" x="59.525" y="66.49778125" smashed="yes" rot="R330">
 <attribute name="NAME" x="58.158975" y="66.13175625" size="0.8128" layer="51" font="vector" rot="R60"/>
 <attribute name="VALUE" x="60.757053125" y="64.63175625" size="0.8128" layer="27" font="vector" rot="R60"/>
 </element>
-<element name="HOUR8" library="Custom components" package="CHIPLED_0603" value="" x="66.49778125" y="59.525" smashed="yes" rot="R300">
+<element name="HOUR8" library="timearc" package="CHIPLED_0603" value="" x="66.49778125" y="59.525" smashed="yes" rot="R300">
 <attribute name="NAME" x="65.13175625" y="59.891028125" size="0.8128" layer="51" font="vector" rot="R30"/>
 <attribute name="VALUE" x="66.63175625" y="57.29295" size="0.8128" layer="27" font="vector" rot="R30"/>
 </element>
-<element name="HOUR9" library="Custom components" package="CHIPLED_0603" value="" x="69.05" y="50" smashed="yes" rot="R270">
+<element name="HOUR9" library="timearc" package="CHIPLED_0603" value="" x="69.05" y="50" smashed="yes" rot="R270">
 <attribute name="NAME" x="68.05" y="51" size="0.8128" layer="51" font="vector"/>
 <attribute name="VALUE" x="68.05" y="48" size="0.8128" layer="27" font="vector"/>
 </element>
-<element name="HOUR10" library="Custom components" package="CHIPLED_0603" value="" x="66.49778125" y="40.475" smashed="yes" rot="R240">
+<element name="HOUR10" library="timearc" package="CHIPLED_0603" value="" x="66.49778125" y="40.475" smashed="yes" rot="R240">
 <attribute name="NAME" x="66.13175625" y="41.841028125" size="0.8128" layer="51" font="vector" rot="R330"/>
 <attribute name="VALUE" x="64.63175625" y="39.24295" size="0.8128" layer="27" font="vector" rot="R330"/>
 </element>
-<element name="HOUR11" library="Custom components" package="CHIPLED_0603" value="" x="59.525" y="33.50221875" smashed="yes" rot="R210">
+<element name="HOUR11" library="timearc" package="CHIPLED_0603" value="" x="59.525" y="33.50221875" smashed="yes" rot="R210">
 <attribute name="NAME" x="59.891028125" y="34.868246875" size="0.8128" layer="51" font="vector" rot="R300"/>
 <attribute name="VALUE" x="57.29295" y="33.368246875" size="0.8128" layer="27" font="vector" rot="R300"/>
 </element>
-<element name="SPECIAL0" library="Custom components" package="CHIPLED_0603" value="" x="48" y="37" smashed="yes">
+<element name="SPECIAL0" library="timearc" package="CHIPLED_0603" value="" x="48" y="37" smashed="yes">
 <attribute name="NAME" x="47" y="36" size="0.8128" layer="51" font="vector" rot="R90"/>
 <attribute name="VALUE" x="50" y="36" size="0.8128" layer="27" font="vector" rot="R90"/>
 </element>
-<element name="SPECIAL3" library="Custom components" package="CHIPLED_0603" value="" x="37" y="50" smashed="yes" rot="R90">
+<element name="SPECIAL3" library="timearc" package="CHIPLED_0603" value="" x="37" y="50" smashed="yes" rot="R90">
 <attribute name="NAME" x="38" y="49" size="0.8128" layer="51" font="vector" rot="R180"/>
 <attribute name="VALUE" x="38" y="52" size="0.8128" layer="27" font="vector" rot="R180"/>
 </element>
-<element name="SPECIAL5" library="Custom components" package="CHIPLED_0603" value="" x="48" y="63" smashed="yes">
+<element name="SPECIAL5" library="timearc" package="CHIPLED_0603" value="" x="48" y="63" smashed="yes">
 <attribute name="NAME" x="47" y="62" size="0.8128" layer="51" font="vector" rot="R90"/>
 <attribute name="VALUE" x="50" y="62" size="0.8128" layer="27" font="vector" rot="R90"/>
 </element>
-<element name="SPECIAL6" library="Custom components" package="CHIPLED_0603" value="" x="52" y="63" smashed="yes">
+<element name="SPECIAL6" library="timearc" package="CHIPLED_0603" value="" x="52" y="63" smashed="yes">
 <attribute name="NAME" x="51" y="62" size="0.8128" layer="51" font="vector" rot="R90"/>
 <attribute name="VALUE" x="54" y="62" size="0.8128" layer="27" font="vector" rot="R90"/>
 </element>
-<element name="SPECIAL9" library="Custom components" package="CHIPLED_0603" value="" x="63" y="50" smashed="yes" rot="R270">
+<element name="SPECIAL9" library="timearc" package="CHIPLED_0603" value="" x="63" y="50" smashed="yes" rot="R270">
 <attribute name="NAME" x="62" y="51" size="0.8128" layer="51" font="vector"/>
 <attribute name="VALUE" x="62" y="48" size="0.8128" layer="27" font="vector"/>
 </element>
-<element name="SPECIAL11" library="Custom components" package="CHIPLED_0603" value="" x="52" y="37" smashed="yes">
+<element name="SPECIAL11" library="timearc" package="CHIPLED_0603" value="" x="52" y="37" smashed="yes">
 <attribute name="NAME" x="51" y="36" size="0.8128" layer="51" font="vector" rot="R90"/>
 <attribute name="VALUE" x="54" y="36" size="0.8128" layer="27" font="vector" rot="R90"/>
 </element>
@@ -1458,7 +1472,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <element name="U2" library="SparkFun2012" package="LGA14" value="ADXL345" x="38.6" y="46.4" rot="MR225"/>
 <element name="C5" library="Custom components" package="C0603" value="100n" x="35.1" y="45.9" rot="MR225"/>
 <element name="C27" library="Custom components" package="C0603" value="10u" x="37.3" y="43.7" rot="MR45"/>
-<element name="U$11" library="devergy_berkelaarmrt" package="FLD00030" value="KDT0030" x="44.9" y="56.2" smashed="yes" rot="R45">
+<element name="U$11" library="timearc" package="FLD00030" value="KDT0030" x="44.9" y="56.2" smashed="yes" rot="R45">
 <attribute name="U_PRICE_1000" value="0.19814 USD" x="44.9" y="56.2" size="1.778" layer="27" rot="R45" display="off"/>
 <attribute name="U_PRICE_1" value="0.60 USD" x="44.9" y="56.2" size="1.778" layer="27" rot="R45" display="off"/>
 <attribute name="MPN" value="KDT00030TR" x="44.9" y="56.2" size="1.778" layer="27" rot="R45" display="off"/>
@@ -1482,7 +1496,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <element name="R33" library="Custom components" package="R0603" value="36k" x="81" y="8" rot="MR180"/>
 <element name="R34" library="Custom components" package="R0603" value="47k" x="81" y="5.5" rot="MR180"/>
 <element name="JP1" library="SparkFun2012" package="SJ_2S-NO" value="" x="21.3" y="5" rot="MR270"/>
-<element name="U$1" library="stm32" package="LQFP64" value="STM32F103CBT6" x="50" y="50" locked="yes" smashed="yes" rot="R225">
+<element name="U$1" library="timearc" package="LQFP64" value="STM32F103CBT6" x="50" y="50" locked="yes" smashed="yes" rot="R225">
 <attribute name="NAME" x="54.62448125" y="51.032378125" size="0.8128" layer="25" font="vector" rot="R225"/>
 </element>
 <element name="JP2" library="SparkFun2012" package="SJ_2S-NO" value="" x="64" y="5" rot="MR180"/>
