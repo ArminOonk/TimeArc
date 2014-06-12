@@ -63,14 +63,6 @@ extern "C" void TIM2_IRQHandler(void)
   ctl_exit_isr();
 }
 
-extern adxl345 accel;
-extern "C" void EXTI1_IRQHandler(void)
-{
-  ctl_enter_isr();
-  accel.interrupt();
-  ctl_exit_isr();
-}
-
 extern capTouch touchUp;
 extern "C" void EXTI2_IRQHandler(void)
 {

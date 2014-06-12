@@ -32,12 +32,15 @@ adxl345::adxl345()
 
   SPI_CS_HIGH;
 
+  GPIO_InitStructure.GPIO_Pin   = ACCEL_INT1_PIN;
+  GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IN_FLOATING;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(ACCEL_INT1_PORT, &GPIO_InitStructure);
+
   GPIO_InitStructure.GPIO_Pin   = ACCEL_INT2_PIN;
   GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IN_FLOATING;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(ACCEL_INT2_PORT, &GPIO_InitStructure);
-
-  GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource1);
   
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
   SPI_InitTypeDef   SPI_InitStructure;
@@ -60,42 +63,19 @@ void adxl345::init()
 {
   writeRegister(DATA_FORMAT, 0b00001010);     // Range +/- 2g
         
-  writeRegister(THRESH_TAP, 0x30);        
-  writeRegister(DURATION, 0x7f);           
-  writeRegister(LATENT, 0x10 );          
-  writeRegister(WINDOW, 0x10);
-  writeRegister(TAP_AXES, 0x0f);
+  writeRegister(THRESH_TAP, 0x40);        
+  writeRegister(DURATION, 0x30);           
+  writeRegister(LATENT, 0x40 );          
+  writeRegister(WINDOW, 0xff);
+  writeRegister(TAP_AXES, 0x07);
 
   writeRegister(POWER_CTL, 0x08);   //Put the ADXL345 into Measurement Mode by writing 0x08 to the POWER_CTL register.
-
-  //enableInterrupt();
-  readAccel();
-}
-
-int source = 0;
-void adxl345::interrupt()
-{
-  EXTI_ClearITPendingBit(EXTI_Line1);
-
-  char intSource = readRegister(INT_SOURCE);
-  char intEnable = readRegister(INT_ENABLE);
-  char intMap =  readRegister(INT_MAP);
-  char intSource2 = readRegister(INT_SOURCE);
-  if(intSource & (1<<5))
-  {
-    // double tap
-    source = 2;
-  }
-  else
-  {
-    // single tap
-    source = 1;
-  }
-
-  //disableInterrupt();
-
-  intCnt++;
+  writeRegister(INT_MAP, 0x00);  // Send DOUBLE_TAP to INT2
+  writeRegister(INT_ENABLE, 0b01100000);
   
+  readRegister(INT_SOURCE); //Clear the interrupts from the INT_SOURCE register.
+
+  readAccel();
 }
 
 void adxl345::readAccel()
@@ -116,6 +96,37 @@ void adxl345::readAccel()
   z = -zRaw*scaleFactor;
 
   updatePose();
+
+  if(ACCCEL_INT1_DETECTED)
+  {
+    char intSource =  readRegister(INT_SOURCE);
+    bool print = false;
+
+    if(intSource & (1<<5))
+    { 
+      printf("ACCEL=DOUBLETAP\r\n");
+      print = true;
+    }else if(intSource & (1<<6))
+    { 
+      printf("ACCEL=TAP\r\n");
+      print = true;
+    }
+
+    if(!print)
+    {
+      printf("ACCEL=INT1_%2x\r\n", intSource);
+    }
+  }
+
+  if(ACCCEL_INT2_DETECTED)
+  {
+    char intSource =  readRegister(INT_SOURCE);
+    bool print = false;
+    if(!print)
+    {
+       printf("ACCEL=INT2_%2x\r\n", intSource);
+    }
+  }
   /*if(!interruptEnabled)
   {
     enableInterrupt();
@@ -123,51 +134,6 @@ void adxl345::readAccel()
 }
 
 // Private
-
-void adxl345::enableInterrupt()
-{
-  writeRegister(INT_MAP, 0b10000000/*SINGLE_TAP|DOUBLE_TAP*/);   //Send the Tap and Double Tap Interrupts to INT2 pin
-  writeRegister(INT_ENABLE, 0b10000000);
-  readRegister(INT_SOURCE); //Clear the interrupts from the INT_SOURCE register.
-
-  interruptEnabled = true;
-  
-  EXTI_InitStructure.EXTI_Line     = EXTI_Line1;
-  EXTI_InitStructure.EXTI_Mode     = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger  = EXTI_Trigger_Rising;
-  EXTI_InitStructure.EXTI_LineCmd  = ENABLE;
-  EXTI_Init(&EXTI_InitStructure);
-
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority         = 0;
-  NVIC_InitStructure.NVIC_IRQChannel                    = EXTI1_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelCmd                 = ENABLE;
-
-  NVIC_Init(&NVIC_InitStructure);
-}
-
-void adxl345::disableInterrupt()
-{
-  interruptEnabled = false;
-
-  EXTI_InitStructure.EXTI_Line     = EXTI_Line1;
-  EXTI_InitStructure.EXTI_Mode     = EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger  = EXTI_Trigger_Rising;
-  EXTI_InitStructure.EXTI_LineCmd  = DISABLE;
-  EXTI_Init(&EXTI_InitStructure);
-
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority  = 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority         = 0;
-  NVIC_InitStructure.NVIC_IRQChannel                    = EXTI1_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelCmd                 = DISABLE;
-
-  NVIC_Init(&NVIC_InitStructure);
-
-  //writeRegister(INT_MAP, 0x00);   //Send the Tap and Double Tap Interrupts to INT2 pin
-  //writeRegister(INT_ENABLE, 0x00);
-  
-}
-
 char adxl345::spiSendByte(char byte)
 {
   // Loop while DR register in not empty 
@@ -209,7 +175,6 @@ char adxl345::readRegister(char registerAddress)
 
 bool adxl345::inRange(float testVal, float mid, float span)
 {
-
   if(testVal > (mid - span) && testVal < (mid + span))
   {
     return true;

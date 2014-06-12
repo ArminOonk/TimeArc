@@ -38,6 +38,9 @@ lightSensor light;
 
 String completeData;
 bool autoMode = true;
+bool autoLight = true;
+float manualLightVal = 0.0f;
+
 void comHandler(void *p)
 {
 
@@ -109,6 +112,24 @@ void comHandler(void *p)
           autoMode = (autoString == "TRUE");
           printAutoMode();
         }
+        else if(completeData.startsWith("LIGHT?"))
+        {
+          printf("LIGHT=%0.2f\r\n", light.getValue());
+        }
+        else if(completeData.startsWith("LIGHT="))
+        {
+          String lightString = completeData.substring(completeData.indexOf("=")+1);
+          if(lightString == "AUTO")
+          {
+            autoLight = true;
+          }
+          else
+          {
+            manualLightVal = lightString.toFloat();
+            autoLight = false;
+          }
+
+        }
         completeData = "";
     }
     ctl_delay(1);
@@ -153,7 +174,14 @@ void ledHandler(void *p)
     if(display.getMode() == CLOCK)
     {
       display.setTime(rtc.getTime());
-      display.setIntensity(lightVal);
+      if(autoLight)
+      {
+        display.setIntensity(lightVal);
+      }
+      else
+      {
+        display.setIntensity(manualLightVal);
+      }
     }
     else if(display.getMode() == ANIMATION)
     {

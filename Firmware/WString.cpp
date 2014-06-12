@@ -629,4 +629,8 @@ long String::toInt(void) const
 	return 0;
 }
 
-
+float String::toFloat(void) const
+{
+	if (buffer) return atof(buffer);
+	return 0;
+}

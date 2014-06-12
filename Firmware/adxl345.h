@@ -15,8 +15,13 @@
 #define SPI_CS_HIGH SPI_CS_PORT->BRR |= SPI_CS_PIN
 #define SPI_CS_LOW SPI_CS_PORT->BSRR |= SPI_CS_PIN
 
+#define ACCEL_INT1_PORT   GPIOC
+#define ACCEL_INT1_PIN   GPIO_Pin_2
+#define ACCCEL_INT1_DETECTED  (GPIO_ReadInputDataBit(ACCEL_INT1_PORT, ACCEL_INT1_PIN)==SET)
+
 #define ACCEL_INT2_PORT   GPIOC
 #define ACCEL_INT2_PIN   GPIO_Pin_1
+#define ACCCEL_INT2_DETECTED  (GPIO_ReadInputDataBit(ACCEL_INT2_PORT, ACCEL_INT2_PIN)==SET)
 
 #define POWER_CTL 0x2D    //Power Control Register
 #define DATA_FORMAT 0x31
@@ -38,7 +43,6 @@ class adxl345
   public:
   adxl345();
   void init();
-  void interrupt();
   
   void readAccel();
   void print();
@@ -53,9 +57,6 @@ class adxl345
   char spiSendByte(char byte);
   void writeRegister(char registerAddress, char value);
   char readRegister(char registerAddress);
-
-  void enableInterrupt();
-  void disableInterrupt();
 
   bool updatePose();
   bool inRange(float testVal, float mid, float span);
