@@ -17,8 +17,6 @@ bool rtcClock::init()
 
     // Get the time one way or another
     BKP_WriteBackupRegister(BKP_DR1, 0xA5A5);
-
-    setTime(1402036753);
   }
 
   // Check if the Power On Reset flag is set */

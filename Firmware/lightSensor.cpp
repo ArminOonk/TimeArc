@@ -3,7 +3,7 @@
 lightSensor::lightSensor()
 {
   filter = 0.2;
-  light = 0.0;
+  reset();
 
   RCC_ADCCLKConfig(RCC_PCLK2_Div6);
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
@@ -43,6 +43,11 @@ lightSensor::lightSensor()
   ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
 
+void lightSensor::reset()
+{
+  light = 4095.0;
+}
+
 unsigned int lightSensor::read()
 {
   // Start the conversion
@@ -56,5 +61,5 @@ unsigned int lightSensor::read()
 float lightSensor::getValue()
 {
   light += 0.2*(read() - light);
-  return (1.0-(light/4096.0));
+  return (1.0-(light/4095.0));
 }

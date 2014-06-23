@@ -11,6 +11,7 @@ class lightSensor
 
   unsigned int read();
   float getValue();
+  void reset();
 
   private:
   float filter;

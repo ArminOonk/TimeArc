@@ -423,44 +423,6 @@ void handleTouch()
     printf("BUTTON=DOWN\r\n");
     lastUserActionTime = rtc.getUTC();
   }
-
-  // change time
-  /*unsigned int now = rtc.getUTC();
-  if(touchTop.isTouched())
-  {
-    lastMenuTime = now;
-  }
-
-  if( (now - lastMenuTime) < 3)
-  {
-    if(touchRight.isTouched())
-    {
-      unsigned int newNow = now+3600;
-      rtc.setTime(newNow);
-      lastMenuTime = newNow;
-    }   
-
-    if(touchLeft.isTouched())
-    {
-      unsigned int newNow = now-3600;
-      rtc.setTime(newNow);
-      lastMenuTime = newNow;
-    }
-
-    if(touchUp.isTouched())
-    {
-      unsigned int newNow = now+60;
-      rtc.setTime(newNow);
-      lastMenuTime = newNow;
-    }
-
-    if(touchDown.isTouched())
-    {
-      unsigned int newNow = now-60;
-      rtc.setTime(newNow);
-      lastMenuTime = newNow;
-    }
-  }*/
 }
 
 void printAutoMode()
