@@ -3,6 +3,7 @@ import os
 import time
 import serial
 import platform
+import calendar
 
 if(platform.system() == "Windows"):
     print("Windows detected")
@@ -37,13 +38,23 @@ def receiveData():
                 diffTime = int(time.time()) - timeArcTime
                 timeSinceStart = int(time.time())-startTime
                 print("timeArcTime: " + str(timeArcTime) + " computerTime: " + str(int(time.time())) + " diff: " + str(diffTime))
-                print("StartTime: " + str(startTime) + " seconds since start: " + str(timeSinceStart) + "Offset promil: " + str((diffTime/timeSinceStart)*1000.0) )
+                print("StartTime: " + str(startTime) + " seconds since start: " + str(timeSinceStart) + " Offset promil: " + str((diffTime/timeSinceStart)*1000.0) )
 
         else:
             print("Wrong length")
 
 def setTime():
     sendCommand("TIME="+str(int(time.time())))
+
+def setOffset():
+    offset = 0
+    if time.daylight != 0:
+        offset =  -time.altzone
+    else:
+        offset = -time.timezone
+
+    print("Offset: " + str(offset))
+    sendCommand("OFFSET="+str(offset))
 
 if not timeArcSerial.isOpen():
     print("Serial port not open, opening ...")
@@ -53,17 +64,20 @@ else:
     print("Serial opened: " + timeArcSerial.name )
 
 setTime()
+setOffset()
 startTime = int(time.time())
-checkInterval = 3600
+checkInterval = 60
 nextCheckTime = int(time.time()) + 20
 
+time.sleep(1)
 while True:
-    time.sleep(1)
+    time.sleep(0.1)
     if int(time.time()) > nextCheckTime:
         sendCommand("TIME?")
         receiveData()
         nextCheckTime = int(time.time()) + checkInterval
 
-    receiveData()
+    if timeArcSerial.inWaiting() > 0:
+        receiveData()
 
 timeArcSerial.close()
