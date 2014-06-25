@@ -11,6 +11,7 @@ timeArcSerial = serial.Serial("COM5", 230400, timeout=1)
 
 def sendCommand(command):
     if timeArcSerial.isOpen():
+        print("Sending: " + command)
         command += "\r\n"
         timeArcSerial.write(command.encode())
 
@@ -20,9 +21,9 @@ def receiveData():
     except serial.serialutil.SerialException:
         print("Serial exception, handle it!")
 
-    txt = str(response.strip())
+    txt = str(response.strip(), "ascii")
     if txt == "":
-        print("Empty response")
+        #print("Empty response")
         return
     else:
         print("Response: " + txt)
@@ -32,8 +33,17 @@ def receiveData():
             print("First: " + vals[0] + " Second: " + vals[1])
             if vals[0] == "TIME":
                 print("Received time from electronics")
+                timeArcTime = int(vals[1])
+                diffTime = int(time.time()) - timeArcTime
+                timeSinceStart = int(time.time())-startTime
+                print("timeArcTime: " + str(timeArcTime) + " computerTime: " + str(int(time.time())) + " diff: " + str(diffTime))
+                print("StartTime: " + str(startTime) + " seconds since start: " + str(timeSinceStart) + "Offset promil: " + str((diffTime/timeSinceStart)*1000.0) )
+
         else:
             print("Wrong length")
+
+def setTime():
+    sendCommand("TIME="+str(int(time.time())))
 
 if not timeArcSerial.isOpen():
     print("Serial port not open, opening ...")
@@ -42,7 +52,18 @@ if not timeArcSerial.isOpen():
 else:
     print("Serial opened: " + timeArcSerial.name )
 
-sendCommand("TIME?")
-receiveData()
+setTime()
+startTime = int(time.time())
+checkInterval = 3600
+nextCheckTime = int(time.time()) + 20
+
+while True:
+    time.sleep(1)
+    if int(time.time()) > nextCheckTime:
+        sendCommand("TIME?")
+        receiveData()
+        nextCheckTime = int(time.time()) + checkInterval
+
+    receiveData()
 
 timeArcSerial.close()
