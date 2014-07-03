@@ -49,6 +49,16 @@ class TimeArcSerial:
         self.sendCommand(command)
         self.receiveData()
 
+    def setAuto(self, auto):
+        if auto:
+            command = "AUTO=TRUE"
+        else:
+            command = "AUTO=FALSE"
+
+        print("Auto: " + command)
+        self.sendCommand(command)
+        self.receiveData()
+
     def receiveData(self):
         if self.serialPort.inWaiting() > 0:
             try:
