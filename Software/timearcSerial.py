@@ -1,9 +1,17 @@
 import serial
 import time
+import platform
 
 class TimeArcSerial:
-
     serialPortName = "COM5"
+    if(platform.system() == "Windows"):
+        print("Windows detected")
+        serialPortName = "COM5"
+    elif (platform.system() == "Linux"):
+        print("Linux detected")
+        serialPortName = "/dev/ttyUSB0"
+
+    startTime = int(time.time())
 
     try:
         serialPort = serial.Serial(serialPortName, 230400, timeout=1)
@@ -22,6 +30,7 @@ class TimeArcSerial:
 
     def setTime(self):
         self.sendCommand("TIME="+str(int(time.time())))
+        self.receiveData()
 
     def setOffset(self):
         offset = 0
@@ -32,6 +41,7 @@ class TimeArcSerial:
 
         print("Offset: " + str(offset))
         self.sendCommand("OFFSET="+str(offset))
+        self.receiveData()
 
     def receiveData(self):
         if self.serialPort.inWaiting() > 0:
@@ -53,6 +63,6 @@ class TimeArcSerial:
                     if vals[0] == "TIME":
                         print("Received time from electronics")
                         timeArcTime = int(vals[1])
-
+                        print("Computertime: " + str(int(time.time())) + " timearctime: " + str(timeArcTime))
                 else:
                     print("Wrong length")
