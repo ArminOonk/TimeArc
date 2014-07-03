@@ -10,6 +10,7 @@ import timearcSerial
 taComm = timearcSerial.TimeArcSerial()
 
 taComm.setTime()
+time.sleep(1)
 taComm.setOffset()
 checkInterval = 60
 nextCheckTime = int(time.time()) + 20
