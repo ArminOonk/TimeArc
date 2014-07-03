@@ -44,7 +44,9 @@ class TimeArcSerial:
         self.receiveData()
 
     def setTimeout(self, timeout):
-        self.sendCommand("TIMEOUT="+str(timeout))
+        command = "TIMEOUT="+str(timeout)
+        print(command)
+        self.sendCommand(command)
         self.receiveData()
 
     def receiveData(self):
