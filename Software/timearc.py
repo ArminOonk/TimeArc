@@ -17,6 +17,7 @@ time.sleep(1)
 taComm.setOffset()
 time.sleep(1)
 taComm.setTimeout(10)
+time.sleep(1)
 
 checkInterval = 60
 nextCheckTime = int(time.time()) + 20
