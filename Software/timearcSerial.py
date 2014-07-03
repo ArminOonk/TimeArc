@@ -43,6 +43,10 @@ class TimeArcSerial:
         self.sendCommand("OFFSET="+str(offset))
         self.receiveData()
 
+    def setTimeout(self, timeout):
+        self.sendCommand("TIMEOUT="+str(timeout))
+        self.receiveData()
+
     def receiveData(self):
         if self.serialPort.inWaiting() > 0:
             try:

@@ -11,10 +11,13 @@ taComm = timearcSerial.TimeArcSerial()
 while int(time.time()) < 1404416633:
     print("Time not set yet: " + str(int(time.time())))
     time.sleep(1)
-    
+
 taComm.setTime()
 time.sleep(1)
 taComm.setOffset()
+time.sleep(1)
+taComm.setTimeout(10)
+
 checkInterval = 60
 nextCheckTime = int(time.time()) + 20
 
