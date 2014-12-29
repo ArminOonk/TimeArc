@@ -6,12 +6,13 @@ import platform
 import calendar
 import timearcSerial
 
-
 taComm = timearcSerial.TimeArcSerial()
 while int(time.time()) < 1404416633:
     print("Time not set yet: " + str(int(time.time())))
     time.sleep(1)
 
+taComm.setAuto(True)
+time.sleep(1)
 taComm.setTime()
 time.sleep(1)
 taComm.setOffset()

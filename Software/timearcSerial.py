@@ -33,11 +33,7 @@ class TimeArcSerial:
         self.receiveData()
 
     def setOffset(self):
-        offset = 0
-        if time.daylight != 0:
-            offset =  -time.altzone
-        else:
-            offset = -time.timezone
+        offset = -time.timezone
 
         print("Offset: " + str(offset))
         self.sendCommand("OFFSET="+str(offset))
