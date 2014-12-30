@@ -5,6 +5,13 @@ import serial
 import platform
 import calendar
 import timearcSerial
+from threading import Timer
+
+def checkAlarm():
+	#Check alarms
+	print("Checking alarms")
+	alarmTimer = Timer(1, checkAlarm)
+	alarmTimer.start()
 
 taComm = timearcSerial.TimeArcSerial()
 while int(time.time()) < 1404416633:
@@ -28,6 +35,9 @@ checkInterval = 60
 nextCheckTime = int(time.time()) + 20
 
 time.sleep(1)
+
+checkAlarm()
+
 while True:
     time.sleep(0.1)
     if int(time.time()) > nextCheckTime:
