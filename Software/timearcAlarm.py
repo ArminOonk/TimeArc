@@ -1,18 +1,38 @@
 #!/usr/bin/python3
 from threading import Timer
+from datetime import datetime, timedelta
 
 class TimeArcAlarm:
 
 	def update(self):
-		print("TimerArcThread update")
-		alarmTimer = Timer(self.interval, self.update)
-		alarmTimer.start()
+		dt = self.diffSeconds(self.triggerTime)
+		if dt < 0:
+			print("Alarm triggered!")
+			return
 		
-	def __init__(self, interValSec):
+		interval = dt
+		if dt > self.interval:
+			interval = self.interval
+			
+		print("Alarm update, diff [sec]: " + str(dt) + " checking again in: " + str(interval))
+				
+		self.alarmTimer = Timer(interval, self.update)
+		self.alarmTimer.start()
+		
+	def __init__(self, hour, minute, interValSec=1):
 		self.interval = interValSec
-		self.update()
-		pass
 		
-	def setTime(self, hour, minute):
-		pass
-	
+		tz = datetime.now()
+		newTime = tz.replace(hour=hour, minute=minute,second=0,microsecond=0)
+		dt = self.diffSeconds(newTime)
+
+		if dt <= 0:
+			newTime = newTime + timedelta(days=1)
+			
+		print("Trigger time: " + str(newTime))
+		self.triggerTime = newTime
+		self.update()
+		
+	def diffSeconds(self, t):
+		dt = t - datetime.now()
+		return dt.total_seconds()

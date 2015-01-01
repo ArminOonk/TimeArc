@@ -11,8 +11,6 @@ class TimeArcMPD:
 		
 		self.volumeInterval = 2	# interval in [sec]
 		
-		# use_unicode will enable the utf-8 mode for python2
-		# see http://pythonhosted.org/python-mpd2/topics/advanced.html#unicode-handling
 		self.client = mpd.MPDClient()
 		self.client.connect("localhost", 6600)
 		
@@ -65,8 +63,8 @@ if __name__ == "__main__":
 	print("MAIN debugging/testing")
 	
 	tam = TimeArcMPD()
-	tam.add("http://po192.pinguinradio.com/listen.pls")
-	tam.add("http://icecast.omroep.nl/3fm-bb-mp3")
+	tam.add('http://po192.pinguinradio.com/listen.pls')
+	tam.add('http://icecast.omroep.nl/3fm-bb-mp3')
 	tam.add('test.mp3')
 	
 	tam.stop()

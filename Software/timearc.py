@@ -7,6 +7,8 @@ import calendar
 import timearcSerial
 import timearcAlarm
 
+alarm = timearcAlarm.TimeArcAlarm(23, 37)
+
 taComm = timearcSerial.TimeArcSerial()
 while int(time.time()) < 1404416633:
     print("Time not set yet: " + str(int(time.time())))
@@ -29,8 +31,6 @@ checkInterval = 60
 nextCheckTime = int(time.time()) + 20
 
 time.sleep(1)
-
-alarm = timearcAlarm.TimeArcAlarm(1)
 
 while True:
     time.sleep(0.1)
