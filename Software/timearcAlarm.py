@@ -13,5 +13,6 @@ class TimeArcAlarm:
 		self.update()
 		pass
 		
-
+	def setTime(self, hour, minute):
+		pass
 	
