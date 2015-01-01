@@ -7,7 +7,7 @@ class TimeArcAlarm:
 	def update(self):
 		dt = self.diffSeconds(self.triggerTime)
 		if dt < 0:
-			print("Alarm triggered!")
+			self.callback()
 			return
 		
 		interval = dt
@@ -19,8 +19,9 @@ class TimeArcAlarm:
 		self.alarmTimer = Timer(interval, self.update)
 		self.alarmTimer.start()
 		
-	def __init__(self, hour, minute, interValSec=1):
+	def __init__(self, hour, minute, callback, interValSec=1):
 		self.interval = interValSec
+		self.callback = callback
 		
 		tz = datetime.now()
 		newTime = tz.replace(hour=hour, minute=minute,second=0,microsecond=0)

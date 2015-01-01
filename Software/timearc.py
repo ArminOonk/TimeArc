@@ -6,8 +6,19 @@ import platform
 import calendar
 import timearcSerial
 import timearcAlarm
+import timearcMPD
 
-alarm = timearcAlarm.TimeArcAlarm(23, 37)
+def alarmCallback():
+	print("Alarm callback")
+	tam = timearcMPD.TimeArcMPD()
+	tam.add('http://po192.pinguinradio.com/listen.pls')
+	tam.add('http://icecast.omroep.nl/3fm-bb-mp3')
+	tam.add('test.mp3')
+	
+	tam.stop()
+	tam.play(65, 90, 2)
+	
+alarm = timearcAlarm.TimeArcAlarm(9, 00, alarmCallback)
 
 taComm = timearcSerial.TimeArcSerial()
 while int(time.time()) < 1404416633:
