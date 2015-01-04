@@ -19,6 +19,8 @@ def alarmCallback():
 	
 	tam.stop()
 	tam.play(65, 90, 2)
+	
+	taComm.setAnimation()
 
 def buttonCallback(button):	
 	if tam.isPlaying():
@@ -39,7 +41,7 @@ def accelCallback(accel):
 	
 # Objects
 tam = timearcMPD.TimeArcMPD()
-alarm = timearcAlarm.TimeArcAlarm(20, 13, alarmCallback, 60)
+alarm = timearcAlarm.TimeArcAlarm(20, 49, alarmCallback, 60)
 taComm = timearcSerial.TimeArcSerial()	
 
 while int(time.time()) < 1404416633:
