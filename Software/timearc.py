@@ -20,17 +20,22 @@ def alarmCallback():
 	tam.stop()
 	tam.play(65, 90, 2)
 
-def buttonCallback(button):
-	print("Button callback: " + button)
-	
+def buttonCallback(button):	
 	if tam.isPlaying():
 		if button == "UP":
 			tam.volumeIncrement()
-		if button == "DOWN":
+		elif button == "DOWN":
 			tam.volumeDecrement()
+		else:
+			print("Button callback: " + button)
+	else:
+		print("Not playing Button: " + button)
 
 def accelCallback(accel):
-	print("Accel callback: " + accel)
+	if accel == "DOUBLETAP":
+		tam.pause()
+	else:	
+		print("Accel callback: " + accel)
 	
 # Objects
 tam = timearcMPD.TimeArcMPD()

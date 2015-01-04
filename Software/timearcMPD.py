@@ -44,6 +44,9 @@ class TimeArcMPD:
 		self.volumeTimer = Timer(self.volumeInterval, self.volumeUpdate)
 		self.volumeTimer.start()
 	
+	def pause(self):
+		self.client.pause()
+		
 	def volumeIncrement(self):
 		self.targetVolume = self.currentVolume + self.maxIncrement
 		self.setVolume(self.targetVolume)
