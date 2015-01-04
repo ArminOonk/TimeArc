@@ -22,7 +22,7 @@ def alarmCallback():
 
 # Objects
 tam = timearcMPD.TimeArcMPD()
-alarm = timearcAlarm.TimeArcAlarm(9, 00, alarmCallback)
+alarm = timearcAlarm.TimeArcAlarm(9, 00, alarmCallback, 60)
 taComm = timearcSerial.TimeArcSerial()	
 
 while int(time.time()) < 1404416633:
@@ -47,12 +47,14 @@ nextCheckTime = int(time.time()) + 20
 
 time.sleep(1)
 
+taComm.receiveUpdate()
+
 while True:
     time.sleep(0.1)
-    if int(time.time()) > nextCheckTime:
-        taComm.sendCommand("TIME?")
-        taComm.receiveData()
-        nextCheckTime = int(time.time()) + checkInterval
+    #if int(time.time()) > nextCheckTime:
+    #    taComm.sendCommand("TIME?")
+    #    taComm.receiveData()
+    #    nextCheckTime = int(time.time()) + checkInterval
 
-    taComm.receiveData()
+    #taComm.receiveData()
 

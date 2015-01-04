@@ -25,7 +25,6 @@ class TimeArcAlarm:
 		
 		return retStr
 		
-		
 	def update(self):
 		dt = self.diffSeconds(self.triggerTime)
 		if dt < 0:
