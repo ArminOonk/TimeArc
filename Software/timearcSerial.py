@@ -60,7 +60,10 @@ class TimeArcSerial:
 		self.receiveData()
 
 	def setAnimation(self):
-		sendCommand("MODE=ANIMATION")
+		self.sendCommand("MODE=ANIMATION")
+		
+	def setClock(self):
+		self.sendCommand("MODE=CLOCK")
 		
 	def setButtonCallback(self, callback):
 		self.buttonCallback = callback
