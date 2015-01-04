@@ -8,19 +8,23 @@ import timearcSerial
 import timearcAlarm
 import timearcMPD
 
+# Call backs
 def alarmCallback():
 	print("Alarm callback")
-	tam = timearcMPD.TimeArcMPD()
+	
+	tam.clear()
 	tam.add('http://po192.pinguinradio.com/listen.pls')
 	tam.add('http://icecast.omroep.nl/3fm-bb-mp3')
 	tam.add('test.mp3')
 	
 	tam.stop()
 	tam.play(65, 90, 2)
-	
-alarm = timearcAlarm.TimeArcAlarm(9, 00, alarmCallback)
 
-taComm = timearcSerial.TimeArcSerial()
+# Objects
+tam = timearcMPD.TimeArcMPD()
+alarm = timearcAlarm.TimeArcAlarm(9, 00, alarmCallback)
+taComm = timearcSerial.TimeArcSerial()	
+
 while int(time.time()) < 1404416633:
     print("Time not set yet: " + str(int(time.time())))
     time.sleep(1)

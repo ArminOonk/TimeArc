@@ -1,9 +1,31 @@
 #!/usr/bin/python3
 from threading import Timer
 from datetime import datetime, timedelta
+import math
 
 class TimeArcAlarm:
 
+	def printCountDownTime(self, secRemaining):
+		secRemaining = round(secRemaining)
+		# Seconds remaining
+		seconds = round(secRemaining%60)
+		secRemaining = secRemaining/60
+		# Minutes remainging
+		minutes = round(secRemaining%60)
+		secRemaining = secRemaining/60
+		# Hours Remaining
+		hours = round(secRemaining%24)
+		secRemaining = secRemaining/24
+		# Days remaining
+		days = math.floor(secRemaining)
+		
+		retStr = "{:0>2d}".format(hours) + ":" + "{:0>2d}".format(minutes) + ":" + "{:0>2d}".format(seconds)
+		if days > 0:
+			retStr = str(days) + " days " + retStr
+		
+		return retStr
+		
+		
 	def update(self):
 		dt = self.diffSeconds(self.triggerTime)
 		if dt < 0:
@@ -14,7 +36,7 @@ class TimeArcAlarm:
 		if dt > self.interval:
 			interval = self.interval
 			
-		print("Alarm update, diff [sec]: " + str(dt) + " checking again in: " + str(interval))
+		print("Alarm update, time remaining: " + self.printCountDownTime(dt) + " checking again in: " + str(interval) + " seconds")
 				
 		self.alarmTimer = Timer(interval, self.update)
 		self.alarmTimer.start()
