@@ -32,7 +32,6 @@ class TimeArcSerial:
 			command += "\r\n"
 			self.serialPort.write(command.encode())
 
-
 	def setTime(self):
 		self.sendCommand("TIME="+str(int(time.time())))
 		self.receiveData()
@@ -60,6 +59,12 @@ class TimeArcSerial:
 		self.sendCommand(command)
 		self.receiveData()
 
+	def setButtonCallback(self, callback):
+		self.buttonCallback = callback
+	
+	def setAccelCallback(self, callback):
+		self.accelCallback = callback
+		
 	def receiveData(self):
 		if self.serialPort.inWaiting() > 0:
 			try:
@@ -72,14 +77,28 @@ class TimeArcSerial:
 				#print("Empty response")
 				return
 			else:
-				print("Response: " + txt)
-				vals = txt.split("=")
+				self.decode(txt)
+	
+	def decode(self, txt):
+		vals = txt.split("=")
 
-				if len(vals) == 2:
-					print("First: " + vals[0] + " Second: " + vals[1])
-					if vals[0] == "TIME":
-						print("Received time from electronics")
-						timeArcTime = int(vals[1])
-						print("Computertime: " + str(int(time.time())) + " timearctime: " + str(timeArcTime))
+		if len(vals) == 2:
+			
+			if vals[0] == "TIME":
+				print("Received time from electronics")
+				timeArcTime = int(vals[1])
+				print("Computertime: " + str(int(time.time())) + " timearctime: " + str(timeArcTime))
+			elif vals[0] == "BUTTON":
+				if "buttonCallback" in dir(self):
+					self.buttonCallback(vals[1])
 				else:
-					print("Wrong length")
+					print("No callback found Button " + vals[1])
+			elif vals[0] == "ACCEL":
+				if "accelCallback" in dir(self):
+					self.accelCallback(vals[1])
+				else:
+					print("No callback found Accel " + vals[1])
+			else:
+				print("First: " + vals[0] + " Second: " + vals[1])
+		else:
+			print("Response: " + txt)

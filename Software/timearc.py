@@ -20,6 +20,12 @@ def alarmCallback():
 	tam.stop()
 	tam.play(65, 90, 2)
 
+def buttonCallback(button):
+	print("Button callback: " + button)
+
+def accelCallback(accel):
+	print("Accel callback: " + accel)
+	
 # Objects
 tam = timearcMPD.TimeArcMPD()
 alarm = timearcAlarm.TimeArcAlarm(9, 00, alarmCallback, 60)
@@ -35,26 +41,18 @@ taComm.setTime()
 time.sleep(1)
 taComm.setOffset()
 time.sleep(1)
-taComm.setTimeout(10)
+taComm.setTimeout(15)
 time.sleep(1)
 taComm.setAuto(False)
 time.sleep(1)
 taComm.setTimeout(10)
 time.sleep(1)
 
-checkInterval = 60
-nextCheckTime = int(time.time()) + 20
-
-time.sleep(1)
-
+taComm.setButtonCallback(buttonCallback)
+taComm.setAccelCallback(accelCallback)
 taComm.receiveUpdate()
 
+print("Ready for action!")
 while True:
     time.sleep(0.1)
-    #if int(time.time()) > nextCheckTime:
-    #    taComm.sendCommand("TIME?")
-    #    taComm.receiveData()
-    #    nextCheckTime = int(time.time()) + checkInterval
-
-    #taComm.receiveData()
 
