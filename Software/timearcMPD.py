@@ -15,8 +15,14 @@ class TimeArcMPD:
 		self.client.connect("localhost", 6600)
 		
 	def setVolume(self, vol):
+		if vol > 100:
+			vol = 100
+		if vol < 0:
+			vol = 0
+			
 		self.currentVolume = vol
 		self.client.setvol(self.currentVolume)
+		print("Volume: " + str(vol))
 	
 	def stop(self):
 		self.client.stop()
@@ -38,6 +44,14 @@ class TimeArcMPD:
 		self.volumeTimer = Timer(self.volumeInterval, self.volumeUpdate)
 		self.volumeTimer.start()
 	
+	def volumeIncrement(self):
+		self.targetVolume = self.currentVolume + self.maxIncrement
+		self.setVolume(self.targetVolume)
+		
+	def volumeDecrement(self):
+		self.targetVolume = self.currentVolume - self.maxIncrement
+		self.setVolume(self.targetVolume)
+		
 	def volumeUpdate(self):
 		if self.targetVolume != self.currentVolume:
 			inc = 0
@@ -58,7 +72,14 @@ class TimeArcMPD:
 			self.volumeTimer.start()
 		else:
 			print("Target volume reached")
-			
+	
+	def status(self):
+		return self.client.status()
+	
+	def isPlaying(self):
+		status = self.status()
+		return status['state'] == 'play'
+		
 if __name__ == "__main__":
 	print("MAIN debugging/testing")
 	

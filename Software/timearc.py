@@ -22,13 +22,19 @@ def alarmCallback():
 
 def buttonCallback(button):
 	print("Button callback: " + button)
+	
+	if tam.isPlaying():
+		if button == "UP":
+			tam.volumeIncrement()
+		if button == "DOWN":
+			tam.volumeDecrement()
 
 def accelCallback(accel):
 	print("Accel callback: " + accel)
 	
 # Objects
 tam = timearcMPD.TimeArcMPD()
-alarm = timearcAlarm.TimeArcAlarm(9, 00, alarmCallback, 60)
+alarm = timearcAlarm.TimeArcAlarm(20, 13, alarmCallback, 60)
 taComm = timearcSerial.TimeArcSerial()	
 
 while int(time.time()) < 1404416633:

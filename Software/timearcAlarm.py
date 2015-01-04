@@ -8,13 +8,13 @@ class TimeArcAlarm:
 	def printCountDownTime(self, secRemaining):
 		secRemaining = round(secRemaining)
 		# Seconds remaining
-		seconds = round(secRemaining%60)
+		seconds = math.floor(secRemaining%60)
 		secRemaining = secRemaining/60
 		# Minutes remainging
-		minutes = round(secRemaining%60)
+		minutes = math.floor(secRemaining%60)
 		secRemaining = secRemaining/60
 		# Hours Remaining
-		hours = round(secRemaining%24)
+		hours = math.floor(secRemaining%24)
 		secRemaining = secRemaining/24
 		# Days remaining
 		days = math.floor(secRemaining)
