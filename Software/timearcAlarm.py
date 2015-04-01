@@ -24,6 +24,15 @@ class TimeArcAlarm:
 			retStr = str(days) + " days " + retStr
 		
 		return retStr
+	
+	def setTime(self, hour, minute):
+		tz = datetime.now()
+		newTime = tz.replace(hour=hour, minute=minute,second=0,microsecond=0)
+		dt = self.diffSeconds(newTime)
+
+		if dt <= 0:
+			newTime = newTime + timedelta(days=1)
+		self.triggerTime = newTime
 		
 	def update(self):
 		dt = self.diffSeconds(self.triggerTime)
@@ -44,15 +53,9 @@ class TimeArcAlarm:
 		self.interval = interValSec
 		self.callback = callback
 		
-		tz = datetime.now()
-		newTime = tz.replace(hour=hour, minute=minute,second=0,microsecond=0)
-		dt = self.diffSeconds(newTime)
-
-		if dt <= 0:
-			newTime = newTime + timedelta(days=1)
-			
-		print("Trigger time: " + str(newTime))
-		self.triggerTime = newTime
+		self.setTime(hour, minute)
+		print("Trigger time: " + str(self.triggerTime))
+		
 		self.update()
 		
 	def diffSeconds(self, t):
