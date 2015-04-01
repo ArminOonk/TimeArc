@@ -6,8 +6,12 @@ from oauth2client.file import Storage
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.tools import run
 
-import gdata.calendar.service
-import gdata.service
+import xe #for the time comparator
+from feed.date.rfc3339 import tf_from_timestamp #also for the comparator
+from feed.date.rfc3339 import timestamp_from_tf #also for the comparator
+
+from datetime import datetime #for the time on the rpi end
+import time
 
 FLAGS = gflags.FLAGS
 
@@ -24,7 +28,6 @@ FLOW = OAuth2WebServerFlow(
     user_agent='TimeArc/1.0',
 	)
 
-FLOW
 # To disable the local server feature, uncomment the following line:
 FLAGS.auth_local_webserver = False
 
@@ -46,16 +49,28 @@ http = credentials.authorize(http)
 # to get a developerKey for your own application.
 service = build(serviceName='calendar', version='v3', http=http, developerKey='AIzaSyBrNYKWOzxV1NFN-TjhsP05ukHK2CQCmIE')
 
-# Get Calendat summary
+# Get Calendar summary
 calendar = service.calendars().get(calendarId='primary').execute()
 print('Calendar summary: ' + calendar['summary'])
 
 # List events
 page_token = None
+timeNow = timestamp_from_tf(time.time())
+timeMax = timestamp_from_tf(time.time()+60*60*24)
+print("Now: " + timeNow + " max: " + timeMax)
+
 while True:
-	events = service.events().list(calendarId='primary', pageToken=page_token, q='wake').execute()
+	events = service.events().list(calendarId='primary', pageToken=page_token, q='wake', timeMin=timeNow, timeMax=timeMax).execute()
 	for event in events['items']:
-		print event['summary'] + str(event['start']['dateTime'])
+		eventTime = tf_from_timestamp(event['start']['dateTime'])
+		eventTimeString = time.strftime('%d-%m-%Y %H:%M',time.localtime(eventTime))
+		
+		delta = datetime.fromtimestamp(eventTime) - datetime.now()
+		
+		print(event['summary'] + " " + eventTimeString + " happening in: " + str(delta.total_seconds()) + " seconds")
+		print(timestamp_from_tf(eventTime))
+		
 	page_token = events.get('nextPageToken')
 	if not page_token:
+		print("Done")
 		break
