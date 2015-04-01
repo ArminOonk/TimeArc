@@ -22,7 +22,7 @@ def alarmCallback():
 	tam.add('test.mp3')
 	
 	tam.stop()
-	tam.play(65, 90, 2)
+	tam.play(65, 80, 2)
 	
 	taComm.setAnimation()
 
