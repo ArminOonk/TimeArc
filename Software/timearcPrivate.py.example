@@ -1,0 +1,9 @@
+from oauth2client.client import OAuth2WebServerFlow
+FLOW = OAuth2WebServerFlow(
+	client_id='',
+	client_secret='',
+	scope='',
+	user_agent='TimeArc/1.0',
+)
+
+API_KEY = ''
