@@ -33,8 +33,17 @@ class TimeArcAlarm:
 		if dt <= 0:
 			newTime = newTime + timedelta(days=1)
 		self.triggerTime = newTime
+		self.alarmSet = True
+		self.update()
+	
+	def stopAlarm(self):
+		self.alarmSet = False
 		
 	def update(self):
+		if not self.alarmSet:
+			print("Alarm not set")
+			return # Alarm not set
+			
 		dt = self.diffSeconds(self.triggerTime)
 		if dt < 0:
 			self.callback()
@@ -49,14 +58,12 @@ class TimeArcAlarm:
 		self.alarmTimer = Timer(interval, self.update)
 		self.alarmTimer.start()
 		
-	def __init__(self, callback, hour, minute, interValSec=1):
+	def __init__(self, callback, hour, minute, interValSec=60):
 		self.interval = interValSec
 		self.callback = callback
 		
 		self.setTime(hour, minute)
 		print("Trigger time: " + str(self.triggerTime))
-		
-		self.update()
 		
 	def diffSeconds(self, t):
 		dt = t - datetime.now()

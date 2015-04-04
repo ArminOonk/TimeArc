@@ -13,22 +13,27 @@ from feed.date.rfc3339 import timestamp_from_tf #also for the comparator
 
 from datetime import datetime #for the time on the rpi end
 import time
+from threading import Timer
 
 class TimeArcGoogleCalendar:
-	def __init__(self, FLOW, API_KEY):
+	def __init__(self, FLOW, API_KEY, callback):
 		self.FLOW = FLOW
 		self.API_KEY = API_KEY
+		self.callback = callback
+		
 		self.FLAGS = gflags.FLAGS
 		self.FLAGS.auth_local_webserver = False
 		self.credentialsReceived = False
 		
+		self.interval = 300
 		self.getCredentials() # Maybe not the best place, will do for now
+		self.update()	#Start the background checking
 		
 	def getCredentials(self):
-		self.storage = Storage('calendar.dat')
-		self.credentials = self.storage.get()
+		storage = Storage('calendar.dat')
+		self.credentials = storage.get()
 		if self.credentials is None or self.credentials.invalid == True:
-			self.credentials = run(FLOW, storage)
+			self.credentials = run(self.FLOW, storage)
 		self.credentialsReceived = True
 	
 	def getNextAlarm(self):
@@ -44,8 +49,10 @@ class TimeArcGoogleCalendar:
 		print("Now: " + timeNow + " max: " + timeMax)
 
 		firstEvent = None
+		numberEvent = 0
 		while True:
 			events = service.events().list(calendarId='primary', pageToken=page_token, q='wake', timeMin=timeNow, timeMax=timeMax).execute()
+			numberEvent = len(events['items'])
 			for event in events['items']:
 				eventTime = tf_from_timestamp(event['start']['dateTime'])
 				eventTimeString = time.strftime('%d-%m-%Y %H:%M',time.localtime(eventTime))
@@ -63,7 +70,17 @@ class TimeArcGoogleCalendar:
 				print("Done")
 				break
 
+		if firstEvent != None or numberEvent == 0:
+			self.callback(firstEvent) # send None when we have no events
 		return firstEvent
+		
+	def update(self):
+		print("Checking google calendar")
+		
+		self.getNextAlarm()
+		
+		self.alarmTimer = Timer(self.interval, self.update)
+		self.alarmTimer.start()
 		
 if __name__ == "__main__":
 	from timearcPrivate import *

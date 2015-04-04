@@ -8,7 +8,9 @@ import sys
 import timearcSerial
 import timearcAlarm
 import timearcMPD
+import timearcGoogleCalendar
 from datetime import datetime, timedelta
+from timearcPrivate import *
 
 alarmTriggered = False
 buttonTopTime = datetime.now()
@@ -60,16 +62,25 @@ def accelCallback(accel):
 			tam.pause()
 	else:	
 		print("Accel callback: " + accel)
+
+def googleCallback(time):
+	if time == None:
+		print("Stopping the alarm, no event found")
+		alarm.stopAlarm()
+	else:
+		print("Google calendar callback, found event: " + str(time))
+		tz = datetime.fromtimestamp(time)
+		alarm.setTime(tz.hour, tz.minute)
 	
 # Objects
+# Media player
 tam = timearcMPD.TimeArcMPD()
+# alarm
 alarm = timearcAlarm.TimeArcAlarm(alarmCallback, 9, 05, 60)
+# Serial port
 taComm = timearcSerial.TimeArcSerial()	
-
-print(sys.hexversion)
-
-#from timearcPrivate import *
-#cal = TimeArcGoogleCalendar(FLOW, API_KEY)
+# Google calendar interface
+cal = timearcGoogleCalendar.TimeArcGoogleCalendar(FLOW, API_KEY, googleCallback)
 
 while int(time.time()) < 1404416633:
     print("Time not set yet: " + str(int(time.time())))
