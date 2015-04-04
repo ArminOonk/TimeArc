@@ -34,9 +34,14 @@ class TimeArcGoogleCalendar:
 		self.credentials = storage.get()
 		if self.credentials is None or self.credentials.invalid == True:
 			self.credentials = run(self.FLOW, storage)
-		self.credentialsReceived = True
+			
+		if self.credentials.invalid:
+			self.credentialsReceived = True
 	
 	def getNextAlarm(self):
+		if not self.credentialsReceived:
+			self.getCredentials()
+			
 		# Create an httplib2.Http object to handle our HTTP requests and authorize it
 		# with our good Credentials.
 		http = httplib2.Http()
@@ -59,9 +64,12 @@ class TimeArcGoogleCalendar:
 				
 				delta = datetime.fromtimestamp(eventTime) - datetime.now()
 				
-				print(event['summary'] + " " + eventTimeString + " happening in: " + str(delta.total_seconds()) + " seconds")
-				print(timestamp_from_tf(eventTime))
+				print(event['summary'] + " " + eventTimeString + " happening @timestamp: " + str(timestamp_from_tf(eventTime)) + " delta: " + str(delta.total_seconds()) + " seconds")
 				
+				if delta.total_seconds() <= 0:
+					print("Negative difference!")
+					continue # This is not correct!
+					
 				if firstEvent == None:
 					firstEvent = eventTime
 				
