@@ -43,6 +43,7 @@ class TimeArcGoogleCalendar:
 		timeMax = timestamp_from_tf(time.time()+60*60*24)
 		print("Now: " + timeNow + " max: " + timeMax)
 
+		firstEvent = None
 		while True:
 			events = service.events().list(calendarId='primary', pageToken=page_token, q='wake', timeMin=timeNow, timeMax=timeMax).execute()
 			for event in events['items']:
@@ -54,11 +55,16 @@ class TimeArcGoogleCalendar:
 				print(event['summary'] + " " + eventTimeString + " happening in: " + str(delta.total_seconds()) + " seconds")
 				print(timestamp_from_tf(eventTime))
 				
+				if firstEvent == None:
+					firstEvent = eventTime
+				
 			page_token = events.get('nextPageToken')
 			if not page_token:
 				print("Done")
 				break
 
+		return firstEvent
+		
 if __name__ == "__main__":
 	from timearcPrivate import *
 	print("Google calendar testing and debugging")

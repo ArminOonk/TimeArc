@@ -1,9 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 import os
 import time
 import serial
 import platform
 import calendar
+import sys
 import timearcSerial
 import timearcAlarm
 import timearcMPD
@@ -62,8 +63,13 @@ def accelCallback(accel):
 	
 # Objects
 tam = timearcMPD.TimeArcMPD()
-alarm = timearcAlarm.TimeArcAlarm(6, 35, alarmCallback, 60)
+alarm = timearcAlarm.TimeArcAlarm(alarmCallback, 9, 05, 60)
 taComm = timearcSerial.TimeArcSerial()	
+
+print(sys.hexversion)
+
+#from timearcPrivate import *
+#cal = TimeArcGoogleCalendar(FLOW, API_KEY)
 
 while int(time.time()) < 1404416633:
     print("Time not set yet: " + str(int(time.time())))

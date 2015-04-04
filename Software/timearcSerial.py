@@ -1,5 +1,6 @@
 import serial
 import time
+import sys
 import platform
 from threading import Timer
 
@@ -81,7 +82,11 @@ class TimeArcSerial:
 			except serial.serialutil.SerialException:
 				print("Serial exception, handle it!")
 
-			txt = str(response.strip(), "ascii")
+			if sys.hexversion >= 50463728:
+				txt = str(response.strip(), "ascii")
+			else:
+				txt = str(response.strip())
+				
 			if txt == "":
 				#print("Empty response")
 				return

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 from threading import Timer
 from datetime import datetime, timedelta
 import math
@@ -19,7 +19,7 @@ class TimeArcAlarm:
 		# Days remaining
 		days = math.floor(secRemaining)
 		
-		retStr = "{:0>2d}".format(hours) + ":" + "{:0>2d}".format(minutes) + ":" + "{:0>2d}".format(seconds)
+		retStr = "{:0>2d}".format(int(hours)) + ":" + "{:0>2d}".format(int(minutes)) + ":" + "{:0>2d}".format(int(seconds))
 		if days > 0:
 			retStr = str(days) + " days " + retStr
 		
@@ -49,7 +49,7 @@ class TimeArcAlarm:
 		self.alarmTimer = Timer(interval, self.update)
 		self.alarmTimer.start()
 		
-	def __init__(self, hour, minute, callback, interValSec=1):
+	def __init__(self, callback, hour, minute, interValSec=1):
 		self.interval = interValSec
 		self.callback = callback
 		
