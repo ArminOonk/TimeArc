@@ -28,7 +28,6 @@ def alarmCallback():
 		global alarmTriggered
 		alarmTriggered = True
 		tam.clear()
-		tam.add('http://po192.pinguinradio.com/listen.pls')
 		tam.add('http://icecast.omroep.nl/3fm-bb-mp3')
 		tam.add('test.mp3')
 		

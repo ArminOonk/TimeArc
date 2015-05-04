@@ -29,8 +29,12 @@ class TimeArcMPD:
 		self.client.stop()
 		
 	def clear(self):
-		self.client.clear()
-
+		try:
+			self.client.clear()
+		except ConnectionError:
+			self.client.connect("localhost", 6600)
+			self.client.clear()
+			
 	def add(self, uri):
 		try:
 			self.client.add(uri)
