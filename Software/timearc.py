@@ -36,7 +36,7 @@ def alarmCallback():
 		tam.play(65, 80, 2)
 		
 		taComm.setAnimation()
-	except exceptions.Exception as e:
+	except Exception as e:
 		log_exception(e)
 		#tam = timearcMPD.TimeArcMPD()
 		#alarmTimer = Timer(2.0, alarmCallback)

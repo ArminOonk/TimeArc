@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-#import mpd
 import musicpd
 
 import time
@@ -13,7 +12,6 @@ class TimeArcMPD:
 		
 		self.volumeInterval = 2	# interval in [sec]
 		
-		#self.client = mpd.MPDClient()
 		self.client = musicpd.MPDClient();
 		self.client.connect("localhost", 6600)
 		
@@ -34,7 +32,10 @@ class TimeArcMPD:
 		self.client.clear()
 
 	def add(self, uri):
-		self.client.add(uri)
+		try:
+			self.client.add(uri)
+		except musicpd.CommandError as e:
+			print("Exception: " + str(e))
 	
 	def play(self, minVol=65, maxVol=90, inc=2):
 		self.targetVolume = maxVol
@@ -90,7 +91,8 @@ if __name__ == "__main__":
 	print("MAIN debugging/testing")
 	
 	tam = TimeArcMPD()
-	tam.add('http://po192.pinguinradio.com/listen.pls')
+	tam.clear()
+	#tam.add('http://po192.pinguinradio.com/listen.pls')
 	tam.add('http://icecast.omroep.nl/3fm-bb-mp3')
 	tam.add('test.mp3')
 	
