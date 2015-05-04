@@ -1,0 +1,14 @@
+* I need to add XML namespace support to xe, and make sure the
+  .import_xml() method works correctly with namespaces.
+
+* I need to make sure that xe deals correctly with string values that
+  might cause broken XML: for example, a string with a single "<" needs
+  to be properly escaped.  I also need to make sure that CDATA sections
+  are handled sensibly.
+
+* I want to add full ISO 8601 date support, although that is a truly
+  frightening prospect.  There is such a staggering range of legal date
+  formats in ISO 8601!
+
+* I may change a bunch of the class names in xe to make them more
+  consistent with each other and thus easier to learn.
