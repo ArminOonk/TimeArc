@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-import mpd
+#import mpd
+import musicpd
+
 import time
 from threading import Timer
 	
@@ -11,7 +13,8 @@ class TimeArcMPD:
 		
 		self.volumeInterval = 2	# interval in [sec]
 		
-		self.client = mpd.MPDClient()
+		#self.client = mpd.MPDClient()
+		self.client = musicpd.MPDClient();
 		self.client.connect("localhost", 6600)
 		
 	def setVolume(self, vol):

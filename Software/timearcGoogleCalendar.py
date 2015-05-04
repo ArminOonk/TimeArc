@@ -65,13 +65,15 @@ class TimeArcGoogleCalendar:
 				delta = datetime.fromtimestamp(eventTime) - datetime.now()
 				
 				print(event['summary'] + " " + eventTimeString + " happening @timestamp: " + str(timestamp_from_tf(eventTime)) + " delta: " + str(delta.total_seconds()) + " seconds")
-				
+		
 				if delta.total_seconds() <= 0:
 					print("Negative difference!")
 					continue # This is not correct!
 					
 				if firstEvent == None:
 					firstEvent = eventTime
+					event['summary'] = 'wake planned by timearc'
+					updated_event = service.events().update(calendarId='primary', eventId=event['id'], body=event).execute()
 				
 			page_token = events.get('nextPageToken')
 			if not page_token:

@@ -3,6 +3,11 @@ import time
 import sys
 import platform
 from threading import Timer
+import os
+#import exceptions
+from logging_utils import setup_logging_to_file, log_exception  
+
+setup_logging_to_file("timearcSerial.py.txt")
 
 class TimeArcSerial:
 	def __init__(self):
@@ -76,23 +81,22 @@ class TimeArcSerial:
 		self.accelCallback = callback
 		
 	def receiveData(self):
-		if self.serialPort.inWaiting() > 0:
-			try:
+		try:
+			if self.serialPort.inWaiting() > 0:
 				response = self.serialPort.readline()
-			except serial.serialutil.SerialException:
-				print("Serial exception, handle it!")
 
-			if sys.hexversion >= 50463728:
-				txt = str(response.strip(), "ascii")
-			else:
-				txt = str(response.strip())
-				
-			if txt == "":
-				#print("Empty response")
-				return
-			else:
-				self.decode(txt)
-	
+				if sys.hexversion >= 50463728:
+					txt = str(response.strip(), "ascii")
+				else:
+					txt = str(response.strip())
+					
+				if txt == "":
+					#print("Empty response")
+					return
+				else:
+					self.decode(txt)
+		except exceptions.Exception as e:
+			log_exception(e)	
 	def decode(self, txt):
 		vals = txt.split("=")
 

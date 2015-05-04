@@ -69,6 +69,10 @@ while True:
 		
 		print(event['summary'] + " " + eventTimeString + " happening in: " + str(delta.total_seconds()) + " seconds")
 		print(timestamp_from_tf(eventTime))
+		event['summary'] = 'wake planned'
+		updated_event = service.events().update(calendarId='primary', eventId=event['id'], body=event).execute()
+		# Print the updated date.
+		print updated_event['updated']
 		
 	page_token = events.get('nextPageToken')
 	if not page_token:
