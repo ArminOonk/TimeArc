@@ -30,22 +30,7 @@ class TimeArcMPD:
 			
 			return func(*args, **kwargs)
 		return CheckConnection_and_call
-	
-	#Connect to MPD if not connected
-	def isConnected(self):
-		try:
-			self.client.ping()
-			return True
-		except musicpd.ConnectionError:
-			print("Exception, reconnecting")
-			self.client.connect("localhost", 6600)
-			try:
-				self.client.ping()
-				return True
-			except musicpd.ConnectionError:
-				print(time.strftime("%H:%M:%S") + ": Could not connect")
-				return False #Something failed 
-	
+		
 	@CheckConnection	
 	def setVolume(self, vol):
 		if vol > 100:
