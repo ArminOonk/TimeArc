@@ -37,9 +37,7 @@ def alarmCallback():
 		taComm.setAnimation()
 	except Exception as e:
 		log_exception(e)
-		#tam = timearcMPD.TimeArcMPD()
-		#alarmTimer = Timer(2.0, alarmCallback)
-		#alarmTimer.start()
+		print("Exception: " + str(e))
 		
 def buttonCallback(button):
 	try:
