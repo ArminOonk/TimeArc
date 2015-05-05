@@ -76,7 +76,21 @@ def accelCallback(accel):
 				tam.pause()
 		else:	
 			print("Accel callback: " + accel)
-	except exceptions.Exception as e:
+	except Exception as e:
+		log_exception(e)
+
+def poseCallback(pose):
+	try:
+		if pose == "FRONT" and tam.isPlaying():
+			print("toggle pause --> off")
+			tam.pause()
+		elif pose == "BACK" and not tam.isPlaying():
+			print("toggle pause --> on")
+			tam.pause()
+		else:
+			print("Pose changed to: " + pose + " doing nothing")
+			
+	except Exception as e:
 		log_exception(e)
 
 def googleCallback(time):
@@ -118,6 +132,7 @@ time.sleep(1)
 
 taComm.setButtonCallback(buttonCallback)
 taComm.setAccelCallback(accelCallback)
+taComm.setPoseCallback(poseCallback)
 taComm.receiveUpdate()
 
 #print('Number of arguments:' + str(len(sys.argv)) + 'arguments.')

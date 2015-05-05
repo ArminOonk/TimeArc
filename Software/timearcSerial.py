@@ -79,7 +79,10 @@ class TimeArcSerial:
 	
 	def setAccelCallback(self, callback):
 		self.accelCallback = callback
-		
+	
+	def setPoseCallback(self, callback):
+		self.poseCallback = callback
+	
 	def receiveData(self):
 		try:
 			if self.serialPort.inWaiting() > 0:
@@ -116,6 +119,11 @@ class TimeArcSerial:
 					self.accelCallback(vals[1])
 				else:
 					print("No callback found Accel " + vals[1])
+			elif vals[0] == "POSE":
+				if "poseCallback" in dir(self):
+					self.poseCallback(vals[1])
+				else:
+					print("No POSE Callback found: " + vals[1])
 			else:
 				print("First: " + vals[0] + " Second: " + vals[1])
 		else:
