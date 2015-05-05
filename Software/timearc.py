@@ -24,7 +24,7 @@ setup_logging_to_file("timearc.py.txt")
 # Call backs
 def alarmCallback():
 	try:
-		print("Alarm callback")
+		print(time.strftime("%H:%M:%S") + " Alarm callback")
 		global alarmTriggered
 		alarmTriggered = True
 		tam.clear()
