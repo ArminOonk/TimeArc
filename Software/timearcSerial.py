@@ -97,11 +97,11 @@ class TimeArcSerial:
 					self.decode(txt)
 		except exceptions.Exception as e:
 			log_exception(e)	
+			
 	def decode(self, txt):
 		vals = txt.split("=")
 
 		if len(vals) == 2:
-			
 			if vals[0] == "TIME":
 				print("Received time from electronics")
 				timeArcTime = int(vals[1])

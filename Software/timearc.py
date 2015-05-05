@@ -120,6 +120,15 @@ taComm.setButtonCallback(buttonCallback)
 taComm.setAccelCallback(accelCallback)
 taComm.receiveUpdate()
 
+#print('Number of arguments:' + str(len(sys.argv)) + 'arguments.')
+#print('Argument List:' + str(sys.argv))
+
+if len(sys.argv) > 1:
+	for i in sys.argv:
+		if i == "testalarm":
+			print("Testing alarm")
+			alarmCallback()
+			
 print("Ready for action!")
 while True:
     time.sleep(0.1)

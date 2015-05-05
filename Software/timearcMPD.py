@@ -13,25 +13,39 @@ class TimeArcMPD:
 		self.volumeInterval = 2	# interval in [sec]
 		
 		self.client = musicpd.MPDClient();
-		self.client.connect("localhost", 6600)
-	
+		#self.client.connect("localhost", 6600)
+		self.update()
+		
+	# Keep the MPD connection alive
+	def update(self):
+		print("MPD keep the connection alive")
+		try:
+			self.client.ping()
+		except musicpd.ConnectionError:
+			print(time.strftime("%H:%M:%S") + ": MPD reconnecting")
+			self.client.connect("localhost", 6600)
+			self.client.ping()
+			
+		self.alarmTimer = Timer(30, self.update)
+		self.alarmTimer.start()
+		
 	#decorator to check the connection
 	# http://hangar.runway7.net/python/decorators-and-wrappers
 	# http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
+
 	def CheckConnection(func):
-		def CheckConnection_and_call(self, *args, **kwargs):
+		def CheckConnection_and_call(*args, **kwargs):
 			# Check the connection
 			try:
 				self.client.ping()
-				return True
 			except musicpd.ConnectionError:
 				print(time.strftime("%H:%M:%S") + ": MPD reconnecting")
 				self.client.connect("localhost", 6600)
-			
+
 			return func(*args, **kwargs)
 		return CheckConnection_and_call
 		
-	@CheckConnection	
+	#@CheckConnection	
 	def setVolume(self, vol):
 		if vol > 100:
 			vol = 100
@@ -42,23 +56,23 @@ class TimeArcMPD:
 		self.client.setvol(self.currentVolume)
 		print("Volume: " + str(vol))
 	
-	@CheckConnection
+	#@CheckConnection
 	def stop(self):
 		self.client.stop()
 	
-	@CheckConnection
+	#@CheckConnection
 	def clear(self):
 		#self.isConnected()
 		self.client.clear()
 		
-	@CheckConnection
+	#@CheckConnection
 	def add(self, uri):
 		try:
 			self.client.add(uri)
 		except musicpd.CommandError as e:
 			print("Exception: " + str(e))
 	
-	@CheckConnection
+	#@CheckConnection
 	def play(self, minVol=65, maxVol=90, inc=2):
 		self.targetVolume = maxVol
 		self.currentVolume = minVol
@@ -70,7 +84,7 @@ class TimeArcMPD:
 		self.volumeTimer = Timer(self.volumeInterval, self.volumeUpdate)
 		self.volumeTimer.start()
 	
-	@CheckConnection
+	#@CheckConnection
 	def pause(self):
 		self.client.pause()
 		
@@ -103,11 +117,11 @@ class TimeArcMPD:
 		else:
 			print("Target volume reached")
 	
-	@CheckConnection
+	#@CheckConnection
 	def status(self):
 		return self.client.status()
 	
-	@CheckConnection
+	#@CheckConnection
 	def isPlaying(self):
 		status = self.status()
 		return status['state'] == 'play'
