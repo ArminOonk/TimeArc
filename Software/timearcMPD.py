@@ -13,19 +13,13 @@ class TimeArcMPD:
 		self.volumeInterval = 2	# interval in [sec]
 		
 		self.client = musicpd.MPDClient();
-		#self.client.connect("localhost", 6600)
 		self.update()
-		
+	
 	# Keep the MPD connection alive
 	def update(self):
 		print("MPD keep the connection alive")
-		try:
-			self.client.ping()
-		except musicpd.ConnectionError:
-			print(time.strftime("%H:%M:%S") + ": MPD reconnecting")
-			self.client.connect("localhost", 6600)
-			self.client.ping()
-			
+		self.CheckConnection()
+		
 		self.alarmTimer = Timer(30, self.update)
 		self.alarmTimer.start()
 		
@@ -33,18 +27,15 @@ class TimeArcMPD:
 	# http://hangar.runway7.net/python/decorators-and-wrappers
 	# http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 
-	def CheckConnection(func):
-		def CheckConnection_and_call(*args, **kwargs):
-			# Check the connection
-			try:
-				self.client.ping()
-			except musicpd.ConnectionError:
-				print(time.strftime("%H:%M:%S") + ": MPD reconnecting")
-				self.client.connect("localhost", 6600)
+	def CheckConnection(self):
+		# Check the connection
+		try:
+			self.client.ping()
+		except musicpd.ConnectionError:
+			print(time.strftime("%H:%M:%S") + ": MPD reconnecting")
+			self.client.connect("localhost", 6600)
+			self.client.ping()
 
-			return func(*args, **kwargs)
-		return CheckConnection_and_call
-		
 	#@CheckConnection	
 	def setVolume(self, vol):
 		if vol > 100:
