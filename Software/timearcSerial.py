@@ -4,7 +4,6 @@ import sys
 import platform
 from threading import Timer
 import os
-#import exceptions
 from logging_utils import setup_logging_to_file, log_exception  
 
 setup_logging_to_file("timearcSerial.py.txt")
@@ -98,7 +97,7 @@ class TimeArcSerial:
 					return
 				else:
 					self.decode(txt)
-		except exceptions.Exception as e:
+		except Exception as e:
 			log_exception(e)	
 			
 	def decode(self, txt):
