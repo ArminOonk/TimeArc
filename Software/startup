@@ -1,0 +1,10 @@
+#!/bin/bash
+ 
+exec 2> /tmp/timearc.log      # send stderr from rc.local to a log file
+exec 1>&2                      # send stdout to the same log file
+set -x
+
+chown pi:pi /tmp/timearc.log
+
+cd /home/pi/timearc/Software
+sudo -u pi screen -dm -S timearc ./timearc.py
