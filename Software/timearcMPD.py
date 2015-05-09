@@ -33,7 +33,7 @@ class TimeArcMPD:
 		try:
 			self.client.ping()
 		except:
-			logger.info(time.strftime("%H:%M:%S") + ": MPD reconnecting")
+			logger.info("MPD reconnecting")
 			self.client.connect("localhost", 6600)
 			self.client.ping()
 	

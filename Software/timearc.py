@@ -46,7 +46,7 @@ logger.addHandler(emailLogger)
 # Call backs
 def alarmCallback():
 	try:
-		logger.info(time.strftime("%H:%M:%S") + " Alarm callback")
+		logger.info("Alarm callback")
 		global alarmTriggered
 		alarmTriggered = True
 		
