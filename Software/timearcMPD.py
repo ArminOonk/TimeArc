@@ -5,7 +5,7 @@ import time
 from threading import Timer
 
 import logging, logging.handlers
-logger = logging.getLogger('TimeArc')
+logger = logging.getLogger('TimeArc.MPD')
 logger.setLevel(logging.DEBUG)
 
 class TimeArcMPD:
@@ -34,8 +34,11 @@ class TimeArcMPD:
 			self.client.ping()
 		except:
 			logger.info("MPD reconnecting")
-			self.client.connect("localhost", 6600)
-			self.client.ping()
+			try:
+				self.client.connect("localhost", 6600)
+				self.client.ping()
+			except:
+				logger.exception('MPD CheckConnection')
 	
 	def setVolume(self, vol):
 		if vol > 100:
@@ -44,15 +47,24 @@ class TimeArcMPD:
 			vol = 0
 			
 		self.currentVolume = vol
-		self.client.setvol(self.currentVolume)
-		logger.debug("Volume: " + str(vol))
-	
+		try:
+			self.client.setvol(self.currentVolume)
+			logger.debug("Volume: " + str(vol))
+		except:
+			logger.exception('MPD Setting volume command')
+
 	def stop(self):
-		self.client.stop()
-	
+		try:
+			self.client.stop()
+		except:
+			logger.exception('MPD stop command')
+			
 	def clear(self):
-		self.client.clear()
-	
+		try:
+			self.client.clear()
+		except:
+			logger.exception('MPD clear command')
+			
 	def addPlayList(self, uri):
 		self.playList.append(uri)
 		
@@ -76,14 +88,20 @@ class TimeArcMPD:
 		self.maxIncrement = inc
 		
 		self.setVolume(self.currentVolume)
-		self.client.play()
-		
-		self.volumeTimer = Timer(self.volumeInterval, self.volumeUpdate)
-		self.volumeTimer.start()
+		try:
+			self.client.play()
+			
+			self.volumeTimer = Timer(self.volumeInterval, self.volumeUpdate)
+			self.volumeTimer.start()
+		except:
+			logger.exception('MPD play command')
 	
 	def pause(self):
-		self.client.pause()
-		
+		try:
+			self.client.pause()
+		except:
+			logger.exception('MPD pause command')
+			
 	def volumeIncrement(self):
 		self.targetVolume = self.currentVolume + self.maxIncrement
 		self.setVolume(self.targetVolume)
@@ -114,17 +132,29 @@ class TimeArcMPD:
 			logger.debug("Target volume reached")
 	
 	def status(self):
-		return self.client.status()
+		ret = None
+		try:
+			ret = self.client.status()
+		except:
+			logger.exception()
+			
+		return ret
 	
 	def isPlaying(self):
 		status = self.status()
 		return status['state'] == 'play'
 		
 	def next(self):
-		self.client.next()
+		try:
+			self.client.next()
+		except:
+			logger.exception('MPD next command')
 		
 	def previous(self):
-		self.client.previous()
+		try:
+			self.client.previous()
+		except:
+			logger.exception('MPD previous command')
 		
 if __name__ == "__main__":
 	print("MAIN debugging/testing")

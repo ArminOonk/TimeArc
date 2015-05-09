@@ -16,7 +16,7 @@ import time
 from threading import Timer
 
 import logging, logging.handlers
-logger = logging.getLogger('TimeArc')
+logger = logging.getLogger('TimeArc.GoogleCalendar')
 logger.setLevel(logging.DEBUG)
 
 class TimeArcGoogleCalendar:

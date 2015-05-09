@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import math
 
 import logging, logging.handlers
-logger = logging.getLogger('TimeArc')
+logger = logging.getLogger('TimeArc.Alarm')
 logger.setLevel(logging.DEBUG)
 
 class TimeArcAlarm:

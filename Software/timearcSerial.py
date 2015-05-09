@@ -6,7 +6,7 @@ from threading import Timer
 import os
 
 import logging, logging.handlers
-logger = logging.getLogger('TimeArc')
+logger = logging.getLogger('TimeArc.Serial')
 logger.setLevel(logging.DEBUG)
 
 class TimeArcSerial:
