@@ -72,7 +72,7 @@ class TimeArcGoogleCalendar:
 					
 				if firstEvent == None:
 					firstEvent = eventTime
-					event['summary'] = 'wake planned by timearc'
+					event['summary'] = 'wake planned by timearc: ' + time.strftime("%H:%M:%S")
 					updated_event = service.events().update(calendarId='primary', eventId=event['id'], body=event).execute()
 				
 			page_token = events.get('nextPageToken')

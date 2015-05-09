@@ -17,38 +17,55 @@ alarmTriggered = False
 buttonTopTime = datetime.now()
 
 #import exceptions
-from logging_utils import setup_logging_to_file, log_exception  
+#from logging_utils import setup_logging_to_file, log_exception  
+#setup_logging_to_file("timearc.py.txt")
 
-setup_logging_to_file("timearc.py.txt")
+# Logging
+import logging, logging.handlers
+logger = logging.getLogger('TimeArc')
+logger.setLevel(logging.DEBUG)
+
+# create formatter
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# create console handler and set level to debug
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+# add formatter to ch
+ch.setFormatter(formatter)
+
+# add ch to logger
+logger.addHandler(ch)
+
+# Create an email logger
+emailLogger = logging.handlers.SMTPHandler(mailhost=(reportSmtpHost, reportSmtpPort), fromaddr=reportingUser, toaddrs=reportingReceipients, subject='TimeArc errors', credentials= (reportingUser, reportingPassword), secure=(), timeout=20.0)
+emailLogger.setLevel(logging.WARNING)
+emailLogger.setFormatter(formatter)
+logger.addHandler(emailLogger)
 
 # Call backs
 def alarmCallback():
 	try:
-		print(time.strftime("%H:%M:%S") + " Alarm callback")
+		logger.info(time.strftime("%H:%M:%S") + " Alarm callback")
 		global alarmTriggered
 		alarmTriggered = True
-		tam.clear()
-		tam.add('http://icecast.omroep.nl/3fm-bb-mp3')
-		tam.add('test.mp3')
 		
-		tam.stop()
-		tam.play(65, 80, 2)
-		
+		tam.startPlayList()
+			
 		taComm.setAnimation()
-	except Exception as e:
-		log_exception(e)
-		print("Exception: " + str(e))
+	except:
+		logger.exception('AlarmCallback')
 		
 def buttonCallback(button):
 	try:
 		global alarmTriggered
-		global  buttonTopTime
+		global buttonTopTime
 		
 		if button == "TOP":
 			buttonTopTime = datetime.now()
 		
 		if alarmTriggered and button == "TOP":
-			print("Going back to clock mode")
+			logger.debug("Going back to clock mode")
 			alarmTriggered = False
 			taComm.setClock()
 			
@@ -57,12 +74,16 @@ def buttonCallback(button):
 				tam.volumeIncrement()
 			elif button == "DOWN":
 				tam.volumeDecrement()
+			elif button == "LEFT":
+				tam.previous()
+			elif button == "RIGHT":
+				tam.next()
 			else:
-				print("Button callback: " + button)
+				logger.debug("Button callback: " + button)
 		else:
-			print("Not playing Button: " + button)
-	except exceptions.Exception as e:
-		log_exception(e)
+			logger.debug("Not playing Button: " + button)
+	except:
+		logger.exception('buttonCallback')
 
 def accelCallback(accel):
 	try:
@@ -70,44 +91,49 @@ def accelCallback(accel):
 		dt = datetime.now() - buttonTopTime
 		
 		if accel == "DOUBLETAP":
-			print("dt: " + str(dt.total_seconds()))
+			logger.debug("dt: " + str(dt.total_seconds()))
 			if dt.total_seconds() < 2:
-				print("Toggle pause")
+				logger.debug("Toggle pause")
 				tam.pause()
 		else:	
-			print("Accel callback: " + accel)
-	except Exception as e:
-		log_exception(e)
+			logger.debug("Accel callback: " + accel)
+	except:
+		logger.exception('accelCallback')
 
 def poseCallback(pose):
 	try:
 		if pose == "FRONT" and tam.isPlaying():
-			print("toggle pause --> off")
+			logger.debug("toggle pause --> off")
 			tam.pause()
 		elif pose == "BACK" and not tam.isPlaying():
-			print("toggle pause --> on")
+			logger.debug("toggle pause --> on")
 			tam.pause()
 		else:
-			print("Pose changed to: " + pose + " doing nothing")
+			logger.debug("Pose changed to: " + pose + " doing nothing")
 			
-	except Exception as e:
-		log_exception(e)
+	except:
+		logger.exception('poseCallback')
 
 def googleCallback(time):
 	try:
 		if time == None:
-			print("Stopping the alarm, no event found")
+			logger.info("Stopping the alarm, no event found")
 			alarm.stopAlarm()
 		else:
-			print("Google calendar callback, found event: " + str(time))
+			logger.info("Google calendar callback, found event: " + str(time))
 			tz = datetime.fromtimestamp(time)
 			alarm.setTime(tz.hour, tz.minute)
-	except exceptions.Exception as e:
-		log_exception(e)
+	except:
+		logger.exception('googleCallback')
 	
 # Objects
 # Media player
 tam = timearcMPD.TimeArcMPD()
+tam.addPlayList('http://pc192.pinguinradio.com:80')
+tam.addPlayList('http://pr320.pinguinradio.com:80')
+tam.addPlayList('http://po192.pinguinradio.com:80')
+tam.addPlayList('http://icecast.omroep.nl/3fm-bb-mp3')
+
 # alarm
 alarm = timearcAlarm.TimeArcAlarm(alarmCallback, 9, 5, 60)
 # Serial port
@@ -116,7 +142,7 @@ taComm = timearcSerial.TimeArcSerial()
 cal = timearcGoogleCalendar.TimeArcGoogleCalendar(FLOW, API_KEY, googleCallback)
 
 while int(time.time()) < 1404416633:
-    print("Time not set yet: " + str(int(time.time())))
+    logger.info("Time not set yet: " + str(int(time.time())))
     time.sleep(1)
 
 taComm.setAuto(True)
@@ -135,16 +161,24 @@ taComm.setAccelCallback(accelCallback)
 taComm.setPoseCallback(poseCallback)
 taComm.receiveUpdate()
 
-#print('Number of arguments:' + str(len(sys.argv)) + 'arguments.')
-#print('Argument List:' + str(sys.argv))
-
 if len(sys.argv) > 1:
 	for i in sys.argv:
 		if i == "testalarm":
-			print("Testing alarm")
+			logger.info("Testing alarm")
 			alarmCallback()
 			
-print("Ready for action!")
+		if i == "testexception":
+			def broken_function():
+				raise Exception('This is broken')
+	
+			try:
+				logger.info('Testing Exception')
+				broken_function()
+			except:
+				logger.exception('Exception test')
+			
+logger.info("Ready for action!")
+	
 while True:
     time.sleep(0.1)
 

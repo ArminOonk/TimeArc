@@ -7,3 +7,11 @@ FLOW = OAuth2WebServerFlow(
 )
 
 API_KEY = ''
+
+# error reporting
+reportingUser = ''
+reportingPassword = ''
+
+reportingReceipients = ['']
+reportSmtpHost = ''
+reportSmtpPort = 587

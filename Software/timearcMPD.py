@@ -12,6 +12,7 @@ class TimeArcMPD:
 		
 		self.volumeInterval = 2	# interval in [sec]
 		
+		self.playList = []
 		self.client = musicpd.MPDClient();
 		self.update()
 	
@@ -22,21 +23,16 @@ class TimeArcMPD:
 		
 		self.alarmTimer = Timer(30, self.update)
 		self.alarmTimer.start()
-		
-	#decorator to check the connection
-	# http://hangar.runway7.net/python/decorators-and-wrappers
-	# http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 
 	def CheckConnection(self):
 		# Check the connection
 		try:
 			self.client.ping()
-		except musicpd.ConnectionError:
+		except:
 			print(time.strftime("%H:%M:%S") + ": MPD reconnecting")
 			self.client.connect("localhost", 6600)
 			self.client.ping()
-
-	#@CheckConnection	
+	
 	def setVolume(self, vol):
 		if vol > 100:
 			vol = 100
@@ -47,23 +43,29 @@ class TimeArcMPD:
 		self.client.setvol(self.currentVolume)
 		print("Volume: " + str(vol))
 	
-	#@CheckConnection
 	def stop(self):
 		self.client.stop()
 	
-	#@CheckConnection
 	def clear(self):
-		#self.isConnected()
 		self.client.clear()
+	
+	def addPlayList(self, uri):
+		self.playList.append(uri)
 		
-	#@CheckConnection
 	def add(self, uri):
 		try:
 			self.client.add(uri)
 		except musicpd.CommandError as e:
 			print("Exception: " + str(e))
 	
-	#@CheckConnection
+	def startPlayList(self, minVol=65, maxVol=80, inc=2):
+		self.clear()
+		for uri in self.playList:
+			self.add(uri)
+		
+		self.stop()
+		self.play(minVol, maxVol, inc)
+		
 	def play(self, minVol=65, maxVol=90, inc=2):
 		self.targetVolume = maxVol
 		self.currentVolume = minVol
@@ -75,7 +77,6 @@ class TimeArcMPD:
 		self.volumeTimer = Timer(self.volumeInterval, self.volumeUpdate)
 		self.volumeTimer.start()
 	
-	#@CheckConnection
 	def pause(self):
 		self.client.pause()
 		
@@ -108,23 +109,27 @@ class TimeArcMPD:
 		else:
 			print("Target volume reached")
 	
-	#@CheckConnection
 	def status(self):
 		return self.client.status()
 	
-	#@CheckConnection
 	def isPlaying(self):
 		status = self.status()
 		return status['state'] == 'play'
+		
+	def next(self):
+		self.client.next()
+		
+	def previous(self):
+		self.client.previous()
 		
 if __name__ == "__main__":
 	print("MAIN debugging/testing")
 	
 	tam = TimeArcMPD()
-	tam.clear()
-	#tam.add('http://po192.pinguinradio.com/listen.pls')
-	tam.add('http://icecast.omroep.nl/3fm-bb-mp3')
-	tam.add('test.mp3')
 	
-	tam.stop()
-	tam.play(65, 90, 2)
+	tam.addPlayList('http://pc192.pinguinradio.com:80')
+	tam.addPlayList('http://pr320.pinguinradio.com:80')
+	tam.addPlayList('http://po192.pinguinradio.com:80')
+	tam.addPlayList('http://icecast.omroep.nl/3fm-bb-mp3')
+	
+	tam.startPlayList()
