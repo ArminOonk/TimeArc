@@ -4,18 +4,19 @@ import sys
 import platform
 from threading import Timer
 import os
-from logging_utils import setup_logging_to_file, log_exception  
 
-setup_logging_to_file("timearcSerial.py.txt")
+import logging, logging.handlers
+logger = logging.getLogger('TimeArc')
+logger.setLevel(logging.DEBUG)
 
 class TimeArcSerial:
 	def __init__(self):
 		serialPortName = "COM5"
 		if platform.system() == "Windows":
-			print("Windows detected")
+			logger.info("Windows detected")
 			serialPortName = "COM5"
 		elif (platform.system() == "Linux"):
-			print("Linux detected")
+			logger.info("Linux detected")
 			serialPortName = "/dev/ttyUSB0"
 
 		startTime = int(time.time())
@@ -23,7 +24,7 @@ class TimeArcSerial:
 		try:
 			self.serialPort = serial.Serial(serialPortName, 230400, timeout=1)
 		except serial.SerialException:
-			print("Error opening serial port")
+			logger.exception("Error opening serial port")
 
 	def receiveUpdate(self):		
 		self.receiveData()
@@ -33,7 +34,7 @@ class TimeArcSerial:
 		
 	def sendCommand(self, command):
 		if self.serialPort.isOpen():
-			print("Sending: " + command)
+			logger.debug("Sending: " + command)
 			command += "\r\n"
 			self.serialPort.write(command.encode())
 
@@ -47,13 +48,13 @@ class TimeArcSerial:
 		else:
 			offset = -time.timezone
 
-		print("Offset: " + str(offset))
+		logger.debug("Offset: " + str(offset))
 		self.sendCommand("OFFSET="+str(offset))
 		self.receiveData()
 
 	def setTimeout(self, timeout):
 		command = "TIMEOUT="+str(timeout)
-		print(command)
+		logger.debug(command)
 		self.sendCommand(command)
 		self.receiveData()
 
@@ -63,7 +64,7 @@ class TimeArcSerial:
 		else:
 			command = "AUTO=FALSE"
 
-		print("Auto: " + command)
+		logger.debug("Auto: " + command)
 		self.sendCommand(command)
 		self.receiveData()
 
@@ -97,33 +98,33 @@ class TimeArcSerial:
 					return
 				else:
 					self.decode(txt)
-		except Exception as e:
-			log_exception(e)	
+		except:
+			logger.exception('timearcSerial receiveData()')	
 			
 	def decode(self, txt):
 		vals = txt.split("=")
 
 		if len(vals) == 2:
 			if vals[0] == "TIME":
-				print("Received time from electronics")
+				logger.info("Received time from electronics")
 				timeArcTime = int(vals[1])
-				print("Computertime: " + str(int(time.time())) + " timearctime: " + str(timeArcTime))
+				logger.info("Computertime: " + str(int(time.time())) + " timearctime: " + str(timeArcTime))
 			elif vals[0] == "BUTTON":
 				if "buttonCallback" in dir(self):
 					self.buttonCallback(vals[1])
 				else:
-					print("No callback found Button " + vals[1])
+					logger.debug("No callback found Button " + vals[1])
 			elif vals[0] == "ACCEL":
 				if "accelCallback" in dir(self):
 					self.accelCallback(vals[1])
 				else:
-					print("No callback found Accel " + vals[1])
+					logger.debug("No callback found Accel " + vals[1])
 			elif vals[0] == "POSE":
 				if "poseCallback" in dir(self):
 					self.poseCallback(vals[1])
 				else:
-					print("No POSE Callback found: " + vals[1])
+					logger.debug("No POSE Callback found: " + vals[1])
 			else:
-				print("First: " + vals[0] + " Second: " + vals[1])
+				logger.debug("First: " + vals[0] + " Second: " + vals[1])
 		else:
-			print("Response: " + txt)
+			logger.debug("Response: " + txt)

@@ -3,7 +3,11 @@ import musicpd
 
 import time
 from threading import Timer
-	
+
+import logging, logging.handlers
+logger = logging.getLogger('TimeArc')
+logger.setLevel(logging.DEBUG)
+
 class TimeArcMPD:
 	def __init__(self):
 		self.targetVolume = 90
@@ -18,7 +22,7 @@ class TimeArcMPD:
 	
 	# Keep the MPD connection alive
 	def update(self):
-		print("MPD keep the connection alive")
+		logger.debug("MPD keep the connection alive")
 		self.CheckConnection()
 		
 		self.alarmTimer = Timer(30, self.update)
@@ -29,7 +33,7 @@ class TimeArcMPD:
 		try:
 			self.client.ping()
 		except:
-			print(time.strftime("%H:%M:%S") + ": MPD reconnecting")
+			logger.info(time.strftime("%H:%M:%S") + ": MPD reconnecting")
 			self.client.connect("localhost", 6600)
 			self.client.ping()
 	
@@ -41,7 +45,7 @@ class TimeArcMPD:
 			
 		self.currentVolume = vol
 		self.client.setvol(self.currentVolume)
-		print("Volume: " + str(vol))
+		logger.debug("Volume: " + str(vol))
 	
 	def stop(self):
 		self.client.stop()
@@ -56,7 +60,7 @@ class TimeArcMPD:
 		try:
 			self.client.add(uri)
 		except musicpd.CommandError as e:
-			print("Exception: " + str(e))
+			logger.exception("timearcMPD add exception")
 	
 	def startPlayList(self, minVol=65, maxVol=80, inc=2):
 		self.clear()
@@ -102,12 +106,12 @@ class TimeArcMPD:
 				inc = -self.maxIncrement
 			
 			self.setVolume(self.currentVolume + inc)
-			print("Updated volume to: " + str(self.currentVolume) + " going to: " + str(self.targetVolume))
+			logger.debug("Updated volume to: " + str(self.currentVolume) + " going to: " + str(self.targetVolume))
 
 			self.volumeTimer = Timer(self.volumeInterval, self.volumeUpdate)
 			self.volumeTimer.start()
 		else:
-			print("Target volume reached")
+			logger.debug("Target volume reached")
 	
 	def status(self):
 		return self.client.status()

@@ -15,6 +15,10 @@ from datetime import datetime #for the time on the rpi end
 import time
 from threading import Timer
 
+import logging, logging.handlers
+logger = logging.getLogger('TimeArc')
+logger.setLevel(logging.DEBUG)
+
 class TimeArcGoogleCalendar:
 	def __init__(self, FLOW, API_KEY, callback):
 		self.FLOW = FLOW
@@ -51,7 +55,7 @@ class TimeArcGoogleCalendar:
 		page_token = None
 		timeNow = timestamp_from_tf(time.time())
 		timeMax = timestamp_from_tf(time.time()+60*60*24)
-		print("Now: " + timeNow + " max: " + timeMax)
+		logger.debug("Now: " + timeNow + " max: " + timeMax)
 
 		firstEvent = None
 		numberEvent = 0
@@ -64,7 +68,7 @@ class TimeArcGoogleCalendar:
 				
 				delta = datetime.fromtimestamp(eventTime) - datetime.now()
 				
-				print(event['summary'] + " " + eventTimeString + " happening @timestamp: " + str(timestamp_from_tf(eventTime)) + " delta: " + str(delta.total_seconds()) + " seconds")
+				logger.info(event['summary'] + " " + eventTimeString + " happening @timestamp: " + str(timestamp_from_tf(eventTime)) + " delta: " + str(delta.total_seconds()) + " seconds")
 		
 				if delta.total_seconds() <= 0:
 					print("Negative difference!")
@@ -77,7 +81,7 @@ class TimeArcGoogleCalendar:
 				
 			page_token = events.get('nextPageToken')
 			if not page_token:
-				print("Done")
+				logger.debug("Done")
 				break
 
 		if firstEvent != None or numberEvent == 0:
@@ -85,7 +89,7 @@ class TimeArcGoogleCalendar:
 		return firstEvent
 		
 	def update(self):
-		print("Checking google calendar")
+		logger.debug("Checking google calendar")
 		
 		self.getNextAlarm()
 		

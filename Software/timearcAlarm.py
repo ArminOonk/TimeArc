@@ -3,6 +3,10 @@ from threading import Timer
 from datetime import datetime, timedelta
 import math
 
+import logging, logging.handlers
+logger = logging.getLogger('TimeArc')
+logger.setLevel(logging.DEBUG)
+
 class TimeArcAlarm:
 
 	def printCountDownTime(self, secRemaining):
@@ -41,7 +45,7 @@ class TimeArcAlarm:
 		
 	def update(self):
 		if not self.alarmSet:
-			print("Alarm not set")
+			logger.debug("Alarm not set")
 			return # Alarm not set
 			
 		dt = self.diffSeconds(self.triggerTime)
@@ -53,7 +57,7 @@ class TimeArcAlarm:
 		if dt > self.interval:
 			interval = self.interval
 			
-		print("Alarm update, time remaining: " + self.printCountDownTime(dt) + " checking again in: " + str(interval) + " seconds")
+		logger.debug("Alarm update, time remaining: " + self.printCountDownTime(dt) + " checking again in: " + str(interval) + " seconds")
 				
 		self.alarmTimer = Timer(interval, self.update)
 		self.alarmTimer.start()
@@ -63,7 +67,7 @@ class TimeArcAlarm:
 		self.callback = callback
 		
 		self.setTime(hour, minute)
-		print("Trigger time: " + str(self.triggerTime))
+		logger.debug("Trigger time: " + str(self.triggerTime))
 		
 	def diffSeconds(self, t):
 		dt = t - datetime.now()
