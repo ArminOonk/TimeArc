@@ -16,10 +16,6 @@ from threading import Timer
 alarmTriggered = False
 buttonTopTime = datetime.now()
 
-#import exceptions
-#from logging_utils import setup_logging_to_file, log_exception  
-#setup_logging_to_file("timearc.py.txt")
-
 # Logging
 import logging, logging.handlers
 logger = logging.getLogger('TimeArc')
@@ -42,6 +38,13 @@ emailLogger = logging.handlers.SMTPHandler(mailhost=(reportSmtpHost, reportSmtpP
 emailLogger.setLevel(logging.WARNING)
 emailLogger.setFormatter(formatter)
 logger.addHandler(emailLogger)
+
+# Create a log file
+fileLogger = logging.FileHandler('timearclog.txt')
+fileLogger.setLevel(logging.WARNING)
+fileLogger.setFormatter(formatter)
+logger.addHandler(fileLogger)
+
 
 # Call backs
 def alarmCallback():
