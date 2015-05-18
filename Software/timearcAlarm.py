@@ -29,45 +29,38 @@ class TimeArcAlarm:
 		
 		return retStr
 	
-	def setTime(self, hour, minute):
-		tz = datetime.now()
-		newTime = tz.replace(hour=hour, minute=minute,second=0,microsecond=0)
-		dt = self.diffSeconds(newTime)
+	def setTime(self, timestamp):
+		tz = datetime.fromtimestamp(timestamp)
+		dt = self.diffSeconds(tz)
+		if dt > 0:
+			self.triggerTime = tz
+			self.alarmSet = True
+			self.update()
 
-		if dt <= 0:
-			newTime = newTime + timedelta(days=1)
-		self.triggerTime = newTime
-		self.alarmSet = True
-		self.update()
-	
 	def stopAlarm(self):
 		self.alarmSet = False
 		
-	def update(self):
-		if not self.alarmSet:
-			logger.debug("Alarm not set")
-			return # Alarm not set
-			
+	def update(self):		
 		dt = self.diffSeconds(self.triggerTime)
-		if dt < 0:
+		if self.alarmSet and dt < 0:
+			self.stopAlarm()
 			self.callback()
-			return
 		
-		interval = dt
-		if dt > self.interval:
-			interval = self.interval
+		timeRemaining = dt
+		if dt > self.interval or dt <= 0:
+			dt = self.interval
 			
-		logger.debug("Alarm update, time remaining: " + self.printCountDownTime(dt) + " checking again in: " + str(interval) + " seconds")
-				
-		self.alarmTimer = Timer(interval, self.update)
+		logger.debug("Alarm update, time remaining: " + self.printCountDownTime(timeRemaining) + " checking again in: " + str(dt) + " seconds")
+
+		self.alarmTimer = Timer(dt, self.update)
 		self.alarmTimer.start()
 		
-	def __init__(self, callback, hour, minute, interValSec=60):
+	def __init__(self, callback, interValSec=60):
 		self.interval = interValSec
 		self.callback = callback
-		
-		self.setTime(hour, minute)
-		logger.debug("Trigger time: " + str(self.triggerTime))
+		self.alarmSet = False
+		self.triggerTime = datetime.now()
+		self.update()
 		
 	def diffSeconds(self, t):
 		dt = t - datetime.now()

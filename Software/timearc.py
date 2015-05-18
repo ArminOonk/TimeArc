@@ -54,7 +54,7 @@ def alarmCallback():
 		alarmTriggered = True
 		
 		tam.startPlayList()
-			
+		
 		taComm.setAnimation()
 	except:
 		logger.exception('AlarmCallback')
@@ -124,8 +124,9 @@ def googleCallback(time):
 			alarm.stopAlarm()
 		else:
 			logger.info("Google calendar callback, found event: " + str(time))
-			tz = datetime.fromtimestamp(time)
-			alarm.setTime(tz.hour, tz.minute)
+			alarm.setTime(time) 
+			#tz = datetime.fromtimestamp(time)
+			#alarm.setTime(tz.hour, tz.minute)
 	except:
 		logger.exception('googleCallback')
 	
@@ -138,7 +139,7 @@ tam.addPlayList('http://po192.pinguinradio.com:80')
 tam.addPlayList('http://icecast.omroep.nl/3fm-bb-mp3')
 
 # alarm
-alarm = timearcAlarm.TimeArcAlarm(alarmCallback, 9, 5, 60)
+alarm = timearcAlarm.TimeArcAlarm(alarmCallback)
 # Serial port
 taComm = timearcSerial.TimeArcSerial()	
 # Google calendar interface

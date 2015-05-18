@@ -55,7 +55,6 @@ class TimeArcGoogleCalendar:
 		page_token = None
 		timeNow = timestamp_from_tf(time.time())
 		timeMax = timestamp_from_tf(time.time()+60*60*24)
-		logger.debug("Now: " + timeNow + " max: " + timeMax)
 
 		firstEvent = None
 		numberEvent = 0
@@ -86,6 +85,7 @@ class TimeArcGoogleCalendar:
 
 		if firstEvent != None or numberEvent == 0:
 			self.callback(firstEvent) # send None when we have no events
+			
 		return firstEvent
 		
 	def update(self):
