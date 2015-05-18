@@ -3,6 +3,9 @@ from threading import Timer
 from datetime import datetime, timedelta
 import math
 
+import timearcGoogleCalendar
+from timearcPrivate import *
+
 import logging, logging.handlers
 logger = logging.getLogger('TimeArc.Alarm')
 logger.setLevel(logging.DEBUG)
@@ -42,26 +45,54 @@ class TimeArcAlarm:
 		
 	def update(self):		
 		dt = self.diffSeconds(self.triggerTime)
-		if self.alarmSet and dt < 0:
-			self.stopAlarm()
-			self.callback()
 		
-		timeRemaining = dt
+		timeRemaining = ""
+		if self.alarmSet:
+			if dt < 0:
+				self.stopAlarm()
+				self.callback()
+		
+			timeRemaining = "time remaining: " + self.printCountDownTime(dt)
+
 		if dt > self.interval or dt <= 0:
 			dt = self.interval
 			
-		logger.debug("Alarm update, time remaining: " + self.printCountDownTime(timeRemaining) + " checking again in: " + str(dt) + " seconds")
+		logger.debug("Alarm update: " + timeRemaining + " checking again in: " + str(dt) + " seconds")
 
 		self.alarmTimer = Timer(dt, self.update)
 		self.alarmTimer.start()
+		
+		# Checking for new events
+		if abs(self.diffSeconds(self.calCheckTime)) > 300:
+			self.calCheckTime = datetime.now()
 		
 	def __init__(self, callback, interValSec=60):
 		self.interval = interValSec
 		self.callback = callback
 		self.alarmSet = False
 		self.triggerTime = datetime.now()
+		
+		self.calCheckTime = datetime.now()
+		self.cal = timearcGoogleCalendar.TimeArcGoogleCalendar(FLOW, API_KEY)
+		self.checkCalendar()
+
 		self.update()
 		
 	def diffSeconds(self, t):
 		dt = t - datetime.now()
 		return dt.total_seconds()
+
+	def checkCalendar(self):
+		try:
+			t = self.cal.getNextAlarm()
+			
+			if t == None:
+				logger.info("Stopping the alarm, no event found")
+				self.stopAlarm()
+			else:
+				logger.info("Google calendar callback, found event: " + str(t))
+				self.setTime(t) 
+		except:
+			logger.exception('googleCallback')
+			
+		self.calCheckTime = datetime.now()

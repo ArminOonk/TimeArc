@@ -20,7 +20,7 @@ logger = logging.getLogger('TimeArc.GoogleCalendar')
 logger.setLevel(logging.DEBUG)
 
 class TimeArcGoogleCalendar:
-	def __init__(self, FLOW, API_KEY, callback):
+	def __init__(self, FLOW, API_KEY, callback=None):
 		self.FLOW = FLOW
 		self.API_KEY = API_KEY
 		self.callback = callback
@@ -31,7 +31,7 @@ class TimeArcGoogleCalendar:
 		
 		self.interval = 300
 		self.getCredentials() # Maybe not the best place, will do for now
-		self.update()	#Start the background checking
+		# Not using threads: self.update()	#Start the background checking
 		
 	def getCredentials(self):
 		storage = Storage('calendar.dat')
@@ -84,7 +84,8 @@ class TimeArcGoogleCalendar:
 				break
 
 		if firstEvent != None or numberEvent == 0:
-			self.callback(firstEvent) # send None when we have no events
+			if self.callback != None:
+				self.callback(firstEvent) # send None when we have no events
 			
 		return firstEvent
 		

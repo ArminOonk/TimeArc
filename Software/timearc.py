@@ -8,7 +8,7 @@ import sys
 import timearcSerial
 import timearcAlarm
 import timearcMPD
-import timearcGoogleCalendar
+
 from datetime import datetime, timedelta
 from timearcPrivate import *
 from threading import Timer
@@ -143,7 +143,7 @@ alarm = timearcAlarm.TimeArcAlarm(alarmCallback)
 # Serial port
 taComm = timearcSerial.TimeArcSerial()	
 # Google calendar interface
-cal = timearcGoogleCalendar.TimeArcGoogleCalendar(FLOW, API_KEY, googleCallback)
+# cal = timearcGoogleCalendar.TimeArcGoogleCalendar(FLOW, API_KEY, googleCallback)
 
 while int(time.time()) < 1404416633:
     logger.info("Time not set yet: " + str(int(time.time())))
