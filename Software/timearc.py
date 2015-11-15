@@ -133,9 +133,9 @@ def googleCallback(time):
 # Objects
 # Media player
 tam = timearcMPD.TimeArcMPD()
-tam.addPlayList('http://pc192.pinguinradio.com:80')
-tam.addPlayList('http://pr320.pinguinradio.com:80')
-tam.addPlayList('http://po192.pinguinradio.com:80')
+tam.addPlayList('pc192.pinguinradio.com/listen.pls')
+tam.addPlayList('pr320.pinguinradio.com/listen.pls')
+tam.addPlayList('po192.pinguinradio.com/listen.pls')
 tam.addPlayList('http://icecast.omroep.nl/3fm-bb-mp3')
 
 # alarm

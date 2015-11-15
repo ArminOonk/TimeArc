@@ -63,8 +63,11 @@ class TimeArcAlarm:
 		self.alarmTimer.start()
 		
 		# Checking for new events
-		if abs(self.diffSeconds(self.calCheckTime)) > 300:
+		dtCal = abs(self.diffSeconds(self.calCheckTime))
+		logger.debug("Seconds since last google calendar check: " + str(dtCal))
+		if dtCal > 300:
 			self.calCheckTime = datetime.now()
+			self.checkCalendar()
 		
 	def __init__(self, callback, interValSec=60):
 		self.interval = interValSec
