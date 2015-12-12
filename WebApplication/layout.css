@@ -1,0 +1,182 @@
+/* layout aoonk.nl all rights reserved */
+body
+{
+  	background: #e8e8ed;
+  	background-image: url('background3.jpg');
+	/*background: #ffffff;*/
+	font-family: verdana,helvetica,arial,sans-serif;
+	font-size: 80%;
+}
+
+img
+{
+  border: none;
+  margin: 3px;
+}
+
+/* tweakers gives list */
+li
+{
+ list-style-type: none;
+}
+
+form
+{
+   padding-left: 5px;
+   padding-right: 5px;
+   padding-bottom: 5px;
+   padding-top: 5px;
+}
+
+div.wrap
+{
+	width:1250px;
+	margin:0 auto;
+}
+
+div.left
+{
+ /*position: absolute;
+ margin-top: 5px;
+ left:10px;
+ margin-right: 365px;
+ width: 90%;*/
+	float:left;
+
+}
+
+div.right
+{
+	float:right;
+	width: 650px;
+}
+
+div.box
+{
+	background: #ffffff;
+	border: 1px solid #75747e;
+	width: 550px;
+	margin: 10px;
+}
+
+div.BoxWindyty
+{
+	background: #ffffff;
+	border: 1px solid #75747e;
+	width: 600px;
+	margin: 10px;
+}
+
+div.WhoIsHome
+{
+	clear:both;
+	background: #ffffff;
+	border: 1px solid #75747e;
+	width: 820px;
+	margin: 10px;
+}
+
+div.boxRight
+{
+}
+
+p.general
+{
+         margin: 10px;
+}
+
+div.bookmark
+{
+        background: #ffffff;
+        border: 1px solid #75747e;
+        width: 150px;
+        margin: 10px;
+}
+
+div.search
+{
+        background: #ffffff;
+        border: 1px solid #75747e;
+        width: 350px;
+        margin: 10px;
+}
+
+div.bookmarkBar
+{
+        width: 90%;
+        margin: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+}
+
+div.link
+{
+        float: left;
+        height: 20px;
+        background: #fff;
+        background-image: url('menu-gradient.jpg');
+
+        border: 1px solid #75747e;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 2px;
+        margin-right: 2px;
+        padding: 5px;
+}
+
+div.spacer
+{
+        height: 0px;
+        clear: both;
+}
+
+h1.kop
+{
+        font-family: verdana,helvetica,arial,sans-serif;
+	font-size: 100%;
+        font-weight: bold;
+        background: #3d3193;
+        color: #fff;
+        padding-top: 3px;
+        padding-bottom: 2px;
+        margin: 0px;
+}
+
+/* for the wikipedia search */
+input.searchButton
+{
+    margin-top:1px;
+    padding: 0 0.4em !important;
+    font-size: 95%;
+    cursor: pointer;
+    background-color: White;
+    border: 1px solid #2f6fab;
+}
+
+a
+{ 
+	color: black;
+	font-size: 10pt;
+	text-decoration: none;
+}
+
+a:active
+{
+	color: gray;
+	text-decoration: none;
+}
+
+a:hover
+{
+	color: red;
+	font-style: normal; 
+	font-weight: normal; 
+	text-decoration: none;
+}
+
+a:visited
+{ 
+	text-decoration: none 
+}
