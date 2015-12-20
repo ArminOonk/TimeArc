@@ -1,6 +1,7 @@
 <?php
-require_once('config.inc.php');
+ini_set('display_errors', 1);
 
+require_once('../config.inc.php');
 
 $txt = "";
 $txt .= "<h1>Headers</h1><table>";
@@ -16,11 +17,9 @@ foreach ($_POST as $name => $value) {
     $txt .= "<tr><td>$name</td><td> $value</td></tr>";
 }
 $txt .= "</table>";
-echo($txt);
 
+/*
 $mail = getPHPMailInstance();
-
-die("Hello, world!");
 
 $mail->From = 'webhook@timearc.nl';
 $mail->FromName = 'Timearc google webhook';
@@ -36,10 +35,11 @@ $mail->AltBody = strip_tags($txt);
 
 if($mail->send())
 {
-	echo("<p>Email send</p>");
+    echo("<p>Email send</p>");
 }
 else
 {
-	echo("<h1>Sending email failed!</h1><p>" . $mail->ErrorInfo) . "</p>";
+    echo("<h1>Sending email failed!</h1><p>" . $mail->ErrorInfo) . "</p>";
 }
-	
+*/
+echo($txt);

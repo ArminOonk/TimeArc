@@ -1,2 +1,3 @@
 *.pyc
 timearcPrivate.py
+/WebApplication/nbproject/private/

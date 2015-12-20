@@ -7,3 +7,4 @@ build/
 vendor/
 
 config.inc.php
+test.php
