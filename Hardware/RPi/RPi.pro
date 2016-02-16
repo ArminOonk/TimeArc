@@ -1,4 +1,4 @@
-update=15-Feb-16 21:24:37
+update=16-Feb-16 21:32:36
 version=1
 last_client=kicad
 [pcbnew]
@@ -60,3 +60,4 @@ LibName28=contrib
 LibName29=valves
 LibName30=dual_buffer_nc7wz16
 LibName31=rpi_interface
+LibName32=fe11S
