@@ -1,0 +1,16 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#
+# Solder_Pad
+#
+DEF Solder_Pad Pad 0 40 Y Y 1 F N
+F0 "Pad" 400 0 60 H V C CNN
+F1 "Solder_Pad" 400 -100 60 H V C CNN
+F2 "" 0 0 60 H V C CNN
+F3 "" 0 0 60 H V C CNN
+DRAW
+X Pad 1 -100 0 200 R 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+#End Library

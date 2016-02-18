@@ -1,4 +1,4 @@
-update=16-Feb-16 21:32:36
+update=18-Feb-16 21:44:19
 version=1
 last_client=kicad
 [pcbnew]
@@ -61,3 +61,7 @@ LibName29=valves
 LibName30=dual_buffer_nc7wz16
 LibName31=rpi_interface
 LibName32=fe11S
+LibName33=C:/Users/zerok/Documents/wifi_pants/wifi_pants-cache
+LibName34=teensy_lc
+LibName35=solder_pad
+LibName36=ws2812
