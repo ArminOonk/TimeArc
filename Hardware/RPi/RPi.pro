@@ -1,4 +1,4 @@
-update=18-Feb-16 21:44:19
+update=22-Feb-16 20:34:05
 version=1
 last_client=kicad
 [pcbnew]
@@ -65,3 +65,4 @@ LibName33=C:/Users/zerok/Documents/wifi_pants/wifi_pants-cache
 LibName34=teensy_lc
 LibName35=solder_pad
 LibName36=ws2812
+LibName37=Sensors
