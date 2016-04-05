@@ -1,4 +1,4 @@
-update=22-Feb-16 21:12:33
+update=05-Apr-16 21:17:17
 version=1
 last_client=kicad
 [pcbnew]
@@ -25,6 +25,16 @@ version=1
 NetIExt=net
 [general]
 version=1
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=../../../../Desktop/
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
 [eeschema]
 version=1
 LibDir=
@@ -66,13 +76,3 @@ LibName34=teensy_lc
 LibName35=solder_pad
 LibName36=ws2812
 LibName37=Sensors
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=../../../../Desktop/
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=60
