@@ -1037,17 +1037,6 @@ UART_RX
 Text Notes 6950 4350 0    60   ~ 0
 Thanks to: https://github.com/al177/wifi_pants
 $Comp
-L Teensy_LC U13
-U 1 1 56C74A7F
-P 13150 1300
-F 0 "U13" H 13150 2600 60  0000 C CNN
-F 1 "Teensy_LC" H 13150 550 60  0000 C CNN
-F 2 "TimeArc:TeensyLC" H 13150 1300 60  0001 C CNN
-F 3 "" H 13150 1300 60  0000 C CNN
-	1    13150 1300
-	1    0    0    -1  
-$EndComp
-$Comp
 L +5V #PWR041
 U 1 1 56C752C0
 P 14300 1050
@@ -2767,4 +2756,15 @@ Wire Wire Line
 	5700 9400 5550 9400
 Wire Wire Line
 	5700 8200 5500 8200
+$Comp
+L Teensy_LC U13
+U 1 1 5705A33E
+P 13150 1300
+F 0 "U13" H 13000 1650 60  0000 C CNN
+F 1 "Teensy_LC" H 13550 1650 60  0000 C CNN
+F 2 "TimeArc:TeensyLC" H 13100 300 60  0001 C CNN
+F 3 "" H 13100 300 60  0000 C CNN
+	1    13150 1300
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

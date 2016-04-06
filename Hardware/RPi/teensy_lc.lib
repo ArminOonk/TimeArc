@@ -4,8 +4,8 @@ EESchema-LIBRARY Version 2.3
 # Teensy_LC
 #
 DEF Teensy_LC U 0 40 Y Y 1 F N
-F0 "U" -50 300 60 H V C CNN
-F1 "Teensy_LC" -50 -1750 60 H V C CNN
+F0 "U" -150 350 60 H V C CNN
+F1 "Teensy_LC" 400 350 60 H V C CNN
 F2 "" -50 -1000 60 H V C CNN
 F3 "" -50 -1000 60 H V C CNN
 DRAW
