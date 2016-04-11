@@ -38,7 +38,7 @@ def circular_place(refs=None, x_center=55, y_center=54, radius=40):
 	angle_increment = 360.0 / len(mods)
 	angle = 0.0
 	
-	mods[0].SetPosition(mods[0].GetPosition())
+	mods.append(mods[0])
 	
 	for m in mods:
 		x = scale*(x_center + radius*math.cos(math.radians(angle)))
@@ -48,7 +48,7 @@ def circular_place(refs=None, x_center=55, y_center=54, radius=40):
 		pos.y = int(y)
 	
 		m.SetPosition(pos)
-		m.SetOrientation(angular_scale*(90-angle))
+		m.SetOrientation(angular_scale*(-angle))
 		
 		print(m.GetReference() + " New (x,y): " + str(m.GetPosition()) + " angle: " + str(m.GetOrientation()))
 		
