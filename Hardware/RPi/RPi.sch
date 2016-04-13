@@ -1842,7 +1842,7 @@ Wire Wire Line
 	8450 1750 8700 1750
 Connection ~ 8600 1750
 Wire Wire Line
-	9100 1750 9000 1750
+	9000 1750 10050 1750
 Wire Wire Line
 	7250 1500 7400 1500
 Wire Wire Line
@@ -2719,17 +2719,6 @@ F 3 "" H 13100 300 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Solder_Pad P3
-U 1 1 570D81A8
-P 11450 2000
-F 0 "P3" H 11450 2150 60  0000 C CNN
-F 1 "Solder_Pad" H 11450 1850 60  0000 C CNN
-F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 11450 2000 60  0001 C CNN
-F 3 "" H 11450 2000 60  0000 C CNN
-	1    11450 2000
-	-1   0    0    1   
-$EndComp
-$Comp
 L Solder_Pad P2
 U 1 1 570D833E
 P 11450 1900
@@ -2746,4 +2735,26 @@ Wire Wire Line
 	12100 1900 11550 1900
 Text Notes 10550 2000 0    60   ~ 0
 Current front\nExtra serial
+$Comp
+L Solder_Pad P4
+U 1 1 570E35ED
+P 10150 1750
+F 0 "P4" H 10150 1900 60  0000 C CNN
+F 1 "Solder_Pad" H 10150 1600 60  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 10150 1750 60  0001 C CNN
+F 3 "" H 10150 1750 60  0000 C CNN
+	1    10150 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Solder_Pad P3
+U 1 1 570EFEC2
+P 11450 2000
+F 0 "P3" H 11450 2150 60  0000 C CNN
+F 1 "Solder_Pad" H 11450 1850 60  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 11450 2000 60  0001 C CNN
+F 3 "" H 11450 2000 60  0000 C CNN
+	1    11450 2000
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC
