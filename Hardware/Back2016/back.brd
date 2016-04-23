@@ -26,8 +26,8 @@
 <layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
-<layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="yes" active="yes"/>
+<layer number="30" name="bStop" color="7" fill="6" visible="yes" active="yes"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
 <layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
 <layer number="33" name="tFinish" color="6" fill="3" visible="no" active="yes"/>
@@ -49,7 +49,7 @@
 <layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
 <layer number="51" name="tDocu" color="14" fill="1" visible="yes" active="yes"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="52" name="bDocu" color="11" fill="1" visible="yes" active="yes"/>
 <layer number="53" name="tGND_GNDA" color="7" fill="9" visible="no" active="no"/>
 <layer number="54" name="bGND_GNDA" color="1" fill="9" visible="no" active="no"/>
 <layer number="56" name="wert" color="7" fill="1" visible="no" active="no"/>
@@ -166,6 +166,8 @@
 <wire x1="83" y1="5" x2="17" y2="5" width="0.2032" layer="51"/>
 <hole x="60" y="50" drill="8.2"/>
 <circle x="60" y="50" radius="6" width="0.2032" layer="51"/>
+<text x="2" y="48" size="1.778" layer="21" font="vector">Armin Oonk, APR 2016</text>
+<text x="2" y="52" size="1.778" layer="21" font="vector">Time Arc, Back</text>
 </plain>
 <libraries>
 <library name="SparkFun-Boards">
@@ -543,6 +545,24 @@ chip</description>
 <wire x1="98" y1="81" x2="100" y2="81" width="0.127" layer="51"/>
 <wire x1="81" y1="98" x2="81" y2="100" width="0.127" layer="51"/>
 </package>
+<package name="WS2812B">
+<wire x1="2.5" y1="-2.5" x2="-2.5" y2="-2.5" width="0.127" layer="51"/>
+<wire x1="-2.5" y1="-2.5" x2="-2.5" y2="1.6" width="0.127" layer="51"/>
+<wire x1="-2.5" y1="1.6" x2="-2.5" y2="2.5" width="0.127" layer="51"/>
+<wire x1="-2.5" y1="2.5" x2="-1.6" y2="2.5" width="0.127" layer="51"/>
+<wire x1="-1.6" y1="2.5" x2="2.5" y2="2.5" width="0.127" layer="51"/>
+<wire x1="2.5" y1="2.5" x2="2.5" y2="-2.5" width="0.127" layer="51"/>
+<wire x1="-2.5" y1="1.6" x2="-1.6" y2="2.5" width="0.127" layer="51"/>
+<smd name="1-VDD" x="2.45" y="-1.65" dx="1.5" dy="0.9" layer="1" rot="R180"/>
+<smd name="2-DOUT" x="2.45" y="1.65" dx="1.5" dy="0.9" layer="1" rot="R180"/>
+<smd name="4-DIN" x="-2.45" y="-1.65" dx="1.5" dy="0.9" layer="1" rot="R180"/>
+<smd name="3-GND" x="-2.45" y="1.65" dx="1.5" dy="0.9" layer="1" rot="R180"/>
+<circle x="0" y="0" radius="1.7204625" width="0.127" layer="51"/>
+<text x="3.4925" y="1.5875" size="0.8128" layer="25" ratio="10" rot="R270">&gt;NAME</text>
+<wire x1="-1.6" y1="2.5" x2="-1.3" y2="2.8" width="0.127" layer="51"/>
+<wire x1="-1.3" y1="2.8" x2="-1.7" y2="3.2" width="0.127" layer="51"/>
+<wire x1="-1.7" y1="3.2" x2="-2.5" y2="2.5" width="0.127" layer="51"/>
+</package>
 </packages>
 </library>
 <library name="SparkFun-Passives">
@@ -601,28 +621,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </package>
 </packages>
 </library>
-<library name="adafruit">
-<packages>
-<package name="WS2812B">
-<wire x1="2.5" y1="-2.5" x2="-2.5" y2="-2.5" width="0.127" layer="21"/>
-<wire x1="-2.5" y1="-2.5" x2="-2.5" y2="1.6" width="0.127" layer="21"/>
-<wire x1="-2.5" y1="1.6" x2="-2.5" y2="2.5" width="0.127" layer="21"/>
-<wire x1="-2.5" y1="2.5" x2="-1.6" y2="2.5" width="0.127" layer="21"/>
-<wire x1="-1.6" y1="2.5" x2="2.5" y2="2.5" width="0.127" layer="21"/>
-<wire x1="2.5" y1="2.5" x2="2.5" y2="-2.5" width="0.127" layer="21"/>
-<wire x1="-2.5" y1="1.6" x2="-1.6" y2="2.5" width="0.127" layer="21"/>
-<smd name="1-VDD" x="2.45" y="-1.65" dx="1.5" dy="0.9" layer="1" rot="R180"/>
-<smd name="2-DOUT" x="2.45" y="1.65" dx="1.5" dy="0.9" layer="1" rot="R180"/>
-<smd name="4-DIN" x="-2.45" y="-1.65" dx="1.5" dy="0.9" layer="1" rot="R180"/>
-<smd name="3-GND" x="-2.45" y="1.65" dx="1.5" dy="0.9" layer="1" rot="R180"/>
-<circle x="0" y="0" radius="1.7204625" width="0.127" layer="21"/>
-<text x="3.4925" y="1.5875" size="0.8128" layer="25" ratio="10" rot="R270">&gt;NAME</text>
-<wire x1="-1.6" y1="2.5" x2="-1.3" y2="2.8" width="0.127" layer="21"/>
-<wire x1="-1.3" y1="2.8" x2="-1.7" y2="3.2" width="0.127" layer="21"/>
-<wire x1="-1.7" y1="3.2" x2="-2.5" y2="2.5" width="0.127" layer="21"/>
-</package>
-</packages>
-</library>
 </libraries>
 <attributes>
 <attribute name="CIRCULAR-LAYOUT-SETTINGS" value="1.968500 1.968500 1.700000 90.000000 0 0"/>
@@ -633,7 +631,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <class number="0" name="default" width="0" drill="0">
 </class>
 </classes>
-<designrules name="eC-PCB_proto-2-layer">
+<designrules name="eC-PCB_proto-2-layer *">
 <description language="de">&lt;p&gt;&lt;p&gt;
 &lt;b&gt;EAGLE design rules (DRU) for the Eurocircuits STANDARD pool service &lt;/b&gt;
 &lt;p&gt;
@@ -707,7 +705,7 @@ Your Eurocircuits Team</description>
 <param name="mlMaxStopFrame" value="0.2mm"/>
 <param name="mlMinCreamFrame" value="0mil"/>
 <param name="mlMaxCreamFrame" value="0.2mm"/>
-<param name="mlViaStopLimit" value="0mil"/>
+<param name="mlViaStopLimit" value="0.35mm"/>
 <param name="srRoundness" value="0"/>
 <param name="srMinRoundness" value="0mil"/>
 <param name="srMaxRoundness" value="0mil"/>
@@ -816,196 +814,279 @@ Your Eurocircuits Team</description>
 </pass>
 </autorouter>
 <elements>
-<element name="J1" library="SparkFun-Boards" package="2X20-SHROUDED-SMT" value="RASPBERRYPI-40-PIN-GPIO-SMT" x="50" y="10" locked="yes" rot="R270">
+<element name="J1" library="SparkFun-Boards" package="2X20-SHROUDED-SMT" value="RASPBERRYPI-40-PIN-GPIO-SMT" x="50" y="10" locked="yes" smashed="yes" rot="R270">
 <attribute name="PROD_ID" value="CONN-13143" x="19.52" y="-10.32" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="U1" library="timearc" package="QFN-24-NP" value="" x="87" y="41" smashed="yes" rot="R90">
-<attribute name="NAME" x="85" y="38" size="0.8128" layer="25" font="vector" rot="R90"/>
+<attribute name="NAME" x="85" y="38" size="0.8128" layer="25" font="vector" ratio="13" rot="R90"/>
 <attribute name="VALUE" x="91.15" y="38.5" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="C2" library="timearc" package="C0603" value="100n" x="88" y="48" rot="R180"/>
-<element name="C3" library="timearc" package="C0603" value="10n" x="88" y="45" rot="R180"/>
+<element name="C2" library="timearc" package="C0603" value="100n" x="88" y="48" smashed="yes" rot="R180">
+<attribute name="NAME" x="86" y="49" size="0.8128" layer="25" font="vector" ratio="13" rot="R180"/>
+<attribute name="VALUE" x="86" y="48" size="0.8128" layer="27" font="vector" ratio="13" rot="R180"/>
+</element>
+<element name="C3" library="timearc" package="C0603" value="10n" x="88" y="45" smashed="yes" rot="R180">
+<attribute name="NAME" x="86" y="46" size="0.8128" layer="25" font="vector" ratio="13" rot="R180"/>
+<attribute name="VALUE" x="86" y="45" size="0.8128" layer="27" font="vector" ratio="13" rot="R180"/>
+</element>
 <element name="JP1" library="SparkFun-Passives" package="PAD-JUMPER-2-NO_YES_SILK" value="JUMPER-PAD-2-NOYES_SILK" x="92" y="43" smashed="yes" rot="R180">
-<attribute name="NAME" x="93" y="45" size="0.8128" layer="25" font="vector" ratio="10" rot="R180"/>
+<attribute name="NAME" x="93" y="45" size="0.8128" layer="25" font="vector" ratio="13" rot="R180"/>
 </element>
 <element name="JP2" library="SparkFun-Passives" package="PAD-JUMPER-2-NO_YES_SILK" value="JUMPER-PAD-2-NOYES_SILK" x="86" y="36" smashed="yes" rot="R90">
-<attribute name="NAME" x="85" y="33" size="0.8128" layer="25" font="vector" ratio="10"/>
+<attribute name="NAME" x="85" y="34" size="0.8128" layer="25" font="vector" ratio="13"/>
 </element>
-<element name="C4" library="timearc" package="C0603" value="100n" x="92" y="40"/>
-<element name="C5" library="timearc" package="C0603" value="2.2n" x="82" y="43" rot="R180"/>
-<element name="R2" library="timearc" package="R0603" value="10k" x="82" y="37" rot="R180"/>
-<element name="R3" library="timearc" package="R0603" value="10k" x="82" y="40" rot="R180"/>
-<element name="U2" library="timearc" package="ESP12E-SMD" value="" x="18" y="29" rot="R90"/>
+<element name="C4" library="timearc" package="C0603" value="100n" x="92" y="40" smashed="yes">
+<attribute name="NAME" x="94" y="40" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="94" y="39" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="C5" library="timearc" package="C0603" value="2.2n" x="82" y="43" smashed="yes" rot="R180">
+<attribute name="NAME" x="78" y="43" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="78" y="42" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="R2" library="timearc" package="R0603" value="10k" x="82" y="37" smashed="yes" rot="R180">
+<attribute name="NAME" x="78" y="37" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="78" y="36" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="R3" library="timearc" package="R0603" value="10k" x="82" y="40" smashed="yes" rot="R180">
+<attribute name="NAME" x="78" y="40" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="78" y="39" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="U2" library="timearc" package="ESP12E-SMD" value="" x="18" y="29" smashed="yes" rot="R90">
+<attribute name="VALUE" x="3" y="29" size="0.8128" layer="27" font="vector" rot="R90"/>
+<attribute name="NAME" x="3" y="22" size="0.8128" layer="25" font="vector" ratio="13" rot="R90"/>
+</element>
 <element name="C6" library="timearc" package="C0805" value="10u" x="34" y="20" smashed="yes">
-<attribute name="NAME" x="37" y="20" size="0.8128" layer="25" font="vector"/>
-<attribute name="VALUE" x="37" y="19" size="0.8128" layer="27" font="vector"/>
+<attribute name="NAME" x="36" y="20" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="36" y="19" size="0.8128" layer="27" font="vector" ratio="13"/>
 </element>
-<element name="R4" library="timearc" package="R0603" value="22" x="34" y="23" rot="R180"/>
-<element name="R5" library="timearc" package="R0603" value="22" x="34" y="25.5" rot="R180"/>
-<element name="R6" library="timearc" package="R0603" value="22" x="34" y="28" rot="R180"/>
-<element name="R7" library="timearc" package="R0603" value="22" x="34" y="30.5" rot="R180"/>
-<element name="R8" library="timearc" package="R0603" value="22" x="34" y="33" rot="R180"/>
-<element name="R9" library="timearc" package="R0603" value="22" x="34" y="35.5" rot="R180"/>
-<element name="JP3" library="SparkFun-Passives" package="PAD-JUMPER-2-NO_YES_SILK" value="JUMPER-PAD-2-NOYES_SILK" x="20" y="40" rot="R270"/>
+<element name="R4" library="timearc" package="R0603" value="22" x="34" y="23" smashed="yes" rot="R180">
+<attribute name="NAME" x="36" y="23" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="36" y="22" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="R5" library="timearc" package="R0603" value="22" x="34" y="25.5" smashed="yes" rot="R180">
+<attribute name="NAME" x="36" y="25.5" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="36" y="24.5" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="R6" library="timearc" package="R0603" value="22" x="34" y="28" smashed="yes" rot="R180">
+<attribute name="NAME" x="36" y="28" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="36" y="27" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="R7" library="timearc" package="R0603" value="22" x="34" y="30.5" smashed="yes" rot="R180">
+<attribute name="NAME" x="36" y="30.5" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="36" y="29.5" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="R8" library="timearc" package="R0603" value="22" x="34" y="33" smashed="yes" rot="R180">
+<attribute name="NAME" x="36" y="33" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="36" y="32" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="R9" library="timearc" package="R0603" value="22" x="34" y="35.5" smashed="yes" rot="R180">
+<attribute name="NAME" x="36" y="35.5" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="36" y="34.5" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="JP3" library="SparkFun-Passives" package="PAD-JUMPER-2-NO_YES_SILK" value="JUMPER-PAD-2-NOYES_SILK" x="20" y="40" smashed="yes" rot="R270">
+<attribute name="NAME" x="21.27" y="40.908" size="0.8128" layer="25" rot="R270"/>
+</element>
 <element name="U3" library="timearc" package="SOT65P210X110-6N" value="SN74LVC2G34DCKR" x="57.5" y="25" smashed="yes" rot="R90">
 <attribute name="PACKAGE" value="SC70-6" x="57.5" y="25" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="OC_NEWARK" value="76C4214" x="57.5" y="25" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="SN74LVC2G34DCKR" x="57.5" y="25" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SUPPLIER" value="Texas Instruments" x="57.5" y="25" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="OC_FARNELL" value="1595409" x="57.5" y="25" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="NAME" x="56" y="24.5" size="0.8128" layer="25" font="vector" ratio="10" rot="SR90"/>
+<attribute name="NAME" x="56" y="24.5" size="0.8128" layer="25" font="vector" ratio="13" rot="SR90"/>
 </element>
-<element name="U4" library="SparkFun-PowerIC" package="SOT223" value="2.5V" x="68" y="25" rot="R90">
+<element name="U4" library="SparkFun-PowerIC" package="SOT223" value="2.5V" x="68" y="25" smashed="yes" rot="R90">
 <attribute name="PROD_ID" value="VREG-08170" x="68" y="25" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="NAME" x="63.4915" y="24.1745" size="0.8128" layer="25" rot="R90"/>
+<attribute name="VALUE" x="68.1905" y="23.9205" size="0.8128" layer="27" rot="R90"/>
 </element>
 <element name="C7" library="timearc" package="C0805" value="10u" x="74" y="27" smashed="yes" rot="R90">
-<attribute name="NAME" x="74" y="25" size="0.8128" layer="25" font="vector" rot="R270"/>
-<attribute name="VALUE" x="73" y="25" size="0.8128" layer="27" font="vector" rot="R270"/>
+<attribute name="NAME" x="74" y="29" size="0.8128" layer="25" font="vector" ratio="13" rot="R90"/>
+<attribute name="VALUE" x="75" y="29" size="0.8128" layer="27" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="C8" library="timearc" package="C0805" value="10u" x="53" y="25" smashed="yes" rot="R180">
-<attribute name="NAME" x="54" y="24" size="0.8128" layer="25" font="vector" rot="R180"/>
-<attribute name="VALUE" x="54" y="27" size="0.8128" layer="27" font="vector" rot="R180"/>
+<attribute name="NAME" x="54" y="24" size="0.8128" layer="25" font="vector" ratio="13" rot="R180"/>
+<attribute name="VALUE" x="54" y="27" size="0.8128" layer="27" font="vector" ratio="13" rot="R180"/>
 </element>
-<element name="R10" library="timearc" package="R0603" value="100" x="56" y="20" rot="R90"/>
-<element name="R11" library="timearc" package="R0603" value="470" x="53" y="20" rot="R270"/>
-<element name="R12" library="timearc" package="R0603" value="100" x="59" y="20" rot="R90"/>
-<element name="R13" library="timearc" package="R0603" value="470" x="62" y="20" rot="R90"/>
-<element name="R14" library="timearc" package="R0603" value="100" x="55" y="29" rot="R180"/>
-<element name="R15" library="timearc" package="R0603" value="100" x="60" y="29"/>
-<element name="C9" library="timearc" package="C0603" value="100n" x="74" y="23" rot="R270"/>
-<element name="C10" library="timearc" package="C0603" value="100n" x="51" y="29"/>
-<element name="C11" library="timearc" package="C0603" value="100n" x="64" y="29"/>
-<element name="R16" library="timearc" package="R0603" value="100" x="51" y="32" rot="R180"/>
-<element name="R17" library="timearc" package="R0603" value="100" x="64" y="32" rot="R180"/>
+<element name="R10" library="timearc" package="R0603" value="100" x="56" y="20" smashed="yes" rot="R90">
+<attribute name="NAME" x="55" y="18" size="0.8128" layer="25" font="vector" ratio="13" rot="R270"/>
+<attribute name="VALUE" x="56" y="18" size="0.8128" layer="27" font="vector" ratio="13" rot="R270"/>
+</element>
+<element name="R11" library="timearc" package="R0603" value="470" x="53" y="20" smashed="yes" rot="R270">
+<attribute name="NAME" x="52" y="18" size="0.8128" layer="25" font="vector" ratio="13" rot="R270"/>
+<attribute name="VALUE" x="53" y="18" size="0.8128" layer="27" font="vector" ratio="13" rot="R270"/>
+</element>
+<element name="R12" library="timearc" package="R0603" value="100" x="59" y="20" smashed="yes" rot="R90">
+<attribute name="NAME" x="58" y="18" size="0.8128" layer="25" font="vector" ratio="13" rot="R270"/>
+<attribute name="VALUE" x="59" y="18" size="0.8128" layer="27" font="vector" ratio="13" rot="R270"/>
+</element>
+<element name="R13" library="timearc" package="R0603" value="470" x="62" y="20" smashed="yes" rot="R90">
+<attribute name="NAME" x="61" y="18" size="0.8128" layer="25" font="vector" ratio="13" rot="R270"/>
+<attribute name="VALUE" x="62" y="18" size="0.8128" layer="27" font="vector" ratio="13" rot="R270"/>
+</element>
+<element name="R14" library="timearc" package="R0603" value="100" x="55" y="29" smashed="yes" rot="R180">
+<attribute name="NAME" x="56.5" y="29" size="0.8128" layer="25" font="vector"/>
+<attribute name="VALUE" x="56.5" y="28" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="R15" library="timearc" package="R0603" value="100" x="60" y="29" smashed="yes">
+<attribute name="NAME" x="59" y="27" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="59" y="26" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="C9" library="timearc" package="C0603" value="100n" x="74" y="23" smashed="yes" rot="R270">
+<attribute name="NAME" x="73" y="21" size="0.8128" layer="25" font="vector" ratio="13" rot="R270"/>
+<attribute name="VALUE" x="74" y="21" size="0.8128" layer="27" font="vector" ratio="13" rot="R270"/>
+</element>
+<element name="C10" library="timearc" package="C0603" value="100n" x="51" y="29" smashed="yes">
+<attribute name="NAME" x="49" y="30" size="0.8128" layer="25" font="vector" ratio="13" rot="R180"/>
+<attribute name="VALUE" x="49" y="29" size="0.8128" layer="27" font="vector" ratio="13" rot="R180"/>
+</element>
+<element name="C11" library="timearc" package="C0603" value="100n" x="64" y="29" smashed="yes">
+<attribute name="NAME" x="66" y="29" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="66" y="28" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
+<element name="R16" library="timearc" package="R0603" value="100" x="51" y="32" smashed="yes" rot="R180">
+<attribute name="NAME" x="49" y="33" size="0.8128" layer="25" font="vector" ratio="13" rot="R180"/>
+<attribute name="VALUE" x="49" y="32" size="0.8128" layer="27" font="vector" ratio="13" rot="R180"/>
+</element>
+<element name="R17" library="timearc" package="R0603" value="100" x="64" y="32" smashed="yes" rot="R180">
+<attribute name="NAME" x="66" y="32" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="66" y="31" size="0.8128" layer="27" font="vector" ratio="13"/>
+</element>
 <element name="C12" library="timearc" package="C0805" value="47u" x="55" y="32" smashed="yes">
-<attribute name="NAME" x="54" y="33" size="0.8128" layer="25" font="vector"/>
-<attribute name="VALUE" x="54" y="30" size="0.8128" layer="27" font="vector"/>
+<attribute name="NAME" x="53" y="34" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="53" y="33" size="0.8128" layer="27" font="vector" ratio="13"/>
 </element>
 <element name="C13" library="timearc" package="C0805" value="47u" x="60" y="32" smashed="yes" rot="R180">
-<attribute name="NAME" x="61" y="31" size="0.8128" layer="25" font="vector" rot="R180"/>
-<attribute name="VALUE" x="61" y="34" size="0.8128" layer="27" font="vector" rot="R180"/>
+<attribute name="NAME" x="58" y="34" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="58" y="33" size="0.8128" layer="27" font="vector" ratio="13"/>
 </element>
 <element name="AUDIO_L" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="53" y="39" smashed="yes">
-<attribute name="NAME" x="51" y="37" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="51" y="37" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="AUDIO_R" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="62" y="39" smashed="yes">
-<attribute name="NAME" x="60" y="37" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="60" y="37" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="AUDIO_GND" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="57.5" y="39" smashed="yes">
-<attribute name="NAME" x="55.5" y="37" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="55.5" y="37" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
-<element name="U$4" library="timearc" package="TEENSY_LC_SMD" value="TEENSY_LCSMD" x="50" y="76" rot="R180"/>
+<element name="U$4" library="timearc" package="TEENSY_LC_SMD" value="TEENSY_LCSMD" x="50" y="76" smashed="yes" rot="R180">
+<attribute name="NAME" x="58" y="58" size="0.8128" layer="21" font="vector" ratio="13" rot="R180"/>
+<attribute name="VALUE" x="50" y="58" size="0.8128" layer="21" font="vector" ratio="13" rot="R180"/>
+</element>
 <element name="TOUCH1" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="77" y="66" smashed="yes">
-<attribute name="NAME" x="75" y="64" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="75" y="63" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="TOUCH2" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="67" y="66" smashed="yes">
-<attribute name="NAME" x="65" y="64" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="65" y="63" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="TOUCH3" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="77" y="73" smashed="yes">
-<attribute name="NAME" x="75" y="71" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="75" y="71" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="TOUCH4" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="67" y="73" smashed="yes">
-<attribute name="NAME" x="65" y="71" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="65" y="71" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="TOUCH5" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="23" y="66" smashed="yes">
-<attribute name="NAME" x="21" y="64" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="21" y="64" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="TOUCH6" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="33" y="66" smashed="yes">
-<attribute name="NAME" x="31" y="64" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="31" y="64" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="SDA/TOUCH" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="33" y="94" smashed="yes">
-<attribute name="NAME" x="31" y="92" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="31" y="91" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="SCL/TOUCH" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="23" y="94" smashed="yes">
-<attribute name="NAME" x="21" y="92" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="21" y="91" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="TOUCH7" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="33" y="73" smashed="yes">
-<attribute name="NAME" x="31" y="71" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="31" y="71" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="TOUCH8" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="23" y="73" smashed="yes">
-<attribute name="NAME" x="21" y="71" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="21" y="71" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="RX3" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="77" y="83" smashed="yes" rot="R180">
-<attribute name="NAME" x="79" y="85" size="0.8128" layer="21" font="vector" rot="R270"/>
+<attribute name="NAME" x="79" y="85" size="0.8128" layer="21" font="vector" ratio="13" rot="R270"/>
 </element>
 <element name="TX3" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="72" y="83" smashed="yes" rot="R180">
-<attribute name="NAME" x="74" y="85" size="0.8128" layer="21" font="vector" rot="R270"/>
+<attribute name="NAME" x="74" y="85" size="0.8128" layer="21" font="vector" ratio="13" rot="R270"/>
 </element>
 <element name="JP4" library="SparkFun-Passives" package="PAD-JUMPER-2-NO_YES_SILK" value="JUMPER-PAD-2-NOYES_SILK" x="33" y="90" smashed="yes" rot="R90">
-<attribute name="NAME" x="31.73" y="89.092" size="0.4064" layer="25" rot="R90"/>
+<attribute name="NAME" x="32" y="88" size="0.8128" layer="25"/>
 </element>
 <element name="JP5" library="SparkFun-Passives" package="PAD-JUMPER-2-NO_YES_SILK" value="JUMPER-PAD-2-NOYES_SILK" x="23" y="90" smashed="yes" rot="R90">
-<attribute name="NAME" x="21.73" y="89.092" size="0.4064" layer="25" rot="R90"/>
+<attribute name="NAME" x="22" y="88" size="0.8128" layer="25" font="vector"/>
 </element>
-<element name="LED1" library="adafruit" package="WS2812B" value="WS2812B5050" x="71.5899" y="87.394871875" locked="yes" rot="MR210"/>
-<element name="LED2" library="adafruit" package="WS2812B" value="WS2812B5050" x="87.394871875" y="71.5899" locked="yes" rot="MR240"/>
-<element name="LED3" library="adafruit" package="WS2812B" value="WS2812B5050" x="93.1799" y="49.9999" locked="yes" rot="MR270"/>
-<element name="LED4" library="adafruit" package="WS2812B" value="WS2812B5050" x="87.394871875" y="28.4099" locked="yes" rot="MR300"/>
-<element name="LED5" library="adafruit" package="WS2812B" value="WS2812B5050" x="71.5899" y="12.604928125" locked="yes" rot="MR320"/>
-<element name="LED6" library="adafruit" package="WS2812B" value="WS2812B5050" x="49.9999" y="6.8199" locked="yes" rot="MR0"/>
-<element name="LED7" library="adafruit" package="WS2812B" value="WS2812B5050" x="28.4099" y="12.604928125" locked="yes" rot="MR30"/>
-<element name="LED8" library="adafruit" package="WS2812B" value="WS2812B5050" x="12.604928125" y="28.4099" locked="yes" rot="MR60"/>
-<element name="LED9" library="adafruit" package="WS2812B" value="WS2812B5050" x="6.8199" y="49.9999" locked="yes" rot="MR90"/>
-<element name="LED10" library="adafruit" package="WS2812B" value="WS2812B5050" x="12.604928125" y="71.5899" locked="yes" rot="MR120"/>
-<element name="LED11" library="adafruit" package="WS2812B" value="WS2812B5050" x="28.4099" y="87.394871875" locked="yes" rot="MR150"/>
-<element name="LED12" library="adafruit" package="WS2812B" value="WS2812B5050" x="49.9999" y="93.1799" locked="yes" rot="MR180"/>
+<element name="LED1" library="timearc" package="WS2812B" value="WS2812B5050" x="71.5899" y="87.394871875" locked="yes" smashed="yes" rot="MR210"/>
+<element name="LED2" library="timearc" package="WS2812B" value="WS2812B5050" x="87.394871875" y="71.5899" locked="yes" smashed="yes" rot="MR240"/>
+<element name="LED3" library="timearc" package="WS2812B" value="WS2812B5050" x="93.1799" y="49.9999" locked="yes" smashed="yes" rot="MR270"/>
+<element name="LED4" library="timearc" package="WS2812B" value="WS2812B5050" x="87.394871875" y="28.4099" locked="yes" smashed="yes" rot="MR300"/>
+<element name="LED5" library="timearc" package="WS2812B" value="WS2812B5050" x="71.5899" y="12.604928125" locked="yes" smashed="yes" rot="MR320"/>
+<element name="LED6" library="timearc" package="WS2812B" value="WS2812B5050" x="49.9999" y="6.8199" locked="yes" smashed="yes" rot="MR0"/>
+<element name="LED7" library="timearc" package="WS2812B" value="WS2812B5050" x="28.4099" y="12.604928125" locked="yes" smashed="yes" rot="MR30"/>
+<element name="LED8" library="timearc" package="WS2812B" value="WS2812B5050" x="12.604928125" y="28.4099" locked="yes" smashed="yes" rot="MR60"/>
+<element name="LED9" library="timearc" package="WS2812B" value="WS2812B5050" x="6.8199" y="49.9999" locked="yes" smashed="yes" rot="MR90"/>
+<element name="LED10" library="timearc" package="WS2812B" value="WS2812B5050" x="12.604928125" y="71.5899" locked="yes" smashed="yes" rot="MR120"/>
+<element name="LED11" library="timearc" package="WS2812B" value="WS2812B5050" x="28.4099" y="87.394871875" locked="yes" smashed="yes" rot="MR150"/>
+<element name="LED12" library="timearc" package="WS2812B" value="WS2812B5050" x="49.9999" y="93.1799" locked="yes" smashed="yes" rot="MR180">
+<attribute name="NAME" x="53.4924" y="91.5924" size="0.8128" layer="26" ratio="10" rot="MR90"/>
+</element>
 <element name="DO_WS1282" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="72" y="94" smashed="yes" rot="R180">
-<attribute name="NAME" x="74" y="96" size="0.8128" layer="21" font="vector" rot="R270"/>
+<attribute name="NAME" x="74" y="96" size="0.8128" layer="21" font="vector" ratio="13" rot="R270"/>
 </element>
 <element name="5V_WS1282" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="67" y="94" smashed="yes" rot="R180">
-<attribute name="NAME" x="69" y="96" size="0.8128" layer="21" font="vector" rot="R270"/>
+<attribute name="NAME" x="69" y="96" size="0.8128" layer="21" font="vector" ratio="13" rot="R270"/>
 </element>
 <element name="GND_WS2812" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="77" y="94" smashed="yes" rot="R180">
-<attribute name="NAME" x="79" y="96" size="0.8128" layer="21" font="vector" rot="R270"/>
+<attribute name="NAME" x="79" y="96" size="0.8128" layer="21" font="vector" ratio="13" rot="R270"/>
 </element>
-<element name="U$15" library="timearc" package="TIMEARC_KEEPOUT" value="" x="0" y="0"/>
+<element name="U$15" library="timearc" package="TIMEARC_KEEPOUT" value="" x="0" y="0" smashed="yes"/>
 <element name="GND_T1_T2" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="72" y="66" smashed="yes">
-<attribute name="NAME" x="70" y="64" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="70" y="63" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="GND_T3_T4" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="72" y="73" smashed="yes">
-<attribute name="NAME" x="70" y="71" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="70" y="71" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="GND_T5_T6" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="28" y="66" smashed="yes">
-<attribute name="NAME" x="26" y="64" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="26" y="64" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="GND_T7_T8" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="28" y="73" smashed="yes">
-<attribute name="NAME" x="26" y="71" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="26" y="71" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="GND_T_SPARE" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="28" y="94" smashed="yes">
-<attribute name="NAME" x="26" y="92" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="26" y="91" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="5V_FRONT" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="67" y="83" smashed="yes" rot="R180">
-<attribute name="NAME" x="69" y="85" size="0.8128" layer="21" font="vector" rot="R270"/>
+<attribute name="NAME" x="69" y="85" size="0.8128" layer="21" font="vector" ratio="13" rot="R270"/>
 </element>
 <element name="GND_FRONT" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="82" y="83" smashed="yes" rot="R180">
-<attribute name="NAME" x="84" y="85" size="0.8128" layer="21" font="vector" rot="R270"/>
+<attribute name="NAME" x="84" y="85" size="0.8128" layer="21" font="vector" ratio="13" rot="R270"/>
 </element>
 <element name="5V_POWER" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="68.5" y="39" smashed="yes">
-<attribute name="NAME" x="66.5" y="37" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="66.5" y="37" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="GND_POWER" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="73.5" y="39" smashed="yes">
-<attribute name="NAME" x="71.5" y="37" size="0.8128" layer="21" font="vector" rot="R90"/>
+<attribute name="NAME" x="71.5" y="37" size="0.8128" layer="21" font="vector" ratio="13" rot="R90"/>
 </element>
 <element name="C1" library="timearc" package="C0805" value="10u" x="71" y="34" smashed="yes">
-<attribute name="NAME" x="67" y="34" size="0.8128" layer="25" font="vector"/>
-<attribute name="VALUE" x="67" y="33" size="0.8128" layer="27" font="vector"/>
+<attribute name="NAME" x="67" y="34" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="67" y="33" size="0.8128" layer="27" font="vector" ratio="13"/>
 </element>
-<element name="U5" library="SparkFun-PowerIC" package="SOT223" value="3.3V" x="84" y="25" rot="R180">
+<element name="U5" library="SparkFun-PowerIC" package="SOT223" value="3.3V" x="84" y="25" smashed="yes" rot="R180">
 <attribute name="PROD_ID" value="VREG-08170" x="92" y="14" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="NAME" x="86" y="22" size="0.8128" layer="25" font="vector"/>
+<attribute name="VALUE" x="85.9205" y="20.8095" size="0.8128" layer="27"/>
 </element>
 <element name="C14" library="timearc" package="C0805" value="10u" x="81" y="31" smashed="yes">
-<attribute name="NAME" x="85" y="31" size="0.8128" layer="25" font="vector" rot="R180"/>
-<attribute name="VALUE" x="85" y="32" size="0.8128" layer="27" font="vector" rot="R180"/>
+<attribute name="NAME" x="77" y="31" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="77" y="30" size="0.8128" layer="27" font="vector" ratio="13"/>
 </element>
 <element name="C15" library="timearc" package="C0805" value="10u" x="86" y="31" smashed="yes">
-<attribute name="NAME" x="88" y="31" size="0.8128" layer="25" font="vector"/>
-<attribute name="VALUE" x="88" y="30" size="0.8128" layer="27" font="vector"/>
+<attribute name="NAME" x="88" y="31" size="0.8128" layer="25" font="vector" ratio="13"/>
+<attribute name="VALUE" x="88" y="30" size="0.8128" layer="27" font="vector" ratio="13"/>
 </element>
 <element name="JP6" library="SparkFun-Passives" package="PAD-JUMPER-2-NO_YES_SILK" value="JUMPER-PAD-2-NOYES_SILK" x="84" y="17" smashed="yes" rot="R270">
-<attribute name="NAME" x="85.5" y="18" size="0.8128" layer="25" font="vector" rot="R270"/>
+<attribute name="NAME" x="85.5" y="18" size="0.8128" layer="25" font="vector" ratio="13" rot="R270"/>
 </element>
 <element name="JP7" library="SparkFun-Passives" package="PAD-JUMPER-2-NO_YES_SILK" value="JUMPER-PAD-2-NOYES_SILK" x="81" y="17" smashed="yes" rot="R90">
-<attribute name="NAME" x="79.5" y="16" size="0.8128" layer="25" font="vector" rot="R90"/>
+<attribute name="NAME" x="79.5" y="16" size="0.8128" layer="25" font="vector" ratio="13" rot="R90"/>
 </element>
 </elements>
 <signals>
@@ -1782,11 +1863,9 @@ Your Eurocircuits Team</description>
 <wire x1="23" y1="90.45" x2="23" y2="94" width="0.2032" layer="1"/>
 <wire x1="23" y1="90.45" x2="29.55" y2="90.45" width="0.2032" layer="1"/>
 <wire x1="29.55" y1="90.45" x2="30" y2="90" width="0.2032" layer="1"/>
-<wire x1="30" y1="90" x2="30" y2="89" width="0.2032" layer="1"/>
-<wire x1="30" y1="89" x2="30.5" y2="88.5" width="0.2032" layer="1"/>
-<wire x1="30.5" y1="88.5" x2="30.5" y2="86.5" width="0.2032" layer="1"/>
-<wire x1="30.5" y1="86.5" x2="31" y2="86" width="0.2032" layer="1"/>
-<wire x1="31" y1="86" x2="34" y2="86" width="0.2032" layer="1"/>
+<wire x1="30" y1="90" x2="30" y2="86.5" width="0.2032" layer="1"/>
+<wire x1="30" y1="86.5" x2="30.5" y2="86" width="0.2032" layer="1"/>
+<wire x1="30.5" y1="86" x2="34" y2="86" width="0.2032" layer="1"/>
 <wire x1="34" y1="86" x2="34.5" y2="86.5" width="0.2032" layer="1"/>
 <wire x1="34.5" y1="86.5" x2="34.5" y2="88.5" width="0.2032" layer="1"/>
 <wire x1="34.5" y1="88.5" x2="35" y2="89" width="0.2032" layer="1"/>
