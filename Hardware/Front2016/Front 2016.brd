@@ -232,10 +232,11 @@ Source: http://www.osram.convergy.de/ ... LG_LY Q971.pdf</description>
 <wire x1="98" y1="81" x2="100" y2="81" width="0.127" layer="51"/>
 <wire x1="81" y1="98" x2="81" y2="100" width="0.127" layer="51"/>
 </package>
-</packages>
-</library>
-<library name="adafruit">
-<packages>
+<package name="SOLDER_PAD">
+<smd name="1" x="0" y="0" dx="5" dy="3" layer="1" rot="R90"/>
+<text x="-2" y="-2" size="0.8128" layer="21" font="vector" rot="R90">&gt;name</text>
+<text x="3" y="-2" size="0.8128" layer="21" font="vector" rot="R90">&gt;value</text>
+</package>
 <package name="SO08-SKINNYPADS">
 <wire x1="2.159" y1="1.9558" x2="-2.159" y2="1.9558" width="0.1524" layer="21"/>
 <wire x1="2.159" y1="-1.9558" x2="2.54" y2="-1.5748" width="0.1524" layer="21" curve="90"/>
@@ -255,8 +256,7 @@ Source: http://www.osram.convergy.de/ ... LG_LY Q971.pdf</description>
 <smd name="6" x="0.635" y="2.9734" dx="0.6604" dy="1.524" layer="1"/>
 <smd name="4" x="1.905" y="-2.9734" dx="0.6604" dy="1.524" layer="1"/>
 <smd name="5" x="1.905" y="2.9734" dx="0.6604" dy="1.524" layer="1"/>
-<text x="3.937" y="-2.032" size="1.27" layer="27" ratio="10" rot="R90">&gt;VALUE</text>
-<text x="-2.921" y="-1.905" size="1.27" layer="25" ratio="10" rot="R90">&gt;NAME</text>
+<text x="-3" y="-2" size="0.8128" layer="25" font="vector" ratio="10" rot="R90">&gt;NAME</text>
 <rectangle x1="1.651" y1="1.9558" x2="2.159" y2="3.0988" layer="51"/>
 <rectangle x1="-2.159" y1="-3.0988" x2="-1.651" y2="-1.9558" layer="51"/>
 <rectangle x1="-0.889" y1="-3.0988" x2="-0.381" y2="-1.9558" layer="51"/>
@@ -265,12 +265,14 @@ Source: http://www.osram.convergy.de/ ... LG_LY Q971.pdf</description>
 <rectangle x1="0.381" y1="1.9558" x2="0.889" y2="3.0988" layer="51"/>
 <rectangle x1="-0.889" y1="1.9558" x2="-0.381" y2="3.0988" layer="51"/>
 <rectangle x1="-2.159" y1="1.9558" x2="-1.651" y2="3.0988" layer="51"/>
+<smd name="+5V" x="3.5" y="-0.85" dx="1.1" dy="1" layer="1" rot="R90"/>
+<smd name="GND" x="3.5" y="0.85" dx="1.1" dy="1" layer="1" rot="R90"/>
 </package>
 </packages>
 </library>
 </libraries>
 <attributes>
-<attribute name="CIRCULAR-LAYOUT-SETTINGS" value="1.968500 1.968500 0.900000 0.000000 0 1"/>
+<attribute name="CIRCULAR-LAYOUT-SETTINGS" value="1.968500 1.968500 0.900000 180.000000 0 1"/>
 </attributes>
 <variantdefs>
 </variantdefs>
@@ -522,122 +524,140 @@ Your Eurocircuits Team</description>
 <element name="SEC59" library="timearc" package="CHIPLED_0603" value="" x="45.220865625" y="95.46943125" rot="R6"/>
 <element name="SEC0" library="timearc" package="CHIPLED_0603" value="" x="49.9999" y="95.7199"/>
 <element name="U$1" library="timearc" package="TIMEARC_KEEPOUT" value="" x="0" y="0"/>
-<element name="MIN0" library="timearc" package="CHIPLED_0603" value="" x="49.9999" y="90.6399"/>
-<element name="MIN1" library="timearc" package="CHIPLED_0603" value="" x="54.247946875" y="90.41726875" rot="R354"/>
-<element name="MIN2" library="timearc" package="CHIPLED_0603" value="" x="58.4494375" y="89.751815625" rot="R348"/>
-<element name="MIN3" library="timearc" package="CHIPLED_0603" value="" x="62.558346875" y="88.650825" rot="R342"/>
-<element name="MIN4" library="timearc" package="CHIPLED_0603" value="" x="66.5296875" y="87.12639375" rot="R336"/>
-<element name="MIN5" library="timearc" package="CHIPLED_0603" value="" x="70.3199" y="85.19518125" rot="R330"/>
-<element name="MIN6" library="timearc" package="CHIPLED_0603" value="" x="73.88748125" y="82.878346875" rot="R324"/>
-<element name="MIN7" library="timearc" package="CHIPLED_0603" value="" x="77.19336875" y="80.2013125" rot="R318"/>
-<element name="MIN8" library="timearc" package="CHIPLED_0603" value="" x="80.2013125" y="77.19336875" rot="R312"/>
-<element name="MIN9" library="timearc" package="CHIPLED_0603" value="" x="82.878346875" y="73.88748125" rot="R306"/>
-<element name="MIN10" library="timearc" package="CHIPLED_0603" value="" x="85.19518125" y="70.3199" rot="R300"/>
-<element name="MIN11" library="timearc" package="CHIPLED_0603" value="" x="87.12639375" y="66.5296875" rot="R294"/>
-<element name="MIN12" library="timearc" package="CHIPLED_0603" value="" x="88.650825" y="62.558346875" rot="R288"/>
-<element name="MIN13" library="timearc" package="CHIPLED_0603" value="" x="89.751815625" y="58.4494375" rot="R282"/>
-<element name="MIN14" library="timearc" package="CHIPLED_0603" value="" x="90.41726875" y="54.247946875" rot="R276"/>
-<element name="MIN15" library="timearc" package="CHIPLED_0603" value="" x="90.6399" y="49.9999" rot="R270"/>
-<element name="MIN16" library="timearc" package="CHIPLED_0603" value="" x="90.41726875" y="45.751853125" rot="R264"/>
-<element name="MIN17" library="timearc" package="CHIPLED_0603" value="" x="89.751815625" y="41.5503625" rot="R258"/>
-<element name="MIN18" library="timearc" package="CHIPLED_0603" value="" x="88.650825" y="37.441453125" rot="R252"/>
-<element name="MIN19" library="timearc" package="CHIPLED_0603" value="" x="87.12639375" y="33.4701125" rot="R246"/>
-<element name="MIN20" library="timearc" package="CHIPLED_0603" value="" x="85.19518125" y="29.6799" rot="R240"/>
-<element name="MIN21" library="timearc" package="CHIPLED_0603" value="" x="82.878346875" y="26.11231875" rot="R234"/>
-<element name="MIN22" library="timearc" package="CHIPLED_0603" value="" x="80.2013125" y="22.80643125" rot="R228"/>
-<element name="MIN23" library="timearc" package="CHIPLED_0603" value="" x="77.19336875" y="19.7984875" rot="R222"/>
-<element name="MIN24" library="timearc" package="CHIPLED_0603" value="" x="73.88748125" y="17.121453125" rot="R216"/>
-<element name="MIN25" library="timearc" package="CHIPLED_0603" value="" x="70.3199" y="14.80461875" rot="R210"/>
-<element name="MIN26" library="timearc" package="CHIPLED_0603" value="" x="66.5296875" y="12.87340625" rot="R204"/>
-<element name="MIN27" library="timearc" package="CHIPLED_0603" value="" x="62.558346875" y="11.348975" rot="R198"/>
-<element name="MIN28" library="timearc" package="CHIPLED_0603" value="" x="58.4494375" y="10.247984375" rot="R192"/>
-<element name="MIN29" library="timearc" package="CHIPLED_0603" value="" x="54.247946875" y="9.58253125" rot="R186"/>
-<element name="MIN30" library="timearc" package="CHIPLED_0603" value="" x="49.9999" y="9.3599" rot="R180"/>
-<element name="MIN31" library="timearc" package="CHIPLED_0603" value="" x="45.751853125" y="9.58253125" rot="R174"/>
-<element name="MIN32" library="timearc" package="CHIPLED_0603" value="" x="41.5503625" y="10.247984375" rot="R168"/>
-<element name="MIN33" library="timearc" package="CHIPLED_0603" value="" x="37.441453125" y="11.348975" rot="R162"/>
-<element name="MIN34" library="timearc" package="CHIPLED_0603" value="" x="33.4701125" y="12.87340625" rot="R156"/>
-<element name="MIN35" library="timearc" package="CHIPLED_0603" value="" x="29.6799" y="14.80461875" rot="R150"/>
-<element name="MIN36" library="timearc" package="CHIPLED_0603" value="" x="26.11231875" y="17.121453125" rot="R144"/>
-<element name="MIN37" library="timearc" package="CHIPLED_0603" value="" x="22.80643125" y="19.7984875" rot="R138"/>
-<element name="MIN38" library="timearc" package="CHIPLED_0603" value="" x="19.7984875" y="22.80643125" rot="R132"/>
-<element name="MIN39" library="timearc" package="CHIPLED_0603" value="" x="17.121453125" y="26.11231875" rot="R126"/>
-<element name="MIN40" library="timearc" package="CHIPLED_0603" value="" x="14.80461875" y="29.6799" rot="R120"/>
-<element name="MIN41" library="timearc" package="CHIPLED_0603" value="" x="12.87340625" y="33.4701125" rot="R114"/>
-<element name="MIN42" library="timearc" package="CHIPLED_0603" value="" x="11.348975" y="37.441453125" rot="R108"/>
-<element name="MIN43" library="timearc" package="CHIPLED_0603" value="" x="10.247984375" y="41.5503625" rot="R102"/>
-<element name="MIN44" library="timearc" package="CHIPLED_0603" value="" x="9.58253125" y="45.751853125" rot="R96"/>
-<element name="MIN45" library="timearc" package="CHIPLED_0603" value="" x="9.3599" y="49.9999" rot="R90"/>
-<element name="MIN46" library="timearc" package="CHIPLED_0603" value="" x="9.58253125" y="54.247946875" rot="R84"/>
-<element name="MIN47" library="timearc" package="CHIPLED_0603" value="" x="10.247984375" y="58.4494375" rot="R78"/>
-<element name="MIN48" library="timearc" package="CHIPLED_0603" value="" x="11.348975" y="62.558346875" rot="R72"/>
-<element name="MIN49" library="timearc" package="CHIPLED_0603" value="" x="12.87340625" y="66.5296875" rot="R66"/>
-<element name="MIN50" library="timearc" package="CHIPLED_0603" value="" x="14.80461875" y="70.3199" rot="R60"/>
-<element name="MIN51" library="timearc" package="CHIPLED_0603" value="" x="17.121453125" y="73.88748125" rot="R54"/>
-<element name="MIN52" library="timearc" package="CHIPLED_0603" value="" x="19.7984875" y="77.19336875" rot="R48"/>
-<element name="MIN53" library="timearc" package="CHIPLED_0603" value="" x="22.80643125" y="80.2013125" rot="R42"/>
-<element name="MIN54" library="timearc" package="CHIPLED_0603" value="" x="26.11231875" y="82.878346875" rot="R36"/>
-<element name="MIN55" library="timearc" package="CHIPLED_0603" value="" x="29.6799" y="85.19518125" rot="R30"/>
-<element name="MIN56" library="timearc" package="CHIPLED_0603" value="" x="33.4701125" y="87.12639375" rot="R24"/>
-<element name="MIN57" library="timearc" package="CHIPLED_0603" value="" x="37.441453125" y="88.650825" rot="R18"/>
-<element name="MIN58" library="timearc" package="CHIPLED_0603" value="" x="41.5503625" y="89.751815625" rot="R12"/>
-<element name="MIN59" library="timearc" package="CHIPLED_0603" value="" x="45.751853125" y="90.41726875" rot="R6"/>
-<element name="HOUR0" library="timearc" package="CHIPLED_0603" value="" x="49.9999" y="85.5599"/>
-<element name="HOUR1" library="timearc" package="CHIPLED_0603" value="" x="67.7799" y="80.795775" rot="R330"/>
-<element name="HOUR2" library="timearc" package="CHIPLED_0603" value="" x="80.795775" y="67.7799" rot="R300"/>
-<element name="HOUR3" library="timearc" package="CHIPLED_0603" value="" x="85.5599" y="49.9999" rot="R270"/>
-<element name="HOUR4" library="timearc" package="CHIPLED_0603" value="" x="80.795775" y="32.2199" rot="R240"/>
-<element name="HOUR5" library="timearc" package="CHIPLED_0603" value="" x="67.7799" y="19.204025" rot="R210"/>
-<element name="HOUR6" library="timearc" package="CHIPLED_0603" value="" x="49.9999" y="14.4399" rot="R180"/>
-<element name="HOUR7" library="timearc" package="CHIPLED_0603" value="" x="32.2199" y="19.204025" rot="R150"/>
-<element name="HOUR8" library="timearc" package="CHIPLED_0603" value="" x="19.204025" y="32.2199" rot="R120"/>
-<element name="HOUR9" library="timearc" package="CHIPLED_0603" value="" x="14.4399" y="49.9999" rot="R90"/>
-<element name="HOUR10" library="timearc" package="CHIPLED_0603" value="" x="19.204025" y="67.7799" rot="R60"/>
-<element name="HOUR11" library="timearc" package="CHIPLED_0603" value="" x="32.2199" y="80.795775" rot="R30"/>
-<element name="ICH1" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="49.9999" y="93.1799" rot="MR180"/>
-<element name="ICH2" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="63.34325625" y="91.06651875" rot="MR198"/>
-<element name="ICL3" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="49.9999" y="83.0199" rot="MR0"/>
-<element name="ICL4" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="60.2036375" y="81.403775" rot="MR18"/>
-<element name="ICH5" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="75.38046875" y="84.93325625" rot="MR216"/>
-<element name="ICH6" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="84.93325625" y="75.38046875" rot="MR234"/>
-<element name="ICL7" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="69.408571875" y="76.7136375" rot="MR36"/>
-<element name="ICL8" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="76.7136375" y="69.408571875" rot="MR54"/>
-<element name="ICH9" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="91.06651875" y="63.34325625" rot="MR252"/>
-<element name="ICH10" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="93.1799" y="49.9999" rot="MR270"/>
-<element name="ICL11" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="81.403775" y="60.2036375" rot="MR72"/>
-<element name="ICL12" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="83.0199" y="49.9999" rot="MR90"/>
-<element name="ICH13" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="91.06651875" y="36.65654375" rot="MR288"/>
-<element name="ICH14" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="84.93325625" y="24.61933125" rot="MR306"/>
-<element name="ICL15" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="81.403775" y="39.7961625" rot="MR108"/>
-<element name="ICL16" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="76.7136375" y="30.591228125" rot="MR126"/>
-<element name="ICH17" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="75.38046875" y="15.06654375" rot="MR324"/>
-<element name="ICH18" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="63.34325625" y="8.93328125" rot="MR342"/>
-<element name="ICL19" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="69.408571875" y="23.2861625" rot="MR144"/>
-<element name="ICL20" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="60.2036375" y="18.596025" rot="MR162"/>
-<element name="ICH21" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="49.9999" y="6.8199" rot="MR0"/>
-<element name="ICH22" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="36.65654375" y="8.93328125" rot="MR18"/>
-<element name="ICL23" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="49.9999" y="16.9799" rot="MR180"/>
-<element name="ICL24" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="39.7961625" y="18.596025" rot="MR198"/>
-<element name="ICH25" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="24.61933125" y="15.06654375" rot="MR36"/>
-<element name="ICH26" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="15.06654375" y="24.61933125" rot="MR54"/>
-<element name="ICL27" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="30.591228125" y="23.2861625" rot="MR216"/>
-<element name="ICL28" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="23.2861625" y="30.591228125" rot="MR234"/>
-<element name="ICH29" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="8.93328125" y="36.65654375" rot="MR72"/>
-<element name="ICH30" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="6.8199" y="49.9999" rot="MR90"/>
-<element name="ICL31" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="18.596025" y="39.7961625" rot="MR252"/>
-<element name="ICL32" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="16.9799" y="49.9999" rot="MR270"/>
-<element name="ICH33" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="8.93328125" y="63.34325625" rot="MR108"/>
-<element name="ICH34" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="15.06654375" y="75.38046875" rot="MR126"/>
-<element name="ICL35" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="18.596025" y="60.2036375" rot="MR288"/>
-<element name="ICL36" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="23.2861625" y="69.408571875" rot="MR306"/>
-<element name="ICH37" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="24.61933125" y="84.93325625" rot="MR144"/>
-<element name="ICC1" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="49.9999" y="72.8599" rot="MR0"/>
-<element name="ICL39" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="30.591228125" y="76.7136375" rot="MR324"/>
-<element name="ICC3" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="49.9999" y="27.1399" rot="MR180"/>
-<element name="ICH41" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="36.65654375" y="91.06651875" rot="MR162"/>
-<element name="ICC2" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="72.8599" y="49.9999" rot="MR90"/>
-<element name="ICL43" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="39.7961625" y="81.403775" rot="MR342"/>
-<element name="ICC4" library="adafruit" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="27.1399" y="49.9999" rot="MR270"/>
+<element name="MIN0" library="timearc" package="CHIPLED_0603" value="" x="49.9999" y="90.6399" rot="R180"/>
+<element name="MIN1" library="timearc" package="CHIPLED_0603" value="" x="54.247946875" y="90.41726875" rot="R174"/>
+<element name="MIN2" library="timearc" package="CHIPLED_0603" value="" x="58.4494375" y="89.751815625" rot="R168"/>
+<element name="MIN3" library="timearc" package="CHIPLED_0603" value="" x="62.558346875" y="88.650825" rot="R162"/>
+<element name="MIN4" library="timearc" package="CHIPLED_0603" value="" x="66.5296875" y="87.12639375" rot="R156"/>
+<element name="MIN5" library="timearc" package="CHIPLED_0603" value="" x="70.3199" y="85.19518125" rot="R150"/>
+<element name="MIN6" library="timearc" package="CHIPLED_0603" value="" x="73.88748125" y="82.878346875" rot="R144"/>
+<element name="MIN7" library="timearc" package="CHIPLED_0603" value="" x="77.19336875" y="80.2013125" rot="R138"/>
+<element name="MIN8" library="timearc" package="CHIPLED_0603" value="" x="80.2013125" y="77.19336875" rot="R132"/>
+<element name="MIN9" library="timearc" package="CHIPLED_0603" value="" x="82.878346875" y="73.88748125" rot="R126"/>
+<element name="MIN10" library="timearc" package="CHIPLED_0603" value="" x="85.19518125" y="70.3199" rot="R120"/>
+<element name="MIN11" library="timearc" package="CHIPLED_0603" value="" x="87.12639375" y="66.5296875" rot="R114"/>
+<element name="MIN12" library="timearc" package="CHIPLED_0603" value="" x="88.650825" y="62.558346875" rot="R108"/>
+<element name="MIN13" library="timearc" package="CHIPLED_0603" value="" x="89.751815625" y="58.4494375" rot="R102"/>
+<element name="MIN14" library="timearc" package="CHIPLED_0603" value="" x="90.41726875" y="54.247946875" rot="R96"/>
+<element name="MIN15" library="timearc" package="CHIPLED_0603" value="" x="90.6399" y="49.9999" rot="R90"/>
+<element name="MIN16" library="timearc" package="CHIPLED_0603" value="" x="90.41726875" y="45.751853125" rot="R84"/>
+<element name="MIN17" library="timearc" package="CHIPLED_0603" value="" x="89.751815625" y="41.5503625" rot="R78"/>
+<element name="MIN18" library="timearc" package="CHIPLED_0603" value="" x="88.650825" y="37.441453125" rot="R72"/>
+<element name="MIN19" library="timearc" package="CHIPLED_0603" value="" x="87.12639375" y="33.4701125" rot="R66"/>
+<element name="MIN20" library="timearc" package="CHIPLED_0603" value="" x="85.19518125" y="29.6799" rot="R60"/>
+<element name="MIN21" library="timearc" package="CHIPLED_0603" value="" x="82.878346875" y="26.11231875" rot="R54"/>
+<element name="MIN22" library="timearc" package="CHIPLED_0603" value="" x="80.2013125" y="22.80643125" rot="R48"/>
+<element name="MIN23" library="timearc" package="CHIPLED_0603" value="" x="77.19336875" y="19.7984875" rot="R42"/>
+<element name="MIN24" library="timearc" package="CHIPLED_0603" value="" x="73.88748125" y="17.121453125" rot="R36"/>
+<element name="MIN25" library="timearc" package="CHIPLED_0603" value="" x="70.3199" y="14.80461875" rot="R30"/>
+<element name="MIN26" library="timearc" package="CHIPLED_0603" value="" x="66.5296875" y="12.87340625" rot="R24"/>
+<element name="MIN27" library="timearc" package="CHIPLED_0603" value="" x="62.558346875" y="11.348975" rot="R18"/>
+<element name="MIN28" library="timearc" package="CHIPLED_0603" value="" x="58.4494375" y="10.247984375" rot="R12"/>
+<element name="MIN29" library="timearc" package="CHIPLED_0603" value="" x="54.247946875" y="9.58253125" rot="R6"/>
+<element name="MIN30" library="timearc" package="CHIPLED_0603" value="" x="49.9999" y="9.3599"/>
+<element name="MIN31" library="timearc" package="CHIPLED_0603" value="" x="45.751853125" y="9.58253125" rot="R354"/>
+<element name="MIN32" library="timearc" package="CHIPLED_0603" value="" x="41.5503625" y="10.247984375" rot="R348"/>
+<element name="MIN33" library="timearc" package="CHIPLED_0603" value="" x="37.441453125" y="11.348975" rot="R342"/>
+<element name="MIN34" library="timearc" package="CHIPLED_0603" value="" x="33.4701125" y="12.87340625" rot="R336"/>
+<element name="MIN35" library="timearc" package="CHIPLED_0603" value="" x="29.6799" y="14.80461875" rot="R330"/>
+<element name="MIN36" library="timearc" package="CHIPLED_0603" value="" x="26.11231875" y="17.121453125" rot="R324"/>
+<element name="MIN37" library="timearc" package="CHIPLED_0603" value="" x="22.80643125" y="19.7984875" rot="R318"/>
+<element name="MIN38" library="timearc" package="CHIPLED_0603" value="" x="19.7984875" y="22.80643125" rot="R312"/>
+<element name="MIN39" library="timearc" package="CHIPLED_0603" value="" x="17.121453125" y="26.11231875" rot="R306"/>
+<element name="MIN40" library="timearc" package="CHIPLED_0603" value="" x="14.80461875" y="29.6799" rot="R300"/>
+<element name="MIN41" library="timearc" package="CHIPLED_0603" value="" x="12.87340625" y="33.4701125" rot="R294"/>
+<element name="MIN42" library="timearc" package="CHIPLED_0603" value="" x="11.348975" y="37.441453125" rot="R288"/>
+<element name="MIN43" library="timearc" package="CHIPLED_0603" value="" x="10.247984375" y="41.5503625" rot="R282"/>
+<element name="MIN44" library="timearc" package="CHIPLED_0603" value="" x="9.58253125" y="45.751853125" rot="R276"/>
+<element name="MIN45" library="timearc" package="CHIPLED_0603" value="" x="9.3599" y="49.9999" rot="R270"/>
+<element name="MIN46" library="timearc" package="CHIPLED_0603" value="" x="9.58253125" y="54.247946875" rot="R264"/>
+<element name="MIN47" library="timearc" package="CHIPLED_0603" value="" x="10.247984375" y="58.4494375" rot="R258"/>
+<element name="MIN48" library="timearc" package="CHIPLED_0603" value="" x="11.348975" y="62.558346875" rot="R252"/>
+<element name="MIN49" library="timearc" package="CHIPLED_0603" value="" x="12.87340625" y="66.5296875" rot="R246"/>
+<element name="MIN50" library="timearc" package="CHIPLED_0603" value="" x="14.80461875" y="70.3199" rot="R240"/>
+<element name="MIN51" library="timearc" package="CHIPLED_0603" value="" x="17.121453125" y="73.88748125" rot="R234"/>
+<element name="MIN52" library="timearc" package="CHIPLED_0603" value="" x="19.7984875" y="77.19336875" rot="R228"/>
+<element name="MIN53" library="timearc" package="CHIPLED_0603" value="" x="22.80643125" y="80.2013125" rot="R222"/>
+<element name="MIN54" library="timearc" package="CHIPLED_0603" value="" x="26.11231875" y="82.878346875" rot="R216"/>
+<element name="MIN55" library="timearc" package="CHIPLED_0603" value="" x="29.6799" y="85.19518125" rot="R210"/>
+<element name="MIN56" library="timearc" package="CHIPLED_0603" value="" x="33.4701125" y="87.12639375" rot="R204"/>
+<element name="MIN57" library="timearc" package="CHIPLED_0603" value="" x="37.441453125" y="88.650825" rot="R198"/>
+<element name="MIN58" library="timearc" package="CHIPLED_0603" value="" x="41.5503625" y="89.751815625" rot="R192"/>
+<element name="MIN59" library="timearc" package="CHIPLED_0603" value="" x="45.751853125" y="90.41726875" rot="R186"/>
+<element name="HOUR0" library="timearc" package="CHIPLED_0603" value="" x="49.9999" y="85.5599" rot="R180"/>
+<element name="HOUR1" library="timearc" package="CHIPLED_0603" value="" x="67.7799" y="80.795775" rot="R150"/>
+<element name="HOUR2" library="timearc" package="CHIPLED_0603" value="" x="80.795775" y="67.7799" rot="R120"/>
+<element name="HOUR3" library="timearc" package="CHIPLED_0603" value="" x="85.5599" y="49.9999" rot="R90"/>
+<element name="HOUR4" library="timearc" package="CHIPLED_0603" value="" x="80.795775" y="32.2199" rot="R60"/>
+<element name="HOUR5" library="timearc" package="CHIPLED_0603" value="" x="67.7799" y="19.204025" rot="R30"/>
+<element name="HOUR6" library="timearc" package="CHIPLED_0603" value="" x="49.9999" y="14.4399"/>
+<element name="HOUR7" library="timearc" package="CHIPLED_0603" value="" x="32.2199" y="19.204025" rot="R330"/>
+<element name="HOUR8" library="timearc" package="CHIPLED_0603" value="" x="19.204025" y="32.2199" rot="R300"/>
+<element name="HOUR9" library="timearc" package="CHIPLED_0603" value="" x="14.4399" y="49.9999" rot="R270"/>
+<element name="HOUR10" library="timearc" package="CHIPLED_0603" value="" x="19.204025" y="67.7799" rot="R240"/>
+<element name="HOUR11" library="timearc" package="CHIPLED_0603" value="" x="32.2199" y="80.795775" rot="R210"/>
+<element name="ICH1" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="49.9999" y="93.1799" rot="MR180"/>
+<element name="ICH2" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="63.34325625" y="91.06651875" rot="MR198"/>
+<element name="ICL3" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="49.9999" y="83.0199" rot="MR180"/>
+<element name="ICL4" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="60.2036375" y="81.403775" rot="MR198"/>
+<element name="ICH5" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="75.38046875" y="84.93325625" rot="MR216"/>
+<element name="ICH6" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="84.93325625" y="75.38046875" rot="MR234"/>
+<element name="ICL7" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="69.408571875" y="76.7136375" rot="MR216"/>
+<element name="ICL8" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="76.7136375" y="69.408571875" rot="MR234"/>
+<element name="ICH9" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="91.06651875" y="63.34325625" rot="MR252"/>
+<element name="ICH10" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="93.1799" y="49.9999" rot="MR270"/>
+<element name="ICL11" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="81.403775" y="60.2036375" rot="MR252"/>
+<element name="ICL12" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="83.0199" y="49.9999" rot="MR270"/>
+<element name="ICH13" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="91.06651875" y="36.65654375" rot="MR288"/>
+<element name="ICH14" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="84.93325625" y="24.61933125" rot="MR306"/>
+<element name="ICL15" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="81.403775" y="39.7961625" rot="MR288"/>
+<element name="ICL16" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="76.7136375" y="30.591228125" rot="MR306"/>
+<element name="ICH17" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="75.38046875" y="15.06654375" rot="MR324"/>
+<element name="ICH18" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="63.34325625" y="8.93328125" rot="MR342"/>
+<element name="ICL19" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="69.408571875" y="23.2861625" rot="MR324"/>
+<element name="ICL20" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="60.2036375" y="18.596025" rot="MR342"/>
+<element name="ICH21" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="49.9999" y="6.8199" rot="MR0"/>
+<element name="ICH22" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="36.65654375" y="8.93328125" rot="MR18"/>
+<element name="ICL23" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="49.9999" y="16.9799" rot="MR0"/>
+<element name="ICL24" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="39.7961625" y="18.596025" rot="MR18"/>
+<element name="ICH25" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="24.61933125" y="15.06654375" rot="MR36"/>
+<element name="ICH26" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="15.06654375" y="24.61933125" rot="MR54"/>
+<element name="ICL27" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="30.591228125" y="23.2861625" rot="MR36"/>
+<element name="ICL28" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="23.2861625" y="30.591228125" rot="MR54"/>
+<element name="ICH29" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="8.93328125" y="36.65654375" rot="MR72"/>
+<element name="ICH30" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="6.8199" y="49.9999" rot="MR90"/>
+<element name="ICL31" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="18.596025" y="39.7961625" rot="MR72"/>
+<element name="ICL32" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="16.9799" y="49.9999" rot="MR90"/>
+<element name="ICH33" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="8.93328125" y="63.34325625" rot="MR108"/>
+<element name="ICH34" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="15.06654375" y="75.38046875" rot="MR126"/>
+<element name="ICL35" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="18.596025" y="60.2036375" rot="MR108"/>
+<element name="ICL36" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="23.2861625" y="69.408571875" rot="MR126"/>
+<element name="ICH37" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="24.61933125" y="84.93325625" rot="MR144"/>
+<element name="ICC1" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="49.9999" y="72.8599" rot="MR180"/>
+<element name="ICL39" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="30.591228125" y="76.7136375" rot="MR144"/>
+<element name="ICC3" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="49.9999" y="27.1399" rot="MR0"/>
+<element name="ICH41" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="36.65654375" y="91.06651875" rot="MR162"/>
+<element name="ICC2" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="72.8599" y="49.9999" rot="MR270"/>
+<element name="ICL43" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="39.7961625" y="81.403775" rot="MR162"/>
+<element name="ICC4" library="timearc" package="SO08-SKINNYPADS" value="WS2811-SOP8" x="27.1399" y="49.9999" rot="MR90"/>
+<element name="+5V" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="45" y="56" smashed="yes" rot="MR0">
+<attribute name="NAME" x="47" y="54" size="0.8128" layer="22" font="vector" rot="MR90"/>
+</element>
+<element name="DIN" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="50" y="56" smashed="yes" rot="MR0">
+<attribute name="NAME" x="52" y="54" size="0.8128" layer="22" font="vector" rot="MR90"/>
+</element>
+<element name="GND" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="55" y="56" smashed="yes" rot="MR0">
+<attribute name="NAME" x="57" y="54" size="0.8128" layer="22" font="vector" rot="MR90"/>
+</element>
+<element name="+5V1" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="45" y="48" smashed="yes" rot="MR0">
+<attribute name="NAME" x="47" y="46" size="0.8128" layer="22" font="vector" rot="MR90"/>
+</element>
+<element name="DOUT" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="50" y="48" smashed="yes" rot="MR0">
+<attribute name="NAME" x="52" y="46" size="0.8128" layer="22" font="vector" rot="MR90"/>
+</element>
+<element name="GND46" library="timearc" package="SOLDER_PAD" value="SOLDER_PAD" x="55" y="48" smashed="yes" rot="MR0">
+<attribute name="NAME" x="57" y="46" size="0.8128" layer="22" font="vector" rot="MR90"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
@@ -735,8 +755,52 @@ Your Eurocircuits Team</description>
 <vertex x="100" y="0"/>
 <vertex x="0" y="0"/>
 </polygon>
-<wire x1="69.8865" y1="51.9049" x2="37.549478125" y2="94.483065625" width="0" layer="19" extent="16-16"/>
-<wire x1="13.78074375" y1="78.669365625" x2="48.0949" y2="69.8865" width="0" layer="19" extent="16-16"/>
+<contactref element="GND" pad="1"/>
+<contactref element="GND46" pad="1"/>
+<contactref element="ICH1" pad="GND"/>
+<contactref element="ICH2" pad="GND"/>
+<contactref element="ICL3" pad="GND"/>
+<contactref element="ICL4" pad="GND"/>
+<contactref element="ICH5" pad="GND"/>
+<contactref element="ICH6" pad="GND"/>
+<contactref element="ICL7" pad="GND"/>
+<contactref element="ICL8" pad="GND"/>
+<contactref element="ICH9" pad="GND"/>
+<contactref element="ICH10" pad="GND"/>
+<contactref element="ICL11" pad="GND"/>
+<contactref element="ICL12" pad="GND"/>
+<contactref element="ICH13" pad="GND"/>
+<contactref element="ICH14" pad="GND"/>
+<contactref element="ICL15" pad="GND"/>
+<contactref element="ICL16" pad="GND"/>
+<contactref element="ICH17" pad="GND"/>
+<contactref element="ICH18" pad="GND"/>
+<contactref element="ICL19" pad="GND"/>
+<contactref element="ICL20" pad="GND"/>
+<contactref element="ICH21" pad="GND"/>
+<contactref element="ICH22" pad="GND"/>
+<contactref element="ICL23" pad="GND"/>
+<contactref element="ICL24" pad="GND"/>
+<contactref element="ICH25" pad="GND"/>
+<contactref element="ICH26" pad="GND"/>
+<contactref element="ICL27" pad="GND"/>
+<contactref element="ICL28" pad="GND"/>
+<contactref element="ICH29" pad="GND"/>
+<contactref element="ICH30" pad="GND"/>
+<contactref element="ICL31" pad="GND"/>
+<contactref element="ICL32" pad="GND"/>
+<contactref element="ICH33" pad="GND"/>
+<contactref element="ICH34" pad="GND"/>
+<contactref element="ICL35" pad="GND"/>
+<contactref element="ICL36" pad="GND"/>
+<contactref element="ICH37" pad="GND"/>
+<contactref element="ICC1" pad="GND"/>
+<contactref element="ICL39" pad="GND"/>
+<contactref element="ICC3" pad="GND"/>
+<contactref element="ICH41" pad="GND"/>
+<contactref element="ICC2" pad="GND"/>
+<contactref element="ICL43" pad="GND"/>
+<contactref element="ICC4" pad="GND"/>
 </signal>
 <signal name="5V">
 <contactref element="ICH1" pad="8"/>
@@ -849,109 +913,214 @@ Your Eurocircuits Team</description>
 <contactref element="SEC57" pad="A"/>
 <contactref element="SEC56" pad="A"/>
 <contactref element="SEC11" pad="A"/>
-<wire x1="80.0237875" y1="83.344815625" x2="76.3738125" y2="86.300503125" width="0" layer="19" extent="1-1"/>
-<wire x1="83.344815625" y1="80.0237875" x2="80.0237875" y2="83.344815625" width="0" layer="19" extent="1-1"/>
-<wire x1="86.300503125" y1="76.3738125" x2="83.344815625" y2="80.0237875" width="0" layer="19" extent="1-1"/>
-<wire x1="72.4349" y1="88.858465625" x2="76.3738125" y2="86.300503125" width="0" layer="19" extent="1-1"/>
-<wire x1="88.858465625" y1="72.4349" x2="86.300503125" y2="76.3738125" width="0" layer="19" extent="1-1"/>
-<wire x1="68.250171875" y1="90.9906875" x2="72.4349" y2="88.858465625" width="0" layer="19" extent="1-1"/>
-<wire x1="63.865503125" y1="92.673809375" x2="68.250171875" y2="90.9906875" width="0" layer="19" extent="1-1"/>
-<wire x1="90.9906875" y1="68.250171875" x2="88.858465625" y2="72.4349" width="0" layer="19" extent="1-1"/>
-<wire x1="92.673809375" y1="63.865503125" x2="90.9906875" y2="68.250171875" width="0" layer="19" extent="1-1"/>
-<wire x1="59.328896875" y1="93.8893875" x2="63.865503125" y2="92.673809375" width="0" layer="19" extent="1-1"/>
-<wire x1="93.8893875" y1="59.328896875" x2="92.673809375" y2="63.865503125" width="0" layer="19" extent="1-1"/>
-<wire x1="54.690084375" y1="94.6240875" x2="59.328896875" y2="93.8893875" width="0" layer="19" extent="1-1"/>
-<wire x1="94.6240875" y1="54.690084375" x2="93.8893875" y2="59.328896875" width="0" layer="19" extent="1-1"/>
-<wire x1="49.9999" y1="94.8699" x2="54.690084375" y2="94.6240875" width="0" layer="19" extent="1-1"/>
-<wire x1="94.8699" y1="49.9999" x2="94.6240875" y2="54.690084375" width="0" layer="19" extent="1-1"/>
-<wire x1="45.3097125" y1="94.6240875" x2="49.9999" y2="94.8699" width="0" layer="19" extent="1-1"/>
-<wire x1="94.6240875" y1="45.3097125" x2="94.8699" y2="49.9999" width="0" layer="19" extent="1-1"/>
-<wire x1="93.8893875" y1="40.6709" x2="94.6240875" y2="45.3097125" width="0" layer="19" extent="1-1"/>
-<wire x1="40.6709" y1="93.8893875" x2="45.3097125" y2="94.6240875" width="0" layer="19" extent="1-1"/>
-<wire x1="92.673809375" y1="36.13429375" x2="93.8893875" y2="40.6709" width="0" layer="19" extent="1-1"/>
-<wire x1="36.13429375" y1="92.673809375" x2="40.6709" y2="93.8893875" width="0" layer="19" extent="1-1"/>
-<wire x1="90.9906875" y1="31.749625" x2="92.673809375" y2="36.13429375" width="0" layer="19" extent="1-1"/>
-<wire x1="31.749625" y1="90.9906875" x2="36.13429375" y2="92.673809375" width="0" layer="19" extent="1-1"/>
-<wire x1="88.858465625" y1="27.5649" x2="90.9906875" y2="31.749625" width="0" layer="19" extent="1-1"/>
-<wire x1="27.5649" y1="88.858465625" x2="31.749625" y2="90.9906875" width="0" layer="19" extent="1-1"/>
-<wire x1="86.300503125" y1="23.625984375" x2="88.858465625" y2="27.5649" width="0" layer="19" extent="1-1"/>
-<wire x1="23.625984375" y1="86.300503125" x2="27.5649" y2="88.858465625" width="0" layer="19" extent="1-1"/>
-<wire x1="83.344815625" y1="19.976009375" x2="86.300503125" y2="23.625984375" width="0" layer="19" extent="1-1"/>
-<wire x1="19.976009375" y1="83.344815625" x2="23.625984375" y2="86.300503125" width="0" layer="19" extent="1-1"/>
-<wire x1="80.0237875" y1="16.65498125" x2="83.344815625" y2="19.976009375" width="0" layer="19" extent="1-1"/>
-<wire x1="16.65498125" y1="80.0237875" x2="19.976009375" y2="83.344815625" width="0" layer="19" extent="1-1"/>
-<wire x1="76.3738125" y1="13.69929375" x2="80.0237875" y2="16.65498125" width="0" layer="19" extent="1-1"/>
-<wire x1="13.69929375" y1="76.3738125" x2="16.65498125" y2="80.0237875" width="0" layer="19" extent="1-1"/>
-<wire x1="72.4349" y1="11.14133125" x2="76.3738125" y2="13.69929375" width="0" layer="19" extent="1-1"/>
-<wire x1="11.14133125" y1="72.4349" x2="13.69929375" y2="76.3738125" width="0" layer="19" extent="1-1"/>
-<wire x1="68.250171875" y1="9.009109375" x2="72.4349" y2="11.14133125" width="0" layer="19" extent="1-1"/>
-<wire x1="9.009109375" y1="68.250171875" x2="11.14133125" y2="72.4349" width="0" layer="19" extent="1-1"/>
-<wire x1="63.865503125" y1="7.3259875" x2="68.250171875" y2="9.009109375" width="0" layer="19" extent="1-1"/>
-<wire x1="7.3259875" y1="63.865503125" x2="9.009109375" y2="68.250171875" width="0" layer="19" extent="1-1"/>
-<wire x1="59.328896875" y1="6.110409375" x2="63.865503125" y2="7.3259875" width="0" layer="19" extent="1-1"/>
-<wire x1="6.110409375" y1="59.328896875" x2="7.3259875" y2="63.865503125" width="0" layer="19" extent="1-1"/>
-<wire x1="54.690084375" y1="5.375709375" x2="59.328896875" y2="6.110409375" width="0" layer="19" extent="1-1"/>
-<wire x1="5.375709375" y1="54.690084375" x2="6.110409375" y2="59.328896875" width="0" layer="19" extent="1-1"/>
-<wire x1="49.9999" y1="5.1299" x2="54.690084375" y2="5.375709375" width="0" layer="19" extent="1-1"/>
-<wire x1="5.1299" y1="49.9999" x2="5.375709375" y2="54.690084375" width="0" layer="19" extent="1-1"/>
-<wire x1="45.3097125" y1="5.375709375" x2="49.9999" y2="5.1299" width="0" layer="19" extent="1-1"/>
-<wire x1="5.375709375" y1="45.3097125" x2="5.1299" y2="49.9999" width="0" layer="19" extent="1-1"/>
-<wire x1="40.6709" y1="6.110409375" x2="45.3097125" y2="5.375709375" width="0" layer="19" extent="1-1"/>
-<wire x1="6.110409375" y1="40.6709" x2="5.375709375" y2="45.3097125" width="0" layer="19" extent="1-1"/>
-<wire x1="36.13429375" y1="7.3259875" x2="40.6709" y2="6.110409375" width="0" layer="19" extent="1-1"/>
-<wire x1="7.3259875" y1="36.13429375" x2="6.110409375" y2="40.6709" width="0" layer="19" extent="1-1"/>
-<wire x1="31.749625" y1="9.009109375" x2="36.13429375" y2="7.3259875" width="0" layer="19" extent="1-1"/>
-<wire x1="9.009109375" y1="31.749625" x2="7.3259875" y2="36.13429375" width="0" layer="19" extent="1-1"/>
-<wire x1="27.5649" y1="11.14133125" x2="31.749625" y2="9.009109375" width="0" layer="19" extent="1-1"/>
-<wire x1="23.625984375" y1="13.69929375" x2="27.5649" y2="11.14133125" width="0" layer="19" extent="1-1"/>
-<wire x1="11.14133125" y1="27.5649" x2="9.009109375" y2="31.749625" width="0" layer="19" extent="1-1"/>
-<wire x1="13.69929375" y1="23.625984375" x2="11.14133125" y2="27.5649" width="0" layer="19" extent="1-1"/>
-<wire x1="19.976009375" y1="16.65498125" x2="23.625984375" y2="13.69929375" width="0" layer="19" extent="1-1"/>
-<wire x1="16.65498125" y1="19.976009375" x2="13.69929375" y2="23.625984375" width="0" layer="19" extent="1-1"/>
-<wire x1="81.407996875" y1="75.173925" x2="86.300503125" y2="76.3738125" width="0" layer="19" extent="1-16"/>
-<wire x1="72.091571875" y1="83.647453125" x2="76.3738125" y2="86.300503125" width="0" layer="19" extent="1-16"/>
-<wire x1="87.649971875" y1="64.2361875" x2="92.673809375" y2="63.865503125" width="0" layer="19" extent="1-16"/>
-<wire x1="60.6126625" y1="88.827321875" x2="63.865503125" y2="92.673809375" width="0" layer="19" extent="1-16"/>
-<wire x1="90.2065" y1="51.9049" x2="94.8699" y2="49.9999" width="0" layer="19" extent="1-16"/>
-<wire x1="48.0949" y1="90.2065" x2="49.9999" y2="94.8699" width="0" layer="19" extent="1-16"/>
-<wire x1="88.827325" y1="39.3871375" x2="92.673809375" y2="36.13429375" width="0" layer="19" extent="1-16"/>
-<wire x1="35.7636125" y1="87.64996875" x2="36.13429375" y2="92.673809375" width="0" layer="19" extent="1-16"/>
-<wire x1="83.64745625" y1="27.908228125" x2="86.300503125" y2="23.625984375" width="0" layer="19" extent="1-16"/>
-<wire x1="24.825875" y1="81.40799375" x2="23.625984375" y2="86.300503125" width="0" layer="19" extent="1-16"/>
-<wire x1="75.173928125" y1="18.591803125" x2="76.3738125" y2="13.69929375" width="0" layer="19" extent="1-16"/>
-<wire x1="16.352346875" y1="72.09156875" x2="13.69929375" y2="76.3738125" width="0" layer="19" extent="1-16"/>
-<wire x1="64.236190625" y1="12.349828125" x2="63.865503125" y2="7.3259875" width="0" layer="19" extent="1-16"/>
-<wire x1="11.172478125" y1="60.612659375" x2="7.3259875" y2="63.865503125" width="0" layer="19" extent="1-16"/>
-<wire x1="51.9049" y1="9.7933" x2="49.9999" y2="5.1299" width="0" layer="19" extent="1-16"/>
-<wire x1="9.7933" y1="48.0949" x2="5.1299" y2="49.9999" width="0" layer="19" extent="1-16"/>
-<wire x1="39.387140625" y1="11.172475" x2="36.13429375" y2="7.3259875" width="0" layer="19" extent="1-16"/>
-<wire x1="12.34983125" y1="35.763609375" x2="7.3259875" y2="36.13429375" width="0" layer="19" extent="1-16"/>
-<wire x1="27.90823125" y1="16.35234375" x2="23.625984375" y2="13.69929375" width="0" layer="19" extent="1-16"/>
-<wire x1="18.59180625" y1="24.825871875" x2="13.69929375" y2="23.625984375" width="0" layer="19" extent="1-16"/>
-<wire x1="80.2389" y1="69.6151125" x2="81.407996875" y2="75.173925" width="0" layer="19" extent="16-16"/>
-<wire x1="72.697471875" y1="77.9994375" x2="72.091571875" y2="83.647453125" width="0" layer="19" extent="16-16"/>
-<wire x1="84.820325" y1="59.310703125" x2="87.649971875" y2="64.2361875" width="0" layer="19" extent="16-16"/>
-<wire x1="62.934234375" y1="83.64296875" x2="60.6126625" y2="88.827321875" width="0" layer="19" extent="16-16"/>
-<wire x1="51.9049" y1="85.9933" x2="48.0949" y2="90.2065" width="0" layer="19" extent="16-16"/>
-<wire x1="85.9933" y1="48.0949" x2="90.2065" y2="51.9049" width="0" layer="19" extent="16-16"/>
-<wire x1="40.689096875" y1="84.820321875" x2="35.7636125" y2="87.64996875" width="0" layer="19" extent="16-16"/>
-<wire x1="83.642971875" y1="37.065565625" x2="88.827325" y2="39.3871375" width="0" layer="19" extent="16-16"/>
-<wire x1="30.3846875" y1="80.238896875" x2="24.825875" y2="81.40799375" width="0" layer="19" extent="16-16"/>
-<wire x1="77.999440625" y1="27.302328125" x2="83.64745625" y2="27.908228125" width="0" layer="19" extent="16-16"/>
-<wire x1="22.0003625" y1="72.69746875" x2="16.352346875" y2="72.09156875" width="0" layer="19" extent="16-16"/>
-<wire x1="69.615115625" y1="19.7609" x2="75.173928125" y2="18.591803125" width="0" layer="19" extent="16-16"/>
-<wire x1="16.35683125" y1="62.93423125" x2="11.172478125" y2="60.612659375" width="0" layer="19" extent="16-16"/>
-<wire x1="59.31070625" y1="15.179475" x2="64.236190625" y2="12.349828125" width="0" layer="19" extent="16-16"/>
-<wire x1="14.0065" y1="51.9049" x2="9.7933" y2="48.0949" width="0" layer="19" extent="16-16"/>
-<wire x1="48.0949" y1="14.0065" x2="51.9049" y2="9.7933" width="0" layer="19" extent="16-16"/>
-<wire x1="15.179478125" y1="40.68909375" x2="12.34983125" y2="35.763609375" width="0" layer="19" extent="16-16"/>
-<wire x1="37.06556875" y1="16.356828125" x2="39.387140625" y2="11.172475" width="0" layer="19" extent="16-16"/>
-<wire x1="27.30233125" y1="22.000359375" x2="27.90823125" y2="16.35234375" width="0" layer="19" extent="16-16"/>
-<wire x1="19.760903125" y1="30.384684375" x2="18.59180625" y2="24.825871875" width="0" layer="19" extent="16-16"/>
-<wire x1="51.9049" y1="75.8333" x2="51.9049" y2="85.9933" width="0" layer="19" extent="16-16"/>
-<wire x1="75.8333" y1="48.0949" x2="85.9933" y2="48.0949" width="0" layer="19" extent="16-16"/>
-<wire x1="24.1665" y1="51.9049" x2="14.0065" y2="51.9049" width="0" layer="19" extent="16-16"/>
-<wire x1="48.0949" y1="24.1665" x2="48.0949" y2="14.0065" width="0" layer="19" extent="16-16"/>
+<contactref element="MIN1" pad="A"/>
+<contactref element="MIN0" pad="A"/>
+<contactref element="MIN59" pad="A"/>
+<contactref element="MIN4" pad="A"/>
+<contactref element="MIN3" pad="A"/>
+<contactref element="MIN2" pad="A"/>
+<contactref element="MIN7" pad="A"/>
+<contactref element="MIN6" pad="A"/>
+<contactref element="MIN5" pad="A"/>
+<contactref element="MIN10" pad="A"/>
+<contactref element="MIN9" pad="A"/>
+<contactref element="MIN8" pad="A"/>
+<contactref element="MIN13" pad="A"/>
+<contactref element="MIN12" pad="A"/>
+<contactref element="MIN11" pad="A"/>
+<contactref element="MIN16" pad="A"/>
+<contactref element="MIN15" pad="A"/>
+<contactref element="MIN14" pad="A"/>
+<contactref element="MIN19" pad="A"/>
+<contactref element="MIN18" pad="A"/>
+<contactref element="MIN17" pad="A"/>
+<contactref element="MIN22" pad="A"/>
+<contactref element="MIN21" pad="A"/>
+<contactref element="MIN20" pad="A"/>
+<contactref element="MIN25" pad="A"/>
+<contactref element="MIN24" pad="A"/>
+<contactref element="MIN23" pad="A"/>
+<contactref element="MIN28" pad="A"/>
+<contactref element="MIN27" pad="A"/>
+<contactref element="MIN26" pad="A"/>
+<contactref element="MIN31" pad="A"/>
+<contactref element="MIN30" pad="A"/>
+<contactref element="MIN29" pad="A"/>
+<contactref element="MIN34" pad="A"/>
+<contactref element="MIN33" pad="A"/>
+<contactref element="MIN32" pad="A"/>
+<contactref element="MIN37" pad="A"/>
+<contactref element="MIN36" pad="A"/>
+<contactref element="MIN35" pad="A"/>
+<contactref element="MIN40" pad="A"/>
+<contactref element="MIN39" pad="A"/>
+<contactref element="MIN38" pad="A"/>
+<contactref element="MIN43" pad="A"/>
+<contactref element="MIN42" pad="A"/>
+<contactref element="MIN41" pad="A"/>
+<contactref element="MIN46" pad="A"/>
+<contactref element="MIN45" pad="A"/>
+<contactref element="MIN44" pad="A"/>
+<contactref element="MIN49" pad="A"/>
+<contactref element="MIN48" pad="A"/>
+<contactref element="MIN47" pad="A"/>
+<contactref element="MIN52" pad="A"/>
+<contactref element="MIN51" pad="A"/>
+<contactref element="MIN50" pad="A"/>
+<contactref element="MIN55" pad="A"/>
+<contactref element="MIN54" pad="A"/>
+<contactref element="MIN53" pad="A"/>
+<contactref element="MIN58" pad="A"/>
+<contactref element="MIN57" pad="A"/>
+<contactref element="MIN56" pad="A"/>
+<contactref element="+5V" pad="1"/>
+<contactref element="+5V1" pad="1"/>
+<contactref element="HOUR1" pad="A"/>
+<contactref element="HOUR0" pad="A"/>
+<contactref element="HOUR11" pad="A"/>
+<contactref element="HOUR4" pad="A"/>
+<contactref element="HOUR3" pad="A"/>
+<contactref element="HOUR2" pad="A"/>
+<contactref element="HOUR7" pad="A"/>
+<contactref element="HOUR6" pad="A"/>
+<contactref element="HOUR5" pad="A"/>
+<contactref element="HOUR10" pad="A"/>
+<contactref element="HOUR9" pad="A"/>
+<contactref element="HOUR8" pad="A"/>
+<contactref element="ICH1" pad="+5V"/>
+<contactref element="ICH2" pad="+5V"/>
+<contactref element="ICL3" pad="+5V"/>
+<contactref element="ICL4" pad="+5V"/>
+<contactref element="ICH5" pad="+5V"/>
+<contactref element="ICH6" pad="+5V"/>
+<contactref element="ICL7" pad="+5V"/>
+<contactref element="ICL8" pad="+5V"/>
+<contactref element="ICH9" pad="+5V"/>
+<contactref element="ICH10" pad="+5V"/>
+<contactref element="ICL11" pad="+5V"/>
+<contactref element="ICL12" pad="+5V"/>
+<contactref element="ICH13" pad="+5V"/>
+<contactref element="ICH14" pad="+5V"/>
+<contactref element="ICL15" pad="+5V"/>
+<contactref element="ICL16" pad="+5V"/>
+<contactref element="ICH17" pad="+5V"/>
+<contactref element="ICH18" pad="+5V"/>
+<contactref element="ICL19" pad="+5V"/>
+<contactref element="ICL20" pad="+5V"/>
+<contactref element="ICH21" pad="+5V"/>
+<contactref element="ICH22" pad="+5V"/>
+<contactref element="ICL23" pad="+5V"/>
+<contactref element="ICL24" pad="+5V"/>
+<contactref element="ICH25" pad="+5V"/>
+<contactref element="ICH26" pad="+5V"/>
+<contactref element="ICL27" pad="+5V"/>
+<contactref element="ICL28" pad="+5V"/>
+<contactref element="ICH29" pad="+5V"/>
+<contactref element="ICH30" pad="+5V"/>
+<contactref element="ICL31" pad="+5V"/>
+<contactref element="ICL32" pad="+5V"/>
+<contactref element="ICH33" pad="+5V"/>
+<contactref element="ICH34" pad="+5V"/>
+<contactref element="ICL35" pad="+5V"/>
+<contactref element="ICL36" pad="+5V"/>
+<contactref element="ICH37" pad="+5V"/>
+<contactref element="ICC1" pad="+5V"/>
+<contactref element="ICL39" pad="+5V"/>
+<contactref element="ICC3" pad="+5V"/>
+<contactref element="ICH41" pad="+5V"/>
+<contactref element="ICC2" pad="+5V"/>
+<contactref element="ICL43" pad="+5V"/>
+<contactref element="ICC4" pad="+5V"/>
+<wire x1="80.0237875" y1="83.344815625" x2="78.711646875" y2="83.563671875" width="0" layer="19" extent="1-16"/>
+<wire x1="87.678171875" y1="73.048525" x2="88.858465625" y2="72.4349" width="0" layer="19" extent="1-16"/>
+<wire x1="66.93461875" y1="90.79335625" x2="68.250171875" y2="90.9906875" width="0" layer="19" extent="1-16"/>
+<wire x1="92.956478125" y1="60.277221875" x2="93.8893875" y2="59.328896875" width="0" layer="19" extent="1-16"/>
+<wire x1="53.4999" y1="94.0299" x2="54.690084375" y2="94.6240875" width="0" layer="19" extent="1-16"/>
+<wire x1="94.0299" y1="46.4999" x2="94.6240875" y2="45.3097125" width="0" layer="19" extent="1-16"/>
+<wire x1="39.722578125" y1="92.956475" x2="40.6709" y2="93.8893875" width="0" layer="19" extent="1-16"/>
+<wire x1="90.793359375" y1="33.06518125" x2="90.9906875" y2="31.749625" width="0" layer="19" extent="1-16"/>
+<wire x1="26.951275" y1="87.67816875" x2="27.5649" y2="88.858465625" width="0" layer="19" extent="1-16"/>
+<wire x1="83.563675" y1="21.288153125" x2="83.344815625" y2="19.976009375" width="0" layer="19" extent="1-16"/>
+<wire x1="16.436128125" y1="78.71164375" x2="16.65498125" y2="80.0237875" width="0" layer="19" extent="1-16"/>
+<wire x1="73.048528125" y1="12.321628125" x2="72.4349" y2="11.14133125" width="0" layer="19" extent="1-16"/>
+<wire x1="9.20644375" y1="66.934615625" x2="9.009109375" y2="68.250171875" width="0" layer="19" extent="1-16"/>
+<wire x1="60.277225" y1="7.043321875" x2="59.328896875" y2="6.110409375" width="0" layer="19" extent="1-16"/>
+<wire x1="5.9699" y1="53.4999" x2="5.375709375" y2="54.690084375" width="0" layer="19" extent="1-16"/>
+<wire x1="46.4999" y1="5.9699" x2="45.3097125" y2="5.375709375" width="0" layer="19" extent="1-16"/>
+<wire x1="7.043325" y1="39.722575" x2="6.110409375" y2="40.6709" width="0" layer="19" extent="1-16"/>
+<wire x1="33.065184375" y1="9.206440625" x2="31.749625" y2="9.009109375" width="0" layer="19" extent="1-16"/>
+<wire x1="21.28815625" y1="16.436125" x2="19.976009375" y2="16.65498125" width="0" layer="19" extent="1-16"/>
+<wire x1="12.32163125" y1="26.951271875" x2="11.14133125" y2="27.5649" width="0" layer="19" extent="1-16"/>
+<wire x1="81.407996875" y1="75.173925" x2="83.566009375" y2="74.387096875" width="0" layer="19" extent="1-16"/>
+<wire x1="72.091571875" y1="83.647453125" x2="74.387096875" y2="83.566009375" width="0" layer="19" extent="1-16"/>
+<wire x1="87.649971875" y1="64.2361875" x2="89.459221875" y2="62.821009375" width="0" layer="19" extent="1-16"/>
+<wire x1="60.6126625" y1="88.827321875" x2="62.821009375" y2="89.459221875" width="0" layer="19" extent="1-16"/>
+<wire x1="90.2065" y1="51.9049" x2="91.4899" y2="49.9999" width="0" layer="19" extent="1-16"/>
+<wire x1="48.0949" y1="90.2065" x2="49.9999" y2="91.4899" width="0" layer="19" extent="1-16"/>
+<wire x1="88.827325" y1="39.3871375" x2="89.459221875" y2="37.1787875" width="0" layer="19" extent="1-16"/>
+<wire x1="35.7636125" y1="87.64996875" x2="37.1787875" y2="89.459221875" width="0" layer="19" extent="1-16"/>
+<wire x1="83.64745625" y1="27.908228125" x2="83.566009375" y2="25.6127" width="0" layer="19" extent="1-16"/>
+<wire x1="24.825875" y1="81.40799375" x2="25.6127" y2="83.566009375" width="0" layer="19" extent="1-16"/>
+<wire x1="75.173928125" y1="18.591803125" x2="74.387096875" y2="16.4337875" width="0" layer="19" extent="1-16"/>
+<wire x1="16.352346875" y1="72.09156875" x2="16.4337875" y2="74.387096875" width="0" layer="19" extent="1-16"/>
+<wire x1="64.236190625" y1="12.349828125" x2="62.821009375" y2="10.540575" width="0" layer="19" extent="1-16"/>
+<wire x1="11.172478125" y1="60.612659375" x2="10.540575" y2="62.821009375" width="0" layer="19" extent="1-16"/>
+<wire x1="51.9049" y1="9.7933" x2="49.9999" y2="8.5099" width="0" layer="19" extent="1-16"/>
+<wire x1="9.7933" y1="48.0949" x2="8.5099" y2="49.9999" width="0" layer="19" extent="1-16"/>
+<wire x1="39.387140625" y1="11.172475" x2="37.1787875" y2="10.540575" width="0" layer="19" extent="1-16"/>
+<wire x1="12.34983125" y1="35.763609375" x2="10.540575" y2="37.1787875" width="0" layer="19" extent="1-16"/>
+<wire x1="27.90823125" y1="16.35234375" x2="25.6127" y2="16.4337875" width="0" layer="19" extent="1-16"/>
+<wire x1="18.59180625" y1="24.825871875" x2="16.4337875" y2="25.6127" width="0" layer="19" extent="1-16"/>
+<wire x1="79.458553125" y1="67.076628125" x2="81.53189375" y2="68.2049" width="0" layer="19" extent="1-16"/>
+<wire x1="32.923171875" y1="79.45855" x2="31.7949" y2="81.53189375" width="0" layer="19" extent="1-16"/>
+<wire x1="67.07663125" y1="20.541246875" x2="68.2049" y2="18.467903125" width="0" layer="19" extent="1-16"/>
+<wire x1="20.54125" y1="32.92316875" x2="18.467903125" y2="31.7949" width="0" layer="19" extent="1-16"/>
+<wire x1="53.4999" y1="83.8699" x2="49.9999" y2="86.4099" width="0" layer="19" extent="1-16"/>
+<wire x1="83.8699" y1="46.4999" x2="86.4099" y2="49.9999" width="0" layer="19" extent="1-16"/>
+<wire x1="16.1299" y1="53.4999" x2="13.5899" y2="49.9999" width="0" layer="19" extent="1-16"/>
+<wire x1="46.4999" y1="16.1299" x2="49.9999" y2="13.5899" width="0" layer="19" extent="1-16"/>
+<wire x1="63.795" y1="81.1306125" x2="68.2049" y2="81.53189375" width="0" layer="19" extent="1-16"/>
+<wire x1="81.130615625" y1="36.2048" x2="81.53189375" y2="31.7949" width="0" layer="19" extent="1-16"/>
+<wire x1="18.8691875" y1="63.794996875" x2="18.467903125" y2="68.2049" width="0" layer="19" extent="1-16"/>
+<wire x1="36.204803125" y1="18.869184375" x2="31.7949" y2="18.467903125" width="0" layer="19" extent="1-16"/>
+<wire x1="66.119675" y1="75.427834375" x2="63.795" y2="81.1306125" width="0" layer="19" extent="16-16"/>
+<wire x1="77.987228125" y1="61.09656875" x2="79.458553125" y2="67.076628125" width="0" layer="19" extent="16-16"/>
+<wire x1="57.47304375" y1="79.164578125" x2="53.4999" y2="83.8699" width="0" layer="19" extent="16-16"/>
+<wire x1="79.16458125" y1="42.52675625" x2="83.8699" y2="46.4999" width="0" layer="19" extent="16-16"/>
+<wire x1="38.90323125" y1="77.987225" x2="32.923171875" y2="79.45855" width="0" layer="19" extent="16-16"/>
+<wire x1="75.4278375" y1="33.880125" x2="81.130615625" y2="36.2048" width="0" layer="19" extent="16-16"/>
+<wire x1="24.571965625" y1="66.119671875" x2="18.8691875" y2="63.794996875" width="0" layer="19" extent="16-16"/>
+<wire x1="61.096571875" y1="22.012571875" x2="67.07663125" y2="20.541246875" width="0" layer="19" extent="16-16"/>
+<wire x1="20.835221875" y1="57.473040625" x2="16.1299" y2="53.4999" width="0" layer="19" extent="16-16"/>
+<wire x1="42.526759375" y1="20.83521875" x2="46.4999" y2="16.1299" width="0" layer="19" extent="16-16"/>
+<wire x1="22.012575" y1="38.903228125" x2="20.54125" y2="32.92316875" width="0" layer="19" extent="16-16"/>
+<wire x1="33.880128125" y1="24.5719625" x2="36.204803125" y2="18.869184375" width="0" layer="19" extent="16-16"/>
+<wire x1="72.73975" y1="75.344053125" x2="66.119675" y2="75.427834375" width="0" layer="19" extent="16-16"/>
+<wire x1="73.188378125" y1="69.202028125" x2="72.73975" y2="75.344053125" width="0" layer="19" extent="16-16"/>
+<wire x1="83.293734375" y1="57.137603125" x2="77.987228125" y2="61.09656875" width="0" layer="19" extent="16-16"/>
+<wire x1="80.0465" y1="51.9049" x2="83.293734375" y2="57.137603125" width="0" layer="19" extent="16-16"/>
+<wire x1="48.0949" y1="80.0465" x2="53.4999" y2="83.8699" width="0" layer="19" extent="16-16"/>
+<wire x1="42.862196875" y1="83.29373125" x2="48.0949" y2="80.0465" width="0" layer="19" extent="16-16"/>
+<wire x1="30.797771875" y1="73.188375" x2="32.923171875" y2="79.45855" width="0" layer="19" extent="16-16"/>
+<wire x1="24.655746875" y1="72.739746875" x2="30.797771875" y2="73.188375" width="0" layer="19" extent="16-16"/>
+<wire x1="75.34405625" y1="27.26005" x2="75.4278375" y2="33.880125" width="0" layer="19" extent="16-16"/>
+<wire x1="69.20203125" y1="26.811421875" x2="75.34405625" y2="27.26005" width="0" layer="19" extent="16-16"/>
+<wire x1="57.13760625" y1="16.706065625" x2="61.096571875" y2="22.012571875" width="0" layer="19" extent="16-16"/>
+<wire x1="51.9049" y1="19.9533" x2="57.13760625" y2="16.706065625" width="0" layer="19" extent="16-16"/>
+<wire x1="19.9533" y1="48.0949" x2="16.1299" y2="53.4999" width="0" layer="19" extent="16-16"/>
+<wire x1="16.70606875" y1="42.86219375" x2="19.9533" y2="48.0949" width="0" layer="19" extent="16-16"/>
+<wire x1="26.811425" y1="30.79776875" x2="20.54125" y2="32.92316875" width="0" layer="19" extent="16-16"/>
+<wire x1="27.260053125" y1="24.65574375" x2="26.811425" y2="30.79776875" width="0" layer="19" extent="16-16"/>
+<wire x1="53.4999" y1="73.7099" x2="57.47304375" y2="79.164578125" width="0" layer="19" extent="16-16"/>
+<wire x1="48.0949" y1="69.8865" x2="53.4999" y2="73.7099" width="0" layer="19" extent="16-16"/>
+<wire x1="73.7099" y1="46.4999" x2="79.16458125" y2="42.52675625" width="0" layer="19" extent="16-16"/>
+<wire x1="69.8865" y1="51.9049" x2="73.7099" y2="46.4999" width="0" layer="19" extent="16-16"/>
+<wire x1="26.2899" y1="53.4999" x2="20.835221875" y2="57.473040625" width="0" layer="19" extent="16-16"/>
+<wire x1="30.1133" y1="48.0949" x2="26.2899" y2="53.4999" width="0" layer="19" extent="16-16"/>
+<wire x1="46.4999" y1="26.2899" x2="42.526759375" y2="20.83521875" width="0" layer="19" extent="16-16"/>
+<wire x1="51.9049" y1="30.1133" x2="46.4999" y2="26.2899" width="0" layer="19" extent="16-16"/>
+<wire x1="45" y1="56" x2="48.0949" y2="69.8865" width="0" layer="19" extent="16-16"/>
+<wire x1="45" y1="48" x2="45" y2="56" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="N$3">
 <contactref element="ICH1" pad="2"/>
@@ -1325,6 +1494,8 @@ Your Eurocircuits Team</description>
 </signal>
 <signal name="N$33">
 <contactref element="ICH30" pad="6"/>
+<contactref element="ICH29" pad="5"/>
+<wire x1="11.172478125" y1="39.3871375" x2="9.7933" y2="50.6349" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="N$46">
 <contactref element="ICH30" pad="5"/>
@@ -1345,6 +1516,496 @@ Your Eurocircuits Team</description>
 <contactref element="ICH37" pad="5"/>
 <contactref element="ICH41" pad="6"/>
 <wire x1="27.90823125" y1="83.647453125" x2="38.179296875" y2="88.434871875" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$81">
+<contactref element="ICL3" pad="1"/>
+<contactref element="MIN59" pad="C"/>
+<wire x1="48.0949" y1="85.9933" x2="45.8407" y2="89.571925" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$82">
+<contactref element="ICL3" pad="2"/>
+<contactref element="MIN0" pad="C"/>
+<wire x1="49.3649" y1="85.9933" x2="49.9999" y2="89.7899" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$83">
+<contactref element="ICL3" pad="3"/>
+<contactref element="MIN1" pad="C"/>
+<wire x1="50.6349" y1="85.9933" x2="54.159096875" y2="89.571925" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$84">
+<contactref element="ICL4" pad="1"/>
+<contactref element="MIN2" pad="C"/>
+<wire x1="59.31070625" y1="84.820321875" x2="58.2727125" y2="88.9203875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$85">
+<contactref element="ICL4" pad="2"/>
+<contactref element="MIN3" pad="C"/>
+<wire x1="60.51855" y1="84.427871875" x2="62.29568125" y2="87.842425" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$86">
+<contactref element="ICL4" pad="3"/>
+<contactref element="MIN4" pad="C"/>
+<wire x1="61.726390625" y1="84.03541875" x2="66.183959375" y2="86.349878125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$87">
+<contactref element="ICL7" pad="1"/>
+<contactref element="MIN5" pad="C"/>
+<wire x1="69.615115625" y1="80.238896875" x2="69.8949" y2="84.459059375" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$88">
+<contactref element="ICL7" pad="2"/>
+<contactref element="MIN6" pad="C"/>
+<wire x1="70.64256875" y1="79.492409375" x2="73.3878625" y2="82.19068125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$89">
+<contactref element="ICL7" pad="3"/>
+<contactref element="MIN7" pad="C"/>
+<wire x1="71.67001875" y1="78.745921875" x2="76.62460625" y2="79.5696375" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$90">
+<contactref element="ICL8" pad="1"/>
+<contactref element="MIN8" pad="C"/>
+<wire x1="77.999440625" y1="72.69746875" x2="79.5696375" y2="76.62460625" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$91">
+<contactref element="ICL8" pad="2"/>
+<contactref element="MIN9" pad="C"/>
+<wire x1="78.745925" y1="71.670015625" x2="82.19068125" y2="73.3878625" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$92">
+<contactref element="ICL8" pad="3"/>
+<contactref element="MIN10" pad="C"/>
+<wire x1="79.4924125" y1="70.642565625" x2="84.459059375" y2="69.8949" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$95">
+<contactref element="ICL11" pad="1"/>
+<contactref element="MIN11" pad="C"/>
+<wire x1="83.642971875" y1="62.93423125" x2="86.349878125" y2="66.183959375" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$96">
+<contactref element="ICL11" pad="2"/>
+<contactref element="MIN12" pad="C"/>
+<wire x1="84.035421875" y1="61.7263875" x2="87.842425" y2="62.29568125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$97">
+<contactref element="ICL11" pad="3"/>
+<contactref element="MIN13" pad="C"/>
+<wire x1="84.427875" y1="60.518546875" x2="88.9203875" y2="58.2727125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$99">
+<contactref element="ICL12" pad="1"/>
+<contactref element="MIN14" pad="C"/>
+<wire x1="85.9933" y1="51.9049" x2="89.571925" y2="54.159096875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$100">
+<contactref element="ICL12" pad="2"/>
+<contactref element="MIN15" pad="C"/>
+<wire x1="85.9933" y1="50.6349" x2="89.7899" y2="49.9999" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$101">
+<contactref element="ICL12" pad="3"/>
+<contactref element="MIN16" pad="C"/>
+<wire x1="85.9933" y1="49.3649" x2="89.571925" y2="45.8407" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$103">
+<contactref element="ICL15" pad="1"/>
+<contactref element="MIN17" pad="C"/>
+<wire x1="84.820325" y1="40.68909375" x2="88.9203875" y2="41.727084375" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$104">
+<contactref element="ICL15" pad="2"/>
+<contactref element="MIN18" pad="C"/>
+<wire x1="87.842425" y1="37.704115625" x2="84.427875" y2="39.48125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$105">
+<contactref element="ICL15" pad="3"/>
+<contactref element="MIN19" pad="C"/>
+<wire x1="86.349878125" y1="33.8158375" x2="84.035421875" y2="38.273409375" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$107">
+<contactref element="ICL16" pad="1"/>
+<contactref element="MIN20" pad="C"/>
+<wire x1="80.2389" y1="30.384684375" x2="84.459059375" y2="30.1049" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$108">
+<contactref element="ICL16" pad="2"/>
+<contactref element="MIN21" pad="C"/>
+<wire x1="82.19068125" y1="26.611934375" x2="79.4924125" y2="29.35723125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$109">
+<contactref element="ICL16" pad="3"/>
+<contactref element="MIN22" pad="C"/>
+<wire x1="79.5696375" y1="23.375190625" x2="78.745925" y2="28.32978125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$111">
+<contactref element="ICL19" pad="1"/>
+<contactref element="MIN23" pad="C"/>
+<wire x1="72.697471875" y1="22.000359375" x2="76.62460625" y2="20.430159375" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$112">
+<contactref element="ICL19" pad="2"/>
+<contactref element="MIN24" pad="C"/>
+<wire x1="73.3878625" y1="17.809115625" x2="71.67001875" y2="21.253875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$113">
+<contactref element="ICL19" pad="3"/>
+<contactref element="MIN25" pad="C"/>
+<wire x1="69.8949" y1="15.5407375" x2="70.64256875" y2="20.5073875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$115">
+<contactref element="ICL20" pad="1"/>
+<contactref element="MIN26" pad="C"/>
+<wire x1="62.934234375" y1="16.356828125" x2="66.183959375" y2="13.64991875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$116">
+<contactref element="ICL20" pad="2"/>
+<contactref element="MIN27" pad="C"/>
+<wire x1="62.29568125" y1="12.157371875" x2="61.726390625" y2="15.964378125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$117">
+<contactref element="ICL20" pad="3"/>
+<contactref element="MIN28" pad="C"/>
+<wire x1="58.2727125" y1="11.079409375" x2="60.51855" y2="15.571925" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$119">
+<contactref element="ICL23" pad="1"/>
+<contactref element="MIN29" pad="C"/>
+<wire x1="54.159096875" y1="10.427871875" x2="51.9049" y2="14.0065" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$120">
+<contactref element="ICL23" pad="2"/>
+<contactref element="MIN30" pad="C"/>
+<wire x1="49.9999" y1="10.2099" x2="50.6349" y2="14.0065" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$121">
+<contactref element="ICL23" pad="3"/>
+<contactref element="MIN31" pad="C"/>
+<wire x1="45.8407" y1="10.427871875" x2="49.3649" y2="14.0065" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$123">
+<contactref element="ICL24" pad="1"/>
+<contactref element="MIN32" pad="C"/>
+<wire x1="41.727084375" y1="11.079409375" x2="40.689096875" y2="15.179475" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$124">
+<contactref element="ICL24" pad="2"/>
+<contactref element="MIN33" pad="C"/>
+<wire x1="37.704115625" y1="12.157371875" x2="39.481253125" y2="15.571925" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$125">
+<contactref element="ICL24" pad="3"/>
+<contactref element="MIN34" pad="C"/>
+<wire x1="33.8158375" y1="13.64991875" x2="38.2734125" y2="15.964378125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$127">
+<contactref element="ICL27" pad="1"/>
+<contactref element="MIN35" pad="C"/>
+<wire x1="30.1049" y1="15.5407375" x2="30.3846875" y2="19.7609" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$128">
+<contactref element="ICL27" pad="2"/>
+<contactref element="MIN36" pad="C"/>
+<wire x1="26.611934375" y1="17.809115625" x2="29.357234375" y2="20.5073875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$129">
+<contactref element="ICL27" pad="3"/>
+<contactref element="MIN37" pad="C"/>
+<wire x1="23.375190625" y1="20.430159375" x2="28.329784375" y2="21.253875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$131">
+<contactref element="ICL28" pad="1"/>
+<contactref element="MIN38" pad="C"/>
+<wire x1="20.430159375" y1="23.375190625" x2="22.0003625" y2="27.302328125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$132">
+<contactref element="ICL28" pad="2"/>
+<contactref element="MIN39" pad="C"/>
+<wire x1="17.809115625" y1="26.611934375" x2="21.253878125" y2="28.32978125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$133">
+<contactref element="ICL28" pad="3"/>
+<contactref element="MIN40" pad="C"/>
+<wire x1="15.5407375" y1="30.1049" x2="20.507390625" y2="29.35723125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$135">
+<contactref element="ICL31" pad="1"/>
+<contactref element="MIN41" pad="C"/>
+<wire x1="13.64991875" y1="33.8158375" x2="16.35683125" y2="37.065565625" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$136">
+<contactref element="ICL31" pad="2"/>
+<contactref element="MIN42" pad="C"/>
+<wire x1="12.157371875" y1="37.704115625" x2="15.96438125" y2="38.273409375" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$137">
+<contactref element="ICL31" pad="3"/>
+<contactref element="MIN43" pad="C"/>
+<wire x1="11.079409375" y1="41.727084375" x2="15.571928125" y2="39.48125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$139">
+<contactref element="ICL32" pad="1"/>
+<contactref element="MIN44" pad="C"/>
+<wire x1="10.427871875" y1="45.8407" x2="14.0065" y2="48.0949" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$140">
+<contactref element="ICL32" pad="2"/>
+<contactref element="MIN45" pad="C"/>
+<wire x1="10.2099" y1="49.9999" x2="14.0065" y2="49.3649" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$141">
+<contactref element="ICL32" pad="3"/>
+<contactref element="MIN46" pad="C"/>
+<wire x1="14.0065" y1="50.6349" x2="10.427871875" y2="54.159096875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$143">
+<contactref element="ICL35" pad="1"/>
+<contactref element="MIN47" pad="C"/>
+<wire x1="11.079409375" y1="58.2727125" x2="15.179478125" y2="59.310703125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$144">
+<contactref element="ICL35" pad="2"/>
+<contactref element="MIN48" pad="C"/>
+<wire x1="12.157371875" y1="62.29568125" x2="15.571928125" y2="60.518546875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$145">
+<contactref element="ICL35" pad="3"/>
+<contactref element="MIN49" pad="C"/>
+<wire x1="15.96438125" y1="61.7263875" x2="13.64991875" y2="66.183959375" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$147">
+<contactref element="ICL36" pad="1"/>
+<contactref element="MIN50" pad="C"/>
+<wire x1="15.5407375" y1="69.8949" x2="19.760903125" y2="69.6151125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$148">
+<contactref element="ICL36" pad="2"/>
+<contactref element="MIN51" pad="C"/>
+<wire x1="17.809115625" y1="73.3878625" x2="20.507390625" y2="70.642565625" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$149">
+<contactref element="ICL36" pad="3"/>
+<contactref element="MIN52" pad="C"/>
+<wire x1="21.253878125" y1="71.670015625" x2="20.430159375" y2="76.62460625" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$151">
+<contactref element="ICL39" pad="1"/>
+<contactref element="MIN53" pad="C"/>
+<wire x1="23.375190625" y1="79.5696375" x2="27.30233125" y2="77.9994375" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$152">
+<contactref element="ICL39" pad="2"/>
+<contactref element="MIN54" pad="C"/>
+<wire x1="26.611934375" y1="82.19068125" x2="28.329784375" y2="78.745921875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$153">
+<contactref element="ICL39" pad="3"/>
+<contactref element="MIN55" pad="C"/>
+<wire x1="29.357234375" y1="79.492409375" x2="30.1049" y2="84.459059375" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$155">
+<contactref element="ICL43" pad="1"/>
+<contactref element="MIN56" pad="C"/>
+<wire x1="33.8158375" y1="86.349878125" x2="37.06556875" y2="83.64296875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$156">
+<contactref element="ICL43" pad="2"/>
+<contactref element="MIN57" pad="C"/>
+<wire x1="37.704115625" y1="87.842425" x2="38.2734125" y2="84.03541875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$157">
+<contactref element="ICL43" pad="3"/>
+<contactref element="MIN58" pad="C"/>
+<wire x1="39.481253125" y1="84.427871875" x2="41.727084375" y2="88.9203875" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$63">
+<contactref element="ICH41" pad="5"/>
+<contactref element="ICL3" pad="6"/>
+<wire x1="39.387140625" y1="88.827321875" x2="50.6349" y2="80.0465" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$93">
+<contactref element="ICL3" pad="5"/>
+<contactref element="ICL4" pad="6"/>
+<wire x1="51.9049" y1="80.0465" x2="59.888728125" y2="78.379675" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$94">
+<contactref element="ICL4" pad="5"/>
+<contactref element="ICL7" pad="6"/>
+<wire x1="61.096571875" y1="77.987225" x2="68.174578125" y2="73.9348625" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$98">
+<contactref element="ICL7" pad="5"/>
+<contactref element="ICL8" pad="6"/>
+<wire x1="74.681353125" y1="67.147125" x2="69.20203125" y2="73.188375" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$102">
+<contactref element="ICL8" pad="5"/>
+<contactref element="ICL11" pad="6"/>
+<wire x1="78.77213125" y1="58.680884375" x2="75.4278375" y2="66.119671875" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$106">
+<contactref element="ICL11" pad="5"/>
+<contactref element="ICL12" pad="6"/>
+<wire x1="80.0465" y1="49.3649" x2="79.16458125" y2="57.473040625" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$110">
+<contactref element="ICL12" pad="5"/>
+<contactref element="ICL15" pad="6"/>
+<wire x1="78.379678125" y1="40.111071875" x2="80.0465" y2="48.0949" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$114">
+<contactref element="ICL15" pad="5"/>
+<contactref element="ICL16" pad="6"/>
+<wire x1="73.934865625" y1="31.825221875" x2="77.987228125" y2="38.903228125" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$118">
+<contactref element="ICL16" pad="5"/>
+<contactref element="ICL19" pad="6"/>
+<wire x1="67.147128125" y1="25.318446875" x2="73.188378125" y2="30.79776875" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$122">
+<contactref element="ICL19" pad="5"/>
+<contactref element="ICL20" pad="6"/>
+<wire x1="58.6808875" y1="21.22766875" x2="66.119675" y2="24.5719625" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$126">
+<contactref element="ICL20" pad="5"/>
+<contactref element="ICL23" pad="6"/>
+<wire x1="49.3649" y1="19.9533" x2="57.47304375" y2="20.83521875" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$130">
+<contactref element="ICL23" pad="5"/>
+<contactref element="ICL24" pad="6"/>
+<wire x1="40.111075" y1="21.620121875" x2="48.0949" y2="19.9533" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$134">
+<contactref element="ICL24" pad="5"/>
+<contactref element="ICL27" pad="6"/>
+<wire x1="31.825225" y1="26.064934375" x2="38.90323125" y2="22.012571875" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$138">
+<contactref element="ICL27" pad="5"/>
+<contactref element="ICL28" pad="6"/>
+<wire x1="25.31845" y1="32.852671875" x2="30.797771875" y2="26.811421875" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$142">
+<contactref element="ICL28" pad="5"/>
+<contactref element="ICL31" pad="6"/>
+<wire x1="24.571965625" y1="33.880125" x2="21.227671875" y2="41.3189125" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$146">
+<contactref element="ICL31" pad="5"/>
+<contactref element="ICL32" pad="6"/>
+<wire x1="20.835221875" y1="42.52675625" x2="19.9533" y2="50.6349" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$150">
+<contactref element="ICL32" pad="5"/>
+<contactref element="ICL35" pad="6"/>
+<wire x1="19.9533" y1="51.9049" x2="21.620125" y2="59.888725" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$154">
+<contactref element="ICL35" pad="5"/>
+<contactref element="ICL36" pad="6"/>
+<wire x1="22.012575" y1="61.09656875" x2="26.0649375" y2="68.174575" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$158">
+<contactref element="ICL36" pad="5"/>
+<contactref element="ICL39" pad="6"/>
+<wire x1="26.811425" y1="69.202028125" x2="32.852675" y2="74.68135" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$159">
+<contactref element="ICL39" pad="5"/>
+<contactref element="ICL43" pad="6"/>
+<wire x1="33.880128125" y1="75.427834375" x2="41.318915625" y2="78.772128125" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$161">
+<contactref element="ICC1" pad="1"/>
+<contactref element="HOUR11" pad="C"/>
+<wire x1="32.6449" y1="80.059653125" x2="48.0949" y2="75.8333" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$162">
+<contactref element="ICC1" pad="2"/>
+<contactref element="HOUR0" pad="C"/>
+<wire x1="49.3649" y1="75.8333" x2="49.9999" y2="84.7099" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$163">
+<contactref element="ICC1" pad="3"/>
+<contactref element="HOUR1" pad="C"/>
+<wire x1="50.6349" y1="75.8333" x2="67.3549" y2="80.059653125" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$165">
+<contactref element="ICC2" pad="1"/>
+<contactref element="HOUR2" pad="C"/>
+<wire x1="75.8333" y1="51.9049" x2="80.059653125" y2="67.3549" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$166">
+<contactref element="ICC2" pad="2"/>
+<contactref element="HOUR3" pad="C"/>
+<wire x1="75.8333" y1="50.6349" x2="84.7099" y2="49.9999" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$167">
+<contactref element="ICC2" pad="3"/>
+<contactref element="HOUR4" pad="C"/>
+<wire x1="80.059653125" y1="32.6449" x2="75.8333" y2="49.3649" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$169">
+<contactref element="ICC3" pad="1"/>
+<contactref element="HOUR5" pad="C"/>
+<wire x1="51.9049" y1="24.1665" x2="67.3549" y2="19.94014375" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$170">
+<contactref element="ICC3" pad="2"/>
+<contactref element="HOUR6" pad="C"/>
+<wire x1="49.9999" y1="15.2899" x2="50.6349" y2="24.1665" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$171">
+<contactref element="ICC3" pad="3"/>
+<contactref element="HOUR7" pad="C"/>
+<wire x1="32.6449" y1="19.94014375" x2="49.3649" y2="24.1665" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$173">
+<contactref element="ICC4" pad="1"/>
+<contactref element="HOUR8" pad="C"/>
+<wire x1="19.94014375" y1="32.6449" x2="24.1665" y2="48.0949" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$174">
+<contactref element="ICC4" pad="2"/>
+<contactref element="HOUR9" pad="C"/>
+<wire x1="15.2899" y1="49.9999" x2="24.1665" y2="49.3649" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$175">
+<contactref element="ICC4" pad="3"/>
+<contactref element="HOUR10" pad="C"/>
+<wire x1="24.1665" y1="50.6349" x2="19.94014375" y2="67.3549" width="0" layer="19" extent="1-16"/>
+</signal>
+<signal name="N$176">
+<contactref element="ICL43" pad="5"/>
+<contactref element="ICC1" pad="6"/>
+<wire x1="50.6349" y1="69.8865" x2="42.526759375" y2="79.164578125" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$177">
+<contactref element="ICC1" pad="5"/>
+<contactref element="ICC2" pad="6"/>
+<wire x1="69.8865" y1="49.3649" x2="51.9049" y2="69.8865" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$178">
+<contactref element="ICC2" pad="5"/>
+<contactref element="ICC3" pad="6"/>
+<wire x1="49.3649" y1="30.1133" x2="69.8865" y2="48.0949" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$179">
+<contactref element="ICC3" pad="5"/>
+<contactref element="ICC4" pad="6"/>
+<wire x1="48.0949" y1="30.1133" x2="30.1133" y2="50.6349" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$160">
+<contactref element="DIN" pad="1"/>
+<contactref element="ICH1" pad="6"/>
+<wire x1="50" y1="56" x2="50.6349" y2="90.2065" width="0" layer="19" extent="16-16"/>
+</signal>
+<signal name="N$164">
+<contactref element="DOUT" pad="1"/>
+<contactref element="ICC4" pad="5"/>
+<wire x1="30.1133" y1="51.9049" x2="50" y2="48" width="0" layer="19" extent="16-16"/>
 </signal>
 </signals>
 </board>
