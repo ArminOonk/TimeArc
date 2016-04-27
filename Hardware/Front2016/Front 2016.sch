@@ -1243,7 +1243,7 @@ Source: http://www.ledtronics.com/ds/smd-0603/Dstr0092.pdf</description>
 </package>
 <package name="TOUCH_PAD_LARGE">
 <smd name="P$1" x="0" y="0" dx="50" dy="50" layer="1" roundness="100" stop="no" cream="no"/>
-<pad name="P$2" x="0" y="0" drill="0.31"/>
+<pad name="P$2" x="0" y="0" drill="0.31" stop="no"/>
 </package>
 </packages>
 <symbols>
