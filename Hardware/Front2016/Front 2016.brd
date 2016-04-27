@@ -161,8 +161,6 @@
 <dimension x1="93" y1="93" x2="95.84296875" y2="99.39668125" x3="99.01085" y3="106.524409375" textsize="1.778" layer="47" dtype="radius"/>
 <dimension x1="93" y1="7" x2="99.372565625" y2="4.103378125" x3="106.473425" y3="0.875715625" textsize="1.778" layer="47" dtype="radius"/>
 <dimension x1="7" y1="7" x2="0.295215625" y2="4.988565625" x3="-7.175828125" y3="2.747253125" textsize="1.778" layer="47" dtype="radius"/>
-<text x="65" y="93" size="1.778" layer="22" font="vector" rot="MR0">Time Arc, Front
-Armin Oonk, APR2016</text>
 <text x="64" y="45" size="1.778" layer="22" font="vector" rot="MR0">Time Arc, Front
 Armin Oonk, APR2016</text>
 <text x="47" y="80" size="2.54" layer="21" font="vector">XII</text>
