@@ -6483,9 +6483,10 @@ Standard adjustable voltage regulator but in SMD form. Spark Fun Electronics SKU
 <label x="68.58" y="175.26" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U2" gate="G$1" pin="ADC"/>
-<wire x1="160.02" y1="106.68" x2="157.48" y2="106.68" width="0.1524" layer="91"/>
-<label x="157.48" y="106.68" size="1.778" layer="95" rot="R180" xref="yes"/>
+<wire x1="160.02" y1="104.14" x2="157.48" y2="104.14" width="0.1524" layer="91"/>
+<label x="157.48" y="104.14" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="U2" gate="G$1" pin="CH_PD"/>
+<junction x="160.02" y="104.14"/>
 </segment>
 </net>
 <net name="PWM1" class="0">

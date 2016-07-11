@@ -15737,18 +15737,17 @@ Your Eurocircuits Team</description>
 </signal>
 <signal name="ID_SD">
 <contactref element="J1" pad="27"/>
-<contactref element="U2" pad="ADC"/>
-<wire x1="40.75" y1="11.25" x2="41" y2="11.5" width="0.2032" layer="1"/>
 <wire x1="41" y1="11.5" x2="41" y2="13.4587" width="0.2032" layer="1"/>
 <wire x1="41" y1="13.4587" x2="41.11" y2="13.5687" width="0.2032" layer="1"/>
-<wire x1="14.2" y1="20.7" x2="14.2" y2="20.2" width="0.2032" layer="1"/>
-<wire x1="14.2" y1="20.2" x2="14" y2="20" width="0.2032" layer="1"/>
-<wire x1="14" y1="20" x2="14" y2="11" width="0.2032" layer="1"/>
-<via x="14" y="11" extent="1-16" drill="0.31"/>
-<wire x1="14" y1="11" x2="24" y2="11" width="0.2032" layer="16"/>
+<wire x1="16.2" y1="20.2" x2="16" y2="20" width="0.2032" layer="1"/>
+<wire x1="16" y1="20" x2="16" y2="11" width="0.2032" layer="1"/>
+<via x="16" y="11" extent="1-16" drill="0.31"/>
+<wire x1="16" y1="11" x2="24" y2="11" width="0.2032" layer="16"/>
 <via x="24" y="11" extent="1-16" drill="0.31"/>
 <wire x1="24" y1="11" x2="40.5" y2="11" width="0.2032" layer="1"/>
-<wire x1="40.5" y1="11" x2="40.75" y2="11.25" width="0.2032" layer="1"/>
+<wire x1="40.5" y1="11" x2="41" y2="11.5" width="0.2032" layer="1"/>
+<contactref element="U2" pad="CH_PD"/>
+<wire x1="16.2" y1="20.2" x2="16.2" y2="20.7" width="0.4064" layer="1"/>
 </signal>
 <signal name="PWM1">
 <contactref element="J1" pad="33"/>
